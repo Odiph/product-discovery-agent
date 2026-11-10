@@ -123,3 +123,24 @@ def test_research_typed_by_guess_crosses_as_a_citation_only(tmp_path):
     assert SENTINEL not in json.dumps(by_type[RESEARCH])
     # Code is a repository's own prose, typed by what the folder is: unchanged.
     assert SENTINEL in by_type[CODE]["text"]
+
+
+def test_the_real_kb_add_decides_what_crosses_not_a_hand_built_document(tmp_path, monkeypatch):
+    """The seam test: every other case here builds its Document by hand, so a
+    `kb add` that stopped passing `--type` through to the loader would leave
+    them all green. Real CLI in, real MCP tool out, same file both times."""
+    from app import main as main_mod
+    from app import projects as projects_mod
+
+    monkeypatch.setattr(projects_mod, "REPO_ROOT", tmp_path)
+    notes = tmp_path / "notes.md"
+    notes.write_text(f"# Notes\n\nThey said the {SENTINEL} was rebuilt by hand.\n", encoding="utf-8")
+
+    assert main_mod.main(["kb", "add", str(notes), "--project", "acme"]) == 0
+    hits = _call({"project": "acme", "query": SENTINEL}, tmp_path)["hits"]
+    assert [h["text"] for h in hits] == [None], "a guessed type must cross as a citation only"
+
+    assert main_mod.main(["kb", "add", str(notes), "--type", "research", "--project", "acme"]) == 0
+    hits = _call({"project": "acme", "query": SENTINEL}, tmp_path)["hits"]
+    assert len(hits) == 1, "confirming must update the same document, not add a second"
+    assert SENTINEL in hits[0]["text"]

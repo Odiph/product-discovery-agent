@@ -227,6 +227,53 @@ def test_a_repository_walk_does_not_follow_a_junction(tmp_path, junction):
     assert ".md (1)" in document.sections[0].text
 
 
+# The guard has two halves, and an escaping junction is stopped by EITHER, so
+# the tests above stay green with one half deleted (mutation-checked
+# 2026-11-10). Each half gets a case only it can catch.
+
+
+def test_a_junction_that_stays_inside_the_root_is_still_not_followed(tmp_path):
+    # Only the link-kind half sees this: the target resolves inside the root,
+    # so without it the same file would be indexed twice under two names.
+    root = tmp_path / "root"
+    (root / "notes").mkdir(parents=True)
+    (root / "notes" / "mine.md").write_text("Mine.\n", encoding="utf-8")
+    link = root / "alias"
+    _junction(link, root / "notes")
+    try:
+        loaded = sources.load(root)
+    finally:
+        subprocess.run(["cmd", "/c", "rmdir", str(link)], capture_output=True)
+    assert [Path(d.origin).name for d in loaded.documents] == ["mine.md"]
+
+
+class _UnnamedLink:
+    """A path that is neither a symlink nor a junction yet resolves elsewhere --
+    a link kind the first half does not name. Building a real one needs admin
+    rights, so the guard is driven directly."""
+
+    def __init__(self, lands: Path) -> None:
+        self._lands = lands
+
+    def is_symlink(self) -> bool:
+        return False
+
+    def is_junction(self) -> bool:
+        return False
+
+    def resolve(self) -> Path:
+        return self._lands
+
+
+@pytest.mark.parametrize("module", [sources, code], ids=["folder walk", "repository walk"])
+def test_a_path_that_resolves_outside_the_root_is_refused_whatever_its_kind(tmp_path, module):
+    # Only the resolve half sees this.
+    root = (tmp_path / "root").resolve()
+    root.mkdir()
+    assert module._inside(root, _UnnamedLink(tmp_path / "outside" / "x.md")) is False
+    assert module._inside(root, _UnnamedLink(root / "x.md")) is True
+
+
 # --- 6: a PDF that never finishes parsing ------------------------------------------
 
 
