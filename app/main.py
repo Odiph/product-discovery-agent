@@ -61,12 +61,14 @@ from app.capture.devices import (
     resolve_default_render_device,
 )
 from app.capture.keepalive import KeepAliveStream
+from app.capture import precheck_in_person
 from app.capture.precheck import (
     build_precheck_report,
     print_precheck_report,
     print_self_test_report,
     run_self_test,
 )
+from app.capture.remote import RemoteAudioSource
 from app.capture.stream import CaptureStream
 from app.capture.supervisor import StreamSupervisor
 from app.coach import context as coach_context
@@ -78,19 +80,26 @@ from app.coach import asked_store as coach_asked_store
 from app.coach import demotion_store as coach_demotion_store
 from app.coach import extract as coach_extract
 from app.coach import interview_summary as summary_mod
+from app.coach import process as coach_process
+from app.kb import digest as kb_digest
 from app.coach import reasoning_client
 from app.coach import rejection_store as coach_rejection_store
 from app.coach.context import ContextItem, ContextValidationError, SurveyItem
 from app.coach.coverage import CoverageDetector, CoverageState
 from app.coach.pipeline import SuggestionPipeline
 from app.coach.trigger import TurnTrigger
+from app import evidence_cli, kb_cli, mirror_cli, prep_cli, process_cli, themes_cli
+from app.session import evidence as evidence_mod
 from app.session.audio_writer import AudioWriter
 from app.session.participant import PARTICIPANT_KEY, normalize_participant
-from app.session.reader import read_session
+from app.session.reader import MalformedRecordError, list_session_ids, read_session
 from app.session.render import write_rendered_transcript
 from app.session.feed_watch import FeedWatch, FeedWatchConfig
 from app.session.store import SegmentRecord, SessionStore, create_session_dir
+from app.stt import voiceprint as voiceprint_mod
+from app.stt.roles import RoleResolver
 from app.stt.live import (
+    IN_PERSON_SUFFIX,
     EngineNotReadyError,
     StreamWorker,
     UnknownEngineError,
@@ -101,6 +110,7 @@ from app.web import author as web_author
 from app.web import console as web_console
 from app.web import review as web_review
 from app.web import server as web_server
+from app.web import tailnet
 from app.web.hub import ConnectionHub, survey_payload
 from app.web.survey_hold import SurveyDisplayHold
 from app.web.join import create_join
@@ -673,6 +683,19 @@ def build_arg_parser() -> argparse.ArgumentParser:
         ),
     )
     start.add_argument(
+        "--in-person",
+        action="store_true",
+        default=False,
+        help=(
+            "An in-person meeting: ONE microphone -- the phone's, streamed from the "
+            "phone page -- carries both people, and each turn is assigned to "
+            "interviewer or interviewee by speaker diarization plus a voiceprint "
+            "check. No local audio device is opened. The phone page is served on "
+            "127.0.0.1 only; reach it from the phone through `tailscale serve`, "
+            "which gives it the HTTPS a phone browser requires for the microphone."
+        ),
+    )
+    start.add_argument(
         "--no-serve",
         action="store_true",
         default=False,
@@ -728,6 +751,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
             "Add a bounded real-phone reachability row: starts the server, shows the "
             "QR, and waits for a real connection before reporting go/no-go. Off by "
             "default so the everyday precheck stays fast -- run it before a real call."
+        ),
+    )
+    precheck.add_argument(
+        "--in-person",
+        action="store_true",
+        default=False,
+        help=(
+            "Check the in-person rig instead: no laptop audio device; Tailscale is up, "
+            "`tailscale serve` forwards this laptop's HTTPS name to the app's port, that "
+            "name has a valid certificate, and the diarizing engine answers."
         ),
     )
 
@@ -796,7 +829,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
         ),
     )
     critique.add_argument(
-        "session", help="Session id (a name under the sessions root) or a full path to a session directory"
+        "session", nargs="?", default=None,
+        help="Session id (a name under the sessions root) or a full path to a session directory",
+    )
+    critique.add_argument(
+        "--all", action="store_true",
+        help="judge every interview in the project that has no critique yet (one vendor call each); "
+             "feeds `mirror`",
+    )
+    critique.add_argument(
+        "--force", action="store_true", help="with --all: judge again even where a critique exists",
     )
     critique.add_argument(
         "--min-words", type=int, default=coach_asked.DEFAULT_MIN_WORDS,
@@ -852,6 +894,22 @@ def build_arg_parser() -> argparse.ArgumentParser:
                         help="re-check every checksum after writing -- a backup nobody "
                              "has ever read is a hope, not a backup")
     _add_project_argument(export)
+
+    evidence_cli.add_parsers(subparsers, _add_project_argument)
+    kb_cli.add_parsers(subparsers, _add_project_argument)
+    mirror_cli.add_parser(subparsers, _add_project_argument)
+    prep_cli.add_parser(subparsers, _add_project_argument)
+    process_cli.add_parser(subparsers, _add_project_argument)
+    themes_cli.add_parser(subparsers, _add_project_argument)
+
+    subparsers.add_parser(
+        "fetch-voiceprint-model",
+        help=(
+            "Download the speaker-embedding model the in-person mode uses to tell "
+            "the two people in the room apart (about 25 MB, verified by SHA-256, "
+            "stored in the git-ignored models/ folder)"
+        ),
+    )
 
     return parser
 
@@ -982,6 +1040,37 @@ def _load_coach_context(
     return brief, survey, hypotheses
 
 
+def _knowledge_query(*, brief, survey, hypotheses) -> str:
+    """What the coach digest's notes are chosen by: this interview's survey,
+    hypotheses and hand-written brief. Not the facts from past interviews --
+    they are another kind of knowing, and would pull the background toward
+    what customers already said."""
+    parts = [item.text for item in survey]
+    parts.extend(f"{h.statement} {h.falsifier}" for h in hypotheses)
+    parts.extend(item.text for item in brief if not item.id.startswith(coach_context.FACT_ID_PREFIX))
+    return "\n".join(parts)
+
+
+def _load_coach_knowledge(context_dir: Path, query: str) -> "tuple[kb_digest.CoachNote, ...]":
+    """The coach digest's notes for this interview (B1), from the project's
+    `knowledge/` beside `context/`. Never stops an interview: a damaged digest
+    is reported and the coach runs without background."""
+    knowledge_dir = Path(context_dir).parent / projects_mod.KNOWLEDGE_DIR_NAME
+    try:
+        notes, stale = kb_digest.coach_notes(knowledge_dir, query)
+    except kb_digest.DigestError as exc:
+        print(f"WARNING: no background notes this time: {exc}", file=sys.stderr)
+        return ()
+    except (OSError, ValueError, TypeError, KeyError) as exc:
+        print(f"WARNING: no background notes this time: the knowledge base could not be read "
+              f"({type(exc).__name__}); try `kb digest` again", file=sys.stderr)
+        return ()
+    if stale:
+        print(f"Note: {stale} document(s) changed or were removed since the last `kb digest`; "
+              f"their notes are left out until you run it again.")
+    return notes
+
+
 def _previous_session_started_at(sessions_root: Path) -> Optional[datetime]:
     """The most recent `started_at` among existing session directories, or
     `None` if there is no prior session -- used only to decide whether the
@@ -1022,6 +1111,43 @@ def _warn_if_context_stale(context_dir: Path, previous_started_at: Optional[date
             )
 
 
+# In-person role check: enrol both voices from the opening two minutes, then a
+# voiceprint decides each turn of at least a second (measured: 96% of words).
+IN_PERSON_ENROL_S = 120.0
+IN_PERSON_MIN_TURN_S = 1.0
+
+
+def _in_person_conflict(args: argparse.Namespace) -> Optional[str]:
+    """The flags that assume local audio devices or no server."""
+    if getattr(args, "no_serve", False):
+        return "--no-serve (the phone streams audio through the server)"
+    if getattr(args, "only", None):
+        return "--only (one microphone carries both people)"
+    for flag in ("interviewee_device", "interviewer_device"):
+        if getattr(args, flag, None):
+            return f"--{flag.replace('_', '-')} (no local device is opened)"
+    return None
+
+
+def _serve_host(in_person: bool) -> str:
+    # In person, loopback ONLY: `tailscale serve` is the front door, so the
+    # phone surface is never reachable from whatever Wi-Fi the laptop is on.
+    return "127.0.0.1" if in_person else "0.0.0.0"
+
+
+def _print_in_person_urls(port: int, token: str) -> None:
+    print(f"In-person: test on this laptop at http://127.0.0.1:{port}/s/{token}?mic")
+    name = tailnet.detect_dns_name()
+    if name:
+        print(f"On the phone, open: {tailnet.phone_url(name, token)}")
+        print(f"(needs `tailscale serve --bg {port}` running on this laptop)")
+    else:
+        print(
+            "Tailscale not detected. On this laptop run `tailscale serve --bg "
+            f"{port}`, then on the phone open https://<this-laptop>.<your-tailnet>.ts.net/s/{token}?mic"
+        )
+
+
 async def _async_main(args: argparse.Namespace) -> int:
     cfg = _apply_project(config_mod.load_config(engine_override=args.engine), args)
     extra_fact_dirs = _resolve_extra_fact_dirs(args)
@@ -1030,6 +1156,17 @@ async def _async_main(args: argparse.Namespace) -> int:
     # -- `--no-serve` is the one flag that skips it entirely, for the
     # single-side trap tests, which need no browser, no QR and no socket.
     no_serve: bool = getattr(args, "no_serve", False)
+    in_person: bool = getattr(args, "in_person", False)
+    if in_person:
+        conflict = _in_person_conflict(args)
+        if conflict:
+            print(f"ERROR: --in-person cannot be combined with {conflict}.", file=sys.stderr)
+            return 1
+        # ONE stream, the phone's, registered as the interviewer's: the phone IS
+        # the operator's microphone, so "interviewer side not sending audio" is
+        # the true status when it disconnects. Each TURN still gets its own
+        # role from the resolver.
+        speakers = (SPEAKER_INTERVIEWER,)
 
     if not no_serve:
         # Fail loudly, before any device/session setup, if the pinned port is
@@ -1037,7 +1174,7 @@ async def _async_main(args: argparse.Namespace) -> int:
         # desynchronize the printed/QR'd join URL from what is actually
         # listening (03-RESEARCH.md §4, OPS-05).
         try:
-            web_server.check_port_available(cfg.app_port)
+            web_server.check_port_available(cfg.app_port, host=_serve_host(in_person))
         except web_server.PortInUseError as exc:
             print(f"ERROR: {exc}", file=sys.stderr)
             return 1
@@ -1067,6 +1204,8 @@ async def _async_main(args: argparse.Namespace) -> int:
     coach_brief: "tuple[ContextItem, ...]" = ()
     coach_survey: "tuple[SurveyItem, ...]" = ()
     coach_hypotheses: "tuple[coach_corpus.Hypothesis, ...]" = ()
+    coach_rules = ""
+    coach_knowledge: "tuple[kb_digest.CoachNote, ...]" = ()
     coach_enabled = False
     # 06-01-PLAN.md §F4: measured around the CALL SITE, not inside the loader
     # -- `_load_coach_context`'s (and `load_brief`'s) own signature and return
@@ -1099,6 +1238,11 @@ async def _async_main(args: argparse.Namespace) -> int:
                 coach_brief, coach_survey, coach_hypotheses = _load_coach_context(
                     cfg.context_dir, extra_fact_dirs=extra_fact_dirs
                 )
+                coach_rules = coach_process.load_process(cfg.context_dir)
+                coach_knowledge = _load_coach_knowledge(
+                    cfg.context_dir,
+                    _knowledge_query(brief=coach_brief, survey=coach_survey, hypotheses=coach_hypotheses),
+                )
                 coach_context_load_s = time.perf_counter() - context_load_started
             except (ContextValidationError, coach_corpus.CorpusValidationError) as exc:
                 print(f"ERROR: {exc}", file=sys.stderr)
@@ -1107,11 +1251,15 @@ async def _async_main(args: argparse.Namespace) -> int:
             coach_enabled = True
             print(
                 f"Coach enabled: brief has {len(coach_brief)} item(s), survey has "
-                f"{len(coach_survey)} item(s), hypotheses has {len(coach_hypotheses)} item(s)."
+                f"{len(coach_survey)} item(s), hypotheses has {len(coach_hypotheses)} item(s)"
+                + (f", plus your own rules from {coach_process.PROCESS_FILENAME}" if coach_rules else "")
+                + (f", plus {len(coach_knowledge)} background note(s) from `kb digest`" if coach_knowledge else "")
+                + "."
             )
 
     try:
-        engines = {speaker: get_engine(cfg.engine_name) for speaker in speakers}
+        engine_name = cfg.engine_name + IN_PERSON_SUFFIX if in_person else cfg.engine_name
+        engines = {speaker: get_engine(engine_name) for speaker in speakers}
     except UnknownEngineError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1142,13 +1290,23 @@ async def _async_main(args: argparse.Namespace) -> int:
         for speaker in ALL_SPEAKERS
     }
 
-    pa = construct_pyaudio()
-    try:
-        devices = _resolve_devices(pa, speakers, resolvers=device_resolvers)
-    except DeviceOpenError as exc:
-        pa.terminate()
-        print(f"ERROR: {exc}", file=sys.stderr)
-        return 1
+    remote_source: Optional[RemoteAudioSource] = None
+    if in_person:
+        # No PyAudio at all: nothing on this laptop is recorded.
+        pa = None
+        remote_source = RemoteAudioSource(
+            sample_rate=cfg.sample_rate, frame_ms=cfg.frame_ms,
+            queue_max_seconds=cfg.queue_max_seconds,
+        )
+        devices = {SPEAKER_INTERVIEWER: remote_source.device}
+    else:
+        pa = construct_pyaudio()
+        try:
+            devices = _resolve_devices(pa, speakers, resolvers=device_resolvers)
+        except DeviceOpenError as exc:
+            pa.terminate()
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return 1
     for speaker, device in devices.items():
         print(f"Resolved {speaker} device: {device.name} ({device.native_sample_rate} Hz, {device.channels} ch)")
 
@@ -1161,7 +1319,7 @@ async def _async_main(args: argparse.Namespace) -> int:
     # channel captured two minutes of digital silence. The MEASUREMENT already
     # existed -- `precheck` had reported `-69.5 dBFS (silence)` on that very
     # device -- but nothing stood between it and the recording.
-    if not getattr(args, "skip_self_test", False):
+    if not in_person and not getattr(args, "skip_self_test", False):
         try:
             self_test = run_self_test(
                 pyaudio_module=pyaudio, pa=pa, devices=devices, cfg=cfg
@@ -1196,7 +1354,11 @@ async def _async_main(args: argparse.Namespace) -> int:
                 return 1
             print(f"WARNING: {message}", file=sys.stderr)
 
-    retain_audio: bool = getattr(args, "retain_audio", config_mod.DEFAULT_RETAIN_AUDIO)
+    # In-person keeps the room audio WITHOUT --retain-audio: the evidence pass
+    # needs it, and it is deleted once the operator confirms the speakers
+    # (app/session/evidence.py). It never leaves this laptop except to the
+    # transcription vendor the live stream already uses.
+    retain_audio: bool = in_person or getattr(args, "retain_audio", config_mod.DEFAULT_RETAIN_AUDIO)
 
     session_dir = create_session_dir(cfg.sessions_root)
     store = SessionStore(session_dir)
@@ -1210,6 +1372,29 @@ async def _async_main(args: argparse.Namespace) -> int:
         participant=getattr(args, "participant", None),
     )
     metadata["audio_retained"] = retain_audio
+    role_resolver: Optional[RoleResolver] = None
+    if in_person:
+        embedder, voiceprint_reason = voiceprint_mod.load_embedder()
+        role_resolver = RoleResolver(
+            embedder=embedder, enrol_s=IN_PERSON_ENROL_S, min_turn_s=IN_PERSON_MIN_TURN_S
+        )
+        # How this session's speaker labels were obtained. The evidence side
+        # must read this before it trusts a live role: measured, live labels
+        # were right for ~96% of words WITH the voiceprint, ~86% without.
+        metadata["capture"] = "in-person"
+        metadata["speaker_source"] = "diarization-live"
+        metadata["voiceprint"] = (
+            voiceprint_mod.MODEL_FILENAME if embedder else f"unavailable: {voiceprint_reason}"
+        )
+        metadata[evidence_mod.EVIDENCE_KEY] = evidence_mod.EVIDENCE_PENDING
+        print(
+            f"Room audio: kept on this laptop as {evidence_mod.ROOM_AUDIO_FILENAME} for the after-meeting "
+            "pass (`diarize-after`, then `confirm-speakers`, which deletes it)."
+        )
+        print(
+            "Voiceprint check: on." if embedder
+            else f"WARNING: voiceprint check off ({voiceprint_reason}); roles come from the engine's labels alone."
+        )
     store.write_metadata(metadata)
     # Printed at START, not only at close -- a user who cannot see what the
     # system is doing cannot tell a working system from a dead one
@@ -1322,6 +1507,12 @@ async def _async_main(args: argparse.Namespace) -> int:
             # function; `hypotheses` was not, and this caller was missed for
             # exactly that reason. Found 2026-08-10.
             hypotheses=coach_hypotheses,
+            # B5: the operator's own rules, on top of the Mom Test; "" when
+            # the project has none, which leaves every prompt byte-identical.
+            process=coach_rules,
+            # B1: the coach digest's notes for this interview; () when the
+            # project has none, which leaves every prompt byte-identical.
+            knowledge=coach_knowledge,
             session_start_grounding_s=coach_context_load_s,
             coverage_state_provider=lambda: coverage_detector.state,
             # `resolve_model()`, not the constant: a `COACH_BASE_URL` pointing
@@ -1414,7 +1605,7 @@ async def _async_main(args: argparse.Namespace) -> int:
         records what to open; `start()` is what touches the microphone, and
         `worker.start()` is what opens the STT session. That separation is what
         makes building a pair on demand safe."""
-        capture = CaptureStream(
+        capture = remote_source if remote_source is not None else CaptureStream(
             pyaudio, pa, device,
             target_sample_rate=cfg.sample_rate, frame_ms=cfg.frame_ms,
             queue_max_seconds=cfg.queue_max_seconds, label=speaker,
@@ -1422,12 +1613,14 @@ async def _async_main(args: argparse.Namespace) -> int:
         audio_writer: Optional[AudioWriter] = None
         if retain_audio:
             audio_writer = AudioWriter(
-                session_dir, speaker=speaker, sample_rate=cfg.sample_rate, store=store
+                session_dir, speaker=speaker, sample_rate=cfg.sample_rate, store=store,
+                stem=evidence_mod.ROOM_AUDIO_STEM if in_person else None,
             )
         worker = StreamWorker(
             engine=engines[speaker], frame_queue=capture.queue, store=store,
             speaker=speaker, sample_rate=cfg.sample_rate, audio_writer=audio_writer,
             loop=loop, broadcast=(hub.broadcast if hub is not None else None),
+            role_resolver=role_resolver,
             # Phase 4 (04-01-PLAN.md §C2/D-03, 04-02-PLAN.md §D9): the two
             # triggers stay structurally separate -- ONLY the interviewer's
             # stream gets the coverage hook (coverage is written from what
@@ -1472,7 +1665,9 @@ async def _async_main(args: argparse.Namespace) -> int:
             store=store,
             # The SAME resolver session start used, so a pin survives a device
             # change instead of reverting to the default endpoint here.
-            device_resolver=(lambda pa=pa, fn=device_resolvers[speaker]: fn(pa)),
+            device_resolver=(
+                None if in_person else (lambda pa=pa, fn=device_resolvers[speaker]: fn(pa))
+            ),
             config=config_mod.supervisor_config(cfg),
         )
         return StreamPair(
@@ -1580,7 +1775,8 @@ async def _async_main(args: argparse.Namespace) -> int:
         print(microphone_state_line(microphone.is_on), flush=True)
 
     control = ControlChannel(sys.stdin, on_microphone=_set_microphone)
-    control.start()
+    if not in_person:  # in person, the phone IS the microphone; nothing to toggle here
+        control.start()
 
     # 03-02-PLAN.md Task 2 §Q6/§Q7: a laptop-side failure must survive a
     # reconnect, so it is server-authoritative state polled from what each
@@ -1653,10 +1849,15 @@ async def _async_main(args: argparse.Namespace) -> int:
             heartbeat_timeout_ms=cfg.heartbeat_timeout_ms,
             reconnect_backoff_base_ms=cfg.reconnect_backoff_base_ms,
             reconnect_backoff_cap_ms=cfg.reconnect_backoff_cap_ms,
+            # In-person only: the phone's microphone channel. None otherwise,
+            # which keeps a two-stream run's page receive-only (gate 2).
+            audio_sink=remote_source.push if remote_source is not None else None,
         )
+        if in_person:
+            _print_in_person_urls(cfg.app_port, join_info.token)
         server = web_server.build_uvicorn_server(
             app,
-            host="0.0.0.0",
+            host=_serve_host(in_person),
             port=cfg.app_port,
             ws_ping_interval_s=cfg.ws_ping_interval_s,
             ws_ping_timeout_s=cfg.ws_ping_timeout_s,
@@ -1736,7 +1937,8 @@ async def _async_main(args: argparse.Namespace) -> int:
                 pair.audio_writer.close()
         if keepalive is not None:
             keepalive.stop()
-        pa.terminate()
+        if pa is not None:
+            pa.terminate()
         # Ordered alongside the other stops above, not as a separate
         # mechanism (03-RESEARCH.md §1). A fatal ASGI error becomes a named,
         # visible store event -- never a silent death (OPS-05). Skipped
@@ -1779,6 +1981,10 @@ async def _async_main(args: argparse.Namespace) -> int:
                 store.append_event(event="server-status", detail={"stopped_by": "signal"})
         for pair in pairs:
             print(f"{pair.speaker} segment count: {store.segment_count(pair.speaker)}")
+        if in_person:
+            for pair in pairs:
+                store.update_metadata({"speaker_roles": dict(pair.worker.role_counts)})
+                print(f"Speaker roles: {pair.worker.role_counts}")
         summary = store.close()
         print(f"Transcript written to: {store.transcript_path}")
         print(f"Latency summary: {summary}")
@@ -1830,8 +2036,20 @@ def run_render(args: argparse.Namespace) -> int:
     return 0
 
 
+def _run_in_person_precheck(args: argparse.Namespace, cfg: "config_mod.AppConfig") -> int:
+    conflict = precheck_in_person.in_person_conflict(args)
+    if conflict:
+        print(f"ERROR: --in-person cannot be combined with {conflict}.", file=sys.stderr)
+        return 2
+    report = precheck_in_person.build_in_person_report(cfg=cfg, port=cfg.app_port, skip_stt=args.skip_stt)
+    print_precheck_report(report, rules=precheck_in_person.IN_PERSON_PREFLIGHT_RULES)
+    return report.exit_code
+
+
 def run_precheck(args: argparse.Namespace) -> int:
     cfg = config_mod.load_config(engine_override=args.engine)
+    if getattr(args, "in_person", False):
+        return _run_in_person_precheck(args, cfg)
     pa = construct_pyaudio()
     # The same pins `start` accepts, resolved the same way. A pre-call check
     # that measured the DEFAULT endpoints while the interview was pinned
@@ -2099,6 +2317,15 @@ def run_extract(args: argparse.Namespace) -> int:
         print(f"ERROR: no session directory found at {session_dir}", file=sys.stderr)
         return 1
 
+    # Before the key check and any vendor call: an unconfirmed one-microphone
+    # session is refused, not warned about -- its live roles are ~96% right,
+    # and a misattributed interviewer line would become customer evidence.
+    session_meta = read_session(session_dir).metadata
+    refusal = evidence_mod.extract_refusal(session_meta)
+    if refusal is not None:
+        print(f"ERROR: {refusal}", file=sys.stderr)
+        return 1
+
     try:
         client = reasoning_client.build_client()
     except reasoning_client.CoachConfigError as exc:
@@ -2126,8 +2353,13 @@ def run_extract(args: argparse.Namespace) -> int:
         )
         return 1
 
-    read_result = read_session(session_dir)
-    segments = tuple(SegmentRecord(**record) for record in read_result.records_of_kind("segment"))
+    read_result = read_session(
+        session_dir, transcript_filename=evidence_mod.transcript_filename_for(session_meta)
+    )
+    segments = tuple(
+        SegmentRecord(**record)
+        for record in evidence_mod.segment_fields(read_result.records_of_kind("segment"))
+    )
 
     # §K7b: a loud warning, never a refusal -- only the user can tell a
     # deliberate mid-interview sanity check from a forgotten crash. Printed
@@ -2292,13 +2524,115 @@ def run_critique_questions(args: argparse.Namespace) -> int:
     warnings print before the call so a user who did not mean to re-run
     mid-interview can still interrupt."""
     cfg = _apply_project(config_mod.load_config(), args)
+    if args.all and args.session is not None:
+        print("ERROR: name one session OR pass --all, not both", file=sys.stderr)
+        return 2
+    if args.force and not args.all:
+        print("ERROR: --force only applies with --all", file=sys.stderr)
+        return 2
+    if args.all:
+        return _critique_all(args, cfg)
+    if args.session is None:
+        print("ERROR: name a session, or pass --all", file=sys.stderr)
+        return 2
     candidate = Path(args.session)
     session_dir = candidate if candidate.is_dir() else cfg.sessions_root / args.session
     if not session_dir.is_dir():
         print(f"ERROR: no session directory found at {session_dir}", file=sys.stderr)
         return 1
+    return _critique_session(args, cfg, session_dir)
 
-    read_result = read_session(session_dir)
+
+def _critique_all(args: argparse.Namespace, cfg) -> int:
+    """Every session without a critique, one at a time, each through exactly
+    the single-session path -- so `--all` cannot judge differently from the
+    command a reader already trusts. A session with nothing to judge (a
+    device test, an aborted start) is skipped, not counted as a failure."""
+    pending = []
+    for session_id in list_session_ids(cfg.sessions_root):
+        session_dir = cfg.sessions_root / session_id
+        if (session_dir / coach_asked_store.CRITIQUE_DOC_FILENAME).is_file() and not args.force:
+            continue
+        try:
+            records = _critique_records(session_dir)
+        except _CritiqueSkip as exc:
+            print(f"skipped {session_id}: {exc}", file=sys.stderr)
+            continue
+        if not coach_asked.interviewer_turns(records, min_words=args.min_words):
+            continue
+        pending.append(session_dir)
+    if not pending:
+        print("Every interview with questions to judge already has a critique. Nothing called.")
+        return 0
+    print(f"{len(pending)} interview(s) to judge, one vendor call each.")
+    worst = 0
+    for session_dir in pending:
+        print(f"\n== {session_dir.name}")
+        try:
+            worst = max(worst, _critique_session(args, cfg, session_dir))
+        except Exception as exc:  # noqa: BLE001 -- one failed call must not cost the remaining ones
+            print(f"ERROR {session_dir.name}: the critique failed ({type(exc).__name__}); "
+                  f"continuing with the rest", file=sys.stderr)
+            worst = 1
+    return worst
+
+
+class _CritiqueSkip(Exception):
+    """A session the critique must not judge, with the operator-facing reason."""
+
+
+def _critique_records(session_dir: Path):
+    """The transcript a critique judges: the confirmed one for an in-person
+    session. Refused while its speakers are unconfirmed -- a paid call on
+    guessed roles would band the interviewee's words as the interviewer's."""
+    try:
+        meta = evidence_mod.read_meta(session_dir)
+    except evidence_mod.EvidenceStateError:
+        meta = {}
+    if not isinstance(meta, dict):
+        raise _CritiqueSkip("session.json is not an object")
+    refusal = evidence_mod.extract_refusal(meta)
+    if refusal is not None:
+        raise _CritiqueSkip(refusal)
+    try:
+        return read_session(session_dir, transcript_filename=evidence_mod.transcript_filename_for(meta)).records
+    except (MalformedRecordError, ValueError, OSError) as exc:
+        raise _CritiqueSkip(f"the transcript cannot be read ({type(exc).__name__})") from exc
+
+
+def _critique_survey(meta: dict, context_dir: Path) -> "tuple[SurveyItem, ...]":
+    """The survey a past interview is judged against: the `context_survey`
+    snapshot `start` wrote into its session.json, because a question is on or
+    off topic for what THAT interview was for. A session recorded before the
+    snapshot existed falls back to the project's current survey, and one with
+    no survey anywhere is judged against its hypotheses alone. A snapshot
+    that is present but malformed raises `ContextValidationError`."""
+    from pydantic import ValidationError
+
+    snapshot = meta.get("context_survey")
+    if snapshot is None:
+        try:
+            return coach_context.load_survey(context_dir)
+        except OSError as exc:
+            raise ContextValidationError(f"cannot read the project's survey: {exc}") from exc
+        except ContextValidationError:
+            if (Path(context_dir) / coach_context.SURVEY_FILENAME).is_file():
+                raise
+            return ()
+    try:
+        return tuple(SurveyItem.model_validate(entry) for entry in snapshot)
+    except (ValidationError, TypeError) as exc:
+        raise ContextValidationError(f"session.json's context_survey is malformed: {exc}") from exc
+
+
+def _critique_session(args: argparse.Namespace, cfg, session_dir: Path) -> int:
+    try:
+        _critique_records(session_dir)
+    except _CritiqueSkip as exc:
+        print(f"ERROR: {session_dir.name}: {exc}", file=sys.stderr)
+        return 1
+    meta = evidence_mod.read_meta(session_dir) if (session_dir / "session.json").is_file() else {}
+    read_result = read_session(session_dir, transcript_filename=evidence_mod.transcript_filename_for(meta))
     turns = coach_asked.interviewer_turns(
         read_result.records, min_words=args.min_words
     )
@@ -2335,6 +2669,21 @@ def run_critique_questions(args: argparse.Namespace) -> int:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
 
+    try:
+        survey = _critique_survey(meta, cfg.context_dir)
+        # The project's rules as they stand NOW, not as they were on the day:
+        # the critique holds the interview to the process you keep today.
+        rules = coach_process.load_process(cfg.context_dir)
+    except ContextValidationError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+
+    if not survey and not hypotheses:
+        print(
+            f"WARNING: {session_dir.name} has no survey and no hypotheses -- the critic has "
+            "nothing to judge off-topic against, so read any off-topic flag as noise.",
+            file=sys.stderr,
+        )
     print(f"Judging {len(turns)} interviewer turns from {session_dir.name}...")
     # NOTE: `is_generic` is always 0 in this report -- `critique_turns` cannot
     # supply the trigger utterance a batch of turns would each need. See its
@@ -2343,6 +2692,8 @@ def run_critique_questions(args: argparse.Namespace) -> int:
         client,
         turns,
         hypotheses=hypotheses,
+        survey=survey,
+        process=rules,
         model=reasoning_client.resolve_model(),
         # NOT `cfg.coach_critique_*`: those are tuned for the LIVE path, where
         # the whole budget is 8 seconds and a 1000-token cap is a deliberate
@@ -2387,7 +2738,7 @@ def run_critique_questions(args: argparse.Namespace) -> int:
         f"  flags: leading={summary['leading']} "
         f"hypothetical={summary['hypothetical_or_future_tense']} "
         f"pitch={summary['pitch']} opinion_seeking={summary['opinion_seeking']} "
-        f"confirmation_only={summary['confirmation_only']}"
+        f"confirmation_only={summary['confirmation_only']} off_topic={summary['off_topic']}"
     )
     # A7: the rubric was calibrated on questions a model PROPOSED, not on real
     # asked speech. Printed on every run rather than buried in a docstring,
@@ -2755,6 +3106,38 @@ def run_standing(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_fetch_voiceprint_model(args: argparse.Namespace) -> int:
+    from app.stt import voiceprint
+
+    try:
+        path = voiceprint.fetch_model()
+    except voiceprint.ModelIntegrityError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    except OSError as exc:
+        print(f"ERROR: could not download the voiceprint model: {exc}", file=sys.stderr)
+        return 1
+    embedder, reason = voiceprint.load_embedder(path)
+    if embedder is None:
+        print(f"ERROR: downloaded, but it does not load: {reason}", file=sys.stderr)
+        return 1
+    print(f"Voiceprint model ready: {path}")
+    return 0
+
+
+def run_evidence_step(args: argparse.Namespace) -> int:
+    """`diarize-after` / `confirm-speakers` (app/evidence_cli.py)."""
+    cfg = _apply_project(config_mod.load_config(), args)
+    candidate = Path(args.session)
+    session_dir = candidate if candidate.is_dir() else cfg.sessions_root / args.session
+    if not session_dir.is_dir():
+        print(f"ERROR: no session directory found at {session_dir}", file=sys.stderr)
+        return 1
+    if args.command == "diarize-after":
+        return evidence_cli.run_diarize_after(session_dir)
+    return evidence_cli.run_confirm_speakers(session_dir, args)
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     configure_logging()
     parser = build_arg_parser()
@@ -2778,6 +3161,20 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return run_standing(args)
         if args.command == "export":
             return run_export(args)
+        if args.command == "fetch-voiceprint-model":
+            return run_fetch_voiceprint_model(args)
+        if args.command in ("diarize-after", "confirm-speakers"):
+            return run_evidence_step(args)
+        if args.command == "kb":
+            return kb_cli.run(args)
+        if args.command == "mirror":
+            return mirror_cli.run(args, _apply_project)
+        if args.command == "prep":
+            return prep_cli.run(args, _apply_project, _read_corpus_refs)
+        if args.command == "themes":
+            return themes_cli.run(args, _apply_project, _read_corpus_refs)
+        if args.command == "process":
+            return process_cli.run(args, _apply_project)
         if args.command == "console":
             return run_console(args)
         if args.command == "hub":

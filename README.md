@@ -1,4 +1,4 @@
-# Discovery Copilot
+# Product Discovery Agent
 
 Live bilingual (Hebrew/English) interview transcription: captures the
 interviewee's audio via WASAPI loopback and the interviewer's own microphone
@@ -17,8 +17,8 @@ corpus and shows where each hypothesis stands across interviews. Windows only.
    other people.
 2. Clone to a short path and install (Python 3.12+):
    ```
-   git clone https://github.com/Odiph/discovery-copilot C:\src\discovery-copilot
-   cd C:\src\discovery-copilot
+   git clone https://github.com/Odiph/product-discovery-agent C:\src\product-discovery-agent
+   cd C:\src\product-discovery-agent
    py -3 -m venv .venv
    .venv\Scripts\python.exe -m pip install -r requirements.txt
    copy .env.example .env
@@ -66,7 +66,9 @@ tool asks for or records consent on your behalf.
 | Data | Sent to | When |
 |---|---|---|
 | Live audio of both sides | Soniox (speech-to-text) | Throughout every recorded call |
-| Transcript text, your brief, survey, hypotheses and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions` |
+| Transcript text, your brief, survey, hypotheses, your own rules (`process.md`) and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions` |
+| Research and code you added with `kb add` (never interviews, conversations or emails) | The same coach endpoint | When you run `kb digest`, once per new or changed document. Its notes then ride in the coach's prompt every cycle |
+| In-person room audio (`room.wav`, kept on the laptop after `start --in-person`) | Soniox, when you run `diarize-after` (the uploaded copy is deleted afterwards); the local file is deleted by `confirm-speakers --confirm` | Once per in-person meeting, only when you run `diarize-after` |
 | Retained audio (`--retain-audio`, off by default) | Nothing, unless you run the benchmark, which uploads it to the STT vendors it compares | Only when you run `benchmark/` yourself |
 
 Each vendor's own policy governs retention and training use, and they change,
@@ -80,7 +82,7 @@ coach is simply off and only Soniox receives anything. Nothing is sent
 anywhere else: no telemetry, no analytics.
 
 **What stays on your machine:** transcripts, session metadata, extracted
-claims and hypotheses, under `sessions/` and `projects/`. Both are
+claims and hypotheses, and the knowledge base (`kb`, below), under `sessions/` and `projects/`. Both are
 git-ignored in full. They hold verbatim speech, so treat the folders as
 confidential and delete sessions you no longer need. If someone asks you to
 erase their data, delete their session directory and remove that session's
@@ -117,7 +119,7 @@ from. Every command below assumes it exists; a bare `python` is the system
 interpreter, has none of these pinned packages, and will silently do something
 else.
 
-**Keep the checkout path short** (e.g. `C:\src\discovery-copilot`), or enable
+**Keep the checkout path short** (e.g. `C:\src\product-discovery-agent`), or enable
 Windows long paths. The `anthropic` package ships module names long enough that
 a venv nested ~120 characters deep crosses Windows' 260-character limit, and
 every import of the coach then fails with a `ModuleNotFoundError` that names a
@@ -295,7 +297,7 @@ Diagnose and fix, from an **Administrator** PowerShell:
 Get-NetConnectionProfile                  # NetworkCategory: Public  <- the tell
 
 Set-NetConnectionProfile -InterfaceAlias 'Wi-Fi' -NetworkCategory Private
-New-NetFirewallRule -DisplayName 'Discovery Copilot phone surface (8765)' `
+New-NetFirewallRule -DisplayName 'Product Discovery Agent phone surface (8765)' `
   -Direction Inbound -Protocol TCP -LocalPort 8765 `
   -Profile Private -Action Allow
 ```
@@ -315,6 +317,59 @@ not widen this to `Public` to make a venue work; use the hotspot.
 
 A tunnel is a manual last resort only, never part of the normal path — reach
 for the hotspot first, always.
+
+## In-person meetings: the phone is the microphone
+
+For a meeting across a table rather than a call, run the engine on the laptop
+and use your phone as the one microphone in the room. A phone browser grants
+the microphone only over HTTPS. Tailscale gives the laptop a real HTTPS name
+that only your own devices can reach, from any network; the app itself listens
+on `127.0.0.1` only, so the Wi-Fi you are on never sees it.
+
+**Once per machine:**
+
+1. Install Tailscale on the laptop and the phone ([tailscale.com/download](https://tailscale.com/download))
+   and sign both in to the same account (`tailscale up` on the laptop).
+2. In the Tailscale admin console, on the **DNS** page, turn on **MagicDNS**
+   and **HTTPS Certificates**.
+3. `python -m app fetch-voiceprint-model` downloads the speaker-embedding
+   model (about 25 MB, SHA-256 verified) that tells the two voices apart.
+
+**Before the meeting:**
+
+```
+tailscale serve --bg 8765
+python -m app precheck --in-person
+```
+
+`tailscale serve --bg <port>` (the app port, 8765 unless you changed
+`APP_PORT`) puts `https://<laptop>.<tailnet>.ts.net/` in front of the app and
+keeps running in the background. `precheck --in-person` opens no laptop audio
+device. It checks that the port is free, that Tailscale is up, that `serve`
+forwards to this app's port (a `serve` started without `--bg` passes with a
+warning: it stops when its terminal closes), that the name completes a
+certificate-verified TLS handshake, and that the diarizing engine answers
+(`--skip-stt` skips that last row). It does not test the phone itself; open
+the phone URL once before the meeting for that.
+
+**During:** `python -m app start --in-person` prints the phone URL
+(`https://<laptop>.<tailnet>.ts.net/s/<token>?mic`). Open it on the phone,
+say the consent line, then press Start. **Speak first:** the first voice heard
+is taken to be the interviewer, and both voiceprints are enrolled from the
+first two minutes. These live roles drive the coaching only.
+
+**After:** the evidence transcript comes from a slower, more accurate pass,
+not from the live roles.
+
+```
+python -m app diarize-after <session>      # uploads room.wav to Soniox (paid), voiceprint cross-check
+python -m app confirm-speakers <session>   # shows who said what; add --confirm (or --swap) to record it
+python -m app extract <session>            # refuses until the speakers are confirmed
+```
+
+`confirm-speakers --confirm` deletes the kept room audio. `--disputed
+label|voiceprint` settles turns the voiceprint disagreed with;
+`--accept-live-roles` confirms a session that has no audio to re-pass.
 
 ## Screen-sharing during the call
 
@@ -573,6 +628,13 @@ same customer):
   in — nothing in this codebase changes it for you yet. Today, hypotheses are
   read by `python -m app extract` for tagging only (each extracted fact may
   reference the hypothesis it bears on); nothing else reads or writes them.
+- **`context/process.md`** (optional) — your own interviewing rules, added on
+  top of the Mom Test that the coach and `critique-questions` already apply:
+  what a good question is for you, what you always forget, what you never do.
+  One `## heading` per rule, so a critique can name the rule it used. Your
+  rules add to the Mom Test and can never relax it. `python -m app process init`
+  writes a starter that only has comments in it. Comments never reach a
+  prompt, so an empty or untouched file changes nothing.
 
 Copy the shipped format samples to get started:
 
@@ -738,11 +800,110 @@ All take `--project PATH` like the rest, and none calls a model unless noted.
 - **`critique-questions <session>`**: bands YOUR OWN questions from the
   interview against the same Mom Test rubric the coach is held to, and writes
   `questions_critique.json` into the session. **This one calls the reasoning
-  vendor.** `--min-words` sets the shortest turn worth judging.
+  vendor.** `--min-words` sets the shortest turn worth judging. `--all`
+  judges every interview in the project that has no critique yet (one call
+  each; `--force` judges again).
+- **`mirror [--show]`**: what you keep doing as an interviewer, across every
+  interview in the project. A **habit** is a question flag (leading,
+  hypothetical, pitching, opinion-seeking, yes/no) that shows up in two or
+  more interviews; the **trend** compares your earlier interviews with your
+  later ones; **walked past** lists the moments an interviewee offered
+  something concrete (a specific occasion, a workaround, a cost, a pain) and
+  your next question went somewhere else, marked when you said "Love it" first.
+  No model call: habits come from the critiques above, walked-past from the
+  transcripts. It is a detector, not a verdict: some moments will be fine.
+  `--show` prints the words of each moment, to this terminal only.
+- **`prep`**: the night before the next interview. Lists what you still do
+  not know (a hypothesis with no decision criterion, none or only unclear
+  evidence, a contested one, a thin one) with the reason for each; walks the
+  guide question by question, marking the ones never reached in the
+  interviews that had them; and repeats your habits from `mirror`. No model
+  call and nothing written: change the guide in `author`, which shows the
+  same survey proposals above the survey with **Move to top**, **Remove from
+  survey** and **Dismiss**. Applying one changes the survey on the page only;
+  nothing is written until you press **Save survey**.
+- **`themes`**: the patterns nobody predicted. Claims that bear on no
+  hypothesis and recur in two or more interviews, grouped by the distinctive
+  words they share; each group is a candidate hypothesis. No model call; reads
+  claims, never quotes.
 - **`export --to backup.zip [--verify]`**: writes a checksummed copy of the
   project's irreplaceable data (transcripts, facts, hypotheses) to a zip. It
   refuses a destination git can see, so a backup can never be committed by
   accident; `--verify` re-reads every checksum after writing.
+
+## The project knowledge base: everything else you already know
+
+Interviews are not the only thing a project knows. `kb` indexes the rest —
+conversations recorded elsewhere, emails, research, your own code — next to
+this tool's interviews, so one search covers all of it with a citation to the
+exact turn, line or paragraph.
+
+```
+python -m app kb add notes/ calls/*.vtt export.mbox ../my-product --project acme
+python -m app kb add --sessions --project acme      # this project's own interviews
+python -m app kb search "export by hand" --project acme
+python -m app kb topics --project acme
+python -m app kb list --project acme
+python -m app kb remove 3f9a1c --project acme       # from the index; the file is untouched
+python -m app kb digest --project acme              # what the coach digest would send; sends nothing
+python -m app kb digest --yes --project acme        # summarise research and code for the coach
+python -m app kb digest --show --project acme       # the notes the coach can draw on
+```
+
+| Source | Read as |
+| --- | --- |
+| a session folder, or `--sessions` | an interview, by role. An in-person session only after `confirm-speakers` |
+| `.vtt`, `.srt`, or `.txt`/`.md` made of `Name: text` lines (Zoom, Meet, Otter, Granola exports) | a conversation, by speaker |
+| `.eml`, `.mbox` (one document per message; quoted reply history dropped) | email |
+| `.md`, `.txt`, `.html`, `.docx`, `.pdf` (one section per page) | research |
+| a repository (a folder with `.git`, `pyproject.toml` or `package.json`) | code: its READMEs and `docs/`, plus a summary of the tree — not its source lines |
+
+A PDF is read for its text only. A scanned PDF has no text until you run OCR
+on it, and a password-protected one needs an unlocked copy. Both are skipped,
+with the reason given.
+
+- **Local only, except `kb digest`.** Adding, searching and topics run on your
+  machine and call no model. The index lives in `projects/<node>/knowledge/`, git-ignored with the
+  rest of `projects/`.
+- **Re-adding is safe.** An unchanged file is a no-op; a changed one replaces
+  its old version.
+- **Search** is keyword search (BM25) that understands Hebrew prefixes
+  (`לקוח` finds `וכשהלקוחות`), final letters and plurals. `--type` narrows it.
+- **Never evidence.** Other sources sit beside your interviews; they never
+  count for or against a hypothesis. `standing` is the same before and after
+  any `kb` command.
+- **Topics** are the words and phrases each document repeats more than the
+  rest of the project does, and what several documents keep returning to.
+- **The coach digest** (`kb digest`) is how the live coach knows your material.
+  Each research and code document is summarised into a few short notes, each
+  citing its page, line or file, with one call to the extraction model per
+  40,000 characters. Only new or changed documents are sent, so a second run
+  costs nothing. At `start`, the notes most related to your survey, hypotheses
+  and brief (up to about 4,000 characters) go into the coach's cached prompt,
+  once, so nothing is added to each cycle's latency. The coach is told they are
+  background, not evidence from any interview. Interviews, conversations and
+  emails are never digested: other customers' words never reach a live prompt.
+  The type is the one `kb add` gave the file, so a call transcript saved as a
+  PDF counts as research: check the list `kb digest` prints before `--yes`.
+  A document changed or removed since the last digest is left out, and `start`
+  says so.
+
+## Before, during, after: the commands behind the chain
+
+| Moment | What you want | Command |
+| --- | --- | --- |
+| The night before | what you still don't know, and what to change in the guide | `prep` |
+| | everything you already know, from every source | `kb search "..."` |
+| During | the whisper | `start` (coach on the console, overlay or phone) |
+| Before an in-person meeting | the phone can reach the laptop over HTTPS | `precheck --in-person` |
+| After an in-person meeting | the evidence transcript, speakers confirmed | `diarize-after`, `confirm-speakers` |
+| After one interview | its claims, and what it moved | `extract`, `summary`, `standing <session>` |
+| After several | where every hypothesis stands, counted per interview | `standing` |
+| | what keeps coming up that no hypothesis predicted | `themes` |
+| | what you keep doing, and the offers you walked past | `critique-questions --all`, then `mirror` |
+
+Every command above takes `--project`. Only `extract`, `critique-questions`
+and the live coach call a model.
 
 ## Retaining the raw audio (rehearsal sessions only)
 
@@ -885,9 +1046,9 @@ Edit `%APPDATA%\Claude\claude_desktop_config.json` (Windows) and add:
 {
   "mcpServers": {
     "discovery-copilot": {
-      "command": "C:\\path\\to\\discovery-copilot\\.venv\\Scripts\\python.exe",
+      "command": "C:\\path\\to\\product-discovery-agent\\.venv\\Scripts\\python.exe",
       "args": ["-m", "app.mcp"],
-      "cwd": "C:\\path\\to\\discovery-copilot"
+      "cwd": "C:\\path\\to\\product-discovery-agent"
     }
   }
 }
@@ -910,8 +1071,8 @@ assumptions).
 Once per machine:
 
 ```
-setx DISCOVERY_COPILOT_HOME "C:\path\to\discovery-copilot"
-claude plugin marketplace add "C:\path\to\discovery-copilot\integrations\claude-code"
+setx DISCOVERY_COPILOT_HOME "C:\path\to\product-discovery-agent"
+claude plugin marketplace add "C:\path\to\product-discovery-agent\integrations\claude-code"
 claude plugin install discovery@discovery-copilot-local
 ```
 
@@ -936,7 +1097,7 @@ product repository's `discovery-proposals.md`, which you enter here through
 - `app/tests/test_claude_plugin.py` launches the registration from a foreign
   directory and fails if the skill or commands name a tool the server lacks.
 
-### The seven tools
+### The ten tools
 
 | Tool | Answers |
 | --- | --- |
@@ -947,6 +1108,9 @@ product repository's `discovery-proposals.md`, which you enter here through
 | `get_facts` | the extracted claims and which way each one bears |
 | `get_standing` | where each hypothesis stands, counted per INTERVIEW |
 | `get_interview_summary` | what one interview did, deterministically |
+| `search_knowledge` | cited hits from the project knowledge base; text only for research and code, never for speech |
+| `get_mirror` | your habits as an interviewer across interviews: flags, trend, walked-past moments (no words) |
+| `get_themes` | claims no hypothesis predicted that recur across interviews (claims, never quotes) |
 
 ### `scope`: one node, or a whole sub-tree
 

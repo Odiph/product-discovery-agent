@@ -1,12 +1,12 @@
 ---
 name: discovery-evidence
-description: Ground product decisions in customer-interview evidence from the Discovery Copilot. Use when prioritising, scoping or designing a user-facing feature, writing a PRD, roadmap item or positioning, or when anyone asks what users need, want or struggle with. Also use when a claim about users is about to be written down without a source.
+description: Ground product decisions in customer-interview evidence from the Product Discovery Agent. Use when prioritising, scoping or designing a user-facing feature, writing a PRD, roadmap item or positioning, or when anyone asks what users need, want or struggle with. Also use when a claim about users is about to be written down without a source.
 ---
 
 # Discovery evidence
 
 This repository is a product. The customer interviews behind it live in a
-separate tool, the Discovery Copilot, which records interviews, extracts claims
+separate tool, the Product Discovery Agent, which records interviews, extracts claims
 from them and tracks where each hypothesis stands. You reach it through the
 `discovery-copilot` MCP server this plugin registers. It is **read-only** and
 returns abstracted claims, never what anyone actually said.
@@ -26,7 +26,7 @@ Read `.discovery-copilot.json` at the repository root:
   decision in another product's customers.
 
 If the server is missing or fails to start, the operator has not set
-`DISCOVERY_COPILOT_HOME` to the Discovery Copilot checkout, or has not restarted
+`DISCOVERY_COPILOT_HOME` to the Product Discovery Agent checkout, or has not restarted
 Claude Code since. Say that; do not work around it.
 
 ## 2. Read the evidence, in this order
@@ -82,18 +82,18 @@ Do not fill the gap with assumptions about users. Propose what to learn:
   questions that invite a compliment.
 
 Append proposals to `discovery-proposals.md` at this repository's root, dated.
-The operator enters the ones they accept through the Discovery Copilot's own
+The operator enters the ones they accept through the Product Discovery Agent's own
 `author` page: `python -m app author --project <project>`, run from the
-Discovery Copilot checkout. **You propose; only `author` writes** a project's
+Product Discovery Agent checkout. **You propose; only `author` writes** a project's
 hypotheses and survey.
 
 ## Boundaries
 
-- **Never read the Discovery Copilot's files directly**: its `projects/`,
+- **Never read the Product Discovery Agent's files directly**: its `projects/`,
   `sessions/` or `context/` directories. They hold transcripts and verbatim
   customer speech that the MCP server deliberately withholds. Asking for a
   quote is a signal to use the claim instead.
 - **Never start a recording** (`python -m app start`, the console or the
   overlay). An interview is a live event the operator runs.
-- Nothing here writes to the Discovery Copilot. If a task seems to need that,
+- Nothing here writes to the Product Discovery Agent. If a task seems to need that,
   hand the operator the command.

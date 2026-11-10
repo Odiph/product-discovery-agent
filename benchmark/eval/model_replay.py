@@ -185,7 +185,7 @@ def replay_trigger(
             transcript=transcript,
             trigger=trigger,
             detected_language=trigger_row.get("detected_language") or "en",
-            hypotheses=hypotheses,
+            knowledge=(), process="", hypotheses=hypotheses,
             recently_shown=tuple(shown_before[-DEFAULT_PROMPT_RECENT:]),
             model=model,
             max_tokens=generate_max_tokens,
@@ -208,7 +208,7 @@ def replay_trigger(
                 critic_mod.run_critique(
                     client,
                     candidates=candidates,
-                    hypotheses=hypotheses,
+                    process="", hypotheses=hypotheses,
                     trigger_text=trigger.text,
                     model=model,
                     max_tokens=critique_max_tokens,

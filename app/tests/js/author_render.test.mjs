@@ -393,3 +393,115 @@ test("loading a criterion and saving without touching it does not lose it", asyn
   const body = await save(document);
   assert.equal(body[0].criterion, stored, "an untouched criterion was dropped by Save");
 });
+
+// --- prep's proposals, applied on the page (B4) -------------------------------------------
+//
+// Accepting a proposal changes the survey ON THE PAGE only. Nothing is written
+// until the operator presses "Save survey", which is still the one writer of
+// context/survey.json -- so a proposal can be read, tried, and abandoned by
+// reloading, exactly like any other edit on this page.
+
+const SURVEY = [
+  { id: "q1", order: 0, text: "Walk me through the last time" },
+  { id: "q2", order: 1, text: "What did you do next?" },
+  { id: "q3", order: 2, text: "Who else was involved?" },
+];
+const MOVE_Q3 = {
+  item_id: "q3", text: "Who else was involved?", action: "move-earlier",
+  reason: "never asked in the 2 interviews that had it: move it earlier, or drop it if it no longer matters",
+};
+
+async function renderWithPrep(proposals, survey = SURVEY) {
+  const document = makeDocument();
+  const posts = [];
+  const respond = (body) => Promise.resolve({ ok: true, json: () => Promise.resolve(body) });
+  const fetch = (url, options) => {
+    if (options && options.method === "POST") {
+      const payload = JSON.parse(options.body);
+      posts.push({ url, payload });
+      return respond({ saved: payload.length });
+    }
+    if (url === "/api/state") { return respond(HEALTHY); }
+    if (url === "/api/survey") { return respond(survey.map((item) => ({ ...item }))); }
+    if (url === "/api/prep") { return respond({ proposals, survey: "present" }); }
+    return respond([]);
+  };
+  new Function("document", "fetch", source)(document, fetch);
+  for (let i = 0; i < 40; i += 1) { await Promise.resolve(); }
+  return { document, posts };
+}
+
+function surveyTexts(document) {
+  return findAll(document.byId["survey-items"], (n) => n.tagName === "input").map((n) => n.value);
+}
+
+function button(node, label) {
+  const found = findAll(node, (n) => n.tagName === "button" && n._text === label);
+  assert.equal(found.length, 1, `expected one "${label}" button, found ${found.length}`);
+  return found[0];
+}
+
+test("the page asks prep what it would change", () => {
+  assert.ok(source.includes("/api/prep"), "author.js never asks for prep's proposals");
+  assert.ok(PAGE_IDS.includes("survey-prep"), "index.html has no survey-prep slot");
+});
+
+test("no proposal, no panel", async () => {
+  const { document } = await renderWithPrep([]);
+  assert.equal(document.byId["survey-prep"].hidden, true);
+});
+
+test("a proposal shows the question, its reason, and where it would move", async () => {
+  const { document } = await renderWithPrep([MOVE_Q3]);
+  const panel = document.byId["survey-prep"];
+  assert.equal(panel.hidden, false);
+  const text = readable(panel);
+  assert.ok(text.includes("Who else was involved?"), text);
+  assert.ok(text.includes("never asked in the 2 interviews"), text);
+  assert.ok(text.includes("question 3") && text.includes("question 1"), "show the before and after: " + text);
+});
+
+test("move to top reorders the survey on the page and writes nothing", async () => {
+  const { document, posts } = await renderWithPrep([MOVE_Q3]);
+  button(document.byId["survey-prep"], "Move to top").click();
+  assert.deepEqual(surveyTexts(document), [
+    "Who else was involved?", "Walk me through the last time", "What did you do next?",
+  ]);
+  assert.deepEqual(posts, [], "accepting must not save: Save survey is the only writer");
+  assert.ok(String(document.byId["survey-status"]._text).includes("not saved"));
+  assert.equal(document.byId["survey-prep"].hidden, true, "an applied proposal leaves the panel");
+});
+
+test("the save after accepting sends the new order, ids unchanged", async () => {
+  const { document, posts } = await renderWithPrep([MOVE_Q3]);
+  button(document.byId["survey-prep"], "Move to top").click();
+  document.byId["save-survey"].click();
+  await Promise.resolve();
+  assert.deepEqual(posts[0].payload.map((item) => item.id), ["q3", "q1", "q2"]);
+});
+
+test("remove takes the question out of the survey", async () => {
+  const { document } = await renderWithPrep([MOVE_Q3]);
+  button(document.byId["survey-prep"], "Remove from survey").click();
+  assert.deepEqual(surveyTexts(document), ["Walk me through the last time", "What did you do next?"]);
+});
+
+test("dismiss hides the proposal and leaves the survey alone", async () => {
+  const { document, posts } = await renderWithPrep([MOVE_Q3]);
+  button(document.byId["survey-prep"], "Dismiss").click();
+  assert.deepEqual(surveyTexts(document), SURVEY.map((item) => item.text));
+  assert.equal(document.byId["survey-prep"].hidden, true);
+  assert.deepEqual(posts, []);
+});
+
+test("a proposal for a question no longer on the page is not offered", async () => {
+  const { document } = await renderWithPrep([{ ...MOVE_Q3, item_id: "gone" }]);
+  assert.equal(document.byId["survey-prep"].hidden, true);
+});
+
+test("a question removed by hand after loading takes its proposal with it", async () => {
+  const { document } = await renderWithPrep([MOVE_Q3]);
+  const rows = findAll(document.byId["survey-items"], (n) => n.tagName === "button" && n._text === "Remove");
+  rows[2].click();
+  assert.equal(document.byId["survey-prep"].hidden, true);
+});

@@ -162,6 +162,8 @@ class SuggestionPipeline:
         brief: Sequence[ContextItem],
         survey: Sequence[SurveyItem],
         hypotheses: Sequence[Any] = (),
+        process: str,
+        knowledge: Sequence[Any],
         session_start_grounding_s: float,
         coverage_state_provider: Callable[[], CoverageState],
         model: str = reasoning_client.DEFAULT_MODEL,
@@ -192,6 +194,13 @@ class SuggestionPipeline:
         # unmodified caller degrades to zero hypotheses -- the normal D-02
         # empty-corpus case, never a construction-time failure.
         self._hypotheses = tuple(hypotheses)
+        # B5: the operator's own rules (`app.coach.process`), loaded once at
+        # session start like the rest. No default, so gate 26 forces
+        # `run_start` to pass it -- a defaulted `hypotheses` was once missed.
+        self._rules = process
+        # B1: the coach digest's notes, chosen once at `start` (the cached
+        # prefix). Generate only: the critic judges questions, not facts.
+        self._knowledge = tuple(knowledge)
         self._session_start_grounding_s = session_start_grounding_s
         self._coverage_state_provider = coverage_state_provider
         self._model = model
@@ -431,6 +440,8 @@ class SuggestionPipeline:
                 # 06-02-PLAN.md §G1/§G3 Task 3: threaded from the
                 # constructor, never read from a file on this worker thread.
                 hypotheses=self._hypotheses,
+                process=self._rules,
+                knowledge=self._knowledge,
                 # What the operator has already been shown, so this call stops
                 # re-proposing it. The measured cause of a 32%-repeat run.
                 recently_shown=self._recent.for_prompt(self._repeat_prompt_recent),
@@ -463,6 +474,8 @@ class SuggestionPipeline:
                 # the one the candidate was generated against would let the
                 # two stages disagree about what this interview is for.
                 survey=self._survey,
+                # The SAME rules generate was given (B5).
+                process=self._rules,
                 # The trigger utterance the whole cycle was fired by
                 # (2026-08-15). `is_generic` asks whether a candidate engages
                 # with what THIS interviewee just said, and this is that

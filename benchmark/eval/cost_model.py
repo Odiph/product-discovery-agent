@@ -89,12 +89,12 @@ def price(session_dir: Path, project: Path, *, chunk: int, legacy: bool = False)
 
         request = assemble_generate_request(
             brief=brief, survey=survey, asked={}, transcript=upto, trigger=trigger,
-            detected_language="en", hypotheses=hyps, recently_shown=recent,
+            detected_language="en", knowledge=(), process="", hypotheses=hyps, recently_shown=recent,
             transcript_cache_chunk=chunk, model="m", max_tokens=2000,
         )
         if legacy:
             cached = [
-                {"text": prompts.static_block(brief=brief, hypotheses=hyps)},
+                {"text": prompts.static_block(brief=brief, knowledge=(), process="", hypotheses=hyps)},
                 {"text": prompts.survey_block(survey, {})},
                 {"text": prompts.transcript_block(upto)},
             ]
@@ -135,7 +135,7 @@ def price(session_dir: Path, project: Path, *, chunk: int, legacy: bool = False)
         ]
         crit = assemble_critique_request(
             candidates=candidates,
-            hypotheses=hyps,
+            process="", hypotheses=hyps,
             # The session's REAL survey, and a placeholder trigger. This
             # script measures TOKEN COUNTS, never judgement quality, so the
             # trigger's wording is irrelevant while its presence is not --

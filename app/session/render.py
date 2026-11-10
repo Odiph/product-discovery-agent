@@ -46,6 +46,7 @@ from typing import Any, Callable, Optional
 
 from app.coach import corpus as coach_corpus_mod
 from app.coach.context import FACT_ID_PREFIX
+from app.session import evidence_view
 from app.session.bleed import detect_bleed
 from app.session.reader import SessionReadResult, read_session
 from app.session.mic_skew import INTERVIEWER, correct_interviewer_latencies
@@ -260,7 +261,9 @@ def render_session(session_dir: Path, *, context_dir: "Optional[Path]") -> str:
     precedent. Pass `None` for a session where resolution is not wanted or
     not possible; every render still produces the whole document either
     way."""
-    result = read_session(session_dir)
+    # A confirmed in-person session renders its confirmed turns (facts cite them).
+    live = read_session(session_dir)
+    result = evidence_view.view_from(session_dir, live)
     fact_lookup, fact_note = _load_fact_lookup(context_dir)
     hypothesis_lookup, hypothesis_note = _load_hypothesis_lookup(context_dir)
 
@@ -301,7 +304,11 @@ def render_session(session_dir: Path, *, context_dir: "Optional[Path]") -> str:
         lines.append("")
 
     session_time = _build_session_time_fn(result.records)
-    ordered = sorted(result.records, key=lambda r: (session_time(r), r.get("seq", 0)))
+    # At a tie, a segment before an event: a confirmed turn's seq and a live
+    # event's seq are different numberings, so seq alone no longer orders them.
+    ordered = sorted(
+        result.records, key=lambda r: (session_time(r), r.get("kind") != "segment", r.get("seq", 0))
+    )
 
     if not ordered:
         lines.append("No segments or events were captured in this session.")
@@ -315,9 +322,9 @@ def render_session(session_dir: Path, *, context_dir: "Optional[Path]") -> str:
             )
         )
 
-    lines.extend(_render_latency_section(result))
+    lines.extend(_render_latency_section(live))  # the live run's latency; the confirmed pass has none
     lines.append("")
-    lines.extend(_render_coaching_summary_section(result))
+    lines.extend(_render_coaching_summary_section(live))  # cycles are live triggers, uncollapsed
     lines.append("")
     return "\n".join(lines)
 

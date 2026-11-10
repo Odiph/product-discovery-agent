@@ -54,7 +54,7 @@ def _run_generate(client):
     return run_generate(
         client, brief=(), survey=(), asked={}, transcript=[],
         trigger=_segment(1, "interviewee", "something they just said", 10.0),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m",
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m",
         max_tokens=100, timeout_s=1.0,
     )
 
@@ -72,7 +72,7 @@ def _basic_request(**overrides):
     trigger = _segment(2, "interviewee", "trigger text here", 3.0)
     kwargs = dict(
         brief=(), survey=survey, asked=asked, transcript=transcript, trigger=trigger,
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100,
+        detected_language="en", hypotheses=(), process="", knowledge=(), recently_shown=(), model="m", max_tokens=100,
     )
     kwargs.update(overrides)
     return assemble_generate_request(**kwargs)
@@ -172,9 +172,9 @@ def test_every_move_name_appears_in_the_assembled_generate_prompt_text():
 
 def test_static_block_assembles_to_identical_bytes_built_twice_a_second_apart():
     brief = (ContextItem(id="b1", text="the customer is a mid-market SaaS company", provenance="evidence"),)
-    first = prompts.static_block(brief=brief, hypotheses=())
+    first = prompts.static_block(brief=brief, knowledge=(), process="", hypotheses=())
     time.sleep(1.1)
-    second = prompts.static_block(brief=brief, hypotheses=())
+    second = prompts.static_block(brief=brief, knowledge=(), process="", hypotheses=())
     assert first == second, "static prompt block is not byte-stable -- every cache breakpoint after it is dead"
 
 
@@ -183,7 +183,7 @@ def test_static_block_offline_length_floor_guards_against_a_trimmed_rubric():
     # (see the live_reasoning-marked test below); this is a cheap, offline
     # regression guard so the rubric/few-shot content cannot silently shrink
     # back down without a test noticing.
-    assert len(prompts.static_block(brief=(), hypotheses=())) > prompts.MIN_STATIC_BLOCK_CHARS
+    assert len(prompts.static_block(brief=(), knowledge=(), process="", hypotheses=())) > prompts.MIN_STATIC_BLOCK_CHARS
 
 
 @pytest.mark.live_reasoning
@@ -196,7 +196,7 @@ def test_static_block_clears_the_models_minimum_cacheable_prefix():
     brief = (ContextItem(id="b1", text="short example brief", provenance="evidence"),)
     result = client.messages.count_tokens(
         model=reasoning_client.DEFAULT_MODEL,
-        system=prompts.static_block(brief=brief, hypotheses=()),
+        system=prompts.static_block(brief=brief, knowledge=(), process="", hypotheses=()),
         messages=[{"role": "user", "content": "placeholder"}],
     )
     assert result.input_tokens >= 4096
@@ -213,7 +213,7 @@ def test_static_block_with_a_fact_derived_item_carries_its_id_claim_source_and_d
         citation="session:sess-1#seq:4", provenance="evidence",
     )
     hand_written = ContextItem(id="b1", text="hand-written brief item", provenance="evidence")
-    block = prompts.static_block(brief=(hand_written, fact_item), hypotheses=())
+    block = prompts.static_block(brief=(hand_written, fact_item), knowledge=(), process="", hypotheses=())
 
     assert "hand-written brief item" in block
     assert f"{FACT_ID_PREFIX}f1" in block, "a fact-derived item's id must be rendered so a later self-report can cite it"
@@ -224,7 +224,7 @@ def test_static_block_with_a_fact_derived_item_carries_its_id_claim_source_and_d
 
 def test_static_block_with_no_fact_derived_items_omits_the_retrieved_facts_block_entirely():
     hand_written = ContextItem(id="b1", text="hand-written brief item", provenance="evidence")
-    with_only_hand_written = prompts.static_block(brief=(hand_written,), hypotheses=())
+    with_only_hand_written = prompts.static_block(brief=(hand_written,), knowledge=(), process="", hypotheses=())
     assert "Facts from past interviews" not in with_only_hand_written
     assert "not settled truth" not in with_only_hand_written
 
@@ -234,7 +234,7 @@ def test_static_block_with_no_fact_derived_items_omits_the_retrieved_facts_block
 
 def test_static_block_with_a_hypothesis_carries_its_id_statement_and_falsifier():
     hand_written = ContextItem(id="b1", text="hand-written brief item", provenance="evidence")
-    block = prompts.static_block(brief=(hand_written,), hypotheses=(_hypothesis(),))
+    block = prompts.static_block(brief=(hand_written,), knowledge=(), process="", hypotheses=(_hypothesis(),))
     assert "h1" in block
     assert "onboarding delay is the top churn reason" in block
     assert "churned customers cite a different top reason more often" in block
@@ -242,13 +242,13 @@ def test_static_block_with_a_hypothesis_carries_its_id_statement_and_falsifier()
 
 def test_static_block_with_no_hypotheses_omits_the_hypotheses_block_entirely():
     hand_written = ContextItem(id="b1", text="hand-written brief item", provenance="evidence")
-    block = prompts.static_block(brief=(hand_written,), hypotheses=())
+    block = prompts.static_block(brief=(hand_written,), knowledge=(), process="", hypotheses=())
     assert "Hypotheses the interviewer has written down" not in block
 
 
 def test_static_block_with_hypotheses_present_and_no_facts_has_hypotheses_but_no_facts_block():
     hand_written = ContextItem(id="b1", text="hand-written brief item", provenance="evidence")
-    block = prompts.static_block(brief=(hand_written,), hypotheses=(_hypothesis(),))
+    block = prompts.static_block(brief=(hand_written,), knowledge=(), process="", hypotheses=(_hypothesis(),))
     assert "Hypotheses the interviewer has written down" in block
     assert "Facts from past interviews" not in block
 
@@ -258,8 +258,8 @@ def test_static_block_with_neither_facts_nor_hypotheses_is_byte_identical_to_pha
     # stay byte-identical, not merely equivalent, to what Phase 4 produced --
     # both new blocks (retrieved facts, hypotheses) must be absent together.
     hand_written = (ContextItem(id="b1", text="hand-written brief item", provenance="evidence"),)
-    with_both_empty = prompts.static_block(brief=hand_written, hypotheses=())
-    twice_more = prompts.static_block(brief=hand_written, hypotheses=())
+    with_both_empty = prompts.static_block(brief=hand_written, knowledge=(), process="", hypotheses=())
+    twice_more = prompts.static_block(brief=hand_written, knowledge=(), process="", hypotheses=())
     assert with_both_empty == twice_more
     assert "Facts from past interviews" not in with_both_empty
     assert "Hypotheses the interviewer has written down" not in with_both_empty
@@ -432,7 +432,7 @@ def test_run_generate_parses_a_normal_response_into_candidates():
     )
     candidates = run_generate(
         stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert candidates == [Candidate(index=0, text="first candidate", move=MOVE_ADVANCE), Candidate(index=1, text="second", move=MOVE_DEEPEN)]
 
@@ -441,7 +441,7 @@ def test_run_generate_passes_its_own_explicit_timeout_and_it_differs_from_a_defa
     stub = StubAnthropicClient(responses=[tool_use_response(GENERATE_TOOL_NAME, {"candidates": [_candidate_payload("x", MOVE_ADVANCE)]})])
     run_generate(
         stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=2.5,
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=2.5,
     )
     assert stub.calls[0].timeout_s == 2.5
 
@@ -452,7 +452,7 @@ def test_run_generate_treats_refusal_and_truncation_as_untrusted(stop_reason):
     with pytest.raises(GenerateFailure) as excinfo:
         run_generate(
             stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-            detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+            detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
         )
     assert excinfo.value.stop_reason == stop_reason
 
@@ -462,7 +462,7 @@ def test_run_generate_raises_on_an_unparseable_body():
     with pytest.raises(GenerateFailure):
         run_generate(
             stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-            detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+            detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
         )
 
 
@@ -471,7 +471,7 @@ def test_run_generate_wraps_any_exception_from_the_call_itself():
     with pytest.raises(GenerateFailure) as excinfo:
         run_generate(
             stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-            detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+            detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
         )
     assert excinfo.value.stop_reason is None
 
@@ -494,7 +494,7 @@ def test_run_generate_parses_a_test_hypothesis_candidate_with_its_target_id():
     )
     candidates = run_generate(
         stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert candidates == [
         Candidate(index=0, text="does X still happen?", move=MOVE_TEST_HYPOTHESIS, target_hypothesis_id="h1")
@@ -512,7 +512,7 @@ def test_run_generate_drops_an_unrecognized_target_hypothesis_id_but_keeps_the_c
     )
     candidates = run_generate(
         stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert len(candidates) == 1, "an invented target_hypothesis_id must never cost the interviewer a candidate"
     assert candidates[0].target_hypothesis_id is None
@@ -533,7 +533,7 @@ def test_run_generate_drops_an_unrecognized_target_hypothesis_id_and_logs_only_a
     with caplog.at_level(logging.WARNING):
         run_generate(
             stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-            detected_language="en", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+            detected_language="en", knowledge=(), process="", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
         )
     formatted = "\n".join(record.getMessage() for record in caplog.records)
     assert "h-secret-user-typed-this" not in formatted, "gate 12: the dropped id's own value must never reach a log line"
@@ -546,7 +546,7 @@ def test_run_generate_with_a_candidate_targeting_no_hypothesis_carries_none():
     )
     candidates = run_generate(
         stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert candidates == [Candidate(index=0, text="x", move=MOVE_ADVANCE, target_hypothesis_id=None)]
 
@@ -580,7 +580,7 @@ def test_run_generate_keeps_grounding_ids_that_all_match_fact_derived_brief_item
     )
     candidates = run_generate(
         stub, brief=(fact1, fact2), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert candidates[0].grounding_ids == (fact1.id, fact2.id)
 
@@ -594,7 +594,7 @@ def test_run_generate_drops_an_invented_grounding_id_but_keeps_the_valid_ones_an
     )
     candidates = run_generate(
         stub, brief=(fact1,), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert len(candidates) == 1, "a hallucinated grounding id must never cost the interviewer a suggestion"
     assert candidates[0].grounding_ids == (fact1.id,)
@@ -612,7 +612,7 @@ def test_run_generate_drops_grounding_ids_reported_against_a_hand_written_brief_
     )
     candidates = run_generate(
         stub, brief=(hand_written,), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert candidates[0].grounding_ids == ()
 
@@ -625,7 +625,7 @@ def test_run_generate_keeps_a_recognized_proposed_state():
     )
     candidates = run_generate(
         stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert candidates[0].proposed_state == "contradicted"
 
@@ -638,7 +638,7 @@ def test_run_generate_drops_an_unrecognized_proposed_state_but_keeps_the_candida
     )
     candidates = run_generate(
         stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert len(candidates) == 1
     assert candidates[0].proposed_state is None
@@ -650,7 +650,7 @@ def test_run_generate_a_candidate_grounded_in_nothing_and_proposing_nothing_is_c
     )
     candidates = run_generate(
         stub, brief=(), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
     )
     assert candidates == [Candidate(index=0, text="x", move=MOVE_ADVANCE)]
 
@@ -671,7 +671,7 @@ def test_dropped_grounding_and_state_values_never_reach_a_log_line_only_their_co
     with caplog.at_level(logging.WARNING):
         run_generate(
             stub, brief=(fact1,), survey=(), asked={}, transcript=[], trigger=_segment(0, "interviewee", "hi", 1.0),
-            detected_language="en", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
+            detected_language="en", knowledge=(), process="", hypotheses=(_hypothesis(id="h1"),), recently_shown=(), model="m", max_tokens=100, timeout_s=1.0,
         )
     formatted = "\n".join(record.getMessage() for record in caplog.records)
     assert "a-user-typed-secret-value" not in formatted, "gate 12: a dropped grounding id must never be logged by value"

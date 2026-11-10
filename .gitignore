@@ -77,3 +77,6 @@ Screenshots/
 benchmark/eval/replay_*.jsonl
 benchmark/eval/replay_*.summary.json
 benchmark/eval/replay_*.log
+
+# Downloaded models (voiceprint): fetched on demand, verified by hash, never committed
+models/

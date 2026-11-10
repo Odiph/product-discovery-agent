@@ -795,6 +795,100 @@
     return list;
   }
 
+  var MIRROR_FLAGS = {
+    leading: "leading",
+    hypothetical_or_future_tense: "hypothetical / future",
+    pitch: "pitching",
+    opinion_seeking: "opinion-seeking",
+    confirmation_only: "yes/no confirmation",
+    off_topic: "off-topic"
+  };
+
+  function clock(seconds) {
+    if (typeof seconds !== "number") { return "--:--"; }
+    var whole = Math.floor(seconds);
+    var minutes = Math.floor(whole / 60);
+    var rest = whole % 60;
+    return (minutes < 10 ? "0" : "") + minutes + ":" + (rest < 10 ? "0" : "") + rest;
+  }
+
+  function pct(rate) { return Math.round(rate * 100) + "%"; }
+
+  // Counts ABOUT the interviewer across the project. No verdict words: a
+  // walked-past moment is a detector's hit, and the page says so.
+  function renderMirror(data, session) {
+    var host = document.getElementById("mirror");
+    var note = document.getElementById("mirror-note");
+    if (!host || !note) { return; }
+    host.textContent = "";
+    var interviews = (data && data.interviews) || [];
+    if (!interviews.length) {
+      note.textContent = "No interviews with speech in this project yet.";
+      return;
+    }
+    var critiqued = interviews.filter(function (i) { return i.critiqued; }).length;
+    var parts = [interviews.length + (interviews.length === 1 ? " interview" : " interviews") + ", "
+      + critiqued + " with a question critique."];
+    if ((data.uncritiqued || []).length) {
+      parts.push("`critique-questions --all` judges the rest (calls the reasoning vendor).");
+    }
+    note.textContent = parts.join(" ");
+
+    var habits = el("div", "mirror-habits");
+    habits.appendChild(el("h3", null, "Habits"));
+    if (critiqued < 2) {
+      habits.appendChild(el("p", "note", "A habit needs two critiqued interviews."));
+    } else if (!(data.habits || []).length) {
+      habits.appendChild(el("p", "note", "No question flag recurs across interviews."));
+    } else {
+      data.habits.forEach(function (h) {
+        habits.appendChild(el("p", null, (MIRROR_FLAGS[h.flag] || h.flag) + ": in " + h.interviews
+          + " of " + critiqued + " interviews, " + h.questions + " questions"));
+      });
+    }
+    host.appendChild(habits);
+
+    if (data.trend) {
+      var trend = el("div", "mirror-trend");
+      trend.appendChild(el("h3", null, "Earlier vs later"));
+      trend.appendChild(el("p", null, "Clean questions: " + pct(data.trend.earlier_clean_rate)
+        + " in the first " + data.trend.earlier_interviews + " -> " + pct(data.trend.later_clean_rate)
+        + " in the last " + data.trend.later_interviews));
+      trend.appendChild(el("p", "note", "Out of the questions the critic could decide: follow-ups it "
+        + "saw without what was said before them are left out."));
+      Object.keys(MIRROR_FLAGS).forEach(function (flag) {
+        var before = data.trend.earlier_flag_rates[flag] || 0;
+        var after = data.trend.later_flag_rates[flag] || 0;
+        if (before || after) {
+          trend.appendChild(el("p", null, MIRROR_FLAGS[flag] + ": " + pct(before) + " -> " + pct(after)
+            + " of questions"));
+        }
+      });
+      host.appendChild(trend);
+    }
+
+    var walked = el("div", "mirror-walked");
+    walked.appendChild(el("h3", null, "Walked past: " + data.walked_past_total + " of "
+      + data.offers_total + " offers"));
+    walked.appendChild(el("p", "note", "An interviewee turn with a concrete occasion, workaround, "
+      + "cost or pain, followed by a question on something else. A detector, not a verdict."));
+    interviews.forEach(function (interview) {
+      (interview.walked_past || []).forEach(function (moment) {
+        var row = el("p", "mirror-moment", interview.session_id + " at " + clock(moment.at_s) + ": "
+          + moment.signals.join(", ") + (moment.acknowledged ? " (acknowledged, then moved on)" : ""));
+        if (interview.session_id === session) {
+          var link = el("button", "citation", "show");
+          link.addEventListener("click", function () {
+            highlight(moment.offer_seqs.concat(moment.next_question_seqs));
+          });
+          row.appendChild(link);
+        }
+        walked.appendChild(row);
+      });
+    });
+    host.appendChild(walked);
+  }
+
   function renderTalkShare(meter) {
     var host = document.getElementById("talk-share");
     var note = document.getElementById("talk-share-note");
@@ -1066,6 +1160,7 @@
     pitch: "Pitch",
     opinion_seeking: "Opinion-seeking",
     confirmation_only: "Confirmation-only",
+    off_topic: "Off-topic",
     generic: "Generic"
   };
 
@@ -1405,7 +1500,14 @@
     clearRendered();
     fetch("/api/review" + query(session))
       .then(function (r) { return r.json(); })
-      .then(render);
+      .then(render)
+      .then(function () { return fetch("/api/mirror"); })
+      .then(function (r) { return r.json(); })
+      .then(function (data) { renderMirror(data, session); })
+      .catch(function () {
+        var note = document.getElementById("mirror-note");
+        if (note) { note.textContent = "The mirror could not be loaded."; }
+      });
   }
 
   // The picker is fetched SEPARATELY from the review and never blocks on it.

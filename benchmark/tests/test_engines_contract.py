@@ -294,15 +294,14 @@ def test_soniox_empty_api_key_raises_typed_error_without_leaking_key(monkeypatch
         engine._get_api_key()
 
 
-def test_soniox_start_message_never_logs_key_in_a_readable_error_but_does_include_it_in_payload():
-    # The start message payload legitimately carries the key (it's the auth
-    # mechanism) -- what must never happen is the key leaking into an
-    # exception message. Confirm the payload shape is correct offline.
-    message = soniox.build_start_message("sk-secret-value", soniox.SonioxConfig())
+def test_soniox_start_message_carries_no_key_and_no_language():
+    # The key authenticates the handshake (`auth_headers`), never a frame --
+    # see test_soniox_auth.py. Confirm the payload shape offline.
+    message = soniox.build_start_message(soniox.SonioxConfig())
     import json
 
     payload = json.loads(message)
-    assert payload["api_key"] == "sk-secret-value"
+    assert "api_key" not in payload
     assert "language_hints" not in payload  # no pre-declared language, deliberately
 
 

@@ -33,6 +33,9 @@ def synthetic_fixture():
     return wav_path, txt_path
 
 
+# Network: edge-tts synthesis (Microsoft's endpoint, which can 403 CI runners)
+# and the tiny Whisper download. CI's offline job deselects `live`.
+@pytest.mark.live
 def test_tracer_end_to_end(tmp_path, synthetic_fixture):
     wav_path, txt_path = synthetic_fixture
     assert wav_path.exists(), "synthetic fixture wav was not generated"

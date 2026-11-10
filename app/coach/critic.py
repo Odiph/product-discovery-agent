@@ -194,6 +194,7 @@ def assemble_critique_request(
     candidates: Sequence[Candidate],
     hypotheses: Sequence[Any],
     survey: Sequence[Any],
+    process: str,
     trigger_text: str,
     model: str,
     max_tokens: int,
@@ -264,7 +265,7 @@ def assemble_critique_request(
             {
                 "type": "text",
                 "text": prompts.critique_instruction(
-                    tool_name=CRITIC_TOOL_NAME, hypotheses=hypotheses, survey=survey
+                    tool_name=CRITIC_TOOL_NAME, hypotheses=hypotheses, survey=survey, process=process
                 ),
                 "cache_control": {"type": "ephemeral"},
             }
@@ -369,6 +370,7 @@ def run_critique(
     candidates: Sequence[Candidate],
     hypotheses: Sequence[Any],
     survey: Sequence[Any],
+    process: str,
     trigger_text: str,
     model: str,
     max_tokens: int,
@@ -385,6 +387,7 @@ def run_critique(
         candidates=candidates,
         hypotheses=hypotheses,
         survey=survey,
+        process=process,
         trigger_text=trigger_text,
         model=model,
         max_tokens=max_tokens,
@@ -492,6 +495,27 @@ _OFF_TOPIC_CLEARED_NOTE = (
     " test_hypothesis names a hypothesis; each is on-topic by construction, so"
     " the flag has no subject. Any wording above calling it off-topic is the"
     " critic's own and is left exactly as written.]"
+)
+
+# The move a question the interviewer really ASKED carries (`asked_critique`).
+# Deliberately NOT a member of `generate.ALL_MOVES`. A move is a statement
+# about why a question was chosen, and the interviewer never made one --
+# borrowing `deepen` or `advance` here would render intent into the prompt
+# (`prompts.candidates_block` writes `move=` verbatim) that nobody expressed.
+# Defined here, not in `asked_critique`, because `enforce_off_topic` needs it
+# and `asked_critique` already imports this module.
+MOVE_ASKED = "asked"
+
+# The moves whose subject is not fixed by construction, so an off-topic flag
+# on them is a finding rather than a contradiction: `deepen` follows the
+# interviewee's last words, and a real asked question declared nothing.
+_MOVES_THAT_CAN_WANDER = frozenset({generate.MOVE_DEEPEN, MOVE_ASKED})
+
+_OFF_TOPIC_ASKED_NOTE = (
+    _ANNOTATION_MARKER
+    + " the band was set to clear_violation because is_off_topic is true: the"
+    " question served no survey item and no hypothesis. Any band wording above"
+    " is the critic's own and is left exactly as written.]"
 )
 
 _OFF_TOPIC_ENFORCED_NOTE = (
@@ -640,12 +664,16 @@ def enforce_off_topic(
     """The seventh flag's two deterministic halves (2026-08-19). Unlike the two
     exemptions above, this one can TIGHTEN -- and both halves are needed.
 
-    **First half: the flag has no subject except on `deepen`.** `advance` and
-    `fill_gap` ARE the survey, and `test_hypothesis` names a hypothesis in
-    `target_hypothesis_id`; each is on-topic by construction, and `no_question`
-    carries no question at all. So `deepen` is the only move that can wander,
-    which is exactly what it did -- it is the one move whose own definition
-    points at the interviewee's last utterance and nothing else. Clearing the
+    **First half: the flag has no subject except on `deepen` and `asked`.**
+    `advance` and `fill_gap` ARE the survey, and `test_hypothesis` names a
+    hypothesis in `target_hypothesis_id`; each is on-topic by construction, and
+    `no_question` carries no question at all. So `deepen` is the only proposed
+    move that can wander, which is exactly what it did -- it is the one move
+    whose own definition points at the interviewee's last utterance and nothing
+    else. `asked` (a question the interviewer really asked, judged after the
+    interview by `asked_critique`) declared no move at all, so it can wander
+    too; clearing its flag left a `clear_violation` with no reason and a note
+    claiming a survey move. Clearing the
     flag elsewhere mirrors `is_confirmation_only`'s "for a candidate with no
     target_hypothesis_id, this is always false", for the same reason: a flag
     recorded true where it cannot apply is a number that looks like a
@@ -678,7 +706,8 @@ def enforce_off_topic(
         if not judgment.is_off_topic:
             adjusted.append(judgment)
             continue
-        if move_by_index.get(judgment.index) != generate.MOVE_DEEPEN:
+        move = move_by_index.get(judgment.index)
+        if move not in _MOVES_THAT_CAN_WANDER:
             adjusted.append(
                 replace(
                     judgment,
@@ -691,7 +720,10 @@ def enforce_off_topic(
             replace(
                 judgment,
                 band=BAND_CLEAR_VIOLATION,
-                rationale=_annotate(judgment.rationale, _OFF_TOPIC_ENFORCED_NOTE),
+                rationale=_annotate(
+                    judgment.rationale,
+                    _OFF_TOPIC_ASKED_NOTE if move == MOVE_ASKED else _OFF_TOPIC_ENFORCED_NOTE,
+                ),
             )
         )
     return adjusted

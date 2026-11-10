@@ -15,10 +15,12 @@
   var hypothesesContainer = document.getElementById("hypotheses-items");
   var briefStatus = document.getElementById("brief-status");
   var surveyStatus = document.getElementById("survey-status");
+  var surveyPrep = document.getElementById("survey-prep");
   var hypothesesStatus = document.getElementById("hypotheses-status");
 
   var briefItems = [];
   var surveyItems = [];
+  var prepProposals = [];
   var hypothesesItems = [];
   var freshIdCounter = 0;
 
@@ -181,6 +183,99 @@
       row.appendChild(removeButton);
 
       surveyContainer.appendChild(row);
+    });
+    // A question removed or reordered by hand changes what a proposal means.
+    renderPrep();
+  }
+
+  // --- prep's proposals (B4) ----------------------------------------------------
+  //
+  // What `python -m app prep` would change in the survey, each with its reason.
+  // Applying one edits the survey on this page only: "Save survey" is still the
+  // one writer of context/survey.json, so nothing changes on disk until the
+  // operator has seen the result and saved it.
+
+  var NOT_SAVED = " -- not saved yet: press Save survey.";
+
+  function surveyIndexOf(itemId) {
+    for (var i = 0; i < surveyItems.length; i += 1) {
+      if (surveyItems[i].id === itemId) { return i; }
+    }
+    return -1;
+  }
+
+  function prepButton(label, onClick) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.textContent = label;
+    b.addEventListener("click", onClick);
+    return b;
+  }
+
+  function settle(proposal, statusText) {
+    prepProposals = prepProposals.filter(function (p) { return p !== proposal; });
+    if (statusText) {
+      renderSurvey();
+      surveyStatus.textContent = statusText + NOT_SAVED;
+    } else {
+      renderPrep();
+    }
+  }
+
+  function renderPrep() {
+    if (!surveyPrep) { return; }
+    surveyPrep.textContent = "";
+    var live = prepProposals.filter(function (p) { return surveyIndexOf(p.item_id) !== -1; });
+    if (!live.length) {
+      surveyPrep.hidden = true;
+      return;
+    }
+    surveyPrep.hidden = false;
+    var head = document.createElement("div");
+    head.className = "prep-headline";
+    head.textContent = "prep suggests, from your past interviews. Applying one changes the survey below; " +
+      "nothing is saved until you press Save survey.";
+    surveyPrep.appendChild(head);
+    live.forEach(function (proposal) {
+      var at = surveyIndexOf(proposal.item_id);
+      var row = document.createElement("div");
+      row.className = "prep-row";
+
+      var question = document.createElement("div");
+      question.className = "prep-question";
+      question.setAttribute("dir", "auto");
+      question.textContent = proposal.text;
+      row.appendChild(question);
+
+      var why = document.createElement("div");
+      why.className = "prep-reason";
+      why.textContent = proposal.reason;
+      row.appendChild(why);
+
+      var change = document.createElement("div");
+      change.className = "prep-change";
+      change.textContent = "Move to top: question " + (at + 1) + " \u2192 question 1";
+      row.appendChild(change);
+
+      var moveButton = prepButton("Move to top", function () {
+        var index = surveyIndexOf(proposal.item_id);
+        if (index === -1) { return; }
+        var item = surveyItems.splice(index, 1)[0];
+        surveyItems.unshift(item);
+        settle(proposal, "Moved to the top");
+      });
+      moveButton.disabled = at === 0;
+      row.appendChild(moveButton);
+      row.appendChild(prepButton("Remove from survey", function () {
+        var index = surveyIndexOf(proposal.item_id);
+        if (index === -1) { return; }
+        surveyItems.splice(index, 1);
+        settle(proposal, "Removed");
+      }));
+      row.appendChild(prepButton("Dismiss", function () {
+        settle(proposal, null);
+      }));
+      surveyPrep.appendChild(row);
     });
   }
 
@@ -418,7 +513,24 @@
     .then(function (items) {
       surveyItems = items;
       renderSurvey();
+      loadPrep();
     });
+
+  // Asked only once the survey is on the page: a proposal names a question by
+  // id, and is offered only while that question is there. Optional, so its
+  // own failure is caught here and the page is exactly what it was without it.
+  function loadPrep() {
+    fetch("/api/prep")
+      .then(function (response) {
+        if (!response.ok) { throw new Error("prep unavailable"); }
+        return response.json();
+      })
+      .then(function (body) {
+        prepProposals = (body && body.proposals) || [];
+        renderPrep();
+      })
+      .catch(function () {});
+  }
 
   fetch("/api/hypotheses")
     .then(function (response) {

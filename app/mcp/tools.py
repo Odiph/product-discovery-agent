@@ -1,4 +1,4 @@
-"""The seven read-only tools, their JSON schemas, and the mapping from this
+"""The ten read-only tools, their JSON schemas, and the mapping from this
 project's loaders onto a wire payload.
 
 **This module counts nothing.** `get_standing` and `get_interview_summary`
@@ -58,6 +58,9 @@ from app import projects as projects_mod
 from app.coach import context as coach_context
 from app.coach import corpus as coach_corpus
 from app.coach import interview_summary as summary_mod
+from app.mcp import knowledge as knowledge_mod
+from app.mcp import mirror as mirror_mod
+from app.coach import themes as themes_mod
 from app.session import reader as session_reader
 
 # --- the seam this cut deliberately left open, now closed -----------------------------
@@ -715,6 +718,53 @@ def get_interview_summary(
 # --- the registry ---------------------------------------------------------------------
 
 
+def search_knowledge(arguments: "Mapping[str, Any]", *, repo_root: "Optional[Path]") -> "dict[str, Any]":
+    """The knowledge base, node scope only: it is filed per node, and what
+    may cross the wire is decided in `app/mcp/knowledge.py`."""
+    unexpected = set(arguments) - {"project", *knowledge_mod.SCHEMA_PROPERTIES}
+    if unexpected:
+        raise ToolArgumentError(f"unknown argument(s) {sorted(unexpected)} for search_knowledge")
+    node = _require_project(arguments, repo_root=repo_root)
+    try:
+        return knowledge_mod.search(arguments, node)
+    except knowledge_mod.KnowledgeArgumentError as exc:
+        raise ToolArgumentError(str(exc)) from exc
+
+
+def get_mirror(arguments: "Mapping[str, Any]", *, repo_root: "Optional[Path]") -> "dict[str, Any]":
+    """The interviewer's habits, node scope: no counts are merged across a
+    sub-tree, because a habit is one interviewer's, within one line of enquiry."""
+    unexpected = set(arguments) - {"project"}
+    if unexpected:
+        raise ToolArgumentError(f"unknown argument(s) {sorted(unexpected)} for get_mirror")
+    return mirror_mod.get(_require_project(arguments, repo_root=repo_root))
+
+
+def get_themes(arguments: "Mapping[str, Any]", *, repo_root: "Optional[Path]") -> "dict[str, Any]":
+    """Unbound themes, node scope. Projected from `FactRef` -- claim, session,
+    id -- never from `Fact`, so the quote is not even in reach."""
+    unexpected = set(arguments) - {"project"}
+    if unexpected:
+        raise ToolArgumentError(f"unknown argument(s) {sorted(unexpected)} for get_themes")
+    node = _require_project(arguments, repo_root=repo_root)
+    errors: "list[dict[str, str]]" = []
+    refs, extraction = _load_facts_across([node], errors)
+    found = themes_mod.unbound_themes(refs)
+    return {
+        "project": node.path,
+        "themes": [
+            {
+                "label": list(theme.label),
+                "interviews": list(theme.sessions),
+                "facts": [{"fact_id": f, "claim": c} for f, c in zip(theme.fact_ids, theme.claims)],
+            }
+            for theme in found
+        ],
+        "errors": errors,
+        **_extraction_block(extraction),
+    }
+
+
 def _project_argument(description: str) -> "dict[str, Any]":
     return {"type": "string", "description": description}
 
@@ -845,6 +895,46 @@ _TOOL_ORDER: "tuple[tuple[str, str, dict[str, Any], Callable[..., dict[str, Any]
         )
         | {"required": ["project", "session_id"]},
         get_interview_summary,
+    ),
+    (
+        "search_knowledge",
+        knowledge_mod.DESCRIPTION,
+        {
+            "type": "object",
+            "properties": {
+                "project": _project_argument(_PROJECT_DESCRIPTION),
+                **knowledge_mod.SCHEMA_PROPERTIES,
+            },
+            "required": ["project", "query"],
+            "additionalProperties": False,
+        },
+        search_knowledge,
+    ),
+    (
+        "get_mirror",
+        mirror_mod.DESCRIPTION,
+        {
+            "type": "object",
+            "properties": {"project": _project_argument(_PROJECT_DESCRIPTION)},
+            "required": ["project"],
+            "additionalProperties": False,
+        },
+        get_mirror,
+    ),
+    (
+        "get_themes",
+        "Patterns nobody predicted: extracted claims that bear on NO hypothesis and recur across "
+        "two or more interviews, grouped by the distinctive words they share. Each theme lists its "
+        "claims (abstracted, never quotes) and the interviews they came from. A theme is a candidate "
+        "hypothesis, not a finding: nothing has been tested against it. Read get_facts' "
+        "'unextracted_projects' first -- an unextracted interview contributes nothing here.",
+        {
+            "type": "object",
+            "properties": {"project": _project_argument(_PROJECT_DESCRIPTION)},
+            "required": ["project"],
+            "additionalProperties": False,
+        },
+        get_themes,
     ),
 )
 

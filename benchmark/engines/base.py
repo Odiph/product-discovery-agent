@@ -25,6 +25,13 @@ class Segment:
     audio_end_s: float
     ready_wall_s: float
     detected_language: Optional[str] = None
+    # Set only by a DIARIZED session (one microphone, several voices): the
+    # engine's own speaker id for this turn ("1", "2", ...), which says nothing
+    # about WHO the speaker is, and when the turn's speech really began on the
+    # audio clock. Two-stream sessions leave both None -- their speaker is the
+    # stream itself.
+    speaker_label: Optional[str] = None
+    speech_start_s: Optional[float] = None
 
 
 @dataclass(frozen=True)

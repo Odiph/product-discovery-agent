@@ -175,7 +175,7 @@ def main(argv: "Optional[Sequence[str]]" = None) -> int:
         store=store,
         brief=(),
         survey=survey,
-        hypotheses=hypotheses,
+        knowledge=(), process="", hypotheses=hypotheses,
         session_start_grounding_s=time.monotonic(),
         coverage_state_provider=lambda: CoverageState(asked=frozenset()),
         model=model,

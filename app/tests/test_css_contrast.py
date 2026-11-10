@@ -60,7 +60,9 @@ def hexes(path: Path, prop: str) -> "set[str]":
 # --- the phone -------------------------------------------------------------------
 # Dark-only surface. Three backgrounds carry body text, plus two status tints
 # that bring their own foregrounds.
-PHONE_SURFACES = {"#0b0d12", "#171c26", "#12151c", "#2a2410", "#3a1414"}
+# In-person mode's mic bar adds the record button and the level meter's track
+# and fill; its status text sits on #171c26, already a surface here.
+PHONE_SURFACES = {"#0b0d12", "#171c26", "#12151c", "#2a2410", "#3a1414", "#2f6f4f", "#2a2e37", "#4fa877"}
 PHONE_PAIRS = [
     # foreground,  background,          what it is
     ("#eaeaea", "#0b0d12", "body text"),
@@ -72,7 +74,18 @@ PHONE_PAIRS = [
     ("#7d8595", "#0b0d12", "transcript timestamps"),
     ("#b8965a", "#2a2410", "gap marker"),
     ("#f0a0a0", "#3a1414", "server status"),
+    ("#eaeaea", "#2f6f4f", "mic bar: record button"),
+    ("#9099a8", "#171c26", "mic bar: status"),
+    ("#8fd0a8", "#171c26", "mic bar: status while recording"),
+    ("#b8965a", "#171c26", "mic bar: reconnecting warning"),
+    ("#f0a0a0", "#171c26", "mic bar: stopped by an error"),
 ]
+
+
+def test_the_mic_level_meter_is_visible_against_its_track():
+    """Not text, so the bar is WCAG's 3:1 for graphical objects: the meter is
+    how the interviewer sees the phone is actually hearing the room."""
+    assert contrast("#4fa877", "#2a2e37") >= 3.0
 
 
 @pytest.mark.parametrize("fg,bg,what", PHONE_PAIRS)

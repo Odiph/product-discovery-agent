@@ -70,7 +70,7 @@ const PAGE_IDS = [
   "no-proposals", "proposals", "summary", "transcript", "no-transcript",
   "page-error", "coverage", "coverage-note", "picker-row", "session-picker",
   "picker-note", "new-hypothesis", "save-banner", "participant",
-  "talk-share", "talk-share-note",
+  "talk-share", "talk-share-note", "mirror", "mirror-note",
 ];
 
 function makeDocument() {
@@ -104,6 +104,7 @@ const DEFAULT_SESSIONS = {
 
 async function render(review, proposals, sessions, options) {
   const failPost = (options || {}).failPost;
+  const mirrorBody = (options || {}).mirror;
   // What a successful POST answers. `{ saved: true }` is the authoring save's
   // own body and stays the default; the decision route answers something else
   // entirely (`applied`/`recorded`), and a harness that could only speak one
@@ -129,7 +130,8 @@ async function render(review, proposals, sessions, options) {
       });
     }
     let body = review;
-    if (url.startsWith("/api/proposals")) { body = { proposals: proposals || [] }; }
+    if (url.startsWith("/api/mirror")) { body = mirrorBody || { interviews: [] }; }
+    else if (url.startsWith("/api/proposals")) { body = { proposals: proposals || [] }; }
     else if (url.startsWith("/api/sessions")) {
       body = sessions === undefined ? DEFAULT_SESSIONS : sessions;
     } else if (url.startsWith("/api/hypotheses")) {
@@ -2099,4 +2101,40 @@ test("switching interview does not stack two sets of panels", async () => {
   // would double every row.
   assert.equal(panelFills(document, "clean").length, 2);
   assert.equal(panelFills(document, "reason").length, 3);
+});
+
+
+// --- the mirror: about every interview, lit only in the one on screen -------------------
+
+const MIRROR = {
+  interviews: [
+    { session_id: "S0", critiqued: true, flags: { leading: 2 }, offers: 3,
+      walked_past: [{ at_s: 125, signals: ["workaround"], acknowledged: false,
+                      offer_seqs: [4], next_question_seqs: [5] }] },
+    { session_id: "S1", critiqued: true, flags: { leading: 1 }, offers: 2,
+      walked_past: [{ at_s: 61, signals: ["cost", "pain"], acknowledged: true,
+                      offer_seqs: [12], next_question_seqs: [13] }] },
+  ],
+  habits: [{ flag: "leading", interviews: 2, questions: 3 }],
+  trend: { earlier_interviews: 1, later_interviews: 1, earlier_clean_rate: 0.5, later_clean_rate: 0.75,
+           earlier_flag_rates: { leading: 0.5 }, later_flag_rates: { leading: 0.25 } },
+  uncritiqued: [], walked_past_total: 2, offers_total: 5,
+};
+
+test("the mirror panel reads habits, trend and moments, and lights only this interview's", async () => {
+  const doc = await render(review(), [], undefined, { mirror: MIRROR });
+  const text = readable(doc.byId.mirror);
+  assert.match(text, /leading: in 2 of 2 interviews, 3 questions/);
+  assert.match(text, /Clean questions: 50% in the first 1 -> 75% in the last 1/);
+  assert.match(text, /Walked past: 2 of 5 offers/);
+  assert.match(text, /S0 at 02:05: workaround/);
+  assert.match(text, /S1 at 01:01: cost, pain \(acknowledged, then moved on\)/);
+  const buttons = findAll(doc.byId.mirror, (n) => n.tagName === "button");
+  assert.equal(buttons.length, 1, "only the interview on screen can be lit");
+  assert.ok(doc.requested.some((u) => u.startsWith("/api/mirror")));
+});
+
+test("an empty mirror says so rather than drawing nothing", async () => {
+  const doc = await render(review(), [], undefined, { mirror: { interviews: [] } });
+  assert.match(doc.byId["mirror-note"].textContent, /No interviews/);
 });

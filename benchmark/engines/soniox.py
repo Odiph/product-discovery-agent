@@ -8,7 +8,10 @@ Endpoint, auth and message schema confirmed AT IMPLEMENTATION TIME against
 Soniox's own example code (github.com/soniox/soniox_examples,
 speech_to_text/python/soniox_realtime.py), not assumed:
 - wss://stt-rt.soniox.com/transcribe-websocket
-- first message: a JSON config frame — api_key, model, audio_format,
+- auth: the key goes in the handshake as `Authorization: Bearer <key>`.
+  Soniox refuses a key sent in the first message from 2027-01-15 (their
+  notice of 2026-10-09), so it never appears in a frame.
+- first message: a JSON config frame — model, audio_format,
   sample_rate, num_channels, enable_language_identification,
   enable_endpoint_detection. `language_hints` is deliberately OMITTED: Soniox
   is candidate 1 precisely BECAUSE it needs no pre-declared language, and
@@ -31,6 +34,7 @@ import json
 import logging
 import os
 import time
+import dataclasses
 from dataclasses import dataclass
 from typing import Optional
 
@@ -40,6 +44,7 @@ from websockets.exceptions import ConnectionClosed
 from benchmark import audio as audio_mod
 from benchmark import config as config_mod
 from benchmark.engines.base import EngineResult, Segment, StreamingSession
+from benchmark.engines.diarized import DiarizedSegmenter
 
 SONIOX_WEBSOCKET_URL = "wss://stt-rt.soniox.com/transcribe-websocket"
 DEFAULT_MODEL = "stt-rt-v5"
@@ -68,19 +73,34 @@ class SonioxConfig:
     model: str = DEFAULT_MODEL
     sample_rate: int = SAMPLE_RATE
     frame_ms: int = FRAME_MS
+    # One microphone, several voices: tag every token with a speaker id and cut
+    # turns from the tokens (`benchmark.engines.diarized`). Endpoint detection
+    # must then be OFF -- on a real one-microphone meeting it cut diarization
+    # agreement from 87% to 56% -- so the pair is set together.
+    diarization: bool = False
+    endpoint_detection: bool = True
+    turn_gap_s: float = 0.8
+    turn_max_s: float = 12.0
+    turn_idle_flush_s: float = 1.5
 
 
-def build_start_message(api_key: str, config: SonioxConfig) -> str:
-    """The first frame sent over the socket."""
+def auth_headers(api_key: str) -> dict[str, str]:
+    """The handshake header that authenticates the socket."""
+    return {"Authorization": f"Bearer {api_key}"}
+
+
+def build_start_message(config: SonioxConfig) -> str:
+    """The first frame sent over the socket. It carries no key -- see `auth_headers`."""
     payload = {
-        "api_key": api_key,
         "model": config.model,
         "audio_format": "pcm_s16le",
         "sample_rate": config.sample_rate,
         "num_channels": 1,
         "enable_language_identification": True,
-        "enable_endpoint_detection": True,
+        "enable_endpoint_detection": config.endpoint_detection,
     }
+    if config.diarization:
+        payload["enable_speaker_diarization"] = True
     return json.dumps(payload)
 
 
@@ -308,10 +328,11 @@ class SonioxEngine:
 
         with ws_connect(
             SONIOX_WEBSOCKET_URL,
+            additional_headers=auth_headers(api_key),
             open_timeout=config_mod.NET_OPEN_TIMEOUT_S,
             close_timeout=config_mod.NET_CLOSE_TIMEOUT_S,
         ) as ws:
-            ws.send(build_start_message(api_key, cfg))
+            ws.send(build_start_message(cfg))
 
             audio_position_s = 0.0
 
@@ -418,16 +439,18 @@ class SonioxEngine:
         from websockets.sync.client import connect as ws_connect
 
         api_key = self._get_api_key()
-        cfg = SonioxConfig(
-            model=self._config.model, sample_rate=sample_rate, frame_ms=self._config.frame_ms
-        )
+        # EVERY field carries over; only the sample rate is the session's own.
+        # Rebuilding from a hand-picked subset silently dropped diarization on
+        # the first real in-person run, filing every turn as the interviewer's.
+        cfg = dataclasses.replace(self._config, sample_rate=sample_rate)
         ws = ws_connect(
             SONIOX_WEBSOCKET_URL,
+            additional_headers=auth_headers(api_key),
             open_timeout=config_mod.NET_OPEN_TIMEOUT_S,
             close_timeout=config_mod.NET_CLOSE_TIMEOUT_S,
         )
         try:
-            ws.send(build_start_message(api_key, cfg))
+            ws.send(build_start_message(cfg))
         except ConnectionClosed as exc:
             raise SonioxServerError(_describe_early_close(ws, exc)) from exc
         return _SonioxStreamingSession(ws=ws, config=cfg, session_start=time.monotonic())
@@ -458,6 +481,16 @@ class _SonioxStreamingSession:
         # the audio clock is the defect fixed 2026-08-10.
         self._audio_position_s = 0.0
         self._finished = False
+        self._segmenter: Optional[DiarizedSegmenter] = (
+            DiarizedSegmenter(
+                gap_s=config.turn_gap_s,
+                max_s=config.turn_max_s,
+                idle_flush_s=config.turn_idle_flush_s,
+                language_of=dominant_language,
+            )
+            if config.diarization
+            else None
+        )
 
     def _ready_wall_s(self) -> float:
         origin = self._audio_clock_origin
@@ -499,6 +532,8 @@ class _SonioxStreamingSession:
             if self._finished:
                 break
             timeout = 0.0  # subsequent reads: drain what's already arrived, don't wait again
+        if self._segmenter is not None:
+            segments.extend(self._segmenter.tick(ready_wall_s=self._ready_wall_s(), now=time.monotonic()))
         return tuple(segments)
 
     def close(self) -> tuple[Segment, ...]:
@@ -519,6 +554,8 @@ class _SonioxStreamingSession:
                     except ConnectionClosed:
                         break
                     segments.extend(self._handle_message(message))
+        if self._segmenter is not None:
+            segments.extend(self._segmenter.flush(ready_wall_s=self._ready_wall_s()))
         self._finished = True
         try:
             self._ws.close()
@@ -534,6 +571,8 @@ class _SonioxStreamingSession:
             raise SonioxServerError(f"Soniox error {code}: {msg}")
         if finished:
             self._finished = True
+        if self._segmenter is not None:
+            return self._segmenter.feed(finalized, ready_wall_s=self._ready_wall_s(), now=time.monotonic())
         seg = tokens_to_segment(
             finalized,
             fallback_audio_end_s=self._audio_position_s,

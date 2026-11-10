@@ -321,9 +321,9 @@ def test_extraction_reaches_the_transcript_only_through_read_session(tmp_path, m
     real_read_session = main_mod.read_session
     calls: "list[Path]" = []
 
-    def _wrapped(path):
+    def _wrapped(path, **kwargs):
         calls.append(path)
-        return real_read_session(path)
+        return real_read_session(path, **kwargs)
 
     monkeypatch.setattr(main_mod, "read_session", _wrapped)
 

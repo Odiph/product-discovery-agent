@@ -13,6 +13,8 @@ for the same reason.
 
 from __future__ import annotations
 
+import inspect
+
 import pytest
 
 from app.coach.asked import InterviewerTurn
@@ -21,6 +23,7 @@ from app.coach.asked_critique import (
     critique_turns,
     to_json_dict,
 )
+from app.coach import critic as critic_mod
 from app.coach.critic import BAND_CLEAN, BAND_CLEAR_VIOLATION, CritiqueFailure, Judgment
 from app.coach.generate import ALL_MOVES
 
@@ -50,10 +53,17 @@ class _Critic:
     def __init__(self, *, responses=None, fail_on=None):
         self.batches = []
         self.trigger_texts = []
+        self.surveys = []
         self._responses = responses or {}
         self._fail_on = fail_on or set()
 
-    def __call__(self, client, *, candidates, hypotheses, trigger_text, model, max_tokens, timeout_s):
+    def __call__(self, client, **kwargs):
+        # Bound against the REAL critic's signature, so a stub can never again
+        # accept a call the real `run_critique` rejects (it did: `survey`
+        # became required and every test here kept passing).
+        inspect.signature(critic_mod.run_critique).bind(client, **kwargs)
+        candidates, trigger_text = kwargs["candidates"], kwargs["trigger_text"]
+        self.surveys.append(kwargs["survey"])
         texts = tuple(c.text for c in candidates)
         self.batches.append(candidates)
         # Recorded so a test can assert this path passes an EMPTY trigger --
@@ -71,7 +81,8 @@ def _run(turns, critic_fn, **kwargs):
     return critique_turns(
         object(),
         turns,
-        hypotheses=(),
+        process="", hypotheses=(),
+        survey=kwargs.pop("survey", ()),
         model="test-model",
         run_critique=critic_fn,
         **kwargs,
@@ -300,3 +311,50 @@ def test_a_question_mark_anywhere_in_a_joined_turn_marks_it():
     text, never the first fragment."""
     assert _turn(0, "And after that? Walk me through it.").is_marked_question
     assert _turn(0, "So you're protecting the playtime.").is_marked_question is False
+
+
+def test_the_survey_reaches_every_batch():
+    """The critic judges `is_off_topic` against what the interview was FOR;
+    without the survey it has nothing to judge that by."""
+    turns = tuple(_turn(i, f"question number {i} here?") for i in range(6))
+    critic = _Critic()
+    survey = ("s1-sentinel",)
+    _run(turns, critic, batch_size=4, survey=survey)
+    assert critic.surveys == [survey, survey]
+
+
+def test_survey_is_required_never_defaulted():
+    with pytest.raises(TypeError):
+        critique_turns(object(), (), process="", hypotheses=(), model="m", run_critique=_Critic())
+
+
+def test_off_topic_reaches_the_durable_artifact():
+    from dataclasses import replace
+
+    critique = _critique([
+        ("What did you have for lunch?", BAND_CLEAR_VIOLATION),
+        ("What did you do next?", BAND_CLEAN),
+    ])
+    first = critique.judged[0]
+    critique = replace(critique, judged=(
+        replace(first, judgment=replace(first.judgment, is_off_topic=True)),
+        *critique.judged[1:],
+    ))
+    payload = to_json_dict(critique, session_id="s1")
+    assert payload["summary"]["off_topic"] == 1
+    assert payload["turns"][0]["judgment"]["is_off_topic"] is True
+    assert payload["turns"][1]["judgment"]["is_off_topic"] is False
+
+
+
+def test_uncertain_reaches_the_durable_artifact():
+    from app.coach.critic import BAND_UNCERTAIN
+
+    critique = _critique([
+        ("Say more about that.", BAND_UNCERTAIN),
+        ("What did you do next?", BAND_CLEAN),
+        ("Would you pay for it?", BAND_CLEAR_VIOLATION),
+        ("And then?", None),
+    ])
+    summary = to_json_dict(critique, session_id="s1")["summary"]
+    assert summary["uncertain"] == 1

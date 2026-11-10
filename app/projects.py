@@ -62,10 +62,12 @@ SESSIONS_DIR_NAME = "sessions"
 # alike. Synthetic runs appearing as projects in a discovery corpus is the same
 # class of error the directory split existed to prevent.
 REHEARSALS_DIR_NAME = "rehearsals"
+# The project knowledge base (app/kb/): indexed documents, contents of a node.
+KNOWLEDGE_DIR_NAME = "knowledge"
 # Everything a project node CONTAINS rather than a node in its own right. A new
 # per-project directory added anywhere must be listed here or it becomes a
 # project.
-NON_NODE_DIR_NAMES = frozenset({CONTEXT_DIR_NAME, SESSIONS_DIR_NAME, REHEARSALS_DIR_NAME})
+NON_NODE_DIR_NAMES = frozenset({CONTEXT_DIR_NAME, SESSIONS_DIR_NAME, REHEARSALS_DIR_NAME, KNOWLEDGE_DIR_NAME})
 
 # `app/projects.py` -> `app/` -> the repository root.
 REPO_ROOT = Path(__file__).resolve().parents[1]

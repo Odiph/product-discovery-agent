@@ -49,7 +49,7 @@ def _make_pipeline(
 ):
     state = CoverageState(asked=frozenset(asked))
     return SuggestionPipeline(
-        client=client, store=store, brief=brief, survey=survey, hypotheses=hypotheses,
+        client=client, store=store, brief=brief, survey=survey, knowledge=(), process="", hypotheses=hypotheses,
         session_start_grounding_s=0.0,
         coverage_state_provider=lambda: state,
         model="m", generate_timeout_s=1.0, critique_timeout_s=1.0,

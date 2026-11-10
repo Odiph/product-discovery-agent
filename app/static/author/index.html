@@ -53,6 +53,10 @@
          exists and cannot be read -- in which case an empty form below is
          NOT an un-authored node, and typing into it is wasted work. -->
     <div id="survey-damage" class="damage" hidden></div>
+    <!-- Filled by /api/prep: the questions `prep` would change, each with its
+         reason. Applying one changes the survey below; only Save survey
+         writes it. Hidden when there is nothing to propose. -->
+    <div id="survey-prep" class="prep" hidden></div>
     <div id="survey-items"></div>
     <p>
       <button type="button" id="add-survey-item">+ Add survey question</button>

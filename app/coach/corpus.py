@@ -44,7 +44,9 @@ from typing import Mapping, Optional, Sequence
 from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 
 from app.coach.context import PROVENANCE_VALUES
+from app.session import evidence
 from app.session.reader import read_session
+from app.session.store import TRANSCRIPT_FILENAME
 
 FACTS_FILENAME = "facts.json"
 HYPOTHESES_FILENAME = "hypotheses.json"
@@ -399,6 +401,11 @@ def _real_segment_speakers(sessions_root: "Path | str", session_id: str) -> "dic
     below."""
     session_dir = Path(sessions_root) / session_id
     result = read_session(session_dir)
+    # A confirmed in-person session's facts cite the EVIDENCE transcript's
+    # seqs and roles (what `extract` read), never the live one's.
+    evidence_name = evidence.transcript_filename_for(result.metadata)
+    if evidence_name != TRANSCRIPT_FILENAME:
+        result = read_session(session_dir, transcript_filename=evidence_name)
     return {record["seq"]: record["speaker"] for record in result.records_of_kind("segment")}
 
 

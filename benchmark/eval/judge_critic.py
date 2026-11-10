@@ -220,7 +220,7 @@ def _judge_one_batch(
             judgments = critic.run_critique(
                 client,
                 candidates=candidates,
-                hypotheses=hypotheses,
+                process="", hypotheses=hypotheses,
                 # The gold set's own plan (2026-08-19). `is_off_topic` cannot
                 # be judged without one, and this is the same survey every
                 # case in the set is labelled against -- see `GOLD_SURVEY`'s
@@ -508,7 +508,7 @@ def main(argv: "Optional[Sequence[str]]" = None) -> int:
             batch = ordered[start:start + args.batch_size]
             request = critic.assemble_critique_request(
                 candidates=[to_candidate(c, i) for i, c in enumerate(batch)],
-                hypotheses=hypotheses,
+                process="", hypotheses=hypotheses,
                 # Same pre-existing break as `cost_model.py`: both of these
                 # are required keywords this dry-run path had stopped passing,
                 # so it has raised TypeError rather than printing sizes.

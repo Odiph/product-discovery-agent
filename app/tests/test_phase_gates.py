@@ -91,15 +91,29 @@ _EXCLUDED_DIR_NAMES = {
 }
 
 
+def _is_excluded(path: Path) -> bool:
+    # RELATIVE parts only: matching the absolute path excluded the whole
+    # repository whenever a checkout lived under a directory named like one of
+    # these (C:\projects\... does), and every gate on this walk passed vacuously.
+    return any(part in _EXCLUDED_DIR_NAMES for part in path.relative_to(REPO_ROOT).parts)
+
+
 def _iter_repo_files(*, suffixes: "tuple[str, ...] | None" = None):
     for path in REPO_ROOT.rglob("*"):
         if not path.is_file():
             continue
-        if any(part in _EXCLUDED_DIR_NAMES for part in path.parts):
+        if _is_excluded(path):
             continue
         if suffixes is not None and path.suffix not in suffixes:
             continue
         yield path
+
+
+def test_the_gate_walk_actually_reaches_the_source_tree():
+    # Gates 2, 3 and 6 pass trivially over an empty walk; this is what makes
+    # "no violations" mean something.
+    walked = set(_iter_repo_files(suffixes=(".js", ".py")))
+    assert STATIC_DIR / "app.js" in walked and THIS_FILE in walked
 
 
 # --- Gate 1 (extended by 03-03-PLAN.md §R5 item 5): no STT vendor named in capture, ------
@@ -124,25 +138,58 @@ def test_gate_one_no_vendor_identifier_in_capture_or_session_executable_code():
 # --- Gate 2: no browser media-capture API anywhere in the repository ---------------
 
 
+# Amended for in-person mode (.planning/in-person/PLAN.md, 2026-09-24): exactly
+# ONE file may capture -- the phone's microphone page, which only an in-person
+# server serves (app/tests/test_web_audio.py pins that a two-stream page never
+# loads it). Everything else stays receive-only.
+_GATE_TWO_CAPTURE_FILE = STATIC_DIR / "mic.js"
+# Case-insensitive, so `navigator.mediaDevices` and `webkitGetUserMedia` count;
+# the last two widen the original four once a capture exemption exists.
+_GATE_TWO_FORBIDDEN = (
+    "getUserMedia", "MediaRecorder", "MediaDevices", "RTCPeerConnection",
+    "getDisplayMedia", "MediaStreamTrackProcessor",
+)
+_GATE_TWO_PATTERN = re.compile("|".join(re.escape(name) for name in _GATE_TWO_FORBIDDEN), re.IGNORECASE)
+
+
 def test_gate_two_no_browser_media_capture_identifier_anywhere():
     # Take the identifier list from phase_specification §U4. These four
     # literals are deliberately named ONLY here and in this plan's own
     # specification -- never in a source comment anywhere else, or that
     # comment would trip this very gate.
-    forbidden_identifiers = ("getUserMedia", "MediaRecorder", "MediaDevices", "RTCPeerConnection")
-    forbidden_pattern = re.compile("|".join(re.escape(name) for name in forbidden_identifiers))
-
     violations = []
     for path in _iter_repo_files(suffixes=(".py", ".js", ".mjs", ".ts", ".jsx", ".tsx", ".html", ".md")):
-        if path == THIS_FILE:
+        if path in (THIS_FILE, _GATE_TWO_CAPTURE_FILE):
             continue
         for lineno, raw_line in enumerate(path.read_text(encoding="utf-8", errors="ignore").splitlines(), start=1):
-            if forbidden_pattern.search(raw_line):
+            if _GATE_TWO_PATTERN.search(raw_line):
                 violations.append(f"{path.relative_to(REPO_ROOT)}:{lineno}: {raw_line}")
     assert not violations, (
-        "the phone is receive-only, and that is what keeps a plain non-TLS LAN "
-        "connection legal in Phase 3 -- a browser media-capture identifier was "
-        "found:\n" + "\n".join(violations)
+        "only app/static/mic.js may capture; every other page is receive-only, which "
+        "is what keeps a plain non-TLS LAN connection legal for a two-stream run -- a "
+        "browser media-capture identifier was found:\n" + "\n".join(violations)
+    )
+
+
+def test_gate_two_the_one_capture_file_checks_for_a_secure_context_before_capturing():
+    # The exemption must be in use (a stale allow-list entry is a hole waiting
+    # for a file), and the page must refuse to capture outside a secure
+    # context: say why on a plain-HTTP address, never fail half-way through.
+    # Comment lines are blanked (not dropped, so offsets keep their order): a
+    # guard that only exists in a comment must not count, and neither must an
+    # identifier named in the file's header comment.
+    source = "\n".join(
+        "" if line.lstrip().startswith("//") else line
+        for line in _GATE_TWO_CAPTURE_FILE.read_text(encoding="utf-8").splitlines()
+    )
+    first_capture = _GATE_TWO_PATTERN.search(source)
+    assert first_capture is not None, "mic.js is exempt from gate 2 but captures nothing: drop the exemption"
+    # The guard must END the script: an `if` that warns and falls through
+    # would still capture on a plain-HTTP page.
+    guard = re.search(r"if \(!window\.isSecureContext\) \{[^}]*\breturn;\s*\}", source)
+    assert guard is not None, "mic.js must guard capture with `if (!window.isSecureContext) { ...; return; }`"
+    assert guard.start() < first_capture.start(), (
+        "mic.js must check window.isSecureContext BEFORE its first capture call"
     )
 
 
@@ -190,14 +237,14 @@ def _parse_pinned_packages(requirements_path: Path) -> set[str]:
     return pins
 
 
-def test_gate_three_exactly_five_new_pinned_dependencies_versus_phase_one():
+def test_gate_three_exactly_seven_new_pinned_dependencies_versus_phase_one():
     # Deliberately raised from 4 to 5 in 04-01-PLAN.md §C7, per CONTEXT.md's
     # instruction that this be a conscious, justified change, never a silent one
     # (the gate's own 1 -> 4 bump in 03-01-PLAN.md Task 2 §P8 set this precedent).
     # Phase 2 contributed the original `1`: PyAudioWPatch. Phase 3 (03-RESEARCH.md
     # Standard Stack) added three more:
-    #   - fastapi==0.141.1  -- the ASGI web framework serving the phone surface (D-05).
-    #   - uvicorn==0.52.1   -- the ASGI server embedding that framework on the main
+    #   - fastapi==0.142.2  -- the ASGI web framework serving the phone surface (D-05).
+    #   - uvicorn==0.54.0   -- the ASGI server embedding that framework on the main
     #     thread alongside the existing capture/STT threads (03-RESEARCH.md §1).
     #   - qrcode[pil]==8.2  -- QR rendering (terminal ANSI + PNG) for the join flow
     #     (03-RESEARCH.md §4); Pillow arrives transitively via the `[pil]` extra and is
@@ -213,7 +260,18 @@ def test_gate_three_exactly_five_new_pinned_dependencies_versus_phase_one():
     #     deliberately, so it is NOT pinned separately and does NOT count here -- a
     #     different, legitimate relationship from the one 03-01-PLAN.md §P9 rejected
     #     (an UNRELATED vendor SDK's transitive dependency tree).
-    # Transitive arrivals (Pillow, colorama, pydantic) never count --
+    # In-person mode (.planning/in-person/PLAN.md, 2026-09-24) adds exactly one more:
+    #   - sherpa-onnx==1.13.8 -- the offline speaker-embedding runtime behind the
+    #     voiceprint role check for one-microphone meetings. Apache-2.0,
+    #     github.com/k2-fsa/sherpa-onnx, CPU-only, pip-audit clean. Chosen by
+    #     measurement: it raised live speaker attribution from 86% to 96% on a real
+    #     meeting. Its `sherpa-onnx-core` is the same project's declared dependency
+    #     and does not count, as with anthropic -> pydantic.
+    # backlog B1 (2026-10-21, the operator's go-ahead) adds exactly one more:
+    #   - pypdf==6.21.1 -- PDF text for the knowledge base (`kb add`). BSD-3-Clause,
+    #     github.com/py-pdf/pypdf, pure Python, no runtime dependencies on 3.11+,
+    #     pip-audit clean (every older release has known CVEs).
+    # Transitive arrivals (Pillow, colorama, pydantic, sherpa-onnx-core) never count --
     # `_parse_pinned_packages` parses literal requirements-file lines, not a resolved
     # dependency tree.
     phase1_pins = _parse_pinned_packages(REPO_ROOT / "benchmark" / "requirements.txt")
@@ -223,9 +281,9 @@ def test_gate_three_exactly_five_new_pinned_dependencies_versus_phase_one():
     assert not missing, f"Phase 1's pinned dependencies must never be removed: {missing}"
 
     added = root_pins - phase1_pins
-    assert len(added) == 5, (
-        f"expected exactly five new pinned dependencies versus Phase 1 "
-        f"(PyAudioWPatch + fastapi + uvicorn + qrcode[pil] + anthropic), got {added}"
+    assert len(added) == 7, (
+        f"expected exactly seven new pinned dependencies versus Phase 1 "
+        f"(PyAudioWPatch + fastapi + uvicorn + qrcode[pil] + anthropic + sherpa-onnx + pypdf), got {added}"
     )
 
 
@@ -337,7 +395,7 @@ def test_gate_six_no_third_party_origin_or_build_step_in_static_assets():
         for path in REPO_ROOT.rglob("*")
         if path.is_file()
         and path.name in _FORBIDDEN_JS_MANIFEST_NAMES
-        and not any(part in _EXCLUDED_DIR_NAMES for part in path.parts)
+        and not _is_excluded(path)
     ]
     node_modules_dirs = [
         str(path.relative_to(REPO_ROOT)) for path in REPO_ROOT.rglob("node_modules") if path.is_dir()
@@ -1037,13 +1095,13 @@ def test_gate_twenty_one_a_facts_verbatim_quote_reaches_no_serialized_request_bo
         "the cheap invariant, kept ALONGSIDE the whole-request check below, never instead of it"
     )
 
-    static = coach_prompts_mod.static_block(brief=(item,), hypotheses=())
+    static = coach_prompts_mod.static_block(brief=(item,), knowledge=(), process="", hypotheses=())
     assert sentinel not in static, "the sentinel leaked into the assembled static prompt block"
 
     generate_request = coach_generate_mod.assemble_generate_request(
         brief=(item,), survey=(), asked={}, transcript=[],
         trigger=SimpleNamespace(text="the interviewee just said something unrelated"),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100,
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100,
     )
     assert sentinel not in json.dumps(generate_request), (
         "the sentinel leaked into the serialized generate request"
@@ -1051,7 +1109,7 @@ def test_gate_twenty_one_a_facts_verbatim_quote_reaches_no_serialized_request_bo
 
     critique_request = coach_critic_mod.assemble_critique_request(
         candidates=[Candidate(index=0, text="an unrelated candidate question", move="advance")],
-        hypotheses=(), survey=(), trigger_text="an unrelated thing the interviewee said",
+        process="", hypotheses=(), survey=(), trigger_text="an unrelated thing the interviewee said",
         model="m", max_tokens=100,
     )
     assert sentinel not in json.dumps(critique_request), (
@@ -1125,7 +1183,7 @@ def test_gate_twenty_three_the_move_set_is_pinned_and_the_prompt_actually_names_
     request = coach_generate_mod.assemble_generate_request(
         brief=(), survey=(), asked={}, transcript=[],
         trigger=SimpleNamespace(text="something the interviewee said"),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m", max_tokens=100,
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m", max_tokens=100,
     )
     combined = "\n".join(block["text"] for block in request["system"]) + "\n" + request["messages"][-1]["content"]
     for move in coach_generate_mod.ALL_MOVES:
@@ -1180,7 +1238,7 @@ def test_gate_twenty_four_the_critic_flags_agree_by_equality_across_every_surfac
     # model would be legal but never meaningfully judged.
     request = coach_critic_mod.assemble_critique_request(
         candidates=[Candidate(index=0, text="a candidate", move="advance")],
-        hypotheses=(), survey=(), trigger_text="something the interviewee just said",
+        process="", hypotheses=(), survey=(), trigger_text="something the interviewee just said",
         model="m", max_tokens=100,
     )
     # `system` is a list of content blocks (it carries a cache breakpoint --
@@ -1247,7 +1305,7 @@ def test_gate_twenty_five_a_genuine_proposal_leaves_the_hypothesis_artifact_and_
             }]}),
         ])
         pipeline = SuggestionPipeline(
-            client=stub, store=store, brief=(), survey=(), hypotheses=(hypothesis,),
+            client=stub, store=store, brief=(), survey=(), knowledge=(), process="", hypotheses=(hypothesis,),
             session_start_grounding_s=0.0,
             coverage_state_provider=lambda: CoverageState(asked=frozenset()),
             model="m", generate_timeout_s=1.0, critique_timeout_s=1.0,
@@ -1889,6 +1947,16 @@ def test_gate_thirty_three_no_registered_mcp_tool_emits_a_verbatim_quote(tmp_pat
     (session_dir / "session.json").write_text(
         json.dumps({"started_at": "2026-08-12T10:15:00+00:00"}), encoding="utf-8"
     )
+    # The knowledge base (backlog B1) holds the same quote as an interview
+    # turn, and `search_knowledge` is driven with the quote as its query, so
+    # the hit is FOUND and must still come back without its text.
+    from app.kb.document import INTERVIEW, Document, Section
+    from app.kb.store import KnowledgeStore
+
+    KnowledgeStore.for_node(projects_dir / "acme").put(Document(
+        source_type=INTERVIEW, origin=f"session:{session_id}", title="Interview",
+        sections=(Section(text=sentinel, location="turn 1", speaker="interviewee"),),
+    ))
 
     requests = []
     driven: "set[str]" = set()
@@ -1907,6 +1975,8 @@ def test_gate_thirty_three_no_registered_mcp_tool_emits_a_verbatim_quote(tmp_pat
             arguments["session_id"] = session_id
         if "hypothesis_id" in properties:
             arguments["hypothesis_id"] = "h1"
+        if "query" in properties:
+            arguments["query"] = sentinel
         requests.append({
             "jsonrpc": "2.0", "id": index + 1, "method": "tools/call",
             "params": {"name": name, "arguments": arguments},
@@ -1933,6 +2003,9 @@ def test_gate_thirty_three_no_registered_mcp_tool_emits_a_verbatim_quote(tmp_pat
             f"a tool failed, so its response proves nothing about leaking: {response}"
         )
 
+    assert '"location": "turn 1"' in raw.replace('\\"', '"'), (
+        "search_knowledge never found the planted turn, so its half of this gate examined nothing"
+    )
     assert claim_sentinel in raw, (
         "the positive control never arrived -- the abstracted claim is supposed to travel, so "
         "its absence means this test examined nothing and the check below is vacuous"
@@ -2097,6 +2170,62 @@ def test_gate_thirty_five_the_set_of_modules_that_write_audio_start_s_is_pinned(
     assert sorted(set(writers)) == ["live.py", "store.py"], (
         f"the set of modules that write audio_start_s changed -- got {sorted(set(writers))}"
     )
+
+
+def _audio_start_key_uses(tree: "ast.AST") -> "tuple[list[int], list[int]]":
+    """`"audio_start_s"` as a DICT KEY: (writes, reads) by line. A write is a
+    key in a dict literal; a read is a subscript or a `.get(...)` with it.
+    The attribute/keyword scans above cannot see either, and records loaded
+    from JSONL are dicts -- the form every reader of a transcript actually has."""
+    writes: "list[int]" = []
+    reads: "list[int]" = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Dict):
+            writes += [k.lineno for k in node.keys if isinstance(k, ast.Constant) and k.value == "audio_start_s"]
+        elif isinstance(node, ast.Subscript):
+            key = node.slice
+            if isinstance(key, ast.Constant) and key.value == "audio_start_s":
+                reads.append(node.lineno)
+        elif isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr == "get":
+            if node.args and isinstance(node.args[0], ast.Constant) and node.args[0].value == "audio_start_s":
+                reads.append(node.lineno)
+    return writes, reads
+
+
+def test_gate_thirty_five_dict_key_uses_of_audio_start_s_are_pinned():
+    """The one place the field is REAL is the in-person after-meeting pass:
+    `evidence_pass.py` writes each confirmed turn's token start, and
+    `evidence_view.py` reads it, from `evidence.jsonl` records only, to find
+    the confirmed turn running at a moment. Pinned by EQUALITY so a dict-key
+    read of the LIVE (fabricated) value elsewhere fails here."""
+    writers: "set[str]" = set()
+    readers: "set[str]" = set()
+    for py_file in sorted((REPO_ROOT / "app").rglob("*.py")):
+        if "tests" in py_file.parts:
+            continue
+        source = py_file.read_text(encoding="utf-8")
+        if "audio_start_s" not in source:
+            continue
+        writes, reads = _audio_start_key_uses(ast.parse(source))
+        if writes:
+            writers.add(py_file.name)
+        if reads:
+            readers.add(py_file.name)
+    assert (sorted(writers), sorted(readers)) == (["evidence_pass.py"], ["evidence_view.py"]), (
+        f"dict-key uses of audio_start_s changed -- writers {sorted(writers)}, readers {sorted(readers)}. "
+        "Only the confirmed after-meeting transcript holds a real start."
+    )
+
+
+def test_gate_thirty_five_dict_key_scan_detects_what_it_is_meant_to_catch():
+    tree = ast.parse(
+        '"""audio_start_s in prose must not trip."""\n'
+        'row = {"audio_start_s": 1.0}\n'
+        'a = record["audio_start_s"]\n'
+        'b = record.get("audio_start_s")\n'
+        'c = record.get("audio_end_s")\n'
+    )
+    assert _audio_start_key_uses(tree) == ([2], [3, 4])
 
 
 def test_gate_thirty_five_detects_a_read_it_is_meant_to_catch(tmp_path):

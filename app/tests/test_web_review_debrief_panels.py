@@ -77,6 +77,7 @@ def _summary(**overrides) -> dict:
         "pitch": 0,
         "opinion_seeking": 3,
         "confirmation_only": 5,
+        "off_topic": 4,
         "generic": 0,
     }
     base.update(overrides)
@@ -126,8 +127,19 @@ def test_the_summary_counts_reach_the_payload(tmp_path):
     assert summary["unmarked_clean_rate"] == 0.52
     assert summary["flags"] == {
         "leading": 9, "hypothetical_or_future_tense": 2, "pitch": 0,
-        "opinion_seeking": 3, "confirmation_only": 5, "generic": 0,
+        "opinion_seeking": 3, "confirmation_only": 5, "off_topic": 4, "generic": 0,
     }
+
+
+def test_a_critique_written_before_off_topic_existed_still_reads(tmp_path):
+    """Every critique on disk before 2026-10-21 lacks the key."""
+    root = _node(tmp_path)
+    old = _summary()
+    del old["off_topic"]
+    _write_critique(root, "s1", {"session_id": "s1", "summary": old})
+    payload = build_review("acme", "s1", repo_root=root)["question_critique"]
+    assert payload["status"] == "read"
+    assert payload["summary"]["flags"]["leading"] == 9
 
 
 def test_a_null_clean_rate_survives_as_null_rather_than_becoming_zero(tmp_path):

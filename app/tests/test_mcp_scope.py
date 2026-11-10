@@ -505,6 +505,11 @@ def _every_tool_invocation():
         ("get_interview_summary", {"project": "acme", "session_id": SESSION_SHARED}),
         ("get_interview_summary",
          {"project": "acme", "session_id": SESSION_SHARED, "scope": "subtree"}),
+        # Empty knowledge base here; app/tests/test_mcp_knowledge.py sweeps one
+        # that holds the sentinel in every source type.
+        ("search_knowledge", {"project": "acme", "query": "sentinel"}),
+        ("get_mirror", {"project": "acme"}),
+        ("get_themes", {"project": "acme"}),
     ]
 
 

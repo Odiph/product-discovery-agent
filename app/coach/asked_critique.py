@@ -29,16 +29,10 @@ from typing import Any, Callable, Optional, Sequence
 
 from app.coach import critic as critic_mod
 from app.coach.asked import InterviewerTurn
-from app.coach.critic import BAND_CLEAN, CritiqueFailure, Judgment
+from app.coach.critic import BAND_CLEAN, MOVE_ASKED, CritiqueFailure, Judgment
 from app.coach.generate import Candidate
 
 logger = logging.getLogger(__name__)
-
-# Deliberately NOT a member of `generate.ALL_MOVES`. A move is a statement
-# about why a question was chosen, and the interviewer never made one --
-# borrowing `deepen` or `advance` here would render intent into the prompt
-# (`prompts.candidates_block` writes `move=` verbatim) that nobody expressed.
-MOVE_ASKED = "asked"
 
 # Matches the offline harness. Production sends the critic one cycle's handful,
 # so a batch far larger would measure it on a workload it never sees and would
@@ -147,6 +141,8 @@ def critique_turns(
     turns: "Sequence[InterviewerTurn]",
     *,
     hypotheses: "Sequence[Any]",
+    survey: "Sequence[Any]",
+    process: str,
     model: str,
     batch_size: int = DEFAULT_BATCH_SIZE,
     max_tokens: int = DEFAULT_MAX_TOKENS,
@@ -157,7 +153,11 @@ def critique_turns(
 
     `run_critique` is injectable so the batching, the index mapping and the
     failure bookkeeping are testable without a vendor call -- the seam is the
-    critic, not the client."""
+    critic, not the client.
+
+    `survey` is REQUIRED for the reason `critic.run_critique` gives: it is what
+    `is_off_topic` is judged against. Pass the survey the interview ran with.
+    `process` (B5) is the operator's own rules, held to as the coach is."""
     call = run_critique or critic_mod.run_critique
     results: "list[JudgedTurn]" = []
 
@@ -169,6 +169,8 @@ def critique_turns(
                 client,
                 candidates=candidates,
                 hypotheses=hypotheses,
+                survey=survey,
+                process=process,
                 # Deliberately empty, and this is a KNOWN LIMITATION rather
                 # than an oversight. `is_generic` is judged against the
                 # utterance a candidate was responding to, but one request
@@ -224,6 +226,13 @@ def to_json_dict(critique: AskedCritique, *, session_id: str) -> dict:
             "unjudged": critique.unjudged_count,
             "clean": critique.clean_count,
             "clean_rate": critique.clean_rate,
+            # Banded uncertain: mostly follow-ups ("say more about that") the
+            # critic cannot place without the utterance before them. `mirror`
+            # leaves them out of its clean rate.
+            "uncertain": sum(
+                1 for item in critique.judged
+                if item.judgment is not None and item.judgment.band == critic_mod.BAND_UNCERTAIN
+            ),
             # Split out because the combined rate answers two different
             # questions at once. `marked_question_*` is "how good were my
             # questions"; `unmarked_*` covers leading statements AND the ~half
@@ -240,6 +249,7 @@ def to_json_dict(critique: AskedCritique, *, session_id: str) -> dict:
             "pitch": critique.flag_count("is_pitch"),
             "opinion_seeking": critique.flag_count("is_opinion_seeking"),
             "confirmation_only": critique.flag_count("is_confirmation_only"),
+            "off_topic": critique.flag_count("is_off_topic"),
             # Always 0 by construction here -- see `critique_turns` on why no
             # trigger utterance can be supplied for a batch. Reported anyway
             # so the key set matches the live path's records rather than
@@ -263,6 +273,7 @@ def to_json_dict(critique: AskedCritique, *, session_id: str) -> dict:
                     "is_opinion_seeking": item.judgment.is_opinion_seeking,
                     "is_confirmation_only": item.judgment.is_confirmation_only,
                     "is_generic": item.judgment.is_generic,
+                    "is_off_topic": item.judgment.is_off_topic,
                     "rationale": item.judgment.rationale,
                 },
             }

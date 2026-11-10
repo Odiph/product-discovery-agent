@@ -83,7 +83,10 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response
 from pydantic import ValidationError
 
-from app.coach.context import BRIEF_FILENAME, SURVEY_FILENAME, ContextItem, SurveyItem
+from app.coach import prep_load
+from app.coach.context import (
+    BRIEF_FILENAME, SURVEY_FILENAME, ContextItem, ContextValidationError, SurveyItem, load_survey,
+)
 from app.coach.corpus import HYPOTHESES_FILENAME, Hypothesis
 from app.projects import SESSIONS_DIR_NAME
 
@@ -411,9 +414,10 @@ def _host_header_is_loopback(host_header: str) -> bool:
 
 
 def create_author_app(*, context_dir: Path, static_dir: Path) -> FastAPI:
-    """Builds the authoring ASGI app. No token, no docs endpoints, seven
-    routes total -- the page, its two static assets, and the brief/survey/
-    hypotheses GET+POST pairs (05-03-PLAN.md §K13). Never registered on
+    """Builds the authoring ASGI app. No token, no docs endpoints. The
+    routes: the page, its two static assets, and the brief/survey/
+    hypotheses GET+POST pairs (05-03-PLAN.md §K13) -- plus the read-only
+    `/api/state` and `/api/prep`. Never registered on
     `app/web/server.py::create_app()`'s own app -- gate 9 (every phone-surface
     route lives beneath the token prefix) is asserted unmodified against THAT
     app, never this one.
@@ -500,6 +504,28 @@ def create_author_app(*, context_dir: Path, static_dir: Path) -> FastAPI:
     @app.get("/api/survey")
     async def get_survey() -> JSONResponse:
         return JSONResponse(_read_existing(context_dir / SURVEY_FILENAME))
+
+    @app.get("/api/prep")
+    def get_prep() -> JSONResponse:
+        """The survey questions `prep` would change, each with its reason
+        (B4). Read-only: accepting one changes the survey on the page, and
+        "Save survey" (`POST /api/survey`) is still the only writer. Sync, so
+        FastAPI runs the session reads in its threadpool rather than on the
+        event loop. A survey that cannot be loaded proposes nothing."""
+        state = _existing_state(context_dir / SURVEY_FILENAME)
+        try:
+            survey = load_survey(context_dir) if state == STATE_PRESENT else ()
+        # An invalid item, or a file that changed between the two reads.
+        except (ContextValidationError, OSError, ValueError):
+            survey = ()
+        proposals = prep_load.survey_proposals(survey, _sessions_root_for(context_dir)) if survey else ()
+        return JSONResponse({
+            "proposals": [
+                {"item_id": p.item_id, "text": p.text, "action": p.action, "reason": p.reason}
+                for p in proposals
+            ],
+            "survey": state,
+        })
 
     @app.post("/api/brief")
     async def post_brief(request: Request) -> JSONResponse:

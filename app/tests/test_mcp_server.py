@@ -299,19 +299,23 @@ def test_a_tool_call_with_a_missing_required_argument_is_an_invalid_params_error
 # --- the tool surface -----------------------------------------------------------------
 
 
-def test_tools_list_is_exactly_the_seven_read_only_tools(repo):
+def test_tools_list_is_exactly_the_ten_read_only_tools(repo):
     """By EQUALITY and in order, the shape gates 8/18/19 already use here: the
     protocol surface grows by decision, never by drift. Widened from five to
     seven in the commit that added `get_standing` and `get_interview_summary`
     -- both read-only, both routed through `app/coach/interview_summary.py`
-    rather than counting anything themselves."""
+    rather than counting anything themselves. Widened to eight by
+    `search_knowledge` (backlog B1): read-only, node scope, and it
+    returns no text for any source type that holds customer speech. Nine with
+    `get_mirror` (B2): counts, flags and sequence numbers, never words. Ten
+    with `get_themes` (B3): abstracted claims, never quotes."""
     response = _decoded(
         _drive([{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}], repo_root=repo)
     )[0]
     names = [tool["name"] for tool in response["result"]["tools"]]
     assert names == [
         "list_projects", "get_survey", "get_hypotheses", "list_interviews", "get_facts",
-        "get_standing", "get_interview_summary",
+        "get_standing", "get_interview_summary", "search_knowledge", "get_mirror", "get_themes",
     ]
     for tool in response["result"]["tools"]:
         assert tool["description"].strip()
@@ -381,6 +385,11 @@ def _every_tool_invocation():
         ("get_interview_summary", {"project": "acme", "session_id": SESSION_ID}),
         ("get_interview_summary",
          {"project": "acme", "session_id": SESSION_ID, "scope": "subtree"}),
+        # Empty knowledge base here; app/tests/test_mcp_knowledge.py sweeps one
+        # that holds the sentinel in every source type.
+        ("search_knowledge", {"project": "acme", "query": "sentinel"}),
+        ("get_mirror", {"project": "acme"}),
+        ("get_themes", {"project": "acme"}),
     ]
 
 

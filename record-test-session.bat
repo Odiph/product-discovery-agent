@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-title Discovery Copilot -- transcript test session
+title Product Discovery Agent -- transcript test session
 
 REM One-button transcript test session (no coach, no phone surface).
 REM

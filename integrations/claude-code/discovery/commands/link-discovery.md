@@ -1,23 +1,23 @@
 ---
-description: Link this repository to one Discovery Copilot project, so evidence questions are answered from the right customers
+description: Link this repository to one Product Discovery Agent project, so evidence questions are answered from the right customers
 argument-hint: <project path, e.g. acme or acme/onboarding>
 allowed-tools: Bash(printenv DISCOVERY_COPILOT_HOME)
 ---
 
-Link this repository to the Discovery Copilot project `$ARGUMENTS`. Follow the
+Link this repository to the Product Discovery Agent project `$ARGUMENTS`. Follow the
 `discovery-evidence` skill's rules throughout.
 
 1. **Check the server is reachable.** Call `list_projects`. If the
    `discovery-copilot` server is missing or fails, stop and tell the operator to
-   set `DISCOVERY_COPILOT_HOME` to their Discovery Copilot checkout (for example
+   set `DISCOVERY_COPILOT_HOME` to their Product Discovery Agent checkout (for example
    `setx DISCOVERY_COPILOT_HOME "C:\path\to\discovery-copilot"` on Windows) and
    restart Claude Code.
 
 2. **Check the project exists.** If `$ARGUMENTS` is empty or is not a path in
    the listing, show the available paths and ask which one; do not pick one
    by resemblance. If the product has no project yet, say that projects are
-   created on the Discovery Copilot side, never from here, and give the steps:
-   create `projects/<name>/project.json` in the Discovery Copilot checkout
+   created on the Product Discovery Agent side, never from here, and give the steps:
+   create `projects/<name>/project.json` in the Product Discovery Agent checkout
    containing `{"corpus": "real"}`, then run
    `python -m app author --project <name>` there to write the brief, survey
    and hypotheses.
@@ -42,7 +42,7 @@ Link this repository to the Discovery Copilot project `$ARGUMENTS`. Follow the
    prints nothing, skip this step and say so. Merge deny rules into
    `.claude/settings.local.json` (create it if needed; keep any existing
    content) so this repository's
-   sessions cannot read the Discovery Copilot's `projects/`, `sessions/` and
+   sessions cannot read the Product Discovery Agent's `projects/`, `sessions/` and
    `context/` directories, where transcripts and verbatim quotes live. Write
    each as `Read(//<path>/<dir>/**)`, where `<path>` is the checkout path with
    forward slashes and the drive letter as a lowercase first segment
@@ -56,7 +56,7 @@ Link this repository to the Discovery Copilot project `$ARGUMENTS`. Follow the
    ```markdown
    <!-- discovery-copilot:start -->
    ## Customer evidence
-   This product's interview evidence is the Discovery Copilot project `<path>`
+   This product's interview evidence is the Product Discovery Agent project `<path>`
    (see `.discovery-copilot.json`). Before prioritising, scoping or designing a
    user-facing feature, or stating what users need, use the
    `discovery-evidence` skill: cite claim and interview IDs, never treat

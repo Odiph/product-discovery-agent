@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-title Discovery Copilot -- console
+title Product Discovery Agent -- console
 
 REM Opens the local console: pick a project, see its survey, hypotheses, fact
 REM count and past interviews, then press Start.

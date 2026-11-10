@@ -37,7 +37,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Optional, Sequence
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import PlainTextResponse, Response
 
 from app import config as config_mod
@@ -149,15 +149,40 @@ def check_port_available(port: int, *, host: str = "0.0.0.0") -> None:
         probe.close()
 
 
+# In-person mode only (`start --in-person`): the phone's microphone channel.
+# One binary frame is at most ~2 s of 16 kHz mono PCM16; anything larger, or
+# not whole 16-bit samples, closes the socket. This is the one route a client
+# can push data into the laptop through, so it is bounded.
+MAX_AUDIO_FRAME_BYTES = 65536
+WS_CLOSE_MIC_BUSY = 4409
+_WS_CLOSE_BAD_AUDIO = 1003
+_MIC_PAGE_MARKER = b"</body>"
+# Appended to the live page for `/s/{t}?mic`, and ONLY there: a two-stream
+# run's page never carries a capture script (gate 2).
+_MIC_BAR = (
+    b'<div id="mic-region" class="mic-region">'
+    b'<button id="mic-button" type="button">Start recording</button>'
+    b'<span id="mic-status" class="mic-status" dir="ltr">Say the consent line first: '
+    b'the first voice is taken to be you.</span>'
+    b'<span id="mic-level" class="mic-level"></span></div>'
+    b'<script>(function(){var s=document.createElement("script");s.type="module";'
+    b's.src=window.location.pathname.replace(/\\/$/,"")+"/mic.js";'
+    b"document.body.appendChild(s);})();</script>"
+)
+
+
 @dataclass(frozen=True)
 class _StaticAssets:
     index_html: bytes
     style_css: bytes
     app_js: bytes
     live_state_mjs: bytes
+    # Loaded only for an in-person run: a two-stream server never reads them.
+    mic_js: bytes = b""
+    mic_core_mjs: bytes = b""
 
 
-def _load_static_assets(static_dir: Path) -> _StaticAssets:
+def _load_static_assets(static_dir: Path, *, include_mic: bool = False) -> _StaticAssets:
     """Reads the four static assets from disk exactly once. No request
     handler below ever touches the filesystem -- every response below is
     served from these in-memory bytes."""
@@ -166,6 +191,8 @@ def _load_static_assets(static_dir: Path) -> _StaticAssets:
         style_css=(static_dir / "style.css").read_bytes(),
         app_js=(static_dir / "app.js").read_bytes(),
         live_state_mjs=(static_dir / "live-state.mjs").read_bytes(),
+        mic_js=(static_dir / "mic.js").read_bytes() if include_mic else b"",
+        mic_core_mjs=(static_dir / "mic-core.mjs").read_bytes() if include_mic else b"",
     )
 
 
@@ -186,6 +213,7 @@ def create_app(
     heartbeat_timeout_ms: int = config_mod.DEFAULT_HEARTBEAT_TIMEOUT_MS,
     reconnect_backoff_base_ms: int = config_mod.DEFAULT_RECONNECT_BACKOFF_BASE_MS,
     reconnect_backoff_cap_ms: int = config_mod.DEFAULT_RECONNECT_BACKOFF_CAP_MS,
+    audio_sink: "Optional[Callable[[bytes], None]]" = None,
 ) -> FastAPI:
     """Builds the ASGI app. Registers exactly five routes, all beneath the
     per-run token: the page, the three assets, and the socket. No other route
@@ -219,7 +247,7 @@ def create_app(
     server status is: a browser that joins mid-interview, or reconnects after
     a sleep, must be correct immediately rather than at the next coverage
     change (which may be minutes away, or never)."""
-    assets = _load_static_assets(static_dir)
+    assets = _load_static_assets(static_dir, include_mic=audio_sink is not None)
     board = status_board if status_board is not None else StatusBoard()
     app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
 
@@ -237,12 +265,15 @@ def create_app(
             return False
         return secrets.compare_digest(candidate, token)
 
+    mic_page = assets.index_html.replace(_MIC_PAGE_MARKER, _MIC_BAR + _MIC_PAGE_MARKER, 1)
+
     @app.get("/s/{candidate_token}")
-    async def get_page(candidate_token: str) -> Response:
+    async def get_page(candidate_token: str, request: Request) -> Response:
         if not _token_matches(candidate_token):
             return _NOT_FOUND
+        wants_mic = audio_sink is not None and "mic" in request.query_params
         return Response(
-            content=assets.index_html,
+            content=mic_page if wants_mic else assets.index_html,
             media_type="text/html",
             headers={"Cache-Control": "no-store"},
         )
@@ -343,6 +374,9 @@ def create_app(
                 detail={"reason": disconnect_reason, "connection_count": hub.connection_count},
             )
 
+    if audio_sink is not None:
+        _register_mic_routes(app, assets=assets, token_matches=_token_matches, store=store, audio_sink=audio_sink)
+
     @app.get("/{_catch_all:path}")
     async def catch_all(_catch_all: str) -> Response:
         # Covers "/", "/s/" (empty token segment), and anything else not
@@ -386,3 +420,51 @@ def build_uvicorn_server(
         ws_ping_timeout=ws_ping_timeout_s,
     )
     return uvicorn.Server(config)
+
+
+def _register_mic_routes(app: FastAPI, *, assets: _StaticAssets, token_matches, store: SessionStore, audio_sink) -> None:
+    """In-person mode: the capture script and the binary audio socket."""
+    slot = {"busy": False}
+
+    def _script(content: bytes) -> Response:
+        return Response(content=content, media_type="text/javascript", headers={"Cache-Control": "no-store"})
+
+    @app.get("/s/{candidate_token}/mic.js")
+    async def get_mic_js(candidate_token: str) -> Response:
+        return _script(assets.mic_js) if token_matches(candidate_token) else _NOT_FOUND
+
+    @app.get("/s/{candidate_token}/mic-core.mjs")
+    async def get_mic_core(candidate_token: str) -> Response:
+        return _script(assets.mic_core_mjs) if token_matches(candidate_token) else _NOT_FOUND
+
+    @app.websocket("/s/{candidate_token}/audio")
+    async def audio_endpoint(websocket: WebSocket, candidate_token: str) -> None:
+        if not token_matches(candidate_token):
+            await websocket.close(code=_WS_CLOSE_BAD_TOKEN)
+            return
+        await websocket.accept()
+        if slot["busy"]:
+            await websocket.close(code=WS_CLOSE_MIC_BUSY)
+            return
+        slot["busy"] = True
+        store.append_event(event="mic-connected")
+        reason = "unknown"
+        try:
+            while True:
+                message = await websocket.receive()
+                if message["type"] == "websocket.disconnect":
+                    reason = f"websocket-close-code-{message.get('code')}"
+                    break
+                frame = message.get("bytes")
+                if frame is None:
+                    continue  # text: not audio, ignored without echoing it
+                if len(frame) > MAX_AUDIO_FRAME_BYTES or len(frame) % 2:
+                    reason = "bad-audio-frame"
+                    await websocket.close(code=_WS_CLOSE_BAD_AUDIO)
+                    break
+                audio_sink(frame)
+        except WebSocketDisconnect as exc:
+            reason = f"websocket-close-code-{exc.code}"
+        finally:
+            slot["busy"] = False
+            store.append_event(event="mic-disconnected", detail={"reason": reason})

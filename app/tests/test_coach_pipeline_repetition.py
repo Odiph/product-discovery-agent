@@ -85,7 +85,7 @@ class _RecordingClient:
 def _make_pipeline(store, client, **overrides):
     state = CoverageState()
     kwargs = dict(
-        client=client, store=store, brief=(), survey=(),
+        client=client, store=store, brief=(), survey=(), process="", knowledge=(),
         session_start_grounding_s=0.0,
         coverage_state_provider=lambda: state,
         model="m", generate_timeout_s=5.0, critique_timeout_s=5.0,

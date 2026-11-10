@@ -151,7 +151,10 @@ def test_preflight_wraps_the_vendor_error_in_the_type_main_catches(monkeypatch):
 # different question that happens to have the same answer today. Collapsing them
 # would make a future engine that is credential-free but network-using silently
 # change the meaning of both.
-_CREDENTIAL_FREE_ENGINES = {"fake", "replay"}
+# `fake-in-person` (app/stt/fake_diarized.py) is the diarized stand-in for
+# `start --in-person`: no network, no model, nothing to check. Its real
+# counterpart `soniox-in-person` IS a SonioxEngine and inherits its preflight.
+_CREDENTIAL_FREE_ENGINES = {"fake", "replay", "fake-in-person"}
 
 
 def test_every_registered_engine_either_preflights_or_is_pinned_credential_free():
@@ -414,7 +417,7 @@ def test_no_vendor_identifier_in_capture_or_session_executable_code():
 def test_soniox_start_frame_declares_no_language_of_any_kind():
     from benchmark.engines.soniox import SonioxConfig, build_start_message
 
-    message = build_start_message("dummy-key-for-structural-test-only", SonioxConfig())
+    message = build_start_message(SonioxConfig())
     payload = json.loads(message)
     for forbidden_key in ("language_hints", "language", "language_code", "locale"):
         assert forbidden_key not in payload, f"start frame declares a language via {forbidden_key!r}"

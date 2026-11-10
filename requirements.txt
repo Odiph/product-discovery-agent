@@ -15,14 +15,14 @@ PyAudioWPatch==0.2.12.8
 # (github.com/fastapi/fastapi, MIT, 317 releases), uvicorn (github.com/Kludex/uvicorn,
 # BSD-3-Clause, 199 releases), qrcode (github.com/lincolnloop/python-qrcode, BSD, 39
 # releases). Plain `uvicorn`, NEVER `uvicorn[standard]` -- this project already pins
-# websockets==17.0.1 below (via benchmark/requirements.txt), which uvicorn auto-detects
+# websockets==17.2 below (via benchmark/requirements.txt), which uvicorn auto-detects
 # and reuses for its own WebSocket protocol; the `[standard]` extra would additionally
 # pull uvloop (POSIX-only, dead weight on this Windows machine), httptools, watchfiles,
 # python-dotenv and pyyaml for no benefit (03-RESEARCH.md Standard Stack). `qrcode[pil]`
 # pulls Pillow transitively for the square-pixel PNG QR fallback -- not separately
 # pinned, so it does not count against test_gate_three's literal-line dependency count.
-fastapi==0.141.1
-uvicorn==0.52.1
+fastapi==0.142.2
+uvicorn==0.54.0
 qrcode[pil]==8.2
 
 # Phase 4 (04-01-PLAN.md §C7, 04-RESEARCH.md §7): the official Python SDK for
@@ -41,4 +41,28 @@ qrcode[pil]==8.2
 # call. This is a different, legitimate relationship from the one
 # 03-01-PLAN.md §P9 rejected, which refused to build tests on a library
 # arriving through an UNRELATED vendor SDK's dependency tree.
-anthropic==0.120.2
+# 2026-11-09: moved to 1.17.0 (newest 1.x, 20 days old). 1.x swaps httpx for
+# its maintained fork httpx2 (github.com/pydantic/httpx2) and pulls truststore;
+# both arrive transitively, pip-audit clean. 2.x is a separate step: it sends
+# API version 2026-10-21.
+anthropic==1.17.0
+
+# In-person mode (.planning/in-person/PLAN.md, 2026-09-24): the voiceprint check
+# that assigns each turn of a one-microphone meeting to interviewer or
+# interviewee. Legitimacy: PyPI-resident, Apache-2.0, github.com/k2-fsa/sherpa-onnx
+# (15k stars, released 2026-09-10), prebuilt cp312 win_amd64 wheels, offline and
+# CPU-only (no PyTorch), pip-audit clean at 1.13.8. It declares its own
+# `sherpa-onnx-core` (same project) as a dependency: that arrival is not pinned
+# separately and does not count against test_gate_three, as with anthropic ->
+# pydantic above. The MODEL is not a package: `python -m app fetch-voiceprint-model`
+# downloads it into git-ignored models/, verified against a pinned SHA-256.
+sherpa-onnx==1.13.8
+
+# backlog B1 (2026-10-21, the operator's go-ahead): reading PDFs into
+# the knowledge base (`kb add`, app/kb/pdf.py). Legitimacy: PyPI-resident,
+# BSD-3-Clause, github.com/py-pdf/pypdf, pure Python with NO runtime
+# dependencies on Python >= 3.11. Pinned to 6.21.4 (12 days old on 2026-11-09),
+# against the usual two-week rule: every older release carries known CVEs
+# (pip-audit 2026-11-09: 6.21.1 has five, the last fixed in 6.21.4), and 6.21.4 audits
+# clean. Text extraction only -- no image or crypto extras.
+pypdf==6.21.4

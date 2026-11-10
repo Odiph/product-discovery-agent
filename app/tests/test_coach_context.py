@@ -265,7 +265,7 @@ def test_empty_corpus_with_no_facts_file_is_byte_identical_to_phase_four(tmp_pat
     assert all(not item.id.startswith(FACT_ID_PREFIX) for item in items)
 
     hand_written_only = (ContextItem(id="b1", text="hand-written brief item", provenance="evidence"),)
-    assert static_block(brief=items, hypotheses=()) == static_block(brief=hand_written_only, hypotheses=()), (
+    assert static_block(brief=items, knowledge=(), process="", hypotheses=()) == static_block(brief=hand_written_only, knowledge=(), process="", hypotheses=()), (
         "an absent facts.json must produce a static_block byte-identical to the hand-written brief alone"
     )
 
@@ -277,7 +277,7 @@ def test_empty_corpus_with_an_empty_facts_array_is_byte_identical_to_phase_four(
     items = load_brief(tmp_path)
 
     hand_written_only = (ContextItem(id="b1", text="hand-written brief item", provenance="evidence"),)
-    assert static_block(brief=items, hypotheses=()) == static_block(brief=hand_written_only, hypotheses=()), (
+    assert static_block(brief=items, knowledge=(), process="", hypotheses=()) == static_block(brief=hand_written_only, knowledge=(), process="", hypotheses=()), (
         "an empty facts.json array must degrade identically to an absent one"
     )
 
@@ -296,7 +296,7 @@ def test_determinism_across_two_interpreters_with_different_hash_seeds(tmp_path)
     script = (
         "import hashlib, os, sys; sys.path.insert(0, '.'); "
         "from app.coach.context import load_brief; from app.coach.prompts import static_block; "
-        "print(hashlib.sha256(static_block(brief=load_brief(os.environ['CTXDIR']), hypotheses=()).encode()).hexdigest())"
+        "print(hashlib.sha256(static_block(brief=load_brief(os.environ['CTXDIR']), knowledge=(), process='', hypotheses=()).encode()).hexdigest())"
     )
     hashes = []
     for seed in ("0", "12345"):
@@ -430,7 +430,7 @@ def test_a_retrieved_hebrew_fact_does_not_disturb_english_language_selection(tmp
     # `items` (which may or may not include the Hebrew fact, depending on scoring)
     # is passed through static_block only to prove it does not raise or otherwise
     # misbehave when a retrieved item carries non-Latin script.
-    assert isinstance(static_block(brief=items, hypotheses=()), str)
+    assert isinstance(static_block(brief=items, knowledge=(), process="", hypotheses=()), str)
 
 
 # --- CTX-03: load_brief() is a substitutable seam ------------------------------------

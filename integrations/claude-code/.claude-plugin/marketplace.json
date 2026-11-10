@@ -1,6 +1,6 @@
 {
   "name": "discovery-copilot-local",
-  "description": "Plugins that let other repositories use this machine's Discovery Copilot interview corpus.",
+  "description": "Plugins that let other repositories use this machine's Product Discovery Agent interview corpus.",
   "owner": {
     "name": "Odiph"
   },

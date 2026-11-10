@@ -36,7 +36,7 @@ def _make_pipeline(
     state = CoverageState()
     return SuggestionPipeline(
         client=client, store=store, brief=(), survey=(),
-        session_start_grounding_s=session_start_grounding_s,
+        knowledge=(), process="", session_start_grounding_s=session_start_grounding_s,
         coverage_state_provider=lambda: state,
         model="m", generate_timeout_s=generate_timeout_s, critique_timeout_s=critique_timeout_s,
         generate_max_tokens=200, critique_max_tokens=200,
@@ -177,7 +177,7 @@ def test_suggestion_pipeline_cannot_be_constructed_without_the_session_start_gro
     store = _new_store(tmp_path)
     with pytest.raises(TypeError):
         SuggestionPipeline(  # noqa: no session_start_grounding_s -- must raise
-            client=StubAnthropicClient(responses=[]), store=store, brief=(), survey=(),
+            client=StubAnthropicClient(responses=[]), store=store, brief=(), survey=(), knowledge=(), process="",
             coverage_state_provider=lambda: CoverageState(),
             model="m", generate_timeout_s=1.0, critique_timeout_s=1.0,
             generate_max_tokens=200, critique_max_tokens=200,

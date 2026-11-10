@@ -61,12 +61,14 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response
 
 from app import projects as projects_mod
+from app.mcp import mirror as mirror_payload
 from app.coach import corpus as coach_corpus
 from app.coach import interview_summary as summary_mod
 from app.coach import coverage_report
 from app.coach import rejection_store
 from app.coach.asked_store import CRITIQUE_DOC_FILENAME
 from app.coach.context import load_survey
+from app.session import evidence_view
 from app.session.participant import read_participant
 from app.session.reader import list_session_ids, read_session
 from app.session.render import TRANSCRIPT_DOC_FILENAME
@@ -365,6 +367,7 @@ QUESTION_FLAGS = (
     "pitch",
     "opinion_seeking",
     "confirmation_only",
+    "off_topic",
     "generic",
 )
 
@@ -822,7 +825,9 @@ def _transcript(sessions_root: Path, session_id: "Optional[str]") -> "list[dict[
     if not session_dir.is_dir():
         return []
     try:
-        result = read_session(session_dir)
+        # Confirmed turns for a confirmed in-person session: facts and mirror
+        # highlights cite those seqs (#turn-<seq>), not the live ones.
+        result = evidence_view.read_view(session_dir)
     except Exception as exc:  # noqa: BLE001 -- an unreadable transcript is a message, not a crash
         logger.warning("reading the transcript failed error_type=%s", type(exc).__name__)
         return []
@@ -969,6 +974,18 @@ def create_review_app(
         if error is not None:
             return JSONResponse({"error": error}, status_code=400)
         return JSONResponse(build_review(project, selected, repo_root=repo_root))
+
+    @app.get("/api/mirror")
+    async def get_mirror() -> JSONResponse:
+        """The interviewer's habits across the whole project (`mirror`). The
+        same payload the MCP tool serves -- numbers, flags and turn sequence
+        numbers -- so the page and an agent cannot disagree; the words of a
+        moment are already on this page, in the transcript it highlights."""
+        try:
+            paths = projects_mod.resolve(project, repo_root=repo_root)
+        except projects_mod.ProjectPathError as exc:
+            return JSONResponse({"error": str(exc)}, status_code=400)
+        return JSONResponse(mirror_payload.get(paths))
 
     # The accept/reject card's two routes, defined in `app/web/accept.py` and
     # mounted here rather than on a second server -- a second port would force

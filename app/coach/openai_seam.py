@@ -10,8 +10,9 @@ surface and the Anthropic-shaped response the coach parses.
 
 **One dialect, not many.** OpenAI-compatible is the common tongue of both the
 local runtimes and the cheap hosted providers, so a single translation reaches
-the whole candidate set without a dependency. It uses `httpx`, which is
-already installed as the Anthropic SDK's own transitive dependency.
+the whole candidate set without a dependency. It uses `httpx2`, which is
+already installed as the Anthropic SDK's own transitive dependency (1.x moved
+from `httpx` to this maintained fork; same API).
 
 **The translation that actually matters is the tool call.** Everything else
 here is plumbing. A coach cycle forces exactly one tool (`tool_choice` names
@@ -65,7 +66,7 @@ import json
 import logging
 from typing import Any, Optional, Sequence
 
-import httpx
+import httpx2
 
 logger = logging.getLogger(__name__)
 
@@ -360,7 +361,7 @@ class OpenAICompatibleClient:
         headers = {"content-type": "application/json"}
         if self._api_key:
             headers["authorization"] = f"Bearer {self._api_key}"
-        response = httpx.post(
+        response = httpx2.post(
             f"{self._base_url}/chat/completions",
             json=body,
             headers=headers,

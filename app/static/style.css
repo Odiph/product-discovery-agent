@@ -195,3 +195,65 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.02em;
 }
+
+/* In-person mode only: the phone's recording bar, injected into `/s/{t}?mic`
+   by app/web/server.py and driven by mic.js. Pinned to the bottom, under the
+   transcript, where a thumb reaches the button. Status colours follow the
+   page's rule: amber for a recoverable connection problem, red only for a
+   stop the user must act on. */
+.mic-region {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+  border-top: 1px solid #2a2e37;
+  background: #171c26;
+}
+
+.mic-region button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 6px;
+  background: #2f6f4f;
+  color: #eaeaea;
+  font: inherit;
+  font-weight: 600;
+}
+
+.mic-region button:disabled {
+  opacity: 0.5;
+}
+
+.mic-status {
+  flex: 1 1 12rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #9099a8;
+}
+
+.mic-status[data-kind="live"] { color: #8fd0a8; }
+.mic-status[data-kind="warn"] { color: #b8965a; }
+.mic-status[data-kind="error"] { color: #f0a0a0; }
+
+/* The level meter: mic.js sets --mic-level to 0..1 on every frame. */
+.mic-level {
+  flex: 1 0 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: #2a2e37;
+  overflow: hidden;
+}
+
+.mic-level::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: calc(var(--mic-level, 0) * 100%);
+  background: #4fa877;
+  transition: width 80ms linear;
+}

@@ -199,7 +199,7 @@ async def _run_probe(
         store=store,
         brief=brief,
         survey=survey,
-        hypotheses=hypotheses,
+        knowledge=(), process="", hypotheses=hypotheses,
         session_start_grounding_s=grounding_s,
         coverage_state_provider=lambda: coverage_detector.state,
         model=reasoning_client.DEFAULT_MODEL,

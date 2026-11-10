@@ -228,6 +228,8 @@ def assemble_generate_request(
     trigger: SegmentRecord,
     detected_language: str,
     hypotheses: Sequence[Any],
+    process: str,
+    knowledge: Sequence[Any],
     recently_shown: Sequence[str],
     transcript_cache_chunk: int = prompts.TRANSCRIPT_CACHE_CHUNK,
     model: str,
@@ -282,7 +284,9 @@ def assemble_generate_request(
     system: "list[dict]" = [
         {
             "type": "text",
-            "text": prompts.static_block(brief=brief, hypotheses=hypotheses),
+            "text": prompts.static_block(
+                brief=brief, hypotheses=hypotheses, process=process, knowledge=knowledge
+            ),
             "cache_control": {"type": "ephemeral"},
         },
         {
@@ -437,6 +441,8 @@ def run_generate(
     trigger: SegmentRecord,
     detected_language: str,
     hypotheses: Sequence[Any],
+    process: str,
+    knowledge: Sequence[Any],
     recently_shown: Sequence[str],
     transcript_cache_chunk: int = prompts.TRANSCRIPT_CACHE_CHUNK,
     model: str,
@@ -464,6 +470,8 @@ def run_generate(
         trigger=trigger,
         detected_language=detected_language,
         hypotheses=hypotheses,
+        process=process,
+        knowledge=knowledge,
         recently_shown=recently_shown,
         transcript_cache_chunk=transcript_cache_chunk,
         model=model,

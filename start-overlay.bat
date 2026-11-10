@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-title Discovery Copilot -- overlay
+title Product Discovery Agent -- overlay
 
 REM One-button launch of the floating record overlay: translucent, always on
 REM top, picks a project and runs the interview.
@@ -24,7 +24,7 @@ REM -- starting a second one would destroy the first one's session.
 REM Relaunch ourselves minimized, once. The /min argument is the re-entry
 REM marker, so this cannot loop.
 if not "%~1"=="/min" (
-  start "Discovery Copilot -- overlay" /min "%~f0" /min
+  start "Product Discovery Agent -- overlay" /min "%~f0" /min
   exit /b 0
 )
 

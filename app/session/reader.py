@@ -69,13 +69,16 @@ class SessionReadResult:
         return tuple(r for r in self.records if r.get("kind") == kind)
 
 
-def read_session(session_dir: Path) -> SessionReadResult:
+def read_session(session_dir: Path, *, transcript_filename: str = TRANSCRIPT_FILENAME) -> SessionReadResult:
     """Parses one session directory. Tolerates a session that is still being
     written (no exclusive lock is ever taken on the transcript file by the
     writer, so a read never blocks behind an open writer) and a session that
     was never closed (reported via `closed=False`, never inferred from a
-    timestamp gap alone -- phase_specification U1)."""
-    transcript_path = session_dir / TRANSCRIPT_FILENAME
+    timestamp gap alone -- phase_specification U1).
+
+    `transcript_filename` selects an in-person session's confirmed evidence
+    transcript instead of the live one (app/session/evidence.py)."""
+    transcript_path = session_dir / transcript_filename
     metadata_path = session_dir / METADATA_FILENAME
 
     metadata: dict[str, Any] = {}

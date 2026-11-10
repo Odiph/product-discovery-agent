@@ -515,9 +515,9 @@ def build_precheck_report(
     return PrecheckReport(rows=tuple(rows))
 
 
-def print_precheck_report(report: PrecheckReport) -> None:
+def print_precheck_report(report: PrecheckReport, *, rules: "tuple[str, ...]" = PREFLIGHT_RULES) -> None:
     print("What to do first (pre-flight rules -- these cannot be fixed in code):")
-    for rule in PREFLIGHT_RULES:
+    for rule in rules:
         print(f"  - {rule}")
     print()
     for row in report.rows:

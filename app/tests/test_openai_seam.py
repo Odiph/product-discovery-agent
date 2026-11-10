@@ -90,7 +90,7 @@ def test_a_generate_call_through_the_seam_produces_real_candidates():
     )
     candidates = run_generate(
         _client(payload), brief=(), survey=(), asked={}, transcript=[], trigger=_segment(),
-        detected_language="en", hypotheses=(), recently_shown=(), model="local-model",
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="local-model",
         max_tokens=1000, timeout_s=5.0,
     )
     assert candidates == [
@@ -110,7 +110,7 @@ def test_a_critique_call_through_the_seam_produces_real_judgments():
     )
     judgments = run_critique(
         _client(payload), candidates=[Candidate(index=0, text="q", move=MOVE_ADVANCE)],
-        hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="local-model", max_tokens=500, timeout_s=5.0,
+        process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="local-model", max_tokens=500, timeout_s=5.0,
     )
     assert len(judgments) == 1 and judgments[0].band == BAND_CLEAN
 
@@ -126,7 +126,7 @@ def test_the_forced_tool_choice_survives_translation():
     run_generate(
         _client(_completion(name=GENERATE_TOOL_NAME, arguments=_ONE_CANDIDATE), capture=capture),
         brief=(), survey=(), asked={}, transcript=[], trigger=_segment(),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m",
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m",
         max_tokens=1000, timeout_s=5.0,
     )
     body = capture[0]["body"]
@@ -147,7 +147,7 @@ def test_the_system_blocks_reach_the_model_in_order_carrying_their_cache_markers
     run_generate(
         _client(_completion(name=GENERATE_TOOL_NAME, arguments=_ONE_CANDIDATE), capture=capture),
         brief=(), survey=(), asked={}, transcript=[], trigger=_segment(seq=0, text="the trigger"),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m",
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m",
         max_tokens=1000, timeout_s=5.0,
     )
     body = capture[0]["body"]
@@ -174,7 +174,7 @@ def test_prompt_caching_off_restores_the_flattened_string_for_a_strict_provider(
             capture=capture, prompt_caching=False,
         ),
         brief=(), survey=(), asked={}, transcript=[], trigger=_segment(seq=0, text="the trigger"),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m",
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m",
         max_tokens=1000, timeout_s=5.0,
     )
     body = capture[0]["body"]
@@ -199,7 +199,7 @@ def test_the_explicit_timeout_reaches_the_transport():
     run_generate(
         _client(_completion(name=GENERATE_TOOL_NAME, arguments=_ONE_CANDIDATE), capture=capture),
         brief=(), survey=(), asked={}, transcript=[], trigger=_segment(),
-        detected_language="en", hypotheses=(), recently_shown=(), model="m",
+        detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m",
         max_tokens=1000, timeout_s=3.5,
     )
     assert capture[0]["timeout_s"] == 3.5
@@ -221,7 +221,7 @@ def test_a_truncated_tool_call_is_refused_rather_than_parsed():
     with pytest.raises(GenerateFailure) as excinfo:
         run_generate(
             _client(payload), brief=(), survey=(), asked={}, transcript=[], trigger=_segment(),
-            detected_language="en", hypotheses=(), recently_shown=(), model="m",
+            detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m",
             max_tokens=10, timeout_s=5.0,
         )
     assert excinfo.value.stop_reason == "max_tokens"
@@ -234,7 +234,7 @@ def test_a_content_filter_stop_is_refused_too():
     with pytest.raises(CritiqueFailure) as excinfo:
         run_critique(
             _client(payload), candidates=[Candidate(index=0, text="q", move=MOVE_ADVANCE)],
-            hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=500, timeout_s=5.0,
+            process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=500, timeout_s=5.0,
         )
     assert excinfo.value.stop_reason == "refusal"
 
@@ -248,7 +248,7 @@ def test_malformed_tool_arguments_fail_loudly_instead_of_becoming_zero_candidate
     with pytest.raises(GenerateFailure):
         run_generate(
             _client(payload), brief=(), survey=(), asked={}, transcript=[], trigger=_segment(),
-            detected_language="en", hypotheses=(), recently_shown=(), model="m",
+            detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m",
             max_tokens=1000, timeout_s=5.0,
         )
 
@@ -265,7 +265,7 @@ def test_prose_instead_of_a_tool_call_fails_loudly():
     with pytest.raises(GenerateFailure):
         run_generate(
             _client(payload), brief=(), survey=(), asked={}, transcript=[], trigger=_segment(),
-            detected_language="en", hypotheses=(), recently_shown=(), model="m",
+            detected_language="en", knowledge=(), process="", hypotheses=(), recently_shown=(), model="m",
             max_tokens=1000, timeout_s=5.0,
         )
 

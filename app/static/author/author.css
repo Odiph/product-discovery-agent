@@ -136,3 +136,18 @@ button:hover:not(:disabled) {
   opacity: 0.85;
   user-select: all;
 }
+
+/* prep's proposals (B4): above the survey they would change. A left border,
+   like .damage, in blue: a suggestion, not a fault. */
+.prep {
+  border-left: 4px solid #4a7fd4;
+  background: rgba(74, 127, 212, 0.07);
+  padding: 0.7rem 0.9rem;
+  margin: 0 0 1rem;
+  border-radius: 3px;
+}
+.prep-headline { font-size: 0.95rem; margin-bottom: 0.4rem; }
+.prep-row { padding: 0.5rem 0; border-top: 1px solid #2a2e37; }
+.prep-question { font-weight: 600; }
+.prep-reason, .prep-change { color: #9099a8; font-size: 0.9rem; margin: 0.15rem 0; }
+.prep-row button { margin: 0.3rem 0.4rem 0 0; }

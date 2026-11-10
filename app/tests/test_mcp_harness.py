@@ -161,7 +161,7 @@ def test_the_registered_command_really_speaks_the_protocol(config):
     assert responses[0]["result"]["serverInfo"]["name"] == SERVER_NAME
     assert [tool["name"] for tool in responses[1]["result"]["tools"]] == [
         "list_projects", "get_survey", "get_hypotheses", "list_interviews", "get_facts",
-        "get_standing", "get_interview_summary",
+        "get_standing", "get_interview_summary", "search_knowledge", "get_mirror", "get_themes",
     ]
 
 

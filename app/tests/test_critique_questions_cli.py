@@ -8,11 +8,14 @@ discarded -- the same rule `run_extract` follows, and for the same reason.
 
 from __future__ import annotations
 
+import inspect
 import json
 
 import pytest
 
 from app import main as main_mod
+from app.coach import critic as critic_mod
+from app.coach.context import SurveyItem
 from app.coach.critic import BAND_CLEAN, BAND_CLEAR_VIOLATION, Judgment
 
 
@@ -70,8 +73,16 @@ def stub_vendor(monkeypatch):
     monkeypatch.setattr(main_mod.reasoning_client, "build_client", lambda: object())
     monkeypatch.setattr(main_mod.reasoning_client, "resolve_model", lambda: "test-model")
 
-    def _run_critique(client, *, candidates, hypotheses, trigger_text, model, max_tokens, timeout_s):
-        return [_judgment(c.index) for c in candidates]
+    def _run_critique(client, **kwargs):
+        # Bound against the real signature: a stub that accepts what the real
+        # critic rejects is how a missing `survey` shipped unnoticed.
+        inspect.signature(critic_mod.run_critique).bind(client, **kwargs)
+        _run_critique.surveys.append(kwargs["survey"])
+        _run_critique.rules.append(kwargs["process"])
+        return [_judgment(c.index) for c in kwargs["candidates"]]
+
+    _run_critique.surveys = []
+    _run_critique.rules = []
 
     monkeypatch.setattr(
         main_mod.coach_asked_critique.critic_mod, "run_critique", _run_critique
@@ -146,7 +157,8 @@ def test_an_unjudged_turn_makes_the_command_exit_nonzero(session, monkeypatch, c
     monkeypatch.setattr(main_mod.reasoning_client, "build_client", lambda: object())
     monkeypatch.setattr(main_mod.reasoning_client, "resolve_model", lambda: "test-model")
 
-    def _failing(client, *, candidates, hypotheses, trigger_text, model, max_tokens, timeout_s):
+    def _failing(client, **kwargs):
+        inspect.signature(critic_mod.run_critique).bind(client, **kwargs)
         raise main_mod.coach_asked_critique.CritiqueFailure(reason="timeout")
 
     monkeypatch.setattr(
@@ -171,3 +183,163 @@ def test_min_words_is_actually_plumbed_through(session, stub_vendor):
     # floor nothing else can clear.
     assert payload["summary"]["turns"] == 1
     assert payload["turns"][0]["text"] == "How long is that wait, usually?"
+
+
+# --- `--all`: every interview without a critique, through the same path ------------
+
+
+def _sessions_env(monkeypatch, session):
+    monkeypatch.setenv("APP_SESSIONS_ROOT", str(session.parent))
+    monkeypatch.setenv("APP_CONTEXT_DIR", str(session.parent.parent / "context"))
+
+
+def test_all_judges_only_the_interviews_without_a_critique(session, stub_vendor, monkeypatch, capsys):
+    _sessions_env(monkeypatch, session)
+    done = session.parent / "20260814T100000"
+    done.mkdir()
+    (done / "transcript.jsonl").write_text((session / "transcript.jsonl").read_text(encoding="utf-8"),
+                                           encoding="utf-8")
+    (done / main_mod.CRITIQUE_DOC_FILENAME).write_text('{"kept": true}', encoding="utf-8")
+    empty = session.parent / "20260815T100000"
+    empty.mkdir()
+    (empty / "transcript.jsonl").write_text("", encoding="utf-8")
+
+    assert main_mod.main(["critique-questions", "--all"]) == 0
+    out = capsys.readouterr().out
+    assert "1 interview(s) to judge" in out
+    assert (session / main_mod.CRITIQUE_DOC_FILENAME).is_file()
+    assert (done / main_mod.CRITIQUE_DOC_FILENAME).read_text(encoding="utf-8") == '{"kept": true}'
+    assert not (empty / main_mod.CRITIQUE_DOC_FILENAME).exists()
+
+
+def test_all_with_nothing_pending_never_builds_a_client(session, no_vendor, monkeypatch, capsys):
+    _sessions_env(monkeypatch, session)
+    (session / main_mod.CRITIQUE_DOC_FILENAME).write_text("{}", encoding="utf-8")
+    assert main_mod.main(["critique-questions", "--all"]) == 0
+    assert "Nothing called" in capsys.readouterr().out
+    assert no_vendor == []
+
+
+def test_force_judges_again(session, stub_vendor, monkeypatch):
+    _sessions_env(monkeypatch, session)
+    (session / main_mod.CRITIQUE_DOC_FILENAME).write_text("{}", encoding="utf-8")
+    assert main_mod.main(["critique-questions", "--all", "--force"]) == 0
+    assert json.loads((session / main_mod.CRITIQUE_DOC_FILENAME).read_text(encoding="utf-8"))["summary"]
+
+
+def test_neither_a_session_nor_all_is_an_error(no_vendor, capsys):
+    assert main_mod.main(["critique-questions"]) == 2
+    assert "--all" in capsys.readouterr().err
+
+
+def test_all_survives_a_corrupt_session_and_skips_unconfirmed_in_person(session, stub_vendor, monkeypatch, capsys):
+    _sessions_env(monkeypatch, session)
+    broken = session.parent / "20260814T100000"
+    broken.mkdir()
+    (broken / "transcript.jsonl").write_text('{"kind": "segment"\n{"seq": 1}\n', encoding="utf-8")
+    in_person = session.parent / "20260815T100000"
+    in_person.mkdir()
+    (in_person / "transcript.jsonl").write_text((session / "transcript.jsonl").read_text(encoding="utf-8"),
+                                                encoding="utf-8")
+    (in_person / "session.json").write_text(json.dumps({"capture": "in-person", "evidence": "pending"}),
+                                            encoding="utf-8")
+    assert main_mod.main(["critique-questions", "--all"]) == 0
+    captured = capsys.readouterr()
+    assert "skipped 20260814T100000" in captured.err and "skipped 20260815T100000" in captured.err
+    assert (session / main_mod.CRITIQUE_DOC_FILENAME).is_file()
+    assert not (in_person / main_mod.CRITIQUE_DOC_FILENAME).exists()
+
+
+def test_all_keeps_going_after_one_failed_call(session, monkeypatch, capsys):
+    _sessions_env(monkeypatch, session)
+    second = session.parent / "20260814T100000"
+    second.mkdir()
+    (second / "transcript.jsonl").write_text((session / "transcript.jsonl").read_text(encoding="utf-8"),
+                                             encoding="utf-8")
+    calls = []
+
+    def _flaky(args, cfg, session_dir):
+        calls.append(session_dir.name)
+        if len(calls) == 1:
+            raise RuntimeError("vendor down")
+        return 0
+
+    monkeypatch.setattr(main_mod, "_critique_session", _flaky)
+    assert main_mod.main(["critique-questions", "--all"]) == 1
+    assert len(calls) == 2
+    assert "continuing with the rest" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("argv", [["--force", "S1"], ["--all", "S1"]])
+def test_contradictory_flags_are_refused(no_vendor, argv, capsys):
+    assert main_mod.main(["critique-questions", *argv]) == 2
+
+
+def test_the_survey_the_interview_ran_with_reaches_the_critic(session, stub_vendor):
+    """The snapshot in session.json, not today's guide: a question is judged
+    against what that interview was for."""
+    meta = {"closed_at": "2026-08-13T22:00:00Z",
+            "context_survey": [{"id": "s7", "order": 1, "text": "How do you start a session?"}]}
+    (session / "session.json").write_text(json.dumps(meta), encoding="utf-8")
+    assert main_mod.main(["critique-questions", str(session)]) == 0
+    assert stub_vendor.surveys
+    assert all([item.id for item in s] == ["s7"] for s in stub_vendor.surveys)
+
+
+def test_without_a_snapshot_the_projects_current_survey_is_used(session, stub_vendor, monkeypatch):
+    current = (SurveyItem(id="s2", order=1, text="What happens before you play?"),)
+    monkeypatch.setattr(main_mod.coach_context, "load_survey", lambda _dir: current)
+    assert main_mod.main(["critique-questions", str(session)]) == 0
+    assert all(tuple(s) == current for s in stub_vendor.surveys)
+
+
+def test_without_any_survey_the_critique_still_runs(session, stub_vendor, monkeypatch):
+    def _missing(_dir):
+        raise main_mod.ContextValidationError("survey.json does not exist")
+
+    monkeypatch.setattr(main_mod.coach_context, "load_survey", _missing)
+    assert main_mod.main(["critique-questions", str(session)]) == 0
+    assert all(tuple(s) == () for s in stub_vendor.surveys)
+
+
+def test_a_malformed_survey_snapshot_fails_before_any_call(session, stub_vendor, capsys):
+    meta = {"closed_at": "2026-08-13T22:00:00Z", "context_survey": [{"id": "s1"}]}
+    (session / "session.json").write_text(json.dumps(meta), encoding="utf-8")
+    assert main_mod.main(["critique-questions", str(session)]) == 1
+    assert stub_vendor.surveys == []
+    assert "context_survey is malformed" in capsys.readouterr().err
+
+
+def test_no_survey_and_no_hypotheses_warns_that_off_topic_is_noise(session, stub_vendor, monkeypatch, capsys):
+    monkeypatch.setattr(main_mod.coach_context, "load_survey", lambda _dir: ())
+    monkeypatch.setattr(main_mod.coach_corpus, "load_hypotheses", lambda *_a, **_k: ())
+    assert main_mod.main(["critique-questions", str(session)]) == 0
+    assert "nothing to judge off-topic against" in capsys.readouterr().err
+
+
+def test_an_unreadable_project_survey_is_a_clean_error(session, stub_vendor, monkeypatch, capsys):
+    def _unreadable(_dir):
+        raise PermissionError("denied")
+
+    monkeypatch.setattr(main_mod.coach_context, "load_survey", _unreadable)
+    assert main_mod.main(["critique-questions", str(session)]) == 1
+    assert stub_vendor.surveys == []
+    assert "cannot read the project's survey" in capsys.readouterr().err
+
+
+def test_the_critique_holds_the_interview_to_your_own_rules(session, stub_vendor, monkeypatch):
+    """B5: the project's `process.md` reaches every critique batch."""
+    rule = "## Price waits\nNever ask about price before the workflow."
+    monkeypatch.setattr(main_mod.coach_process, "load_process", lambda _dir: rule)
+    assert main_mod.main(["critique-questions", str(session)]) == 0
+    assert stub_vendor.rules and set(stub_vendor.rules) == {rule}
+
+
+def test_unreadable_rules_are_a_clean_error_before_any_call(session, stub_vendor, monkeypatch, capsys):
+    def _bad(_dir):
+        raise main_mod.ContextValidationError("cannot read process.md: denied")
+
+    monkeypatch.setattr(main_mod.coach_process, "load_process", _bad)
+    assert main_mod.main(["critique-questions", str(session)]) == 1
+    assert stub_vendor.rules == []
+    assert "process.md" in capsys.readouterr().err

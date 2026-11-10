@@ -62,7 +62,7 @@ def test_the_trigger_utterance_reaches_the_user_message_and_never_the_cached_sys
     `cache_creation_input_tokens: 0` and a third of the coach bill back."""
     trigger = "a very distinctive thing the interviewee said about their tuesday"
     request = assemble_critique_request(
-        candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text=trigger,
+        candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text=trigger,
         model="m", max_tokens=100,
     )
     system_text = "\n".join(block["text"] for block in request["system"])
@@ -78,11 +78,11 @@ def test_the_cached_prefix_is_identical_across_two_different_triggers():
     """The sharper version of the test above: not merely absent, but provably
     unable to move the cached bytes."""
     first = assemble_critique_request(
-        candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="one utterance",
+        candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="one utterance",
         model="m", max_tokens=100,
     )
     second = assemble_critique_request(
-        candidates=[_candidate(0)], hypotheses=(), survey=(),
+        candidates=[_candidate(0)], process="", hypotheses=(), survey=(),
         trigger_text="an entirely different utterance", model="m", max_tokens=100,
     )
     assert first["system"][0]["text"] == second["system"][0]["text"]
@@ -94,7 +94,7 @@ def test_an_empty_trigger_is_rendered_honestly_rather_than_omitted():
     existed. The post-call asked-question critique passes an empty trigger by
     design, so this is a real path, not a defensive one."""
     request = assemble_critique_request(
-        candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="",
+        candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="",
         model="m", max_tokens=100,
     )
     user_text = request["messages"][0]["content"]
@@ -114,7 +114,7 @@ def test_a_critique_response_missing_is_generic_makes_the_whole_response_untrust
     ]})])
     with pytest.raises(CritiqueFailure) as excinfo:
         run_critique(
-            stub, candidates=[_candidate(0)], hypotheses=(), survey=(),
+            stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(),
             trigger_text="something they said", model="m", max_tokens=100, timeout_s=1.0,
         )
     assert excinfo.value.reason == "parse-error"
@@ -152,7 +152,7 @@ def test_is_generic_appears_in_the_assembled_critique_prompt_text():
     """A flag pinned in every schema but never described to the model would be
     legal and never meaningfully judged."""
     request = assemble_critique_request(
-        candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="something",
+        candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="something",
         model="m", max_tokens=100,
     )
     system_text = "\n".join(block["text"] for block in request["system"])
@@ -326,7 +326,7 @@ def test_critique_instruction_stays_above_the_cache_floor():
     interviews, every one of which ran without hypotheses."""
     from app.coach import prompts
 
-    instruction = prompts.critique_instruction(tool_name="x", hypotheses=(), survey=())
+    instruction = prompts.critique_instruction(tool_name="x", process="", hypotheses=(), survey=())
     assert len(instruction) > prompts.MIN_CRITIQUE_BLOCK_CHARS
 
 
@@ -335,7 +335,7 @@ def test_the_critique_system_block_is_a_cache_breakpoint():
     worked examples -- while the candidates it judges live in the user
     message. Without this it was 184 uncached calls per interview."""
     request = assemble_critique_request(
-        candidates=[_candidate(0, "first", MOVE_ADVANCE)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100
+        candidates=[_candidate(0, "first", MOVE_ADVANCE)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100
     )
     system = request["system"]
     assert isinstance(system, list) and len(system) == 1
@@ -347,12 +347,12 @@ def test_the_cached_critique_prefix_does_not_change_when_the_candidates_do():
     system block, every cycle would write a fresh entry and none would read."""
     first = assemble_critique_request(
         candidates=[_candidate(0, "a question about mornings", MOVE_ADVANCE)],
-        hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100,
+        process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100,
     )
     second = assemble_critique_request(
         candidates=[_candidate(0, "a completely different question", MOVE_DEEPEN),
                     _candidate(1, "and another one entirely", MOVE_ADVANCE)],
-        hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100,
+        process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100,
     )
     assert first["system"][0]["text"] == second["system"][0]["text"]
     assert first["messages"][0]["content"] != second["messages"][0]["content"]
@@ -360,7 +360,7 @@ def test_the_cached_critique_prefix_does_not_change_when_the_candidates_do():
 
 def test_assemble_critique_request_embeds_every_candidate_the_generate_stage_produced():
     candidates = [_candidate(0, "first", MOVE_ADVANCE), _candidate(1, "second", MOVE_DEEPEN)]
-    request = assemble_critique_request(candidates=candidates, hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100)
+    request = assemble_critique_request(candidates=candidates, process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100)
     content = request["messages"][0]["content"]
     assert "first" in content
     assert "second" in content
@@ -387,7 +387,7 @@ def test_run_critique_parses_a_normal_response_into_judgments():
     stub = StubAnthropicClient(
         responses=[tool_use_response(CRITIC_TOOL_NAME, {"judgments": [_judgment_payload(0, BAND_CLEAN)]})]
     )
-    judgments = run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+    judgments = run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
     assert judgments == [_judgment(0, BAND_CLEAN, rationale="fine")]
 
 
@@ -395,7 +395,7 @@ def test_run_critique_passes_its_own_explicit_timeout():
     stub = StubAnthropicClient(
         responses=[tool_use_response(CRITIC_TOOL_NAME, {"judgments": [_judgment_payload(0, BAND_CLEAN)]})]
     )
-    run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.5)
+    run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.5)
     assert stub.calls[0].timeout_s == 1.5
 
 
@@ -407,7 +407,7 @@ def test_run_critique_reading_stop_details_on_a_normal_completion_does_not_raise
     stub = StubAnthropicClient(
         responses=[tool_use_response(CRITIC_TOOL_NAME, {"judgments": [_judgment_payload(0, BAND_CLEAN)]})]
     )
-    judgments = run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+    judgments = run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
     assert len(judgments) == 1
 
 
@@ -415,20 +415,20 @@ def test_run_critique_reading_stop_details_on_a_normal_completion_does_not_raise
 def test_run_critique_treats_refusal_and_truncation_as_untrusted(stop_reason):
     stub = StubAnthropicClient(responses=[ToolUseResponse(content=(), stop_reason=stop_reason)])
     with pytest.raises(CritiqueFailure) as excinfo:
-        run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+        run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
     assert excinfo.value.stop_reason == stop_reason
 
 
 def test_run_critique_raises_on_an_unparseable_body():
     stub = StubAnthropicClient(responses=[tool_use_response(CRITIC_TOOL_NAME, {})])  # missing "judgments"
     with pytest.raises(CritiqueFailure):
-        run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+        run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
 
 
 def test_run_critique_wraps_any_exception_from_the_call_itself():
     stub = StubAnthropicClient(responses=[TimeoutError("simulated network timeout")])
     with pytest.raises(CritiqueFailure) as excinfo:
-        run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+        run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
     assert excinfo.value.stop_reason is None
 
 
@@ -450,7 +450,7 @@ def test_a_string_index_is_refused_rather_than_silently_dropping_every_candidate
          "band": BAND_CLEAN, "rationale": "fine"},
     ]})])
     with pytest.raises(CritiqueFailure):
-        run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+        run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
 
 
 def test_a_boolean_index_is_refused_even_though_bool_subclasses_int():
@@ -460,7 +460,7 @@ def test_a_boolean_index_is_refused_even_though_bool_subclasses_int():
          "band": BAND_CLEAN, "rationale": "fine"},
     ]})])
     with pytest.raises(CritiqueFailure):
-        run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+        run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
 
 
 def test_duplicate_indices_make_the_whole_response_untrusted_rather_than_last_winning():
@@ -477,7 +477,7 @@ def test_duplicate_indices_make_the_whole_response_untrusted_rather_than_last_wi
          "band": BAND_CLEAN, "rationale": "fine"},
     ]})])
     with pytest.raises(CritiqueFailure):
-        run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+        run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
 
 
 # --- 06-02-PLAN.md §G4: the fifth flag, is_confirmation_only --------------------------
@@ -505,7 +505,7 @@ def test_a_critique_response_missing_the_fifth_flags_key_makes_the_whole_respons
          "band": BAND_CLEAN, "rationale": "fine"},
     ]})])
     with pytest.raises(CritiqueFailure):
-        run_critique(stub, candidates=[_candidate(0)], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
+        run_critique(stub, candidates=[_candidate(0)], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100, timeout_s=1.0)
 
 
 def test_judgment_cannot_be_constructed_without_is_confirmation_only():
@@ -520,7 +520,7 @@ def test_critique_prompt_for_a_targeting_candidate_carries_the_hypothesis_statem
     hypothesis = _hypothesis()
     candidate = Candidate(index=0, text="does X still happen?", move="test_hypothesis", target_hypothesis_id="h1")
     request = assemble_critique_request(
-        candidates=[candidate], hypotheses=(hypothesis,), survey=(),
+        candidates=[candidate], process="", hypotheses=(hypothesis,), survey=(),
         trigger_text="the interviewee just said something specific",
         model="m", max_tokens=100,
     )
@@ -533,19 +533,21 @@ def test_critique_prompt_for_a_targeting_candidate_carries_the_hypothesis_statem
 
 def test_critique_prompt_for_a_candidate_with_no_target_still_assembles():
     candidate = _candidate(0)
-    request = assemble_critique_request(candidates=[candidate], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100)
+    request = assemble_critique_request(candidates=[candidate], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100)
     assert "Candidates to classify" in request["messages"][0]["content"]
 
 
 def test_critique_prompt_for_a_candidate_whose_target_resolves_to_nothing_loaded_still_assembles():
     candidate = Candidate(index=0, text="does X still happen?", move="test_hypothesis", target_hypothesis_id="h-gone")
-    request = assemble_critique_request(candidates=[candidate], hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100)
+    request = assemble_critique_request(candidates=[candidate], process="", hypotheses=(), survey=(), trigger_text="the interviewee just said something specific", model="m", max_tokens=100)
     assert "h-gone" in request["messages"][0]["content"]
 
 
 def test_assemble_critique_request_requires_its_hypotheses_keyword():
     with pytest.raises(TypeError):
-        assemble_critique_request(candidates=[_candidate(0)], model="m", max_tokens=100)  # noqa: missing hypotheses
+        assemble_critique_request(  # noqa: missing hypotheses, and only hypotheses
+            candidates=[_candidate(0)], survey=(), process="", trigger_text="", model="m", max_tokens=100
+        )
 
 
 def test_a_confirmation_only_clear_violation_is_dropped_at_any_rank():
@@ -722,7 +724,7 @@ def test_a7_a_dedicated_critic_flag_given_the_falsifier_distinguishes_confirmati
             target_hypothesis_id="a7-hypothesis",
         )
         judgments = run_critique(
-            client, candidates=[falsifiable_candidate, confirmation_candidate], hypotheses=(hypothesis,),
+            client, candidates=[falsifiable_candidate, confirmation_candidate], process="", hypotheses=(hypothesis,),
             model=reasoning_client.DEFAULT_MODEL, max_tokens=1000, timeout_s=60.0,
         )
         judgment_by_index = {j.index: j for j in judgments}
@@ -916,7 +918,7 @@ def test_run_critique_applies_both_exemptions_in_one_pass():
         ]})]
     )
     judged = run_critique(
-        client, candidates=candidates, hypotheses=(), survey=(), trigger_text="they said a specific thing",
+        client, candidates=candidates, process="", hypotheses=(), survey=(), trigger_text="they said a specific thing",
         model="m", max_tokens=100, timeout_s=1.0,
     )
     assert [j.is_generic for j in judged] == [False, False, True], (
@@ -1094,7 +1096,7 @@ def test_the_flag_is_judged_against_the_survey_the_request_actually_carries():
     leave the model answering from nothing."""
     request = assemble_critique_request(
         candidates=[_candidate(0)],
-        hypotheses=(),
+        process="", hypotheses=(),
         survey=("How do you decide what to work on next?",),
         trigger_text="the interviewee just said something specific",
         model="m",
@@ -1114,6 +1116,7 @@ def test_the_survey_stays_in_the_cached_prefix_and_out_of_the_volatile_message()
         candidates=[_candidate(0)],
         hypotheses=(),
         survey=("a distinctive plan item about sprint planning",),
+        process="",
         model="m",
         max_tokens=100,
     )
@@ -1121,3 +1124,22 @@ def test_the_survey_stays_in_the_cached_prefix_and_out_of_the_volatile_message()
     second = assemble_critique_request(trigger_text="an entirely different one", **kwargs)
     assert first["system"] == second["system"]
     assert "sprint planning" not in second["messages"][0]["content"]
+
+
+def test_an_off_topic_question_the_interviewer_actually_asked_keeps_its_flag():
+    """A real asked question declared no move and can wander exactly as
+    `deepen` can. Clearing its flag (as for a survey move) left a
+    `clear_violation` with no reason and a note claiming the question
+    served a survey item by definition -- false for real speech."""
+    from app.coach.critic import MOVE_ASKED, _OFF_TOPIC_CLEARED_NOTE
+
+    judged = enforce_off_topic(
+        [_judgment(0, BAND_CLEAN, rationale="about lunch", is_off_topic=True)],
+        [_cand(0, MOVE_ASKED)],
+    )
+    assert judged[0].is_off_topic is True
+    assert judged[0].band == BAND_CLEAR_VIOLATION
+    assert _OFF_TOPIC_CLEARED_NOTE not in judged[0].rationale
+    assert "survey item by definition" not in judged[0].rationale
+    assert "interruption" not in judged[0].rationale, "an asked question interrupted nothing"
+    assert judged[0].rationale.startswith("about lunch")

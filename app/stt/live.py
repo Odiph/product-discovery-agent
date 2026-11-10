@@ -43,6 +43,8 @@ from benchmark.engines.base import Segment, StreamingEngine
 from app.capture.stream import CaptureFrame
 from app.session.audio_writer import AudioWriter
 from app.session.store import SegmentRecord, SessionStore
+from app.stt.audio_ring import AudioRing
+from app.stt.roles import RoleResolver
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +72,9 @@ class EngineNotReadyError(Exception):
     missing Soniox key without importing a vendor module -- the rule this
     module's own docstring sets out and which `StreamWorker` already keeps.
     """
+
+
+IN_PERSON_SUFFIX = "-in-person"
 
 
 def register_engine(name: str, factory: EngineFactory) -> None:
@@ -136,9 +141,25 @@ def _register_default_engines() -> None:
     register_engine("soniox", SonioxEngine)
     register_engine("fake", FakeStreamingEngine)
     register_engine("replay", ReplayStreamingEngine)
+    # In-person (one microphone, several voices): the same engines with
+    # diarization on. `start --in-person` resolves `<engine>-in-person` and
+    # refuses an engine that has none, rather than run it undiarized.
+    from benchmark.engines.soniox import SonioxConfig
+    from app.stt.fake_diarized import FakeDiarizedEngine
+
+    register_engine(
+        "soniox" + IN_PERSON_SUFFIX,
+        lambda: SonioxEngine(SonioxConfig(diarization=True, endpoint_detection=False)),
+    )
+    register_engine("fake" + IN_PERSON_SUFFIX, FakeDiarizedEngine)
 
 
 _register_default_engines()
+
+
+# How much sent audio the in-person worker keeps for the voiceprint check. A
+# turn is finalized seconds after its audio, and cut at `turn_max_s` (12 s).
+RING_SECONDS = 120.0
 
 
 class StreamWorker:
@@ -160,6 +181,7 @@ class StreamWorker:
         loop: Optional[asyncio.AbstractEventLoop] = None,
         broadcast: Optional[Callable[..., Awaitable[None]]] = None,
         segment_hook: Optional[Callable[[SegmentRecord], None]] = None,
+        role_resolver: Optional[RoleResolver] = None,
     ) -> None:
         self._engine = engine
         self._frame_queue = frame_queue
@@ -187,6 +209,12 @@ class StreamWorker:
         self._session = None
         self._last_audio_end_s = 0.0
         self._failed = False
+        # In-person mode: ONE stream carries both people, and each diarized
+        # turn's role comes from the resolver, fed that turn's own audio from
+        # the ring. `None` for every two-stream caller -- nothing below moves.
+        self._role_resolver = role_resolver
+        self._ring = AudioRing(sample_rate=sample_rate, max_s=RING_SECONDS) if role_resolver else None
+        self.role_counts = {"voiceprint": 0, "diarization": 0, "overruled": 0}
 
     @property
     def failed(self) -> bool:
@@ -240,6 +268,8 @@ class StreamWorker:
     def _send_and_poll(self, frame: CaptureFrame) -> None:
         if frame.pcm16:
             self._session.send_audio(frame.pcm16)
+            if self._ring is not None:
+                self._ring.append(frame.pcm16)
             if self._audio_writer is not None:
                 self._audio_writer.write(frame.pcm16)
         for segment in self._session.poll(timeout_s=self._poll_timeout_s):
@@ -256,8 +286,15 @@ class StreamWorker:
         # first; there is no cleverer sum available downstream.
         audio_start_s = self._last_audio_end_s
         self._last_audio_end_s = segment.audio_end_s
+        speaker = self._speaker
+        if self._role_resolver is not None and segment.speaker_label is not None:
+            speaker = self._resolve_role(segment)
+            if segment.speech_start_s is not None:
+                # A REAL start, from the engine's own token times: the one case
+                # where this field is not the fabrication described above.
+                audio_start_s = segment.speech_start_s
         record = self._store.append_segment(
-            speaker=self._speaker,
+            speaker=speaker,
             text=segment.text,
             audio_start_s=audio_start_s,
             audio_end_s=segment.audio_end_s,
@@ -269,7 +306,7 @@ class StreamWorker:
         logger.debug(
             "worker persisted segment speaker=%s text_len=%d audio_end_s=%.2f "
             "language=%s engine=%s",
-            self._speaker, len(segment.text), segment.audio_end_s,
+            speaker, len(segment.text), segment.audio_end_s,
             segment.detected_language, self._engine.name,
         )
         # Phase 3 bridge (§P3): schedule-and-forget onto the loop thread.
@@ -292,6 +329,20 @@ class StreamWorker:
                 logger.error(
                     "segment hook failed speaker=%s error_type=%s", self._speaker, type(exc).__name__,
                 )
+
+    def _resolve_role(self, segment: Segment) -> str:
+        start = segment.speech_start_s if segment.speech_start_s is not None else segment.audio_end_s
+        resolution = self._role_resolver.resolve(segment, self._ring.slice(start, segment.audio_end_s))
+        self.role_counts[resolution.method] += 1
+        if resolution.overruled:
+            self.role_counts["overruled"] += 1
+            # Counted and timed, never worded: which voice, not what it said.
+            self._store.append_event(
+                event="speaker-overruled",
+                speaker=resolution.role,
+                detail={"engine_label": segment.speaker_label, "audio_end_s": segment.audio_end_s},
+            )
+        return resolution.role
 
     def _log_broadcast_failure(self, future: "concurrent.futures.Future") -> None:
         try:
