@@ -83,11 +83,15 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response
 from pydantic import ValidationError
 
+from app.coach import interview_summary as summary_mod
+from app.coach import ost as ost_mod
 from app.coach import prep_load
 from app.coach.context import (
     BRIEF_FILENAME, SURVEY_FILENAME, ContextItem, ContextValidationError, SurveyItem, load_survey,
 )
-from app.coach.corpus import HYPOTHESES_FILENAME, Hypothesis
+from app.coach.corpus import (
+    FACTS_FILENAME, HYPOTHESES_FILENAME, CorpusValidationError, Hypothesis, load_facts, tree_problems,
+)
 from app.projects import SESSIONS_DIR_NAME
 
 # Hardcoded, not a parameter -- see module docstring and gate 14. A future
@@ -347,7 +351,7 @@ def _validate_hypotheses_payload(body: Any) -> "tuple[Optional[list[dict]], Opti
     `_label_for` below exactly like every other rejection in this module."""
     if not isinstance(body, list):
         return None, "hypotheses must be a JSON array of items"
-    validated: "list[dict]" = []
+    items: "list[Hypothesis]" = []
     seen_ids: "set[str]" = set()
     for index, entry in enumerate(body):
         try:
@@ -357,8 +361,15 @@ def _validate_hypotheses_payload(body: Any) -> "tuple[Optional[list[dict]], Opti
         if item.id in seen_ids:
             return None, f"item {item.id!r} is a duplicate id"
         seen_ids.add(item.id)
-        validated.append(item.model_dump())
-    return validated, None
+        items.append(item)
+    # The Opportunity Solution Tree's file-level rules (a parent must exist and
+    # be an opportunity; a classified node needs a statement). Strict HERE and
+    # only here, so every structural change -- a promoted theme, a re-parented
+    # solution -- passes the one save path gate 19 pins; readers stay tolerant.
+    problems = tree_problems(items)
+    if problems:
+        return None, "the opportunity solution tree is invalid: " + "; ".join(problems)
+    return [item.model_dump() for item in items], None
 
 
 async def _save_items(
@@ -494,6 +505,7 @@ def create_author_app(*, context_dir: Path, static_dir: Path) -> FastAPI:
                 "brief": _existing_state(context_dir / BRIEF_FILENAME),
                 "survey": _existing_state(context_dir / SURVEY_FILENAME),
                 "hypotheses": _existing_state(context_dir / HYPOTHESES_FILENAME),
+                "outcome": ost_mod.read_outcome(context_dir).state,
             }
         )
 
@@ -536,8 +548,74 @@ def create_author_app(*, context_dir: Path, static_dir: Path) -> FastAPI:
         return await _save_items(request, context_dir / SURVEY_FILENAME, _validate_survey_payload)
 
     register_hypothesis_routes(app, context_dir=context_dir)
+    register_tree_routes(app, context_dir=context_dir)
 
     return app
+
+
+def _candidate_themes(context_dir: Path) -> "tuple[str, list[dict]]":
+    """The recurring themes no hypothesis predicted, for the promote panel.
+
+    Through `FactRef` (no quote field exists on it), so this module still reads
+    nothing gate 20 protects. A corpus that will not load proposes nothing and
+    says so, rather than failing the page."""
+    if not (context_dir / FACTS_FILENAME).is_file():
+        return "missing", []
+    try:
+        facts = load_facts(context_dir, sessions_root=None)
+    except (CorpusValidationError, OSError, ValueError):
+        return "unreadable", []
+    refs = [summary_mod.fact_ref(fact, project="") for fact in facts]
+    tree = ost_mod.build_tree((), refs, outcome=ost_mod.Outcome(ost_mod.OUTCOME_MISSING), corpus_exists=True)
+    return "present", [
+        {"label": list(c.label), "interviews": c.interviews, "claims": list(c.claims)}
+        for c in tree.candidates
+    ]
+
+
+def register_tree_routes(app: FastAPI, *, context_dir: Path) -> None:
+    """The outcome GET+POST and the read-only candidate themes.
+
+    The outcome is the only thing written here, to its own file -- never to the
+    hypotheses, so gate 19's set is unchanged. PROMOTING a theme writes nothing
+    at all: the page adds an empty opportunity row the operator must write, and
+    "Save hypotheses" is still the one way the tree's structure changes."""
+    outcome_path = context_dir / ost_mod.OUTCOME_FILENAME
+
+    @app.get("/api/outcome")
+    async def get_outcome() -> JSONResponse:
+        outcome = ost_mod.read_outcome(context_dir)
+        return JSONResponse({"outcome": outcome.text, "state": outcome.state})
+
+    @app.post("/api/outcome")
+    async def post_outcome(request: Request) -> JSONResponse:
+        try:
+            body = await request.json()
+        except Exception:  # noqa: BLE001 -- malformed JSON is a 400, never a 500
+            return JSONResponse({"error": "request body must be valid JSON"}, status_code=400)
+        validated, error = ost_mod.validate_outcome_payload(body)
+        if error is not None:
+            return JSONResponse({"error": error}, status_code=400)
+        # `_save_items`' never-clobber rule, for an object rather than a list.
+        if ost_mod.read_outcome(context_dir).state == ost_mod.OUTCOME_UNREADABLE:
+            return JSONResponse(
+                {
+                    "error": (
+                        f"{outcome_path.name} already exists on disk but could not be read, so "
+                        "the outcome was NOT saved. Fix or move that file, then reload this page."
+                    ),
+                    "state": ost_mod.OUTCOME_UNREADABLE,
+                },
+                status_code=409,
+            )
+        _atomic_write_json(outcome_path, validated)
+        return JSONResponse({"saved": 1})
+
+    @app.get("/api/candidates")
+    def get_candidates() -> JSONResponse:
+        # Sync, so the corpus read runs in FastAPI's threadpool.
+        state, candidates = _candidate_themes(context_dir)
+        return JSONResponse({"facts": state, "candidates": candidates})
 
 
 def register_hypothesis_routes(app: FastAPI, *, context_dir: Path) -> None:

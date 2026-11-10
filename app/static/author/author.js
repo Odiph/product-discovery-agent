@@ -370,6 +370,8 @@
       });
       row.appendChild(labelledField("State", stateSelect));
 
+      renderTreePlace(row, item);
+
       var removeButton = document.createElement("button");
       removeButton.type = "button";
       removeButton.textContent = "Remove";
@@ -381,6 +383,69 @@
 
       hypothesesContainer.appendChild(row);
     });
+  }
+
+  // --- the hypothesis's place in the opportunity solution tree ----------------
+  //
+  // Two selects, and nothing else decides them: a hypothesis is unclassified
+  // until a human picks a kind, and a solution hangs under the opportunity a
+  // human picks. The server re-checks both rules on save (a parent must exist
+  // and be an opportunity), so this page offering only valid parents is a
+  // convenience, never the guard.
+
+  var KINDS = [["", "Unclassified"], ["opportunity", "Opportunity (a need or pain heard from users)"],
+    ["solution", "Solution (something we could build for an opportunity)"]];
+
+  function opportunityChoices(item) {
+    return hypothesesItems.filter(function (other) {
+      return other !== item && other.kind === "opportunity";
+    });
+  }
+
+  function renderTreePlace(row, item) {
+    if (item.promotedFrom) {
+      // The theme this row was promoted from, shown as a REFERENCE beside
+      // empty boxes -- never copied into them. A label of shared words is not
+      // an opportunity; the sentence the operator writes is.
+      var from = document.createElement("div");
+      from.className = "prep-reason";
+      from.textContent = "Promoted from the recurring theme: " + item.promotedFrom +
+        ". Write the opportunity and its falsifier in your own words.";
+      row.appendChild(from);
+    }
+    var kindSelect = document.createElement("select");
+    KINDS.forEach(function (pair) {
+      var option = document.createElement("option");
+      option.value = pair[0];
+      option.textContent = pair[1];
+      kindSelect.appendChild(option);
+    });
+    kindSelect.value = item.kind || "";
+    kindSelect.addEventListener("change", function () {
+      item.kind = kindSelect.value || undefined;
+      if (item.kind !== "solution") { delete item.parent; }
+      // Re-rendered so every solution's parent list sees the change.
+      renderHypotheses();
+    });
+    row.appendChild(labelledField("Place in the tree", kindSelect));
+    if (item.kind !== "solution") { return; }
+
+    var parentSelect = document.createElement("select");
+    var none = document.createElement("option");
+    none.value = "";
+    none.textContent = "(no opportunity yet)";
+    parentSelect.appendChild(none);
+    opportunityChoices(item).forEach(function (opportunity) {
+      var option = document.createElement("option");
+      option.value = opportunity.id;
+      option.textContent = opportunity.statement || opportunity.id;
+      parentSelect.appendChild(option);
+    });
+    parentSelect.value = item.parent || "";
+    parentSelect.addEventListener("change", function () {
+      item.parent = parentSelect.value || undefined;
+    });
+    row.appendChild(labelledField("Serves the opportunity", parentSelect));
   }
 
   document.getElementById("add-hypothesis-item").addEventListener("click", function () {
@@ -409,10 +474,76 @@
       if (item.criterion && item.criterion.trim()) {
         out.criterion = item.criterion;
       }
+      // Sent only when chosen, so an unclassified hypothesis saves exactly as
+      // it did before the tree existed. `promotedFrom` is page-only, never sent.
+      if (item.kind) {
+        out.kind = item.kind;
+      }
+      if (item.kind === "solution" && item.parent) {
+        out.parent = item.parent;
+      }
       return out;
     });
     postJson("/api/hypotheses", payload, hypothesesStatus);
   });
+
+  // --- the outcome and the candidate opportunities ------------------------------
+
+  var outcomeInput = document.getElementById("outcome-input");
+  var outcomeStatus = document.getElementById("outcome-status");
+  var treeCandidates = document.getElementById("tree-candidates");
+
+  document.getElementById("save-outcome").addEventListener("click", function () {
+    outcomeStatus.textContent = "Saving...";
+    postJson("/api/outcome", { outcome: outcomeInput.value || "" }, outcomeStatus);
+  });
+
+  function promote(candidate) {
+    // An EMPTY opportunity: statement and falsifier are the operator's to
+    // write. The server refuses a classified hypothesis with no statement and
+    // any hypothesis with no falsifier, so an untouched promotion cannot save.
+    hypothesesItems.push({
+      id: freshId("opp"), statement: "", falsifier: "", criterion: "", state: "untested",
+      kind: "opportunity", promotedFrom: candidate.label.join(", "),
+    });
+    renderHypotheses();
+    hypothesesStatus.textContent = "Added an opportunity below -- write its statement and " +
+      "falsifier, then press Save hypotheses. Nothing is saved yet.";
+  }
+
+  function renderCandidates(candidates) {
+    treeCandidates.textContent = "";
+    if (!candidates.length) {
+      treeCandidates.hidden = true;
+      return;
+    }
+    treeCandidates.hidden = false;
+    var head = document.createElement("div");
+    head.className = "prep-headline";
+    head.textContent = "Candidate opportunities: claims no hypothesis predicted that recur across " +
+      "interviews. Promoting one adds an empty opportunity for you to write; nothing is saved " +
+      "until you press Save hypotheses.";
+    treeCandidates.appendChild(head);
+    candidates.forEach(function (candidate) {
+      var row = document.createElement("div");
+      row.className = "prep-row";
+      var label = document.createElement("div");
+      label.className = "prep-question";
+      label.setAttribute("dir", "auto");
+      label.textContent = (candidate.label.join(", ") || "(no shared words)") + " -- in " +
+        candidate.interviews + " interviews";
+      row.appendChild(label);
+      (candidate.claims || []).forEach(function (claim) {
+        var line = document.createElement("div");
+        line.className = "prep-reason";
+        line.setAttribute("dir", "auto");
+        line.textContent = claim;
+        row.appendChild(line);
+      });
+      row.appendChild(prepButton("Promote to opportunity", function () { promote(candidate); }));
+      treeCandidates.appendChild(row);
+    });
+  }
 
   // --- Shared save/load plumbing ----------------------------------------------
 
@@ -461,7 +592,7 @@
       "This page could not check whether the files on disk are readable, so an empty form " +
       "below may mean nothing authored yet, or may mean a damaged file.",
   };
-  var ARTIFACTS = ["brief", "survey", "hypotheses"];
+  var ARTIFACTS = ["brief", "survey", "hypotheses", "outcome"];
 
   function renderDamage(state) {
     ARTIFACTS.forEach(function (name) {
@@ -494,7 +625,7 @@
     // silently rendering no banner would be the original defect again -- so it
     // says that it does not know, in those words.
     .catch(function () {
-      renderDamage({ brief: "unknown", survey: "unknown", hypotheses: "unknown" });
+      renderDamage({ brief: "unknown", survey: "unknown", hypotheses: "unknown", outcome: "unknown" });
     });
 
   fetch("/api/brief")
@@ -540,4 +671,18 @@
       hypothesesItems = items;
       renderHypotheses();
     });
+
+  // Optional, like prep: a failure leaves the page exactly as it was without it.
+  fetch("/api/outcome")
+    .then(function (response) { return response.json(); })
+    .then(function (body) { outcomeInput.value = (body && body.outcome) || ""; })
+    .catch(function () {});
+
+  fetch("/api/candidates")
+    .then(function (response) {
+      if (!response.ok) { throw new Error("candidates unavailable"); }
+      return response.json();
+    })
+    .then(function (body) { renderCandidates((body && body.candidates) || []); })
+    .catch(function () {});
 })();

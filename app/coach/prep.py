@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import dataclass
-from typing import Optional, Sequence
+from typing import Collection, Optional, Sequence
 
 KEEP = "keep"
 MOVE_EARLIER = "move-earlier"
@@ -63,26 +63,40 @@ def item_proposals(
     survey: Sequence,
     asked_in: "dict[str, Sequence[str]]",
     guides: "dict[str, Optional[frozenset]]",
+    *,
+    untracked: "Collection[str]" = frozenset(),
 ) -> "tuple[ItemProposal, ...]":
     """`asked_in`: question id -> the interviews that asked it. `guides`:
     interview -> the question ids its guide held (None when the session kept
     no snapshot). A question is judged only against the interviews that HAD
     it: one added last week was not "never asked" in July. A session older
     than the snapshot (None) is assumed to have held every question -- the
-    only safe reading is unknown, and the reason says how many it counted."""
+    only safe reading is unknown, and the reason says how many it counted.
+
+    `untracked`: interviews with no record of which questions were asked at
+    all (imported, or recorded with the coach off). Their silence is not
+    evidence, so they are left out and named, never counted as "never asked"
+    (2026-11-11: 12 imported interviews made every question "move earlier")."""
+    untracked = frozenset(untracked)
+    left_out = f" ({len(untracked)} untracked interviews left out)" if untracked else ""
     proposals = []
     for item in sorted(survey, key=lambda i: i.order):
-        eligible = [s for s, ids in guides.items() if ids is None or item.id in ids]
+        eligible = [s for s, ids in guides.items()
+                    if s not in untracked and (ids is None or item.id in ids)]
         times = len([s for s in asked_in.get(item.id, ()) if s in eligible])
         if len(eligible) >= MIN_INTERVIEWS_FOR_COVERAGE and times == 0:
             action, reason = MOVE_EARLIER, (f"never asked in the {len(eligible)} interviews that had it: "
-                                            f"move it earlier, or drop it if it no longer matters")
+                                            f"move it earlier, or drop it if it no longer matters{left_out}")
+        elif not eligible and untracked and all(s in untracked for s in guides):
+            action, reason = KEEP, (f"not tracked: the {len(untracked)} interviews so far were imported or "
+                                    f"recorded with the coach off, and only the live coach records which "
+                                    f"questions were asked")
         elif not guides:
             action, reason = KEEP, "no interview yet"
         elif not eligible:
             action, reason = KEEP, "new since the last interview"
         else:
-            action, reason = KEEP, f"asked in {times} of the {len(eligible)} interviews that had it"
+            action, reason = KEEP, f"asked in {times} of the {len(eligible)} interviews that had it{left_out}"
         proposals.append(ItemProposal(item.id, item.order, item.text, action, reason))
     return tuple(proposals)
 
@@ -130,6 +144,7 @@ def build(
     walked_past_signals: "Sequence[str]",
     unextracted: "Sequence[str]",
     flag_labels: "dict[str, str]",
+    untracked: "Collection[str]" = frozenset(),
 ) -> Prep:
     avoid = tuple(
         f"{flag_labels.get(h.flag, h.flag)} questions: in {h.sessions} interviews so far" for h in habits
@@ -139,7 +154,7 @@ def build(
         for signal, n in Counter(walked_past_signals).most_common()
     )
     return Prep(
-        items=item_proposals(survey, asked_in, guides),
+        items=item_proposals(survey, asked_in, guides, untracked=untracked),
         gaps=hypothesis_gaps(standings),
         avoid=avoid,
         follow=follow,

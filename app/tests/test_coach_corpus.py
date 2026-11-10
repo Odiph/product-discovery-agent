@@ -335,6 +335,14 @@ def test_the_corpus_has_no_seed_path_only_the_loader_and_the_store_reference_the
     # the corpus, never seed it, so D-01 holds. It never names the hypothesis
     # artifact (gate 19 is unchanged) and never reads `Fact.quoted_text`
     # (gate 20 is unchanged).
+    #
+    # `coach/missed_load.py` joined 2026-11-11 with `python -m app missed`,
+    # for the IDENTICAL read-only `is_file()` reason: "no extracted interviews
+    # yet" and "a malformed corpus" are different states with different
+    # messages, and `load_facts` raises the same error for a missing file as
+    # for a broken one. It writes nothing, projects each fact onto
+    # `missed.CitedClaim` (no quote field) as it loads, and never reads
+    # `Fact.quoted_text`, so gate 20 is unchanged.
     app_dir = REPO_ROOT / "app"
     touching = set()
     for py_file in sorted(app_dir.rglob("*.py")):
@@ -343,7 +351,7 @@ def test_the_corpus_has_no_seed_path_only_the_loader_and_the_store_reference_the
         if _ARTIFACT_FILENAME_IDENTIFIER.search(py_file.read_text(encoding="utf-8")):
             touching.add(py_file.relative_to(app_dir).as_posix())
     assert touching == {
-        "coach/context.py", "coach/corpus.py", "coach/corpus_store.py",
+        "coach/context.py", "coach/corpus.py", "coach/corpus_store.py", "coach/missed_load.py",
         "main.py", "mcp/tools.py", "session/forget.py",
         "web/accept.py", "web/author.py", "web/console.py", "web/review.py",
     }, (
@@ -818,8 +826,13 @@ def test_the_boundary_carries_no_time_value_of_any_kind():
     # populated from a clock: they are the names of directories that either
     # exist or do not.
     fields = corpus.Hypothesis.model_fields
+    # WIDENED 2026-11-10 to eight, deliberately: `kind` and `parent` place a
+    # hypothesis in the opportunity solution tree (app/coach/ost.py). Neither
+    # holds a time; `kind` is a closed set and `parent` a hypothesis id, so
+    # the argument below is untouched. A ninth field still fails here first.
     assert set(fields) == {
         "id", "statement", "falsifier", "state", "criterion", "criterion_registered_after",
+        "kind", "parent",
     }, (
         "a SEVENTH field on Hypothesis -- and if it is a timestamp, it retires the argument "
         "the boundary was shaped as a session-id tuple to make"

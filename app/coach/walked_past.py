@@ -42,6 +42,9 @@ MIN_OFFER_WORDS = 20
 # one real Hebrew interview the median interviewee turn was five words.
 HEBREW_MIN_OFFER_WORDS = 14
 MIN_MOVE_WORDS = 4
+# The shortest stripped Hebrew form an echo may meet on (`content_forms`);
+# `themes.MIN_STEM`'s value and reason.
+MIN_HEBREW_STRIPPED = 4
 
 # Hebrew words are matched WHOLE, allowing up to two attached particles in
 # front (`והמחיר`, `בגיליון`): a bare alternation matches inside other words
@@ -93,7 +96,9 @@ _FOLLOW_UP = _family(
     r"why|how come|tell me more|say more|what happened|what do you mean|you said|you mentioned"
     r"|go back|back to|walk me through (?:that|it)|what was that like|for example|an example|which one",
     ("למה", "איך זה", "תספר", "תספרי", "ספר לי", "ספרי לי", "תרחיב", "תרחיבי", "מה קרה",
-     "מה זאת אומרת", "אמרת", "הזכרת", "הזכרת", "למשל", "דוגמה", "דוגמא", "נחזור"),
+     "מה זאת אומרת", "אמרת", "הזכרת", "הזכרת", "למשל", "דוגמה", "דוגמא", "נחזור",
+     # "Explain" -- asking for the offer again in other words (2026-11-10).
+     "תסביר", "תסבירי"),
 )
 # A reply that points BACK is a follow-up whatever its words: "What do you do
 # during it?", "What would have made that better?", "When you say slow, you
@@ -218,6 +223,14 @@ def _next_substantive_question(sequence: "list[Turn]", position: int) -> Optiona
 
 
 def _follows_up(offer: str, reply: str) -> bool:
+    return points_back(reply) or echoes(offer, reply)
+
+
+def points_back(reply: str) -> bool:
+    """A follow-up by its SHAPE, whatever its words: a follow-up marker, a
+    reflection, or a back-reference near the start. Only meaningful when the
+    reply answers the turn just before it -- "Why?" points at whatever was
+    last said (`missed.py` relies on that)."""
     if _FOLLOW_UP.search(reply) or _REFLECTION.match(reply):
         return True
     # Past the acknowledgement first: the "it" in "Love it." points at nothing
@@ -225,15 +238,25 @@ def _follows_up(offer: str, reply: str) -> bool:
     # one this detector exists for.
     rest = reply[_ACKNOWLEDGEMENT.match(reply).end():] if _ACKNOWLEDGEMENT.match(reply) else reply
     opening = " ".join(rest.split()[:BACK_REFERENCE_WORDS])
-    if _BACK_REFERENCE.search(opening):
-        return True
-    return bool(_content_forms(offer) & _content_forms(reply))
+    return bool(_BACK_REFERENCE.search(opening))
 
 
-def _content_forms(text: str) -> "set[str]":
+def echoes(offer: str, reply: str, *, ignore: "frozenset[str]" = frozenset()) -> bool:
+    """A follow-up by its WORDS: the reply reuses a content word of the offer.
+    `ignore`: forms that are no evidence of engagement -- the project's own
+    vocabulary (`missed.project_vocabulary`), which every question uses."""
+    return bool((content_forms(offer) & content_forms(reply)) - ignore)
+
+
+def content_forms(text: str) -> "set[str]":
     """Content words in every form, plus numbers (so "Three in one evening"
     echoes "about 3 of them"), with -ing/-ed folded ("seen it" / "seeing it"
-    is still the same subject)."""
+    is still the same subject).
+
+    A Hebrew form shorter than `MIN_HEBREW_STRIPPED` counts only as the word
+    itself, never as a stripped form: `פעם` ("time") and `פעמים` ("times")
+    met on `פעמ`, and every "how many times a week" question echoed every
+    offer saying "every time". Longer stems still meet (`הזמנה`/`הזמנות`)."""
     found: "set[str]" = set()
     for word in terms.words(text):
         if word.isdigit():
@@ -241,7 +264,9 @@ def _content_forms(text: str) -> "set[str]":
         elif word in _NUMBER_WORDS:
             found.add(_NUMBER_WORDS[word])
         elif terms.is_topic_word(word):
-            found.update(terms.forms(word))
+            hebrew = bool(_HEBREW.match(word))
+            found.update(f for f in terms.forms(word)
+                         if f == word or not hebrew or len(f) >= MIN_HEBREW_STRIPPED)
             for suffix in ("ing", "ed"):
                 if word.endswith(suffix) and len(word) - len(suffix) >= 3:
                     found.add(word[: -len(suffix)])

@@ -80,3 +80,6 @@ benchmark/eval/replay_*.log
 
 # Downloaded models (voiceprint): fetched on demand, verified by hash, never committed
 models/
+
+# Claude Code agent worktrees (local, per session)
+.claude/worktrees/

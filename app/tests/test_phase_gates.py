@@ -529,6 +529,12 @@ def test_gate_ten_context_artifacts_are_git_ignored():
     for relative_path in (
         "context/brief.json", "context/survey.json", "context/facts.json",
         "context/hypotheses.json", "context/declined_proposals.json",
+        # 2026-11-10: the opportunity solution tree's outcome (app/coach/ost.py).
+        # Already covered by `context/*`; named so a narrowed rule fails here.
+        "context/outcome.json",
+        # 2026-11-11: the model's topic grouping (app/coach/topics_store.py):
+        # labels and fact ids, named for the same reason.
+        "context/topics.json",
     ):
         result = subprocess.run(["git", "check-ignore", "-q", relative_path], cwd=str(REPO_ROOT))
         assert result.returncode == 0, f"{relative_path} is NOT reported as git-ignored"
@@ -2167,7 +2173,14 @@ def test_gate_thirty_five_the_set_of_modules_that_write_audio_start_s_is_pinned(
         for node in ast.walk(ast.parse(source)):
             if isinstance(node, ast.keyword) and node.arg == "audio_start_s":
                 writers.append(py_file.name)
-    assert sorted(set(writers)) == ["live.py", "store.py"], (
+    # 2026-11-11: WIDENED to three, deliberately. `transcript_import.py` (the
+    # `import` command) writes past interviews from their transcript exports
+    # as sessions, so the post-interview commands can read them. Its value is
+    # NOT the live fabrication: a subtitle cue's start is a real time, and a
+    # text file with no stamps gets synthetic times that session.json flags
+    # (`times_synthetic: true`). It is a legitimate session writer; the
+    # no-READS gate above still holds for it.
+    assert sorted(set(writers)) == ["live.py", "store.py", "transcript_import.py"], (
         f"the set of modules that write audio_start_s changed -- got {sorted(set(writers))}"
     )
 

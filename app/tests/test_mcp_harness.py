@@ -162,6 +162,8 @@ def test_the_registered_command_really_speaks_the_protocol(config):
     assert [tool["name"] for tool in responses[1]["result"]["tools"]] == [
         "list_projects", "get_survey", "get_hypotheses", "list_interviews", "get_facts",
         "get_standing", "get_interview_summary", "search_knowledge", "get_mirror", "get_themes",
+        # get_tree (2026-11-10): the opportunity solution tree, labels and counts only.
+        "get_tree",
     ]
 
 

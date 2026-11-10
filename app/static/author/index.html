@@ -19,8 +19,9 @@
   <h1>Interview brief, survey &amp; hypotheses</h1>
   <p class="hint">
     Write this shortly before the call. Saves to <code>context/brief.json</code>,
-    <code>context/survey.json</code> and <code>context/hypotheses.json</code> on
-    this machine only -- all three are git-ignored and never committed.
+    <code>context/survey.json</code>, <code>context/outcome.json</code> and
+    <code>context/hypotheses.json</code> on this machine only -- all four are
+    git-ignored and never committed.
   </p>
 
   <section id="brief-section">
@@ -63,6 +64,28 @@
       <button type="button" id="save-survey">Save survey</button>
       <span id="survey-status" class="status" role="status"></span>
     </p>
+  </section>
+
+  <section id="tree-section">
+    <h2>Opportunity solution tree</h2>
+    <p class="hint">
+      The outcome this work serves sits at the root; each hypothesis below can be
+      classified as an opportunity (a need or pain you heard) or a solution under
+      one. Evidence counts update after every extraction; the structure changes
+      only when you press Save hypotheses. See it with <code>python -m app tree</code>.
+    </p>
+    <div id="outcome-damage" class="damage" hidden></div>
+    <label class="field">Outcome
+      <input type="text" id="outcome-input" dir="auto">
+    </label>
+    <p>
+      <button type="button" id="save-outcome">Save outcome</button>
+      <span id="outcome-status" class="status" role="status"></span>
+    </p>
+    <!-- Filled by /api/candidates: recurring themes no hypothesis predicted.
+         Promote adds an EMPTY opportunity below for you to write; it saves
+         nothing. Hidden when there are none. -->
+    <div id="tree-candidates" class="prep" hidden></div>
   </section>
 
   <section id="hypotheses-section">

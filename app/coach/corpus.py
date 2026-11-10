@@ -41,7 +41,7 @@ import json
 from pathlib import Path
 from typing import Mapping, Optional, Sequence
 
-from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, ValidationError, field_validator, model_serializer, model_validator
 
 from app.coach.context import PROVENANCE_VALUES
 from app.session import evidence
@@ -82,6 +82,20 @@ ALL_HYPOTHESIS_STATES = frozenset(
         HYPOTHESIS_STATE_CONTESTED,
     }
 )
+
+
+# The Opportunity Solution Tree's two classified kinds (Teresa Torres). A
+# hypothesis with NO kind is unclassified, and that is the default for every
+# file written before the tree existed -- so absence must stay legal forever.
+# The OUTCOME at the tree's root is deliberately not a kind: it is a target,
+# not a belief, and has no falsifier to require (see `app/coach/ost.py`).
+HYPOTHESIS_KIND_OPPORTUNITY = "opportunity"
+HYPOTHESIS_KIND_SOLUTION = "solution"
+# Pinned by equality, like `ALL_HYPOTHESIS_STATES`.
+ALL_HYPOTHESIS_KINDS = frozenset({HYPOTHESIS_KIND_OPPORTUNITY, HYPOTHESIS_KIND_SOLUTION})
+# Dropped from a dump when absent, so a file that never had them saves back
+# with exactly the keys it was always saved with.
+_TREE_FIELDS = ("kind", "parent")
 
 
 class CorpusValidationError(Exception):
@@ -325,6 +339,50 @@ class Hypothesis(BaseModel):
     later, and freezing the boundary at the original write would hand a
     rewritten-to-fit rule the credential the original one earned."""
 
+    kind: Optional[str] = None
+    """Where this hypothesis sits in the Opportunity Solution Tree: an
+    `opportunity` (a need or pain heard from users) or a `solution` (something
+    we could build for one). Absent means unclassified, which every file
+    written before the tree existed is, and which stays a legal resting state:
+    the tree is a VIEW over hypotheses, never a second store of them."""
+
+    parent: Optional[str] = None
+    """The id of the opportunity a solution serves. Only a solution may have
+    one. Whether it names a real opportunity is a question about the whole
+    FILE, not this record, so it is answered by `tree_problems` -- strict on
+    the author save path, reported (never raised) on load, so a hand-edited
+    dangling parent cannot take `start` down."""
+
+    @field_validator("kind")
+    @classmethod
+    def _kind_must_be_recognized(cls, value: "Optional[str]") -> "Optional[str]":
+        if value is not None and value not in ALL_HYPOTHESIS_KINDS:
+            raise ValueError(f"kind must be one of {sorted(ALL_HYPOTHESIS_KINDS)!r} or absent, got {value!r}")
+        return value
+
+    @model_validator(mode="after")
+    def _only_a_solution_has_a_parent(self) -> "Hypothesis":
+        # Per-record shape, so it lives here beside `state`'s own check. With
+        # this rule a cycle cannot be written at all: a parent must be an
+        # opportunity (`tree_problems`) and an opportunity cannot have one.
+        if self.parent is not None and self.kind != HYPOTHESIS_KIND_SOLUTION:
+            raise ValueError(
+                f"parent is only valid on a solution, and this hypothesis's kind is {self.kind!r}"
+            )
+        if self.parent is not None and not self.parent.strip():
+            raise ValueError("parent must name an opportunity id, or be absent")
+        return self
+
+    @model_serializer(mode="wrap")
+    def _omit_absent_tree_fields(self, handler):
+        # An unclassified hypothesis dumps exactly as it did before the tree:
+        # no `"kind": null` appearing in every file on its next save.
+        data = handler(self)
+        for key in _TREE_FIELDS:
+            if isinstance(data, dict) and data.get(key) is None:
+                data.pop(key, None)
+        return data
+
     @field_validator("falsifier")
     @classmethod
     def _falsifier_must_be_present(cls, value: str) -> str:
@@ -384,6 +442,45 @@ class Hypothesis(BaseModel):
         interview ever run -- the exact unearned claim this field was added to
         make checkable. No rule cannot pre-date anything."""
         return self.is_scorable and session_id not in self.criterion_registered_after
+
+
+def tree_problems(hypotheses: "Sequence[Hypothesis]") -> "tuple[str, ...]":
+    """What is wrong with the Opportunity Solution Tree these hypotheses
+    describe, one sentence per fault naming the hypothesis at fault. Empty when
+    the tree is sound.
+
+    A FILE-level check, which is why it is not a validator on the model: a
+    parent can only be checked against its siblings. The author save path
+    refuses any non-empty answer; readers (`app/coach/ost.py`) show it and
+    render the faulty solution as unclassified, never raise.
+
+    No separate cycle check, and that is the rule doing the work rather than a
+    gap: a parent must be an opportunity, and an opportunity cannot have a
+    parent (`Hypothesis._only_a_solution_has_a_parent`), so the longest chain
+    is one link. A self-parent fails the same way -- a solution is not an
+    opportunity."""
+    by_id = {hypothesis.id: hypothesis for hypothesis in hypotheses}
+    problems: "list[str]" = []
+    for hypothesis in hypotheses:
+        if hypothesis.kind is not None and not hypothesis.statement.strip():
+            problems.append(
+                f"{hypothesis.id!r} is classified as {hypothesis.kind!r} but has no statement -- "
+                "write the opportunity or solution in your own words"
+            )
+        if hypothesis.parent is None:
+            continue
+        parent = by_id.get(hypothesis.parent)
+        if parent is None:
+            problems.append(
+                f"solution {hypothesis.id!r} names parent {hypothesis.parent!r}, which is not a "
+                "hypothesis in this project"
+            )
+        elif parent.kind != HYPOTHESIS_KIND_OPPORTUNITY:
+            problems.append(
+                f"solution {hypothesis.id!r} names parent {hypothesis.parent!r}, which is "
+                f"{parent.kind or 'unclassified'}, not an opportunity"
+            )
+    return tuple(problems)
 
 
 def _item_label(entry: object, index: int) -> str:

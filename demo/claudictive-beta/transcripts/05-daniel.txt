@@ -1,0 +1,50 @@
+Interviewer 00:00:03: Hi Daniel, thanks for joining. Is English OK? I know you prefer it.
+Daniel 00:00:26: Yeah, English is easier for me for work stuff. Five years in Boston, it stuck.
+Interviewer 00:00:53: Great. So tell me a bit about yourself.
+Daniel 00:01:09: I lead a team of eight at a SaaS company, mostly backend and some data. And I play FC, Ultimate Team, usually late at night after the kids are asleep.
+Interviewer 00:01:56: Great, great. How long have you used Claude Code?
+Daniel 00:02:15: About a year. I use it for reviews mostly, and for my own little scripts. I don't code as much as I used to.
+Interviewer 00:02:50: And how did you hear about Claudictive?
+Daniel 00:03:06: One of my engineers is in the beta. He showed it in a demo day thing we have on Thursdays.
+Interviewer 00:03:36: Great. How was the onboarding?
+Daniel 00:03:50: Fine. It's Overwolf, so, you know, a bit bloated. But it worked first time.
+Interviewer 00:04:16: Anything confusing?
+Daniel 00:04:27: The permissions screen. It asked for a lot of things and I wasn't sure why it needs all of them.
+Interviewer 00:04:59: Got it. Great. Let's move to the next question. How often do you use it?
+Daniel 00:05:24: Honestly? Not much. Maybe twice in the last two weeks.
+Interviewer 00:05:44: And what did you do with it those times?
+Daniel 00:06:00: I asked Claude to summarize a PR one of my guys opened. And once to check a failing deploy. Mostly it's while the game is loading, the loading in FC takes forever, so I'm already checking Slack on my phone anyway.
+Interviewer 00:07:04: Great. What features would you like to see?
+Daniel 00:07:22: Hmm. Voice, probably. Everyone will say voice I guess.
+Interviewer 00:07:42: Yeah, we hear that a lot. Don't you think it would be amazing to just talk to Claude in the middle of a match?
+Daniel 00:08:18: I mean... sure, it sounds cool. In FC the matches are pretty intense though.
+Interviewer 00:08:44: Great. Anything else?
+Daniel 00:08:55: Maybe a smaller mode. Like just a status line, is my thing done or not.
+Interviewer 00:09:20: A status line, great, noted. What about themes?
+Daniel 00:09:38: Don't care much. Dark is fine.
+Interviewer 00:09:52: Great. Let's move on. On a scale of one to ten, how much do you like the idea?
+Daniel 00:10:19: The idea, eight. The execution right now, maybe six. It's beta, it's fine.
+Interviewer 00:10:45: What would make the execution a ten?
+Daniel 00:11:00: Speed, mostly. Sometimes I hit the hotkey and nothing happens for a second or two.
+Interviewer 00:11:28: Got it, latency. Great. Would you pay for it?
+Daniel 00:11:46: Me personally, maybe. Would I buy it for my team? Probably not, most of them don't game. Or they game but they wouldn't admit it to me.
+Interviewer 00:12:28: Haha. And how much would you pay?
+Daniel 00:12:43: Five bucks a month, maybe. I pay for a lot of these little things and I forget about them.
+Interviewer 00:13:13: Great. Would you recommend it to a friend?
+Daniel 00:13:30: Yeah, to a couple of people. There's a guy on my team who plays Apex every lunch break.
+Interviewer 00:13:59: Great, great. Do you use the notifications feature?
+Daniel 00:14:19: The toast when a task finishes? Yeah, that's nice actually. I like that one.
+Interviewer 00:14:45: Great. And what did you dislike the most?
+Daniel 00:15:02: The window is big. It covers most of the screen. And the font is kind of... default.
+Interviewer 00:15:30: Noted, window size. Great. Have you tried the mobile companion idea we mentioned in the beta email?
+Daniel 00:16:03: No, I didn't see that email. What is it?
+Interviewer 00:16:19: It's an idea for an app on your phone that shows Claude's status. Would you use that?
+Daniel 00:16:48: Maybe. I don't know. I already have Slack on my phone, and GitHub.
+Interviewer 00:17:12: Great. Let's move to the last few questions. Is there any feature you think is missing compared to the terminal?
+Daniel 00:17:48: Seeing diffs. In the overlay you only see text. I want to see what changed.
+Interviewer 00:18:14: Diffs, great. Anything you'd remove?
+Daniel 00:18:29: The onboarding tour. Too many screens.
+Interviewer 00:18:45: Got it. Great. And final question, anything else you want to tell me?
+Daniel 00:19:09: No, I think that's it. Good luck with it, seriously, it's a fun idea.
+Interviewer 00:19:34: Thank you so much Daniel, this was super helpful.
+Daniel 00:19:53: Sure thing. Bye.

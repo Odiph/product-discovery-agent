@@ -88,7 +88,10 @@ from app.coach.context import ContextItem, ContextValidationError, SurveyItem
 from app.coach.coverage import CoverageDetector, CoverageState
 from app.coach.pipeline import SuggestionPipeline
 from app.coach.trigger import TurnTrigger
-from app import evidence_cli, kb_cli, mirror_cli, prep_cli, process_cli, themes_cli
+from app import (
+    evidence_cli, extract_all as extract_all_mod, import_cli, kb_cli, mirror_cli, missed_cli,
+    prep_cli, process_cli, themes_cli, tree_cli,
+)
 from app.session import evidence as evidence_mod
 from app.session import forget as forget_mod
 from app.session.audio_writer import AudioWriter
@@ -817,7 +820,17 @@ def build_arg_parser() -> argparse.ArgumentParser:
         ),
     )
     extract.add_argument(
-        "session", help="Session id (a name under the sessions root) or a full path to a session directory"
+        "session", nargs="?", default=None,
+        help="Session id (a name under the sessions root) or a full path to a session directory",
+    )
+    extract.add_argument(
+        "--all", action="store_true",
+        help="every interview in the project not extracted yet, one vendor call each; "
+             "without --yes it only lists them with a token estimate",
+    )
+    extract.add_argument("--yes", action="store_true", help="with --all: run the extractions")
+    extract.add_argument(
+        "--force", action="store_true", help="with --all: extract again even where facts exist",
     )
     _add_project_argument(extract)
 
@@ -909,11 +922,14 @@ def build_arg_parser() -> argparse.ArgumentParser:
     _add_project_argument(forget)
 
     evidence_cli.add_parsers(subparsers, _add_project_argument)
+    import_cli.add_parser(subparsers, _add_project_argument)
     kb_cli.add_parsers(subparsers, _add_project_argument)
     mirror_cli.add_parser(subparsers, _add_project_argument)
+    missed_cli.add_parser(subparsers, _add_project_argument)
     prep_cli.add_parser(subparsers, _add_project_argument)
     process_cli.add_parser(subparsers, _add_project_argument)
     themes_cli.add_parser(subparsers, _add_project_argument)
+    tree_cli.add_parser(subparsers, _add_project_argument)
 
     subparsers.add_parser(
         "fetch-voiceprint-model",
@@ -2358,12 +2374,36 @@ def run_extract(args: argparse.Namespace) -> int:
     the vendor call, so a user who did not mean to re-run mid-interview can
     still interrupt before spending anything."""
     cfg = _apply_project(config_mod.load_config(), args)
+    if args.all and args.session is not None:
+        print("ERROR: name one session OR pass --all, not both", file=sys.stderr)
+        return 2
+    if (args.force or args.yes) and not args.all:
+        print("ERROR: --force and --yes only apply with --all (one named session always runs)", file=sys.stderr)
+        return 2
+    if args.all:
+        return extract_all_mod.run(args, cfg, _extract_session)
+    if args.session is None:
+        print("ERROR: name a session, or pass --all", file=sys.stderr)
+        return 2
     candidate = Path(args.session)
     session_dir = candidate if candidate.is_dir() else cfg.sessions_root / args.session
     if not session_dir.is_dir():
         print(f"ERROR: no session directory found at {session_dir}", file=sys.stderr)
         return 1
+    return 0 if _extract_session(cfg, session_dir) == _EXTRACT_OK else 1
 
+
+# What one extraction came to. `run_extract` folds the last two into exit 1,
+# exactly as it always has; `extract --all` needs them apart to report a
+# deleted-fact run differently from one that never reached the vendor.
+_EXTRACT_OK = extract_all_mod.OK
+_EXTRACT_REJECTIONS = extract_all_mod.REJECTIONS
+_EXTRACT_FAILED = extract_all_mod.FAILED
+
+
+def _extract_session(cfg, session_dir: Path, *, client=None) -> str:
+    """One session through `extract`'s whole path (see `run_extract`). `client`
+    is passed by `--all`, which builds it once rather than once per session."""
     # Before the key check and any vendor call: an unconfirmed one-microphone
     # session is refused, not warned about -- its live roles are ~96% right,
     # and a misattributed interviewer line would become customer evidence.
@@ -2371,19 +2411,20 @@ def run_extract(args: argparse.Namespace) -> int:
     refusal = evidence_mod.extract_refusal(session_meta)
     if refusal is not None:
         print(f"ERROR: {refusal}", file=sys.stderr)
-        return 1
+        return _EXTRACT_FAILED
 
-    try:
-        client = reasoning_client.build_client()
-    except reasoning_client.CoachConfigError as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
-        return 1
+    if client is None:
+        try:
+            client = reasoning_client.build_client()
+        except reasoning_client.CoachConfigError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return _EXTRACT_FAILED
 
     try:
         hypotheses = coach_corpus.load_hypotheses(cfg.context_dir, missing_ok=True)
     except coach_corpus.CorpusValidationError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
-        return 1
+        return _EXTRACT_FAILED
 
     # §K7a: read-only pre-flight, BEFORE anything reaches the vendor. A
     # missing corpus is D-01's normal first case and is not an error here;
@@ -2398,7 +2439,7 @@ def run_extract(args: argparse.Namespace) -> int:
             "backup) before re-running extraction.",
             file=sys.stderr,
         )
-        return 1
+        return _EXTRACT_FAILED
 
     read_result = read_session(
         session_dir, transcript_filename=evidence_mod.transcript_filename_for(session_meta)
@@ -2445,7 +2486,7 @@ def run_extract(args: argparse.Namespace) -> int:
         )
     except coach_extract.ExtractFailure as exc:
         print(f"ERROR: extraction call failed: reason={exc.reason} stop_reason={exc.stop_reason}", file=sys.stderr)
-        return 1
+        return _EXTRACT_FAILED
 
     for rejection in extraction.rejections:
         print(
@@ -2550,7 +2591,7 @@ def run_extract(args: argparse.Namespace) -> int:
     # demotions in here would fail a run over a session the pipeline handled
     # exactly as designed, and the pressure that creates is to stop demoting
     # -- i.e. to accept the bad label. `test_demotion_store.py` pins this.
-    return 1 if extraction.rejections else 0
+    return _EXTRACT_REJECTIONS if extraction.rejections else _EXTRACT_OK
 
 
 CRITIQUE_DOC_FILENAME = coach_asked_store.CRITIQUE_DOC_FILENAME
@@ -3286,12 +3327,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return run_evidence_step(args)
         if args.command == "kb":
             return kb_cli.run(args)
+        if args.command == "missed":
+            return missed_cli.run(args, _apply_project)
+        if args.command == "import":
+            return import_cli.run(args, _apply_project)
         if args.command == "mirror":
             return mirror_cli.run(args, _apply_project)
         if args.command == "prep":
             return prep_cli.run(args, _apply_project, _read_corpus_refs)
         if args.command == "themes":
             return themes_cli.run(args, _apply_project, _read_corpus_refs)
+        if args.command == "tree":
+            return tree_cli.run(args, _apply_project, _read_corpus_refs)
         if args.command == "process":
             return process_cli.run(args, _apply_project)
         if args.command == "console":

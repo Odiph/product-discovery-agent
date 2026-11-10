@@ -45,7 +45,7 @@ def run(args: argparse.Namespace, apply_project, read_corpus_refs) -> int:
     except ContextValidationError:
         survey = ()
 
-    guides, asked_in, unconfirmed = prep_load.interviews_and_coverage(cfg.sessions_root)
+    guides, asked_in, unconfirmed, untracked = prep_load.interviews_and_coverage(cfg.sessions_root)
     interviews = list(guides)
     extracted = {ref.session_id for ref in refs}
     mirror = mirror_load.load(cfg.sessions_root)
@@ -58,6 +58,7 @@ def run(args: argparse.Namespace, apply_project, read_corpus_refs) -> int:
         walked_past_signals=[signal for row in mirror.sessions for m in row.walked_past for signal in m.signals],
         unextracted=[s for s in interviews if s not in extracted and s not in unconfirmed],
         flag_labels=FLAG_LABELS,
+        untracked=untracked,
     )
     _print(plan, has_hypotheses=bool(hypotheses), has_survey=bool(survey),
            known=_already_known(plan.gaps, cfg.context_dir.parent))

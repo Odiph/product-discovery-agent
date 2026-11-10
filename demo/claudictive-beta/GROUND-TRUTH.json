@@ -1,0 +1,323 @@
+{
+  "synthetic": true,
+  "note": "Invented for a conference talk demo. Nothing here is real customer speech. Turn numbers are 1-based and match app.kb.spoken.from_speaker_text's 'turn N' locations.",
+  "topics": {
+    "between_rounds_aside": "THE HIDDEN SIGNAL. The interviewee mentions, in passing, the dead time between rounds or matches (matchmaking queue, loading screen, lobby, waiting to respawn, draft/picking phase, warmup) as when they actually talk to Claude or already alt-tab to check things. Never followed up: the next interviewer turn moves to a scripted question.",
+    "control_a_overlay_covers_hud": "CONTROL A (followed up). The overlay window opens on top of part of the game HUD (minimap, kill feed, hotbar, clock). Every time it is raised, the interviewer asks a follow-up that engages it. A correct 'missed' detector must NOT flag this topic.",
+    "control_b_hotkey_collision": "CONTROL B (below the noise floor). The default Claudictive hotkey collides with another binding (Discord push-to-talk, a game's quick-save). Raised in only 2 interviews, not followed up; a detector with a 3-interview floor must NOT surface it."
+  },
+  "summary": {
+    "interviews": 12,
+    "between_rounds_aside": {
+      "raised_in": 8,
+      "followed_up_in": 0
+    },
+    "control_a_overlay_covers_hud": {
+      "raised_in": 5,
+      "followed_up_in": 5
+    },
+    "control_b_hotkey_collision": {
+      "raised_in": 2,
+      "followed_up_in": 0
+    }
+  },
+  "interviews": [
+    {
+      "file": "transcripts/01-yoni.txt",
+      "interviewee": "Yoni",
+      "persona": "Indie game developer (Unity, solo studio), plays League of Legends most evenings",
+      "turns": 54,
+      "between_rounds_aside": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:05:03",
+        "aside_text": "בעיקר כשאני מחכה בqueue, זה כמו חמש דקות של כלום ואני ממילא בוהה במסך.",
+        "full_line": "Yoni 00:05:03: נגיד אני מריץ build ארוך של המשחק, וזה לוקח כמה דקות, אז אני נכנס לגיים. ושואל את Claude אם הbuild עבר, או מבקש ממנו לתקן משהו קטן. בעיקר כשאני מחכה בqueue, זה כמו חמש דקות של כלום ואני ממילא בוהה במסך.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:05:59: מעולה, מעולה. ואיזה features היית רוצה שנוסיף?",
+        "followed_up": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": false
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:17:02"
+    },
+    {
+      "file": "transcripts/02-maya.txt",
+      "interviewee": "Maya",
+      "persona": "Backend engineer at a fintech (Go, Kubernetes), plays Overwatch 2 ranked a few nights a week",
+      "turns": 50,
+      "between_rounds_aside": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:05:34",
+        "aside_text": "בין round לround אני ממילא עושה alt-tab לבדוק אם הpipeline עבר, אז ככה זה יותר נוח.",
+        "full_line": "Maya 00:05:34: בדרך כלל אני מבקשת ממנו לבדוק משהו בside project, נגיד שיריץ טסטים. בין round לround אני ממילא עושה alt-tab לבדוק אם הpipeline עבר, אז ככה זה יותר נוח.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:06:28: מעולה. איזה features חסרים לך?",
+        "followed_up": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": true,
+        "turn": 18,
+        "timestamp": "00:06:44",
+        "raised_text": "יש פעם אחת שהחלון פשוט כיסה לי את הkill feed ואת חצי מהHUD, ולא ראיתי שמישהו מגיע מאחורה.",
+        "full_line": "Maya 00:06:44: אממ, אני הייתי רוצה שהוא יהיה פחות... כאילו, יש פעם אחת שהחלון פשוט כיסה לי את הkill feed ואת חצי מהHUD, ולא ראיתי שמישהו מגיע מאחורה.",
+        "interviewer_next_turn": 19,
+        "interviewer_next_line": "Interviewer 00:07:32: רגע, מה זאת אומרת כיסה? תספרי לי בדיוק מתי זה קרה.",
+        "followed_up": true
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:19:03"
+    },
+    {
+      "file": "transcripts/03-itay.txt",
+      "interviewee": "Itay",
+      "persona": "Computer-science student (third year), competitive Valorant player (Immortal rank), uses Claude Code for coursework",
+      "turns": 46,
+      "between_rounds_aside": {
+        "present": true,
+        "turn": 26,
+        "timestamp": "00:11:47",
+        "aside_text": "אחרי שאני מת ואני מחכה לround הבא, יש לי שלושים-ארבעים שניות שאני רק צופה בחברים, אז אני זורק לו שאלה.",
+        "full_line": "Itay 00:11:47: שזה מהיר לפתוח. Hotkey ואתה שם. ושהוא זוכר את הproject. אחרי שאני מת ואני מחכה לround הבא, יש לי שלושים-ארבעים שניות שאני רק צופה בחברים, אז אני זורק לו שאלה.",
+        "interviewer_next_turn": 27,
+        "interviewer_next_line": "Interviewer 00:12:57: מעולה. והחלק הכי פחות אהוב?",
+        "followed_up": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": false
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:21:03"
+    },
+    {
+      "file": "transcripts/04-shira.txt",
+      "interviewee": "Shira",
+      "persona": "QA automation engineer (Playwright, Python), plays Apex Legends with a regular squad",
+      "turns": 46,
+      "between_rounds_aside": {
+        "present": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:05:45",
+        "raised_text": "החלון. הוא נפתח בדיוק על הminimap בפינה, ובApex אם אתה לא רואה את הring אתה מת.",
+        "full_line": "Shira 00:05:45: החלון. הוא נפתח בדיוק על הminimap בפינה, ובApex אם אתה לא רואה את הring אתה מת.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:06:19: רגע, תסבירי לי. מתי זה קרה בפעם האחרונה? מה בדיוק ראית?",
+        "followed_up": true
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:18:03"
+    },
+    {
+      "file": "transcripts/05-daniel.txt",
+      "interviewee": "Daniel",
+      "persona": "Engineering team lead (8 reports, SaaS company; spent five years in the US so the interview is mostly in English), plays EA Sports FC Ultimate Team late at night",
+      "turns": 50,
+      "between_rounds_aside": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:06:00",
+        "aside_text": "Mostly it's while the game is loading, the loading in FC takes forever, so I'm already checking Slack on my phone anyway.",
+        "full_line": "Daniel 00:06:00: I asked Claude to summarize a PR one of my guys opened. And once to check a failing deploy. Mostly it's while the game is loading, the loading in FC takes forever, so I'm already checking Slack on my phone anyway.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:07:04: Great. What features would you like to see?",
+        "followed_up": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": false
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:20:03"
+    },
+    {
+      "file": "transcripts/06-noa.txt",
+      "interviewee": "Noa",
+      "persona": "Data scientist at a health-tech startup (Python, notebooks, long training jobs), plays Rocket League 2v2",
+      "turns": 46,
+      "between_rounds_aside": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:06:21",
+        "aside_text": "בין משחק למשחק, כשהוא מחפש match, אני ממילא מציצה בnotebook במסך השני, אז זה פשוט יותר נוח לשאול אותו.",
+        "full_line": "Noa 00:06:21: בודקת אם הtraining נגמר, או מבקשת שיכתוב לי plot של התוצאות. בין משחק למשחק, כשהוא מחפש match, אני ממילא מציצה בnotebook במסך השני, אז זה פשוט יותר נוח לשאול אותו.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:07:28: מעולה. ואיזה features את רוצה?",
+        "followed_up": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": false
+      },
+      "control_b_hotkey_collision": {
+        "present": true,
+        "turn": 12,
+        "timestamp": "00:04:28",
+        "raised_text": "הhotkey. הdefault שלכם זה אותו key שיש לי לpush-to-talk בDiscord, אז כל פעם שדיברתי עם החבר שלי נפתח החלון.",
+        "full_line": "Noa 00:04:28: הhotkey. הdefault שלכם זה אותו key שיש לי לpush-to-talk בDiscord, אז כל פעם שדיברתי עם החבר שלי נפתח החלון.",
+        "interviewer_next_turn": 13,
+        "interviewer_next_line": "Interviewer 00:05:15: הבנתי. מעולה. בואי נעבור לשאלה הבאה. כמה פעמים בשבוע את משתמשת?",
+        "followed_up": false
+      },
+      "duration": "00:19:03"
+    },
+    {
+      "file": "transcripts/07-avi.txt",
+      "interviewee": "Avi",
+      "persona": "Freelance full-stack developer and father of two, very little free time, plays Fortnite with his 11-year-old son on weekends",
+      "turns": 48,
+      "between_rounds_aside": {
+        "present": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:05:08",
+        "raised_text": "כן, פעם אחת פתחתי אותו והוא כיסה לי את המפה בפינה, והבן שלי צעק עליי שאני לא רואה את הסטורם.",
+        "full_line": "Avi 00:05:08: כן, פעם אחת פתחתי אותו והוא כיסה לי את המפה בפינה, והבן שלי צעק עליי שאני לא רואה את הסטורם.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:05:43: חח, רגע, מה זאת אומרת כיסה? איפה בדיוק הוא נפתח?",
+        "followed_up": true
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:16:03"
+    },
+    {
+      "file": "transcripts/08-tamar.txt",
+      "interviewee": "Tamar",
+      "persona": "Mobile developer (Kotlin and Swift) at an agency, long-time Dota 2 player",
+      "turns": 52,
+      "between_rounds_aside": {
+        "present": true,
+        "turn": 18,
+        "timestamp": "00:07:07",
+        "aside_text": "האמת שאני כותבת לו בעיקר בqueue ובpicking phase, יש שם זמן מת ואני לא צריכה לעשות כלום.",
+        "full_line": "Tamar 00:07:07: הוא בסדר. לפעמים איטי, אבל זה Claude, לא אתם. האמת שאני כותבת לו בעיקר בqueue ובpicking phase, יש שם זמן מת ואני לא צריכה לעשות כלום.",
+        "interviewer_next_turn": 19,
+        "interviewer_next_line": "Interviewer 00:08:05: מעולה. בואי נדבר על features. מה היית רוצה שנוסיף?",
+        "followed_up": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": false
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:22:02"
+    },
+    {
+      "file": "transcripts/09-omer.txt",
+      "interviewee": "Omer",
+      "persona": "DevOps engineer (Terraform, AWS), casual player of Minecraft survival and Stardew Valley",
+      "turns": 48,
+      "between_rounds_aside": {
+        "present": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:05:25",
+        "raised_text": "הוא מכסה את הhotbar. החלון נפתח למטה באמצע, בדיוק על הinventory bar.",
+        "full_line": "Omer 00:05:25: הוא מכסה את הhotbar. החלון נפתח למטה באמצע, בדיוק על הinventory bar.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:05:56: רגע, תראה לי, מה זאת אומרת מכסה? באיזה מצב זה קרה?",
+        "followed_up": true
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:17:03"
+    },
+    {
+      "file": "transcripts/10-lior.txt",
+      "interviewee": "Lior",
+      "persona": "Frontend developer (React, TypeScript) at a remote-first US startup, works in English all day, plays Counter-Strike 2 premier",
+      "turns": 46,
+      "between_rounds_aside": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:05:52",
+        "aside_text": "Honestly between rounds I check Slack anyway, and the warmup before a match too, so I just open Claude there instead.",
+        "full_line": "Lior 00:05:52: I check on whatever I left Claude doing. Like, did the refactor finish, did the tests pass. Honestly between rounds I check Slack anyway, and the warmup before a match too, so I just open Claude there instead.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:07:01: Great. What features would you like?",
+        "followed_up": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": false
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:18:03"
+    },
+    {
+      "file": "transcripts/11-gal.txt",
+      "interviewee": "Gal",
+      "persona": "Gameplay programmer at a mid-size mobile game studio (C++, Unreal), plays PUBG Battlegrounds with coworkers after work",
+      "turns": 56,
+      "between_rounds_aside": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:05:53",
+        "aside_text": "בPUBG יש את הlobby ואת המטוס, זה דקה וחצי שאתה סתם יושב, אז שם אני כותב לו.",
+        "full_line": "Gal 00:05:53: אני מריץ compile של המנוע, זה לוקח עשרים דקות לפעמים. אז אני שואל אותו אם זה עבר ואם יש errors. בPUBG יש את הlobby ואת המטוס, זה דקה וחצי שאתה סתם יושב, אז שם אני כותב לו.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:07:05: מעולה. איזה features היית רוצה?",
+        "followed_up": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": true,
+        "turn": 20,
+        "timestamp": "00:08:17",
+        "raised_text": "כן, הדבר הכי מעצבן, החלון יושב בדיוק על הminimap בפינה הימנית למטה. בPUBG זה המפה שלך, בלי זה אתה עיוור.",
+        "full_line": "Gal 00:08:17: כן, הדבר הכי מעצבן, החלון יושב בדיוק על הminimap בפינה הימנית למטה. בPUBG זה המפה שלך, בלי זה אתה עיוור.",
+        "interviewer_next_turn": 21,
+        "interviewer_next_line": "Interviewer 00:09:03: רגע, מה זאת אומרת יושב על הminimap? מתי זה קרה לך? תתאר לי.",
+        "followed_up": true
+      },
+      "control_b_hotkey_collision": {
+        "present": false
+      },
+      "duration": "00:23:03"
+    },
+    {
+      "file": "transcripts/12-roni.txt",
+      "interviewee": "Roni",
+      "persona": "Bootcamp graduate looking for a first junior job, casual player of single-player RPGs (Baldur's Gate 3, The Sims 4)",
+      "turns": 50,
+      "between_rounds_aside": {
+        "present": false
+      },
+      "control_a_overlay_covers_hud": {
+        "present": false
+      },
+      "control_b_hotkey_collision": {
+        "present": true,
+        "turn": 14,
+        "timestamp": "00:04:19",
+        "raised_text": "כן, הhotkey שלכם זה אותו מקש שיש לי בBG3 לquick save. אז כל פעם ששמרתי, נפתח החלון. ולהפך.",
+        "full_line": "Roni 00:04:19: כן, הhotkey שלכם זה אותו מקש שיש לי בBG3 לquick save. אז כל פעם ששמרתי, נפתח החלון. ולהפך.",
+        "interviewer_next_turn": 15,
+        "interviewer_next_line": "Interviewer 00:04:52: מעולה. בואי נעבור לשאלה הבאה. כמה פעמים את משתמשת?",
+        "followed_up": false
+      },
+      "duration": "00:15:02"
+    }
+  ]
+}

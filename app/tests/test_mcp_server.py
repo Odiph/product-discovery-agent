@@ -308,7 +308,8 @@ def test_tools_list_is_exactly_the_ten_read_only_tools(repo):
     `search_knowledge` (backlog B1): read-only, node scope, and it
     returns no text for any source type that holds customer speech. Nine with
     `get_mirror` (B2): counts, flags and sequence numbers, never words. Ten
-    with `get_themes` (B3): abstracted claims, never quotes."""
+    with `get_themes` (B3): abstracted claims, never quotes. Eleven with
+    `get_tree` (2026-11-10): labels and per-interview counts, no claims at all."""
     response = _decoded(
         _drive([{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}], repo_root=repo)
     )[0]
@@ -316,6 +317,8 @@ def test_tools_list_is_exactly_the_ten_read_only_tools(repo):
     assert names == [
         "list_projects", "get_survey", "get_hypotheses", "list_interviews", "get_facts",
         "get_standing", "get_interview_summary", "search_knowledge", "get_mirror", "get_themes",
+        # get_tree (2026-11-10): the opportunity solution tree, labels and counts only.
+        "get_tree",
     ]
     for tool in response["result"]["tools"]:
         assert tool["description"].strip()
@@ -390,6 +393,7 @@ def _every_tool_invocation():
         ("search_knowledge", {"project": "acme", "query": "sentinel"}),
         ("get_mirror", {"project": "acme"}),
         ("get_themes", {"project": "acme"}),
+        ("get_tree", {"project": "acme"}),
     ]
 
 

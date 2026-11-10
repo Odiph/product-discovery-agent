@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import re
 from collections import Counter
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Optional
 
@@ -26,11 +27,12 @@ _CUE_TIME = re.compile(
 _VOICE_TAG = re.compile(r"<v(?:\.[^ >]*)?\s+([^>]+)>")
 _ANY_TAG = re.compile(r"</?[^>]+>")
 # `Name: text` -- a speaker label is short and starts the line. Times in the
-# label (`Dana 00:03:12`, `[00:03] Dana`) are tolerated and dropped.
+# label (`Dana 00:03:12`, `[00:03] Dana`) are tolerated: dropped from the text,
+# kept as the turn's start by `speaker_text_turns` (the importer's clock).
 _SPEAKER_LINE = re.compile(
-    r"^\s*(?:\[?\(?\d{1,2}:\d{2}(?::\d{2})?\]?\)?\s+)?"
+    r"^\s*(?:\[?\(?(?P<lead>\d{1,2}:\d{2}(?::\d{2})?)\]?\)?\s+)?"
     r"(?P<name>[^\W\d][\w .'\-]{0,38}?)"
-    r"(?:\s+\(?\d{1,2}:\d{2}(?::\d{2})?\)?)?\s*:\s+(?P<text>\S.*)$"
+    r"(?:\s+\(?(?P<trail>\d{1,2}:\d{2}(?::\d{2})?)\)?)?\s*:\s+(?P<text>\S.*)$"
 )
 MIN_SPEAKER_LINES = 3
 MAX_SPEAKERS = 12
@@ -39,6 +41,21 @@ MAX_ONE_TURN_LABEL_WORDS = 2
 
 class NotASessionError(ValueError):
     pass
+
+
+@dataclass(frozen=True)
+class Turn:
+    """One speaker turn as a transcript file states it. `speaker` is None for
+    text no label claims. Times are what the FILE says, in seconds, or None:
+    a subtitle cue has both; a `Name: text` line has at most the start time
+    written in its label. Nothing here invents a time --
+    `app/session/transcript_import.py` synthesizes them, and records that it
+    did."""
+
+    speaker: Optional[str]
+    text: str
+    start_s: Optional[float]
+    end_s: Optional[float]
 
 
 def is_session_dir(path: Path) -> bool:
@@ -90,35 +107,44 @@ def from_subtitles(path: Path, text: str) -> Document:
     per voice; consecutive pieces by the same speaker become one turn. A
     `Name: text` cue is labelled when the label names a person (see
     `_speaker_labels`)."""
-    pieces: "list[tuple[Optional[str], str, Optional[float]]]" = []
+    return _conversation(path, [(t.speaker, t.text, t.end_s) for t in subtitle_turns(text)])
+
+
+def subtitle_turns(text: str) -> "list[Turn]":
+    """The turns of a WebVTT or SRT file, each with its first cue's start and
+    its last cue's end."""
+    pieces: "list[Turn]" = []
     for block in re.split(r"\n\s*\n", text.replace("\r\n", "\n")):
         lines = [line for line in block.split("\n") if line.strip()]
         timing = next((i for i, line in enumerate(lines) if _CUE_TIME.search(line)), None)
         if timing is None:
             continue
-        end_s = _seconds(_CUE_TIME.search(lines[timing]).group("end"))
+        cue_time = _CUE_TIME.search(lines[timing])
+        start_s, end_s = _seconds(cue_time.group("start")), _seconds(cue_time.group("end"))
         cue = " ".join(lines[timing + 1:]).strip()
         voices = list(_VOICE_TAG.finditer(cue))
         if voices:
             for current, following in zip(voices, voices[1:] + [None]):
                 said = cue[current.end():following.start() if following else len(cue)]
-                pieces.append((current.group(1).strip(), _ANY_TAG.sub("", said).strip(), end_s))
+                pieces.append(Turn(current.group(1).strip(), _ANY_TAG.sub("", said).strip(), start_s, end_s))
         else:
-            pieces.append((None, _ANY_TAG.sub("", cue).strip(), end_s))
-    speakers = _speaker_labels(said for speaker, said, _ in pieces if speaker is None)
-    turns: "list[tuple[Optional[str], str, Optional[float]]]" = []
-    for speaker, said, end_s in pieces:
+            pieces.append(Turn(None, _ANY_TAG.sub("", cue).strip(), start_s, end_s))
+    speakers = _speaker_labels(piece.text for piece in pieces if piece.speaker is None)
+    turns: "list[Turn]" = []
+    for piece in pieces:
+        speaker, said = piece.speaker, piece.text
         if speaker is None:
             labelled = _SPEAKER_LINE.match(said)
             if labelled and labelled.group("name").strip() in speakers:
                 speaker, said = labelled.group("name").strip(), labelled.group("text").strip()
         if not said:
             continue
-        if turns and turns[-1][0] == speaker:
-            turns[-1] = (speaker, f"{turns[-1][1]} {said}", end_s)
+        if turns and turns[-1].speaker == speaker:
+            previous = turns[-1]
+            turns[-1] = Turn(speaker, f"{previous.text} {said}", previous.start_s, piece.end_s)
         else:
-            turns.append((speaker, said, end_s))
-    return _conversation(path, turns)
+            turns.append(Turn(speaker, said, piece.start_s, piece.end_s))
+    return turns
 
 
 def _speaker_labels(lines: Iterable[str]) -> "set[str]":
@@ -150,24 +176,36 @@ def looks_like_speaker_transcript(text: str) -> bool:
 
 
 def from_speaker_text(path: Path, text: str) -> Document:
-    """`Name: text` lines; an unlabelled line continues the previous turn."""
+    """`Name: text` lines; an unlabelled line continues the previous turn.
+    Indexed without times: a label's time is a START, and a location names
+    where a turn ENDED."""
+    return _conversation(path, [(t.speaker, t.text, None) for t in speaker_text_turns(text)])
+
+
+def speaker_text_turns(text: str) -> "list[Turn]":
+    """The turns of a `Name: text` transcript. `start_s` is the time written
+    in a turn's first label (`[00:03] Dana: ...`, `Dana 00:03:12: ...`) when
+    there is one; `end_s` is always None -- the file does not say."""
     speakers = _speaker_labels(text.splitlines())
-    turns: "list[tuple[Optional[str], str, Optional[float]]]" = []
+    turns: "list[Turn]" = []
     for line in text.splitlines():
         if not line.strip():
             continue
         labelled = _SPEAKER_LINE.match(line)
         if labelled and labelled.group("name").strip() in speakers:
             speaker, said = labelled.group("name").strip(), labelled.group("text").strip()
-            if turns and turns[-1][0] == speaker:
-                turns[-1] = (speaker, f"{turns[-1][1]} {said}", None)
+            stamp = labelled.group("lead") or labelled.group("trail")
+            if turns and turns[-1].speaker == speaker:
+                previous = turns[-1]
+                turns[-1] = Turn(speaker, f"{previous.text} {said}", previous.start_s, None)
             else:
-                turns.append((speaker, said, None))
+                turns.append(Turn(speaker, said, _seconds(stamp) if stamp else None, None))
         elif turns:
-            turns[-1] = (turns[-1][0], f"{turns[-1][1]} {line.strip()}", None)
+            previous = turns[-1]
+            turns[-1] = Turn(previous.speaker, f"{previous.text} {line.strip()}", previous.start_s, None)
         else:
-            turns.append((None, line.strip(), None))
-    return _conversation(path, turns)
+            turns.append(Turn(None, line.strip(), None, None))
+    return turns
 
 
 def _conversation(path: Path, turns: "list[tuple[Optional[str], str, Optional[float]]]") -> Document:

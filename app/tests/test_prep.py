@@ -153,6 +153,43 @@ def test_an_unconfirmed_in_person_interview_is_sent_to_confirm_not_to_extract(no
 
 
 
+def test_an_untracked_interview_is_left_out_of_the_guide_not_counted_as_never_asking():
+    # Only the live coach records which guide questions were asked. An imported
+    # interview, or one recorded with the coach off, has no such record: reading
+    # its silence as "never asked" told the operator to move every question
+    # earlier after 12 imported interviews that asked them all (2026-11-11).
+    survey = [SurveyItem(id="q1", order=0, text="x")]
+    untracked = {"I1", "I2", "I3"}
+    guides = {s: None for s in untracked}
+    (item,) = prep_mod.item_proposals(survey, {}, guides, untracked=untracked)
+    assert item.action == prep_mod.KEEP
+    assert "not tracked" in item.reason and "3 interviews" in item.reason
+
+    guides.update({"S1": frozenset({"q1"}), "S2": frozenset({"q1"})})
+    (item,) = prep_mod.item_proposals(survey, {}, guides, untracked=untracked)
+    assert item.action == prep_mod.MOVE_EARLIER
+    assert "never asked in the 2 interviews that had it" in item.reason and "3 untracked" in item.reason
+
+
+def _untracked_session(sessions, name, meta):
+    directory = sessions / name
+    directory.mkdir()
+    (directory / "session.json").write_text(json.dumps(meta), encoding="utf-8")
+    (directory / "transcript.jsonl").write_text(
+        json.dumps(_segment(0, "interviewer", "Walk me through the last time")) + "\n", encoding="utf-8")
+
+
+def test_imported_and_coach_off_interviews_do_not_make_prep_say_never_asked(node, capsys):
+    sessions = node.parent / "sessions"
+    _untracked_session(sessions, "20260907T100000", {"engine": "import", "coach_enabled": False})
+    _untracked_session(sessions, "20260908T100000", {"engine": "soniox", "coach_enabled": False})
+    assert main_mod.main(["prep"]) == 0
+    out = capsys.readouterr().out
+    assert "from 4 interview(s) so far" in out
+    # q2 was never asked in the two TRACKED interviews; the two untracked ones say nothing.
+    assert "never asked in the 2 interviews that had it" in out and "2 untracked" in out
+
+
 def test_a_gap_the_knowledge_base_already_covers_says_where(node, tmp_path, capsys, monkeypatch):
     from app.kb.document import EMAIL, INTERVIEW, Document, Section
     from app.kb.store import KnowledgeStore

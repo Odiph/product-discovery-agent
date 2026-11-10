@@ -510,6 +510,7 @@ def _every_tool_invocation():
         ("search_knowledge", {"project": "acme", "query": "sentinel"}),
         ("get_mirror", {"project": "acme"}),
         ("get_themes", {"project": "acme"}),
+        ("get_tree", {"project": "acme"}),
     ]
 
 

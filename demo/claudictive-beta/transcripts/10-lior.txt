@@ -1,0 +1,46 @@
+Interviewer 00:00:03: Hey Lior, thanks for doing this. English or Hebrew?
+Lior 00:00:24: English is fine, my whole day is in English anyway. My team is in San Francisco.
+Interviewer 00:00:54: Great. So tell me a bit about yourself.
+Lior 00:01:11: Frontend dev, React and TypeScript, remote for a US startup. So I work weird hours. And I play CS2, premier, like twelve-thirteen thousand rating.
+Interviewer 00:02:01: Great. How do you use Claude Code?
+Lior 00:02:17: A lot. Components, tests, refactors. I let it run on a branch while I do other stuff.
+Interviewer 00:02:49: Great, great. How did you find Claudictive?
+Lior 00:03:08: Someone posted it in a Discord server for devs who game. I signed up the same day.
+Interviewer 00:03:38: Great. How was the onboarding?
+Lior 00:03:53: Pretty smooth. One thing, it didn't detect CS2 at first, I had to restart Overwolf.
+Interviewer 00:04:24: Got it. Anything else?
+Lior 00:04:37: Not really. The API key step was clear.
+Interviewer 00:04:54: Great. Let's move on. How often do you use it?
+Lior 00:05:14: Couple times a week. Less than I thought I would, honestly.
+Interviewer 00:05:38: And what do you do with it?
+Lior 00:05:52: I check on whatever I left Claude doing. Like, did the refactor finish, did the tests pass. Honestly between rounds I check Slack anyway, and the warmup before a match too, so I just open Claude there instead.
+Interviewer 00:07:01: Great. What features would you like?
+Lior 00:07:17: Hmm. A compact mode. Like a tiny bar with a status, green or red.
+Interviewer 00:07:43: Compact mode, great. What else?
+Lior 00:07:58: Voice would be cool. And maybe keybind macros, like one key sends "run the tests".
+Interviewer 00:08:29: Great, great. Don't you think with voice you could use it during the actual fights?
+Lior 00:09:00: Uh, during a fight in CS? No way. You need to hear footsteps. But voice in general, sure.
+Interviewer 00:09:32: Got it. Great. Let's move to the next question. One to ten, how much do you like the idea?
+Lior 00:10:05: Eight. It's a cool idea.
+Interviewer 00:10:18: What would make it a ten?
+Lior 00:10:32: If it was faster to open and close. And if it didn't steal focus from the game. Sometimes I close it and my mouse is still stuck in the overlay.
+Interviewer 00:11:21: Ah, focus. Noted. Great. Would you pay for it?
+Lior 00:11:41: Yeah, probably. Like five bucks. I pay for way dumber stuff.
+Interviewer 00:12:05: Haha great. Would you recommend it?
+Lior 00:12:21: Sure, to the Discord people. They're the target audience, right?
+Interviewer 00:12:47: Exactly. How would you describe it to them?
+Lior 00:13:05: "Claude Code overlay for gamers". Pretty self-explanatory.
+Interviewer 00:13:29: Great. What's the thing you like most?
+Lior 00:13:46: That it's always there. One hotkey. And the notification when it's done.
+Interviewer 00:14:14: Great. And the thing you like least?
+Lior 00:14:30: The look. It looks like a default Electron app. It doesn't feel like a gaming thing.
+Interviewer 00:15:02: So themes, maybe a gamer design?
+Lior 00:15:17: Yeah, something that looks like it belongs in the game.
+Interviewer 00:15:40: Great, noted. What about a mobile companion app?
+Lior 00:16:00: No, I'd rather keep my phone away when I play premier. It's distracting.
+Interviewer 00:16:28: Got it. Great. Anything you'd remove?
+Lior 00:16:45: The sound on notifications. I turned it off.
+Interviewer 00:17:04: Okay. Last question, anything else you want to share?
+Lior 00:17:26: Nope. Keep going, it's a fun project.
+Interviewer 00:17:43: Thanks so much Lior!
+Lior 00:17:55: Cheers.

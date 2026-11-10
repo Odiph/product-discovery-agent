@@ -84,6 +84,12 @@ def _records(session_dir: Path, meta: "dict[str, Any]"):
         return ()
 
 
+# Public for `missed_load`: one reader of a session's meta and transcript, so
+# both detectors judge the same speech.
+session_meta = _meta
+session_records = _records
+
+
 def _critique(session_dir: Path) -> "Optional[dict[str, Any]]":
     path = session_dir / CRITIQUE_DOC_FILENAME
     if not path.is_file():
@@ -93,3 +99,7 @@ def _critique(session_dir: Path) -> "Optional[dict[str, Any]]":
     except (ValueError, OSError):
         return None
     return payload if isinstance(payload, dict) else None
+
+
+# Public for `missed_load`: the same reader of a session's critique the mirror uses.
+session_critique = _critique

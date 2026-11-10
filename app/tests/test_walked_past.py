@@ -109,3 +109,31 @@ def test_hebrew_signal_words_match_whole_words_only():
     assert "pain" in wp.offer_signals("וזה פשוט חבל על הזמן כל פעם מחדש " * 2)
     assert "cost" in wp.offer_signals("והמחיר היה גבוה מדי בשבילנו " * 3)
     assert "cost" in wp.offer_signals("it was ₪400 and that is a lot for a small team like ours " * 2)
+
+
+@pytest.mark.parametrize("reply", ["רגע, תסביר לי יותר בבקשה", "תסבירי לי איך זה עובד אצלך"])
+def test_asking_to_explain_in_hebrew_is_a_follow_up(reply):
+    assert wp.points_back(reply)
+    assert _detect(reply) == []
+
+
+# --- short Hebrew stems (2026-11-11) ---------------------------------------------------
+
+
+def test_a_short_hebrew_word_does_not_echo_through_a_stripped_form():
+    # "פעם" ("once/time") and "פעמים" ("times") met on the stripped `פעמ`:
+    # every "how many times a week" question became a follow-up.
+    assert not wp.echoes("כל פעם ששמרתי נפתח החלון", "כמה פעמים בשבוע את משתמשת?")
+
+
+def test_the_same_short_hebrew_word_still_echoes():
+    assert wp.echoes("כל פעם ששמרתי נפתח החלון", "רגע, באיזו פעם זה קרה?")
+
+
+def test_a_long_hebrew_stem_still_meets_its_plural():
+    assert wp.echoes("ההזמנה הגיעה מאוחר מדי", "כמה הזמנות כאלה היו?")
+
+
+def test_echo_ignores_the_words_it_is_told_to():
+    assert wp.echoes("Claudictive opens in the lobby", "Is Claudictive fast?")
+    assert not wp.echoes("Claudictive opens in the lobby", "Is Claudictive fast?", ignore=frozenset({"claudictive"}))

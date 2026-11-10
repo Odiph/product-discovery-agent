@@ -12,15 +12,16 @@ Deterministic and offline: two claims are linked when they share at least
 the product's own name, does not count); a theme is one claim and the claims
 linked to IT (see `unbound_themes`), labelled by the words its claims share most. It
 works on the abstracted `claim` only -- never a quote -- so it reads nothing
-gate 20 protects. A model pass can name themes better later; this one can be
-checked by hand.
+gate 20 protects. It can be checked by hand, and it misses a topic worded
+differently each time; `from_groups` takes the model's grouping instead
+(`topics.py`, `--group model`).
 """
 
 from __future__ import annotations
 
 from collections import Counter
 from dataclasses import dataclass
-from typing import Sequence
+from typing import Any, Callable, Sequence
 
 from app.kb import terms
 
@@ -48,21 +49,101 @@ class Theme:
     fact_ids: "tuple[str, ...]"
     sessions: "tuple[str, ...]"
     claims: "tuple[str, ...]"
+    terms: "frozenset[str]" = frozenset()
+    """Every match key two or more members share -- the label is the top
+    `LABEL_TERMS` of these. What a question must touch to be ON this theme
+    (`missed.py`); never shown, so it can be wider than the label."""
 
 
 def unbound_themes(refs: Sequence) -> "tuple[Theme, ...]":
     """`refs`: facts as `interview_summary.FactRef` (claim, session_id,
-    bearings). Only those with no bearing are grouped.
+    bearings). Only those with no bearing are grouped."""
+    return clusters(refs, include=lambda ref: not ref.bearings, min_interviews=MIN_INTERVIEWS)
+
+
+def clusters(refs: Sequence, *, include: "Callable[[Any], bool]" = lambda ref: True,
+             min_interviews: int = MIN_INTERVIEWS) -> "tuple[Theme, ...]":
+    """The grouping itself, over the refs `include` admits; `unbound_themes`
+    admits the unbound only, `missed.py` admits every claim (a "between
+    rounds" claim bound to an in-match hypothesis as contrary evidence is
+    still something interviewees kept raising). The common-word ceiling is
+    always counted over ALL the refs, so the two callers agree on what a
+    distinctive word is.
 
     A theme is a CENTRE claim and its direct neighbours, never a chain: with
     connected components, "invoice export" -> "export csv" -> "csv import"
     would drift from invoicing to onboarding inside one theme. Here every
     member shares the threshold with the centre itself. Centres are taken
     most-connected first, ties by position, so the result is deterministic."""
-    refs = [ref for ref in refs if isinstance(getattr(ref, "claim", None), str) and ref.claim.strip()]
-    unbound = [ref for ref in refs if not ref.bearings]
-    if len(unbound) < 2:
+    refs = _with_text(refs)
+    candidates = [ref for ref in refs if include(ref)]
+    if len(candidates) < 2:
         return ()
+    distinctive = _distinctive_words(refs)
+    claims = [distinctive(ref.claim) for ref in candidates]
+    neighbours = _neighbours(claims)
+
+    order = sorted(range(len(candidates)), key=lambda i: (-len(neighbours[i]), i))
+    taken: "set[int]" = set()
+    themes = []
+    for centre in order:
+        if centre in taken:
+            continue
+        members = [centre] + [j for j in sorted(neighbours[centre]) if j not in taken]
+        sessions = tuple(dict.fromkeys(candidates[i].session_id for i in members))
+        if len(members) < 2 or len(sessions) < min_interviews:
+            continue
+        taken.update(members)
+        themes.append(Theme(
+            label=_label([claims[i] for i in members]),
+            fact_ids=tuple(candidates[i].fact_id for i in members),
+            sessions=sessions,
+            claims=tuple(candidates[i].claim for i in members),
+            terms=_shared_keys([claims[i] for i in members]),
+        ))
+    return tuple(sorted(themes, key=lambda t: (-len(t.sessions), -len(t.fact_ids), t.fact_ids)))
+
+
+def from_groups(refs: Sequence, groups: Sequence, *, include: "Callable[[Any], bool]" = lambda ref: True,
+                min_interviews: int = MIN_INTERVIEWS) -> "tuple[Theme, ...]":
+    """Themes from a grouping made elsewhere (`topics.py`, by meaning), held
+    to the same rules as `clusters`: `include` admits members, a theme needs
+    two members from `min_interviews` interviews, and its `terms` are the
+    distinctive keys two members share -- the ceiling counted over ALL the
+    refs, as above, so `missed` judges a follow-up on the same kind of word
+    either way. `groups`: anything with `label` (str) and `fact_ids`; an id
+    not among `refs` is skipped, a claim placed twice stays in its first."""
+    refs = _with_text(refs)
+    by_id: "dict[str, Any]" = {}
+    for ref in refs:
+        by_id.setdefault(ref.fact_id, ref)
+    distinctive = _distinctive_words(refs)
+    taken: "set[str]" = set()
+    themes = []
+    for group in groups:
+        members = [by_id[fact_id] for fact_id in dict.fromkeys(group.fact_ids)
+                   if fact_id in by_id and fact_id not in taken and include(by_id[fact_id])]
+        sessions = tuple(dict.fromkeys(ref.session_id for ref in members))
+        if len(members) < 2 or len(sessions) < min_interviews:
+            continue
+        taken.update(ref.fact_id for ref in members)
+        themes.append(Theme(
+            label=(group.label,),
+            fact_ids=tuple(ref.fact_id for ref in members),
+            sessions=sessions,
+            claims=tuple(ref.claim for ref in members),
+            terms=_shared_keys([distinctive(ref.claim) for ref in members]),
+        ))
+    return tuple(sorted(themes, key=lambda t: (-len(t.sessions), -len(t.fact_ids), t.fact_ids)))
+
+
+def _with_text(refs: Sequence) -> list:
+    return [ref for ref in refs if isinstance(getattr(ref, "claim", None), str) and ref.claim.strip()]
+
+
+def _distinctive_words(refs: Sequence) -> "Callable[[str], list]":
+    """A claim's content words with their keys, minus every key more than
+    `MAX_TERM_SHARE` of `refs` use (the product's name, its domain)."""
     frequency: Counter = Counter()
     for ref in refs:
         frequency.update({key for _, keys in _words(ref.claim) for key in keys})
@@ -71,31 +152,25 @@ def unbound_themes(refs: Sequence) -> "tuple[Theme, ...]":
     # product's name.
     ceiling = (max(MIN_INTERVIEWS, int(len(refs) * MAX_TERM_SHARE))
                if len(refs) >= MIN_CLAIMS_FOR_CEILING else len(refs))
-    claims = [
-        [(word, keys) for word, keys in ((w, {k for k in ks if frequency[k] <= ceiling}) for w, ks in _words(ref.claim))
-         if keys]
-        for ref in unbound
-    ]
-    neighbours = _neighbours(claims)
 
-    order = sorted(range(len(unbound)), key=lambda i: (-len(neighbours[i]), i))
-    taken: "set[int]" = set()
-    themes = []
-    for centre in order:
-        if centre in taken:
-            continue
-        members = [centre] + [j for j in sorted(neighbours[centre]) if j not in taken]
-        sessions = tuple(dict.fromkeys(unbound[i].session_id for i in members))
-        if len(members) < 2 or len(sessions) < MIN_INTERVIEWS:
-            continue
-        taken.update(members)
-        themes.append(Theme(
-            label=_label([claims[i] for i in members]),
-            fact_ids=tuple(unbound[i].fact_id for i in members),
-            sessions=sessions,
-            claims=tuple(unbound[i].claim for i in members),
-        ))
-    return tuple(sorted(themes, key=lambda t: (-len(t.sessions), -len(t.fact_ids), t.fact_ids)))
+    def distinctive(claim: str) -> list:
+        return [(word, keys) for word, keys in ((w, {k for k in ks if frequency[k] <= ceiling})
+                                                for w, ks in _words(claim)) if keys]
+
+    return distinctive
+
+
+def match_keys(text: str) -> "frozenset[str]":
+    """Every key `text`'s content words match on -- the same keys a claim
+    is grouped by, so a question can be tested against `Theme.terms`."""
+    return frozenset().union(*(keys for _, keys in _words(text)))
+
+
+def _shared_keys(member_words) -> "frozenset[str]":
+    present: Counter = Counter()
+    for words in member_words:
+        present.update(set().union(*(keys for _, keys in words)) if words else set())
+    return frozenset(key for key, n in present.items() if n >= 2)
 
 
 def _words(claim: str) -> "list[tuple[str, frozenset]]":

@@ -232,6 +232,14 @@ function hypothesisForm(document) {
   return readable(document.byId["hypotheses-items"]);
 }
 
+// The STATE dropdown specifically. Since 2026-11-10 each row also carries the
+// opportunity-solution-tree "Place in the tree" select, so "every select"
+// stopped meaning "the state select"; picked out by its untested option.
+function stateSelects(document) {
+  return findAll(document.byId["hypotheses-items"], (n) => n.tagName === "select"
+    && n.children.some((o) => o.value === "untested"));
+}
+
 async function renderWith(hypotheses) {
   const document = makeDocument();
   const posted = [];
@@ -323,7 +331,7 @@ test("the state dropdown offers every state the model allows", async () => {
   const document = await renderWith([
     { id: "h1", statement: "s", falsifier: "f", state: "contested" },
   ]);
-  const selects = findAll(document.byId["hypotheses-items"], (n) => n.tagName === "select");
+  const selects = stateSelects(document);
   assert.equal(selects.length, 1, "expected exactly one state dropdown");
   const options = selects[0].children.map((o) => o.value).sort();
   assert.deepEqual(
@@ -337,7 +345,7 @@ test("a stored contested state survives a render", async () => {
   const document = await renderWith([
     { id: "h1", statement: "s", falsifier: "f", state: "contested" },
   ]);
-  const selects = findAll(document.byId["hypotheses-items"], (n) => n.tagName === "select");
+  const selects = stateSelects(document);
   assert.equal(selects[0].value, "contested", "the form silently downgraded a contested hypothesis");
 });
 
@@ -504,4 +512,136 @@ test("a question removed by hand after loading takes its proposal with it", asyn
   const rows = findAll(document.byId["survey-items"], (n) => n.tagName === "button" && n._text === "Remove");
   rows[2].click();
   assert.equal(document.byId["survey-prep"].hidden, true);
+});
+
+// --- the opportunity solution tree: classify, re-parent, promote ---------------------------
+//
+// The tree's STRUCTURE is two optional fields on a hypothesis, saved through the
+// one hypotheses save path. So the page's job is to round-trip them faithfully
+// and to make promotion a human act: a promoted theme arrives as an EMPTY
+// opportunity, never one pre-written from the theme's words.
+
+const CANDIDATE = { label: ["export", "spreadsheet"], interviews: 3, claims: ["they rebuild the export by hand"] };
+
+async function renderTree(hypotheses, candidates = []) {
+  const document = makeDocument();
+  const posted = [];
+  const respond = (body) => Promise.resolve({ ok: true, json: () => Promise.resolve(body) });
+  const fetch = (url, init) => {
+    if (init && init.method === "POST") {
+      posted.push({ url, body: JSON.parse(init.body) });
+      return respond({ saved: 1 });
+    }
+    if (url === "/api/state") { return respond(HEALTHY); }
+    if (url === "/api/hypotheses") { return respond(hypotheses.map((h) => ({ ...h }))); }
+    if (url === "/api/candidates") { return respond({ facts: "present", candidates }); }
+    if (url === "/api/outcome") { return respond({ outcome: "Cut churn", state: "present" }); }
+    return respond([]);
+  };
+  new Function("document", "fetch", source)(document, fetch);
+  for (let i = 0; i < 40; i += 1) { await Promise.resolve(); }
+  document.posted = posted;
+  return document;
+}
+
+function placeSelects(document) {
+  return findAll(document.byId["hypotheses-items"], (n) => n.tagName === "select"
+    && n.children.some((o) => o.value === "opportunity"));
+}
+
+function parentSelects(document) {
+  return findAll(document.byId["hypotheses-items"], (n) => n.tagName === "select"
+    && n.children.some((o) => o._text === "(no opportunity yet)"));
+}
+
+function change(node, value) {
+  node.value = value;
+  (node.listeners.change || []).forEach((fn) => fn({}));
+}
+
+const OPP = { id: "o1", statement: "exporting is painful", falsifier: "nobody exports", state: "untested", kind: "opportunity" };
+const SOL = { id: "s1", statement: "one-click export", falsifier: "they ignore it", state: "untested", kind: "solution", parent: "o1" };
+
+test("an unclassified hypothesis saves with no kind or parent key at all", async () => {
+  const document = await renderTree([{ id: "h1", statement: "s", falsifier: "f", state: "untested" }]);
+  const body = await save(document);
+  assert.ok(!("kind" in body[0]) && !("parent" in body[0]), JSON.stringify(body[0]));
+});
+
+test("a stored kind and parent survive load-and-save untouched", async () => {
+  const document = await renderTree([OPP, SOL]);
+  const body = await save(document);
+  assert.equal(body[0].kind, "opportunity");
+  assert.equal(body[1].kind, "solution");
+  assert.equal(body[1].parent, "o1");
+});
+
+test("a solution is offered only opportunities as parents, never itself", async () => {
+  const other = { id: "h9", statement: "unclassified one", falsifier: "f", state: "untested" };
+  const document = await renderTree([OPP, SOL, other]);
+  const parents = parentSelects(document);
+  assert.equal(parents.length, 1, "exactly the one solution gets a parent select");
+  assert.deepEqual(parents[0].children.map((o) => o.value), ["", "o1"]);
+  assert.equal(parents[0].value, "o1");
+});
+
+test("reclassifying a solution drops its parent from the save", async () => {
+  const document = await renderTree([OPP, SOL]);
+  change(placeSelects(document)[1], "");
+  const body = await save(document);
+  assert.ok(!("kind" in body[1]) && !("parent" in body[1]), JSON.stringify(body[1]));
+});
+
+test("re-parenting through the select is what gets saved", async () => {
+  const opp2 = { ...OPP, id: "o2", statement: "importing is painful" };
+  const document = await renderTree([OPP, opp2, SOL]);
+  change(parentSelects(document)[0], "o2");
+  const body = await save(document);
+  assert.equal(body[2].parent, "o2");
+});
+
+test("a candidate theme is listed with its interview count and a Promote button", async () => {
+  const document = await renderTree([], [CANDIDATE]);
+  const panel = document.byId["tree-candidates"];
+  assert.equal(panel.hidden, false);
+  assert.ok(readable(panel).includes("export, spreadsheet -- in 3 interviews"), readable(panel));
+  button(panel, "Promote to opportunity");
+});
+
+test("no candidates, no panel", async () => {
+  const document = await renderTree([], []);
+  assert.equal(document.byId["tree-candidates"].hidden, true);
+});
+
+test("promoting adds an EMPTY opportunity and writes nothing", async () => {
+  const document = await renderTree([], [CANDIDATE]);
+  button(document.byId["tree-candidates"], "Promote to opportunity").click();
+  assert.deepEqual(document.posted, [], "promotion must not save: Save hypotheses is the only writer");
+  const boxes = findAll(document.byId["hypotheses-items"], (n) => n.tagName === "textarea");
+  assert.ok(boxes.length >= 2);
+  for (const box of boxes) {
+    assert.equal(box.value, "", "a promoted opportunity arrived pre-written from the theme");
+  }
+  assert.equal(placeSelects(document)[0].value, "opportunity");
+  assert.ok(readable(document.byId["hypotheses-items"]).includes("export, spreadsheet"),
+    "the theme is shown as a reference beside the empty boxes");
+});
+
+test("an untouched promotion sends no statement words and no falsifier", async () => {
+  const document = await renderTree([], [CANDIDATE]);
+  button(document.byId["tree-candidates"], "Promote to opportunity").click();
+  const body = await save(document);
+  assert.equal(body[0].kind, "opportunity");
+  assert.equal(body[0].statement, "");
+  assert.ok(!("falsifier" in body[0]), "a falsifier nobody wrote was sent");
+  assert.ok(!("promotedFrom" in body[0]), "page-only bookkeeping reached the server");
+});
+
+test("the outcome loads into its box and Save posts it", async () => {
+  const document = await renderTree([]);
+  assert.equal(document.byId["outcome-input"].value, "Cut churn");
+  document.byId["save-outcome"].click();
+  for (let i = 0; i < 20; i += 1) { await Promise.resolve(); }
+  const post = document.posted.find((p) => p.url === "/api/outcome");
+  assert.deepEqual(post.body, { outcome: "Cut churn" });
 });

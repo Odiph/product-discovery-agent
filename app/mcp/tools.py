@@ -1,4 +1,4 @@
-"""The ten read-only tools, their JSON schemas, and the mapping from this
+"""The eleven read-only tools, their JSON schemas, and the mapping from this
 project's loaders onto a wire payload.
 
 **This module counts nothing.** `get_standing` and `get_interview_summary`
@@ -60,6 +60,7 @@ from app.coach import corpus as coach_corpus
 from app.coach import interview_summary as summary_mod
 from app.mcp import knowledge as knowledge_mod
 from app.mcp import mirror as mirror_mod
+from app.coach import ost as ost_mod
 from app.coach import themes as themes_mod
 from app.session import reader as session_reader
 
@@ -765,6 +766,54 @@ def get_themes(arguments: "Mapping[str, Any]", *, repo_root: "Optional[Path]") -
     }
 
 
+def _project_tree_node(node: Any) -> "dict[str, Any]":
+    """Field by field, labels and counts only. No falsifier, no claim text:
+    a tree is an overview, and `get_standing` already serves the detail."""
+    return {
+        "hypothesis_id": node.hypothesis_id,
+        "kind": node.kind,
+        "statement": node.statement,
+        "state": node.state,
+        "is_scorable": node.is_scorable,
+        "supporting_interviews": node.supporting_interviews,
+        "contrary_interviews": node.contrary_interviews,
+        "unclear_interviews": node.unclear_interviews,
+        "total_interviews": node.total_interviews,
+        "solutions": [_project_tree_node(child) for child in node.children],
+    }
+
+
+def get_tree(arguments: "Mapping[str, Any]", *, repo_root: "Optional[Path]") -> "dict[str, Any]":
+    """The Opportunity Solution Tree, node scope. Counts come from
+    `interview_summary` via `app/coach/ost.py`; nothing is counted here.
+    Candidates carry a label and two counts, never their claims."""
+    unexpected = set(arguments) - {"project"}
+    if unexpected:
+        raise ToolArgumentError(f"unknown argument(s) {sorted(unexpected)} for get_tree")
+    node = _require_project(arguments, repo_root=repo_root)
+    errors: "list[dict[str, str]]" = []
+    refs, extraction = _load_facts_across([node], errors)
+    hypotheses = tuple(h for h, _path in _load_hypotheses_across([node], errors))
+    tree = ost_mod.build_tree(
+        hypotheses, refs, outcome=ost_mod.read_outcome(node.context_dir),
+        corpus_exists=(node.context_dir / coach_corpus.FACTS_FILENAME).is_file(), project=node.path,
+    )
+    return {
+        "project": node.path,
+        "status": tree.status,
+        "outcome": {"state": tree.outcome.state, "text": tree.outcome.text if tree.outcome.is_set else None},
+        "opportunities": [_project_tree_node(n) for n in tree.opportunities],
+        "unclassified": [_project_tree_node(n) for n in tree.unclassified],
+        "candidates": [
+            {"label": list(c.label), "interviews": c.interviews, "claims": len(c.claims)}
+            for c in tree.candidates
+        ],
+        "problems": list(tree.problems),
+        "errors": errors,
+        **_extraction_block(extraction),
+    }
+
+
 def _project_argument(description: str) -> "dict[str, Any]":
     return {"type": "string", "description": description}
 
@@ -935,6 +984,24 @@ _TOOL_ORDER: "tuple[tuple[str, str, dict[str, Any], Callable[..., dict[str, Any]
             "additionalProperties": False,
         },
         get_themes,
+    ),
+    (
+        "get_tree",
+        "The project's Opportunity Solution Tree: its outcome, the hypotheses the operator "
+        "classified as opportunities, the solutions under each, and the unclassified rest -- each "
+        "with its state and how many INTERVIEWS support, contradict or were unclear on it (the "
+        "same per-interview counts as get_standing). 'candidates' are recurring themes no "
+        "hypothesis predicted, as labels and counts: not part of the tree until the operator "
+        "writes one in. The structure changes only when the operator saves it; the counts change "
+        "after every extraction. 'status' is no-hypotheses, not-extracted (every count is zero "
+        "because nothing was read) or tree. Labels and counts only: no claims, no quotes.",
+        {
+            "type": "object",
+            "properties": {"project": _project_argument(_PROJECT_DESCRIPTION)},
+            "required": ["project"],
+            "additionalProperties": False,
+        },
+        get_tree,
     ),
 )
 

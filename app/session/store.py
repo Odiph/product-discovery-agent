@@ -154,12 +154,16 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).astimezone().isoformat(timespec="milliseconds")
 
 
-def create_session_dir(sessions_root: Path) -> Path:
+def create_session_dir(sessions_root: Path, started: Optional[datetime] = None) -> Path:
     """A fresh, not-yet-existing session directory under `sessions_root`,
     named by start timestamp. Defensively disambiguates a same-second
     collision rather than crashing a session that is about to hold real
-    interview audio."""
-    timestamp = datetime.now().strftime("%Y%m%dT%H%M%S")
+    interview audio.
+
+    `started` is for an interview that happened BEFORE now (`import`): the
+    id is minted from when it took place, so it sorts among the live ones by
+    date rather than by the day it was imported."""
+    timestamp = (started or datetime.now()).strftime("%Y%m%dT%H%M%S")
     candidate = sessions_root / timestamp
     suffix = 0
     while candidate.exists():

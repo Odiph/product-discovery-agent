@@ -11,6 +11,12 @@ pitch, never fish for compliments), and grounded in the survey and hypotheses
 you wrote beforehand. Afterwards it extracts claims into a local evidence
 corpus and shows where each hypothesis stands across interviews. Windows only.
 
+**No code yet?** Start with [version 0](docs/version-0.md): the same process as
+one prompt and a checklist. **Want to see it work first?**
+[`demo/claudictive-beta/`](demo/claudictive-beta/README.md) holds 12 synthetic
+interviews to run the whole chain on: `import`, `extract --all`,
+`critique-questions --all`, `missed`, `mirror`, `tree`.
+
 ## Quick start
 
 1. **Read "Privacy, consent and data flows" below first.** You are recording
@@ -66,7 +72,7 @@ tool asks for or records consent on your behalf.
 | Data | Sent to | When |
 |---|---|---|
 | Live audio of both sides | Soniox (speech-to-text) | Throughout every recorded call |
-| Transcript text, your brief, survey, hypotheses, your own rules (`process.md`) and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions` |
+| Transcript text, your brief, survey, hypotheses, your own rules (`process.md`) and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions`. `missed --group model --yes` (and `themes --group model --yes`) sends the extracted claims once, never quotes |
 | Code you added with `kb add`, and research you typed yourself with `kb add --type research` (never interviews, conversations, emails, or anything typed as research by guess) | The same coach endpoint | When you run `kb digest`, once per new or changed document. Its notes then ride in the coach's prompt every cycle |
 | In-person room audio | Soniox, live during `start --in-person`, and again when you run `diarize-after` (the uploaded copy is deleted afterwards) | Every in-person meeting |
 | In-person room audio, phone to laptop | Your Tailscale tailnet: encrypted end to end between your own devices, possibly through Tailscale's relay servers | Throughout every in-person meeting |
@@ -830,6 +836,28 @@ it. This is a per-interview batch cost, not a per-utterance one -- check the
 printed numbers against a few real interviews rather than trusting a
 one-line estimate; that is exactly what these numbers are for.
 
+**`extract --all`** extracts every interview in the project that has no facts,
+rejections or demotions yet, oldest first. Without `--yes` it lists them with
+an estimated input-token count and calls nothing; with `--yes` it runs them
+one at a time, keeps going past a failure, and prints a per-interview summary.
+`--force` extracts the already-extracted ones too.
+
+### Importing past interviews
+
+```
+.venv\Scripts\python.exe -m app import <file-or-folder> --project acme --me "Your Name" [--date 2026-03-04] [--participant "Dana"] --yes
+```
+
+Turns transcript exports (`.vtt`, `.srt`, or a `Name: text` `.txt`/`.md` from
+Otter, Granola or Meet) into sessions, one per file, so `extract`, `standing`,
+`themes`, `mirror`, `critique-questions` and `forget` can use them. `--me` is
+your speaker name as the file spells it: your turns become the interviewer's,
+everyone else's the interviewee's. Without `--yes` it shows the speakers, turn
+counts and roles, and writes nothing. Give `--date` when you know it; without
+it the file's modified time is used and recorded as such. Importing the same
+file twice is refused. Audio files are refused: importing recordings is not
+built yet. Then run `extract --all --project acme`.
+
 ### More commands after the call
 
 All take `--project PATH` like the rest, and none calls a model unless noted.
@@ -866,7 +894,34 @@ All take `--project PATH` like the rest, and none calls a model unless noted.
 - **`themes`**: the patterns nobody predicted. Claims that bear on no
   hypothesis and recur in two or more interviews, grouped by the distinctive
   words they share; each group is a candidate hypothesis. No model call; reads
-  claims, never quotes.
+  claims, never quotes. `--group model` groups by meaning instead, sharing
+  `missed`'s cached grouping.
+- **`missed`**: the topics interviewees raised unprompted in 3 or more
+  interviews, and in how many you followed up ("In 8 of 12 interviews,
+  interviewees raised dead time between matches without being asked. You
+  followed up in 0."). Topics that came up mostly right after you asked about
+  them are listed, with counts, under "Raised when you asked". Claims are grouped by shared
+  words, which misses a topic worded differently each time; `--group model`
+  shows what one call to the extract model would send, and `--group model
+  --yes` makes it, grouping the claims by meaning and caching the result in
+  `context/topics.json`. Later runs use that cache while the claims and model
+  are unchanged, and the first line of output always says which grouping was
+  used. The follow-up judgment never calls a model, and is generous: a word a
+  later question shares with the offer counts as a follow-up, except the next
+  question on your guide and words you use in most interviews (the product's
+  name).
+- **`tree`**: the project's Opportunity Solution Tree (Teresa Torres). The
+  outcome you set in `author` sits at the root; under it, the hypotheses you
+  classified as opportunities (needs or pains heard from users), and under
+  each, the solutions you hung on it. Every node shows its state and how many
+  interviews support it, contradict it or were unclear, the same per-interview
+  counts as `standing`. Below the tree, under "Candidate opportunities (not in
+  the tree)", are the recurring `themes`. The counts update after every
+  `extract`. The structure changes only when you change it: in `author`,
+  classify a hypothesis or re-parent a solution, or press **Promote to
+  opportunity** on a theme, which adds an empty opportunity for you to write
+  (statement and falsifier, in your own words). Nothing changes until you
+  press **Save hypotheses**. No model call; labels and counts, never quotes.
 - **`export --to backup.zip [--verify]`**: writes a checksummed copy of the
   project's irreplaceable data (transcripts, facts, hypotheses) to a zip. It
   refuses a destination git can see, so a backup can never be committed by
@@ -1169,6 +1224,7 @@ product repository's `discovery-proposals.md`, which you enter here through
 | `search_knowledge` | cited hits from the project knowledge base; text only for research and code, never for speech |
 | `get_mirror` | your habits as an interviewer across interviews: flags, trend, walked-past moments (no words) |
 | `get_themes` | claims no hypothesis predicted that recur across interviews (claims, never quotes) |
+| `get_tree` | the opportunity solution tree: outcome, opportunities, solutions, per-interview counts, candidate themes (labels and counts only) |
 
 ### `scope`: one node, or a whole sub-tree
 

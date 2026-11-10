@@ -95,6 +95,14 @@ def preflight_check_corpus_parses(context_dir: "Path | str") -> None:
     _load_existing_facts_or_empty(context_dir)
 
 
+def session_ids_with_facts(context_dir: "Path | str") -> "frozenset[str]":
+    """The sessions the corpus holds facts from (`extract --all`'s "already
+    extracted" check). Here rather than in the caller so the artifact's
+    filename stays named by its loader and writer only. Empty when the corpus
+    is missing; raises `CorpusValidationError` when it exists and is broken."""
+    return frozenset(fact.session_id for fact in _load_existing_facts_or_empty(context_dir))
+
+
 def replace_session_facts(
     context_dir: "Path | str", session_id: str, accepted_facts: Sequence[Fact]
 ) -> Path:

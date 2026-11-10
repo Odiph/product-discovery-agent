@@ -496,3 +496,69 @@ def standing_delta(
     return StandingDelta(
         now=now, before=before, contributed=contribution(hypothesis.id, mine)
     )
+
+
+@dataclass(frozen=True)
+class FollowThrough:
+    """For one topic interviewees kept raising: in how many INTERVIEWS it
+    came up, in how many the follow-up could be judged at all, and in how
+    many the interviewer followed it up (`missed.py`).
+
+    Here, not in `missed.py`, for this module's reason: an interviewee who
+    raised the topic three times in one call, and was followed up once, is
+    ONE interview followed up -- not one of three."""
+
+    raised_interviews: int
+    judged_interviews: int
+    """Interviews where at least one occurrence could be judged. Fewer than
+    `raised_interviews` when a citation pointed nowhere, a transcript was
+    missing, or the speakers were never confirmed -- an unjudged interview is
+    neither a follow-up nor a miss."""
+    followed_interviews: int
+
+    @property
+    def missed_interviews(self) -> int:
+        return self.judged_interviews - self.followed_interviews
+
+
+def follow_through(outcomes: "Iterable[tuple[str, Optional[bool]]]") -> FollowThrough:
+    """`outcomes`: one `(session_id, followed)` per occurrence, `followed`
+    None when it could not be judged. An interview counts as followed up
+    when ANY of its occurrences was; keyed on `session_id` alone, like
+    `count_interviews`."""
+    raised: "set[str]" = set()
+    judged: "set[str]" = set()
+    followed: "set[str]" = set()
+    for session_id, outcome in outcomes:
+        raised.add(session_id)
+        if outcome is not None:
+            judged.add(session_id)
+        if outcome is True:
+            followed.add(session_id)
+    return FollowThrough(
+        raised_interviews=len(raised), judged_interviews=len(judged), followed_interviews=len(followed)
+    )
+
+
+@dataclass(frozen=True)
+class PromptSplit:
+    """One topic's occurrences split by whether the interviewer had just
+    asked about it (`missed.py`). The headline is `unprompted`: "you never
+    followed up" says nothing about an answer to the question you asked."""
+
+    raised_interviews: int
+    """Interviews where it came up at all."""
+    asked_only_interviews: int
+    """Interviews where it came up only right after a question about it."""
+    unprompted: FollowThrough
+    """Over the unprompted occurrences alone, by `follow_through`'s rule."""
+
+
+def split_by_prompt(outcomes: "Iterable[tuple[str, Optional[bool], bool]]") -> PromptSplit:
+    """`outcomes`: one `(session_id, followed, prompted)` per occurrence."""
+    rows = list(outcomes)
+    unprompted = follow_through((session_id, followed) for session_id, followed, prompted in rows if not prompted)
+    raised = {session_id for session_id, _, _ in rows}
+    spontaneous = {session_id for session_id, _, prompted in rows if not prompted}
+    return PromptSplit(raised_interviews=len(raised), asked_only_interviews=len(raised - spontaneous),
+                       unprompted=unprompted)

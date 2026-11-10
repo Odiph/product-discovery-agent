@@ -99,7 +99,10 @@ def test_extraction_asks_for_the_extraction_model_not_the_coachs(monkeypatch, tm
 
     from app import main as main_mod
 
-    source = textwrap.dedent(inspect.getsource(main_mod.run_extract))
+    # 2026-11-11: the call site moved from `run_extract` into
+    # `_extract_session`, the one path both `extract <session>` and
+    # `extract --all` run. Pinned where the call now is.
+    source = textwrap.dedent(inspect.getsource(main_mod._extract_session))
     tree = ast.parse(source)
     called = {
         node.func.attr
