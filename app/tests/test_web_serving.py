@@ -31,6 +31,7 @@ from app.stt.fake import FakeStreamingEngine
 from app.stt.live import StreamWorker
 from app.web import server as web_server
 from app.web.hub import ConnectionHub, wire_payload
+from app.tests._timing import nonblocking_bound_s
 from benchmark.engines.base import Segment
 
 STATIC_DIR = Path(__file__).resolve().parents[1] / "static"
@@ -266,7 +267,7 @@ def test_persist_returns_fast_even_when_broadcast_is_slow(tmp_path):
         caller.join(timeout=5.0)
 
         assert "elapsed" in result, "the calling thread never returned -- _persist blocked"
-        assert result["elapsed"] < 0.05, (
+        assert result["elapsed"] < nonblocking_bound_s(), (
             f"_persist took {result['elapsed']:.3f}s against a 2s-slow broadcast -- "
             f"this is the .result() trap: it must schedule and return immediately"
         )

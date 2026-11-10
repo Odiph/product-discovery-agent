@@ -20,6 +20,7 @@ from app.coach.stub import StubAnthropicClient, tool_use_response
 from app.session.reader import read_session
 from app.session.store import SessionStore, create_session_dir, latency_stats
 from app.stt.live import StreamWorker
+from app.tests._timing import nonblocking_bound_s
 from benchmark.engines.base import Segment
 
 
@@ -90,7 +91,7 @@ def test_stream_worker_persist_returns_in_under_50ms_even_when_the_pipeline_hook
         start = time.monotonic()
         worker._persist(segment)
         elapsed_s = time.monotonic() - start
-        assert elapsed_s < 0.05, (
+        assert elapsed_s < nonblocking_bound_s(), (
             f"_persist took {elapsed_s:.3f}s -- the pipeline hook must enqueue and return, "
             "never block on the reasoning call (§D9, non-negotiable #7)"
         )
