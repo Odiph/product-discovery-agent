@@ -2,8 +2,11 @@
 
 A phone browser grants microphone access only in a secure context, and a
 bare LAN IP over plain HTTP is not one. `tailscale serve --bg <port>` puts
-this laptop's loopback-only server behind a real HTTPS name on the tailnet,
-reachable from the operator's own phone on any network and from nobody else.
+this laptop's loopback-only server behind a real HTTPS name on the tailnet.
+That name is reachable from any device signed in to the operator's tailnet
+(the token in the URL is what keeps out the ones that should not join), and
+from the public internet only if Tailscale Funnel is on for it -- which the
+in-person precheck refuses, see `funnel_enabled`.
 
 Detection is best-effort and bounded: no Tailscale, a stopped one, or a slow
 one all degrade to printing the instruction instead of the URL.
@@ -109,6 +112,59 @@ def serve_routes(raw: str, dns_name: str) -> "tuple[ServeRoute, ...]":
             if proxy:
                 routes.append(ServeRoute(proxy=proxy, foreground=True))
     return tuple(routes)
+
+
+def _funnel_on(config: object, dns_name: str) -> bool:
+    if not isinstance(config, dict):
+        return False
+    allow = config.get("AllowFunnel")
+    return isinstance(allow, dict) and allow.get(f"{dns_name}:443") is True
+
+
+def funnel_enabled(raw: str, dns_name: str) -> bool:
+    """True when `serve status --json` has Funnel on for `<dns_name>:443`, in
+    the background config or any foreground session. Funnel puts the phone
+    surface and the mic socket on the PUBLIC internet behind only the URL
+    token, so in person it is a hard no. Unparseable status says False: the
+    caller's serve row already fails on an unreadable status."""
+    try:
+        config = json.loads(raw)
+    except (ValueError, TypeError):
+        return False
+    if not isinstance(config, dict):
+        return False
+    if _funnel_on(config, dns_name):
+        return True
+    foreground = config.get("Foreground")
+    return isinstance(foreground, dict) and any(_funnel_on(nested, dns_name) for nested in foreground.values())
+
+
+def funnel_off_instruction(port: int) -> str:
+    # Both are long-standing CLI forms: `funnel ... off` drops the public
+    # route, and re-serving restores the tailnet-only one.
+    return (
+        "turn Funnel off for this name with `tailscale funnel --https=443 off`, then "
+        f"`tailscale serve --bg {port}` (tailnet only), and check `tailscale serve status` "
+        "no longer says Funnel on"
+    )
+
+
+def public_funnel_warning(
+    dns_name: str,
+    port: int,
+    *,
+    serve_reader: "Optional[Callable[[], Optional[str]]]" = None,
+) -> Optional[str]:
+    """For the run-start URL print: a warning line when Funnel is on for the
+    phone's name, else None. Best-effort like the rest of this module: an
+    unreadable status says nothing rather than guessing."""
+    raw = (serve_reader or read_serve_status)()
+    if raw is None or not funnel_enabled(raw, dns_name):
+        return None
+    return (
+        f"WARNING: Tailscale Funnel is ON for https://{dns_name} -- the phone page and mic "
+        f"are on the public internet behind only the URL token. Stop and {funnel_off_instruction(port)}."
+    )
 
 
 def route_reaches_port(route: ServeRoute, port: int) -> bool:

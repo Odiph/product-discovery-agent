@@ -54,6 +54,12 @@ class Document:
     sections: "tuple[Section, ...]"
     date: Optional[str] = None
     participants: "tuple[str, ...]" = ()
+    explicit_type: bool = False
+    """True only when the operator NAMED this type (`kb add --type ...`) and
+    the file took it. A guessed type is a guess: a call transcript saved as a
+    PDF is guessed research, and research text crosses MCP and reaches the
+    digest only when the operator said so. Not part of identity or of
+    `content_hash`: confirming a document overwrites it in place."""
 
     def __post_init__(self) -> None:
         if self.source_type not in SOURCE_TYPES:
@@ -94,6 +100,7 @@ class Document:
             "title": self.title,
             "date": self.date,
             "participants": list(self.participants),
+            "explicit_type": self.explicit_type,
             "sections": [asdict(section) for section in self.sections],
         }
 
@@ -105,6 +112,8 @@ class Document:
             title=record["title"],
             date=record.get("date"),
             participants=tuple(record.get("participants") or ()),
+            # A record from before the field existed was typed by guess.
+            explicit_type=record.get("explicit_type") is True,
             sections=tuple(
                 Section(text=s["text"], location=s["location"], speaker=s.get("speaker"))
                 for s in record["sections"]

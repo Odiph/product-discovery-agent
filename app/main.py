@@ -90,6 +90,7 @@ from app.coach.pipeline import SuggestionPipeline
 from app.coach.trigger import TurnTrigger
 from app import evidence_cli, kb_cli, mirror_cli, prep_cli, process_cli, themes_cli
 from app.session import evidence as evidence_mod
+from app.session import forget as forget_mod
 from app.session.audio_writer import AudioWriter
 from app.session.participant import PARTICIPANT_KEY, normalize_participant
 from app.session.reader import MalformedRecordError, list_session_ids, read_session
@@ -895,6 +896,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
                              "has ever read is a hope, not a backup")
     _add_project_argument(export)
 
+    forget = subparsers.add_parser(
+        "forget",
+        help=(
+            "Erase one interview and everything derived from it: its session directory, "
+            "its rows in context/ and its knowledge-base copy. Without --yes it only lists "
+            "what it would delete"
+        ),
+    )
+    forget.add_argument("session", help="Session id (the directory name under sessions/); not a path")
+    forget.add_argument("--yes", action="store_true", help="delete; without it nothing is touched")
+    _add_project_argument(forget)
+
     evidence_cli.add_parsers(subparsers, _add_project_argument)
     kb_cli.add_parsers(subparsers, _add_project_argument)
     mirror_cli.add_parser(subparsers, _add_project_argument)
@@ -1066,8 +1079,9 @@ def _load_coach_knowledge(context_dir: Path, query: str) -> "tuple[kb_digest.Coa
               f"({type(exc).__name__}); try `kb digest` again", file=sys.stderr)
         return ()
     if stale:
-        print(f"Note: {stale} document(s) changed or were removed since the last `kb digest`; "
-              f"their notes are left out until you run it again.")
+        print(f"Note: {stale} document(s) changed, were removed, or are research typed by guess "
+              f"since the last `kb digest`; their notes are left out until you run it again "
+              f"(re-add guessed research with `kb add --type research <path>` first).")
     return notes
 
 
@@ -1141,11 +1155,40 @@ def _print_in_person_urls(port: int, token: str) -> None:
     if name:
         print(f"On the phone, open: {tailnet.phone_url(name, token)}")
         print(f"(needs `tailscale serve --bg {port}` running on this laptop)")
+        # Funnel would put this page on the public internet behind only the
+        # token; precheck refuses it, and a run started without one still says so.
+        warning = tailnet.public_funnel_warning(name, port)
+        if warning:
+            print(warning)
     else:
         print(
             "Tailscale not detected. On this laptop run `tailscale serve --bg "
             f"{port}`, then on the phone open https://<this-laptop>.<your-tailnet>.ts.net/s/{token}?mic"
         )
+
+
+def _room_audio_reminder(session_dir: Path, *, project: "Optional[str]") -> "Optional[str]":
+    """What an in-person run prints as it ends while `room.wav` is on disk.
+
+    The file is both people's voices, kept WITHOUT `--retain-audio` and with
+    no flag on it, until `confirm-speakers --confirm` deletes it. The start
+    banner says so, but it has scrolled away by the time the meeting ends,
+    and a reminder nobody sees is how a customer's voice stays on a laptop
+    for months. `None` when nothing was kept (the audio writer failed)."""
+    room = Path(session_dir) / evidence_mod.ROOM_AUDIO_FILENAME
+    if not room.is_file():
+        return None
+    session_id = Path(session_dir).name
+    suffix = f" --project {project}" if project else ""
+    return "\n".join([
+        f"NOTE: {evidence_mod.ROOM_AUDIO_FILENAME} is still on this laptop: {room}",
+        "  It holds both voices from the room and is kept until you confirm the speakers:",
+        f"    python -m app diarize-after {session_id}{suffix}",
+        f"    python -m app confirm-speakers {session_id} --confirm{suffix}   (deletes it)",
+        f"  No after-meeting pass? `confirm-speakers {session_id} --confirm --accept-live-roles{suffix}` "
+        "also deletes it.",
+        f"  To erase the whole interview instead: python -m app forget {session_id}{suffix}",
+    ])
 
 
 async def _async_main(args: argparse.Namespace) -> int:
@@ -1988,6 +2031,10 @@ async def _async_main(args: argparse.Namespace) -> int:
         summary = store.close()
         print(f"Transcript written to: {store.transcript_path}")
         print(f"Latency summary: {summary}")
+        if in_person:
+            reminder = _room_audio_reminder(store.session_dir, project=getattr(args, "project", None))
+            if reminder:
+                print(reminder)
         # Phase 4 (04-02-PLAN.md §D1/COACH-05): printed beside the transcript
         # latency figures above AND persisted into session metadata -- the
         # same gap STATE.md already records for STT latency (a number only
@@ -3125,6 +3172,76 @@ def run_fetch_voiceprint_model(args: argparse.Namespace) -> int:
     return 0
 
 
+def _plural(count: int, word: str) -> str:
+    return f"{count} {word}{'' if count == 1 else 's'}"
+
+
+def _print_forget_plan(plan: "forget_mod.Plan") -> None:
+    """Counts and paths only. Nothing here may print a claim, a quote or a
+    title: this is the command someone runs BECAUSE a person asked to be
+    erased, and its output lands in a terminal and maybe a ticket."""
+    node = plan.node
+    print(f"Interview {plan.session_id} at {node.label or 'the root sessions/ and context/'}:")
+    if plan.session_dir is not None:
+        print(f"  session directory: {plan.session_dir}  "
+              f"({_plural(plan.session_files, 'file')}, {plan.session_bytes:,} bytes)")
+    for name, count in plan.rows.items():
+        print(f"  {node.context_dir / name}: {_plural(count, 'row')}")
+    if plan.kb_doc_ids:
+        print(f"  knowledge base: {_plural(len(plan.kb_doc_ids), 'document')} ({', '.join(plan.kb_doc_ids)})")
+    if plan.digest_entries:
+        print(f"  coach digest: {_plural(plan.digest_entries, 'entry')}")
+    for path, reason in plan.unreadable:
+        print(f"WARNING: {path} could not be read ({reason}); it will be left untouched -- "
+              "repair it and run this again", file=sys.stderr)
+    if plan.registered_after:
+        print(f"  kept: the pre-registration boundary of {', '.join(plan.registered_after)} names this "
+              "session id (an id, no words); it records when a rule was written and is not rewritten")
+    for line in plan.elsewhere:
+        print(f"  elsewhere: {line}")
+
+
+def run_forget(args: argparse.Namespace) -> int:
+    """`forget` (app/session/forget.py). Plans first; deletes only on --yes."""
+    try:
+        session_id = forget_mod.validate_session_id(args.session)
+    except forget_mod.SessionIdError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
+    cfg = _apply_project(config_mod.load_config(), args)
+    # The root roots too, for the report of matches elsewhere. Routed through
+    # the seam with no project, which is exactly "the root" (gate 30).
+    root_cfg = _apply_project(config_mod.load_config(), argparse.Namespace(project=None))
+    root = forget_mod.Node(None, root_cfg.sessions_root, root_cfg.context_dir, None)
+    if args.project is None:
+        node, others = root, forget_mod.all_nodes()
+    else:
+        paths = projects_mod.resolve(args.project)
+        node = forget_mod.Node(paths.path, cfg.sessions_root, cfg.context_dir,
+                               paths.node_dir / projects_mod.KNOWLEDGE_DIR_NAME)
+        others = (root,) + tuple(n for n in forget_mod.all_nodes() if n.label != paths.path)
+    plan = forget_mod.plan(session_id, node, other_nodes=others)
+    if not plan.found_anything:
+        print(f"Nothing found for session {session_id} at {node.label or 'the root'}.")
+        _print_forget_plan(plan)
+        return 1
+    _print_forget_plan(plan)
+    if not args.yes:
+        print()
+        print("Nothing was deleted. To delete all of the above, run again with --yes.")
+        return 0
+    outcome = forget_mod.apply(plan)
+    for line in outcome.removed:
+        print(f"deleted  {line}")
+    for line in outcome.failed:
+        print(f"ERROR: {line}", file=sys.stderr)
+    print(
+        "Not covered: copies made outside this tool (exports, backups, files you moved), and what "
+        "the vendors keep under their own retention terms."
+    )
+    return 1 if outcome.failed or plan.unreadable else 0
+
+
 def run_evidence_step(args: argparse.Namespace) -> int:
     """`diarize-after` / `confirm-speakers` (app/evidence_cli.py)."""
     cfg = _apply_project(config_mod.load_config(), args)
@@ -3163,6 +3280,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return run_export(args)
         if args.command == "fetch-voiceprint-model":
             return run_fetch_voiceprint_model(args)
+        if args.command == "forget":
+            return run_forget(args)
         if args.command in ("diarize-after", "confirm-speakers"):
             return run_evidence_step(args)
         if args.command == "kb":

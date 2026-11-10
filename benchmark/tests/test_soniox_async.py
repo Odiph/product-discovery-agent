@@ -10,6 +10,7 @@ recording of a customer meeting must not outlive the pass that needed it.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -245,3 +246,90 @@ def test_urllib_transport_sends_a_streamed_body_with_its_length_not_chunked():
         server.shutdown()
     assert (status, raw) == (201, b'{"id": "x"}')
     assert received == {"te": None, "body": b"abcdef"}
+
+
+# --- the multipart header and the Authorization header stay ours ---------------
+
+
+def _uploaded_filename(transport):
+    body = next(body for method, url, _, body in transport.calls if method == "POST" and url.endswith("/v1/files"))
+    return body.split(b'filename="', 1)[1].split(b'"', 1)[0]
+
+
+# Built from code points so the source stays ASCII: a carriage return and
+# Hebrew letters (the word for "file") written literally are easy to mangle.
+CRLF = chr(13) + chr(10)
+HEBREW_WORD = "".join(map(chr, (0x5E7, 0x5D5, 0x5D1, 0x5E5)))
+
+
+@pytest.mark.parametrize("name, expected", [
+    ('room"' + CRLF + 'X-Injected: 1.wav', "roomX-Injected1.wav"),
+    (HEBREW_WORD + " x.wav", "x.wav"),
+    (HEBREW_WORD + ".wav", "audio.wav"),
+    ("..wav", "audio.wav"),
+    ("noext", "noext"),
+    ("meeting 2026-11-10.wav", "meeting2026-11-10.wav"),
+])
+def test_the_upload_name_carries_only_safe_characters(name, expected):
+    # A local file name reaches a multipart HEADER: a quote or a newline in it
+    # would end the header early, and a person's name in it is sent to the
+    # vendor for no reason the pass needs.
+    assert sa._safe_upload_name(Path(name)) == expected
+
+
+def test_the_uploaded_header_names_a_sanitised_file(tmp_path):
+    audio = tmp_path / (HEBREW_WORD + " meeting.wav")
+    audio.write_bytes(b"RIFF....WAVEfmt fake")
+    t = FakeTransport()
+    _client(t).transcribe_file(audio)
+    uploaded = _uploaded_filename(t).decode("ascii")
+    assert uploaded.endswith("-meeting.wav")
+    assert all(c.isascii() and (c.isalnum() or c in "._-") for c in uploaded)
+
+
+def test_urllib_transport_refuses_a_redirect_rather_than_forwarding_the_key():
+    # urllib follows a 3xx by default and copies the request's headers onto the
+    # new request, Authorization included -- a redirect would hand the API key
+    # to whatever host the Location names.
+    import http.server
+    import threading
+
+    seen = {"target": 0}
+
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):  # noqa: N802 -- stdlib name
+            if self.path == "/target":
+                seen["target"] += 1
+                seen["auth"] = self.headers.get("Authorization")
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b"{}")
+                return
+            self.send_response(302)
+            self.send_header("Location", f"http://127.0.0.1:{self.server.server_port}/target")
+            self.end_headers()
+
+        def log_message(self, *args):
+            pass
+
+    server = http.server.HTTPServer(("127.0.0.1", 0), Handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        with pytest.raises(OSError) as raised:
+            sa.urllib_transport(
+                "GET", f"http://127.0.0.1:{server.server_port}/v1/files",
+                {"Authorization": "Bearer k-test"}, None,
+            )
+    finally:
+        server.shutdown()
+    assert seen["target"] == 0
+    assert "k-test" not in str(raised.value)
+
+
+def test_a_refused_redirect_surfaces_as_a_vendor_error(wav):
+    def redirecting(method, url, headers, body):
+        raise sa.RedirectRefused("redirect refused")
+
+    with pytest.raises(sa.SonioxAsyncError):
+        _client(redirecting).transcribe_file(wav)

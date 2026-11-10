@@ -29,13 +29,17 @@ client->server message this protocol has, or is ever meant to have.
 
 from __future__ import annotations
 
+import base64
+import hashlib
 import json
 import logging
+import re
 import secrets
 import socket
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Optional, Sequence
+from urllib.parse import quote, urlsplit
 
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import PlainTextResponse, Response
@@ -154,21 +158,150 @@ def check_port_available(port: int, *, host: str = "0.0.0.0") -> None:
 # not whole 16-bit samples, closes the socket. This is the one route a client
 # can push data into the laptop through, so it is bounded.
 MAX_AUDIO_FRAME_BYTES = 65536
-WS_CLOSE_MIC_BUSY = 4409
+# Last connection wins: a newer mic socket closes the older one with this
+# code, which mic.js treats as final (retrying would steal the mic back and
+# the two phones would take turns forever).
+WS_CLOSE_MIC_REPLACED = 4410
 _WS_CLOSE_BAD_AUDIO = 1003
 _MIC_PAGE_MARKER = b"</body>"
 # Appended to the live page for `/s/{t}?mic`, and ONLY there: a two-stream
-# run's page never carries a capture script (gate 2).
-_MIC_BAR = (
-    b'<div id="mic-region" class="mic-region">'
-    b'<button id="mic-button" type="button">Start recording</button>'
-    b'<span id="mic-status" class="mic-status" dir="ltr">Say the consent line first: '
-    b'the first voice is taken to be you.</span>'
-    b'<span id="mic-level" class="mic-level"></span></div>'
-    b'<script>(function(){var s=document.createElement("script");s.type="module";'
-    b's.src=window.location.pathname.replace(/\\/$/,"")+"/mic.js";'
-    b"document.body.appendChild(s);})();</script>"
+# run's page never carries a capture script (gate 2). The script is loaded by
+# src, not by an inline loader, so the CSP needs no hash for it; the token is
+# known at factory time, which is what makes an absolute src possible.
+_MIC_BAR_HTML = (
+    '<div id="mic-region" class="mic-region">'
+    '<button id="mic-button" type="button">Start recording</button>'
+    '<span id="mic-status" class="mic-status" dir="ltr">Say the consent line first: '
+    'the first voice is taken to be you.</span>'
+    '<span id="mic-level" class="mic-level"></span></div>'
+    '<script type="module" src="/s/{token}/mic.js"></script>'
 )
+
+# A browser-sent Origin that is not this page's own host: refused before
+# accept, like a bad token, but with its own code so the two are told apart.
+_WS_CLOSE_BAD_ORIGIN = 4403
+
+# --- browser hardening headers ------------------------------------------------
+#
+# Every page script is same-origin; the one inline script (index.html's
+# bootstrap, which derives the token path from the URL) is allowed by its
+# hash, computed from the bytes actually served, so nothing else inline runs.
+# No inline style or event-handler attribute exists, so style-src stays 'self'.
+_STATIC_HEADERS = (
+    (b"x-content-type-options", b"nosniff"),
+    (b"referrer-policy", b"no-referrer"),
+    (b"x-frame-options", b"DENY"),
+)
+_INLINE_SCRIPT = re.compile(rb"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.DOTALL | re.IGNORECASE)
+# Only a plain host[:port] (or bracketed IPv6) is ever echoed into the policy:
+# the Host header is client-controlled.
+_SAFE_HOST = re.compile(r"^(?:[A-Za-z0-9.-]+|\[[0-9A-Fa-f:.]+\])(?::\d{1,5})?$")
+
+
+def _inline_script_hashes(html: bytes) -> "tuple[str, ...]":
+    # The HTML parser normalizes CRLF/CR to LF before the browser hashes a
+    # script's text, so hash what the browser will see, not the file's bytes.
+    hashes = []
+    for body in _INLINE_SCRIPT.findall(html):
+        text = body.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        digest = base64.b64encode(hashlib.sha256(text).digest()).decode("ascii")
+        hashes.append(f"'sha256-{digest}'")
+    return tuple(dict.fromkeys(hashes))
+
+
+def content_security_policy(host: Optional[str], script_extra: "Sequence[str]" = ()) -> str:
+    # 'self' covers same-origin ws/wss in current browsers; the explicit
+    # scheme+host entries are for older WebKit, which did not.
+    connect = ["'self'"]
+    if host and _SAFE_HOST.match(host):
+        connect += [f"ws://{host}", f"wss://{host}"]
+    directives = (
+        "default-src 'self'",
+        "script-src " + " ".join(("'self'", *script_extra)),
+        "style-src 'self'",
+        "img-src 'self'",
+        "connect-src " + " ".join(connect),
+        "object-src 'none'",
+        "base-uri 'none'",
+        "form-action 'none'",
+        "frame-ancestors 'none'",
+    )
+    return "; ".join(directives)
+
+
+def _scope_header(scope: dict, name: bytes) -> Optional[str]:
+    for key, value in scope.get("headers", ()):
+        if key.lower() == name:
+            return value.decode("latin-1")
+    return None
+
+
+class _SecurityHeaders:
+    """Pure ASGI (not BaseHTTPMiddleware): adds the hardening headers to every
+    HTTP response, the 404s included, and leaves WebSocket traffic alone. A
+    route that set its own CSP (the page, which needs its script hashes)
+    keeps it; everything else gets the hash-free default."""
+
+    def __init__(self, app) -> None:
+        self.app = app
+
+    async def __call__(self, scope, receive, send) -> None:
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+        default_csp = content_security_policy(_scope_header(scope, b"host")).encode("ascii")
+
+        async def send_with_headers(message) -> None:
+            if message["type"] == "http.response.start":
+                headers = list(message.get("headers", ()))
+                present = {key.lower() for key, _ in headers}
+                headers += [(k, v) for k, v in _STATIC_HEADERS if k not in present]
+                if b"content-security-policy" not in present:
+                    headers.append((b"content-security-policy", default_csp))
+                message = {**message, "headers": headers}
+            await send(message)
+
+        await self.app(scope, receive, send_with_headers)
+
+
+def _host_port(netloc_or_url: str, default_port: int) -> "Optional[tuple[str, int]]":
+    parts = urlsplit(netloc_or_url if "//" in netloc_or_url else "//" + netloc_or_url)
+    try:
+        port = parts.port
+    except ValueError:
+        return None
+    if not parts.hostname:
+        return None
+    return parts.hostname.lower(), port or default_port
+
+
+def _origin_allowed(origin: str, hosts: "Sequence[str]") -> bool:
+    """True when a browser's Origin names one of the hosts this request was
+    addressed to. `hosts` is Host plus any X-Forwarded-Host: behind `tailscale
+    serve` the proxy may present either. Trusting a forwarded header costs
+    nothing here -- a page cannot set it on a WebSocket, and a non-browser
+    client can simply omit Origin anyway."""
+    try:
+        scheme = urlsplit(origin).scheme
+    except ValueError:
+        return False
+    if scheme not in ("http", "https"):
+        return False  # includes the opaque "null" origin
+    default_port = 443 if scheme == "https" else 80
+    target = _host_port(origin, default_port)
+    if target is None:
+        return False
+    return any(_host_port(host.strip(), default_port) == target for host in hosts if host.strip())
+
+
+def _websocket_origin_ok(websocket: WebSocket) -> bool:
+    # No Origin: not a browser (the CLI tests, a curl); the token still gates it.
+    origin = websocket.headers.get("origin")
+    if origin is None:
+        return True
+    hosts = [websocket.headers.get("host") or ""]
+    hosts += (websocket.headers.get("x-forwarded-host") or "").split(",")
+    return _origin_allowed(origin, hosts)
 
 
 @dataclass(frozen=True)
@@ -265,17 +398,24 @@ def create_app(
             return False
         return secrets.compare_digest(candidate, token)
 
-    mic_page = assets.index_html.replace(_MIC_PAGE_MARKER, _MIC_BAR + _MIC_PAGE_MARKER, 1)
+    app.add_middleware(_SecurityHeaders)
+    mic_bar = _MIC_BAR_HTML.replace("{token}", quote(token, safe="")).encode("utf-8")
+    mic_page = assets.index_html.replace(_MIC_PAGE_MARKER, mic_bar + _MIC_PAGE_MARKER, 1)
+    page_hashes = _inline_script_hashes(assets.index_html)
+    # mic.js builds its AudioWorklet from a blob: URL, which script-src
+    # governs; only the mic page is granted it.
+    mic_hashes = (*_inline_script_hashes(mic_page), "blob:")
 
     @app.get("/s/{candidate_token}")
     async def get_page(candidate_token: str, request: Request) -> Response:
         if not _token_matches(candidate_token):
             return _NOT_FOUND
         wants_mic = audio_sink is not None and "mic" in request.query_params
+        csp = content_security_policy(request.headers.get("host"), mic_hashes if wants_mic else page_hashes)
         return Response(
             content=mic_page if wants_mic else assets.index_html,
             media_type="text/html",
-            headers={"Cache-Control": "no-store"},
+            headers={"Cache-Control": "no-store", "Content-Security-Policy": csp},
         )
 
     @app.get("/s/{candidate_token}/app.js")
@@ -315,6 +455,11 @@ def create_app(
             # set (D-05). Sending "websocket.close" before "websocket.accept"
             # refuses the handshake at the ASGI level.
             await websocket.close(code=_WS_CLOSE_BAD_TOKEN)
+            return
+        if not _websocket_origin_ok(websocket):
+            # Another site's page holding a leaked token: refused before
+            # accept, so it never joins the hub either.
+            await websocket.close(code=_WS_CLOSE_BAD_ORIGIN)
             return
         await hub.connect(websocket)
         disconnect_reason = "unknown"
@@ -424,7 +569,10 @@ def build_uvicorn_server(
 
 def _register_mic_routes(app: FastAPI, *, assets: _StaticAssets, token_matches, store: SessionStore, audio_sink) -> None:
     """In-person mode: the capture script and the binary audio socket."""
-    slot = {"busy": False}
+    # The socket that currently owns the mic. Last connection wins: a stray
+    # token holder connecting first can no longer lock the operator out --
+    # reloading the phone page always takes the mic back.
+    slot: "dict[str, Optional[WebSocket]]" = {"owner": None}
 
     def _script(content: bytes) -> Response:
         return Response(content=content, media_type="text/javascript", headers={"Cache-Control": "no-store"})
@@ -442,16 +590,26 @@ def _register_mic_routes(app: FastAPI, *, assets: _StaticAssets, token_matches, 
         if not token_matches(candidate_token):
             await websocket.close(code=_WS_CLOSE_BAD_TOKEN)
             return
-        await websocket.accept()
-        if slot["busy"]:
-            await websocket.close(code=WS_CLOSE_MIC_BUSY)
+        if not _websocket_origin_ok(websocket):
+            await websocket.close(code=_WS_CLOSE_BAD_ORIGIN)
             return
-        slot["busy"] = True
-        store.append_event(event="mic-connected")
+        await websocket.accept()
+        previous, slot["owner"] = slot["owner"], websocket
+        if previous is not None:
+            try:
+                await previous.close(code=WS_CLOSE_MIC_REPLACED, reason="replaced by a newer connection")
+            except Exception:  # noqa: BLE001 -- already closing: its own handler cleans up
+                pass
+        store.append_event(event="mic-connected", detail={"replaced_previous": previous is not None})
         reason = "unknown"
         try:
             while True:
                 message = await websocket.receive()
+                if slot["owner"] is not websocket:
+                    # Replaced while waiting: never feed a second room into
+                    # the transcript, even one frame.
+                    reason = "replaced"
+                    break
                 if message["type"] == "websocket.disconnect":
                     reason = f"websocket-close-code-{message.get('code')}"
                     break
@@ -464,7 +622,10 @@ def _register_mic_routes(app: FastAPI, *, assets: _StaticAssets, token_matches, 
                     break
                 audio_sink(frame)
         except WebSocketDisconnect as exc:
-            reason = f"websocket-close-code-{exc.code}"
+            reason = "replaced" if slot["owner"] is not websocket else f"websocket-close-code-{exc.code}"
         finally:
-            slot["busy"] = False
+            # Release only our OWN claim: a replaced socket's cleanup runs
+            # after the new owner took the slot and must not free it.
+            if slot["owner"] is websocket:
+                slot["owner"] = None
             store.append_event(event="mic-disconnected", detail={"reason": reason})

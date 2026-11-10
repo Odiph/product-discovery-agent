@@ -8,9 +8,11 @@ instead, in the order an operator would fix it:
 1. the app's port is free on loopback (`start --in-person` binds 127.0.0.1);
 2. Tailscale is running and this laptop has a tailnet name;
 3. `tailscale serve` forwards `https://<name>/` to THIS app's port;
-4. that name completes a certificate-verified TLS handshake -- a phone grants
+4. Tailscale Funnel is OFF for that name -- Funnel would put the phone page
+   and the mic socket on the public internet behind only the URL token;
+5. that name completes a certificate-verified TLS handshake -- a phone grants
    the microphone only in a secure context;
-5. the diarizing in-person engine answers (skippable, like the call precheck).
+6. the diarizing in-person engine answers (skippable, like the call precheck).
 
 Every dependency is injectable, so the report is testable with no Tailscale,
 no network and no key.
@@ -44,6 +46,7 @@ IN_PERSON_PREFLIGHT_RULES = (
 
 _SERVE_NAME = "Tailscale serve forwards to this app"
 _HTTPS_NAME = "HTTPS name reachable (verified certificate)"
+_FUNNEL_NAME = "Not public (Tailscale Funnel off)"
 
 
 def in_person_conflict(args: argparse.Namespace) -> Optional[str]:
@@ -94,6 +97,20 @@ def _serve_row(dns_name: str, port: int, raw: Optional[str]) -> PrecheckRow:
     return PrecheckRow(name=_SERVE_NAME, result=RESULT_FAIL, remedy=remedy)
 
 
+def _funnel_row(dns_name: str, port: int, raw: Optional[str]) -> PrecheckRow:
+    if raw is None:  # the serve row already fails on an unreadable status
+        return PrecheckRow(name=_FUNNEL_NAME, result=RESULT_SKIPPED)
+    if not tailnet.funnel_enabled(raw, dns_name):
+        return PrecheckRow(name=_FUNNEL_NAME, result=RESULT_PASS, measured="tailnet only")
+    return PrecheckRow(
+        name=_FUNNEL_NAME, result=RESULT_FAIL,
+        remedy=(
+            f"Tailscale Funnel is ON for https://{dns_name}: the phone page and mic would be on the "
+            f"public internet behind only the URL token. {tailnet.funnel_off_instruction(port).capitalize()}."
+        ),
+    )
+
+
 def _https_row(dns_name: str, port: int, failure: "Optional[tailnet.HandshakeFailure]") -> PrecheckRow:
     if failure is None:
         return PrecheckRow(name=_HTTPS_NAME, result=RESULT_PASS, measured=f"https://{dns_name}")
@@ -128,10 +145,13 @@ def build_in_person_report(
     dns_name = dns_detector()
     rows.append(_tailscale_row(dns_name))
     if dns_name:
-        rows.append(_serve_row(dns_name, port, serve_reader()))
+        serve_status = serve_reader()
+        rows.append(_serve_row(dns_name, port, serve_status))
+        rows.append(_funnel_row(dns_name, port, serve_status))
         rows.append(_https_row(dns_name, port, https_probe(dns_name)))
     else:
         rows.append(PrecheckRow(name=_SERVE_NAME, result=RESULT_SKIPPED))
+        rows.append(PrecheckRow(name=_FUNNEL_NAME, result=RESULT_SKIPPED))
         rows.append(PrecheckRow(name=_HTTPS_NAME, result=RESULT_SKIPPED))
 
     if skip_stt:

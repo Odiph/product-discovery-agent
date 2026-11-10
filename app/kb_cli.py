@@ -26,7 +26,7 @@ from app import projects as projects_mod
 from app.kb import digest as kb_digest
 from app.kb import index as kb_index
 from app.kb import sources
-from app.kb.document import SOURCE_TYPES, SPOKEN_TYPES
+from app.kb.document import RESEARCH, SOURCE_TYPES, SPOKEN_TYPES
 from app.kb.store import KNOWLEDGE_DIR_NAME, KnowledgeStore, KnowledgeStoreError
 from app.session.reader import list_session_ids
 
@@ -117,6 +117,7 @@ def _add(args: argparse.Namespace, store: KnowledgeStore, paths: projects_mod.Pr
         return 2
     outcomes = {"added": 0, "updated": 0, "unchanged": 0}
     skipped = 0
+    guessed: "list[str]" = []
     for target in targets:
         loaded = sources.load(target, source_type=args.type)
         for document in loaded.documents:
@@ -126,13 +127,22 @@ def _add(args: argparse.Namespace, store: KnowledgeStore, paths: projects_mod.Pr
                 continue
             outcome = store.put(document)
             outcomes[outcome] += 1
-            print(f"{outcome:9} {document.doc_id}  [{document.source_type}]  {document.title}"
-                  f"  ({len(document.sections)} sections)")
+            # What was STORED: a guess over a confirmed document stays confirmed.
+            confirmed = store.get(document.doc_id).document.explicit_type
+            by_guess = document.source_type == RESEARCH and not confirmed
+            if by_guess:
+                guessed.append(document.origin)
+            print(f"{outcome:9} {document.doc_id}  [{document.source_type}{', by guess' if by_guess else ''}]"
+                  f"  {document.title}  ({len(document.sections)} sections)")
         for skip in loaded.skipped:
             print(f"skipped  {skip.path}: {skip.reason}")
             skipped += 1
     print(f"\n{outcomes['added']} added, {outcomes['updated']} updated, {outcomes['unchanged']} unchanged, "
           f"{skipped} skipped -> projects/{paths.path}/{KNOWLEDGE_DIR_NAME}/")
+    if guessed:
+        print(f"{len(guessed)} document(s) typed research by guess: their text stays off MCP and out of "
+              f"`kb digest` until you confirm none is a customer's own words, with "
+              f"`kb add --type research <path>`.")
     print(LOCAL_ONLY_NOTE)
     print(DIGEST_NOTE)
     return 0 if sum(outcomes.values()) or not skipped else 1
@@ -146,8 +156,9 @@ def _list(store: KnowledgeStore, source_type) -> int:
     for item in stored:
         document = item.document
         speakers = "  speakers" if document.source_type in SPOKEN_TYPES and document.has_speakers else ""
+        guess = ", typed by guess" if document.source_type == RESEARCH and not document.explicit_type else ""
         print(f"{item.doc_id}  {document.source_type:12} {document.date or '----------'}  {document.title}"
-              f"  ({len(document.sections)} sections{speakers})")
+              f"  ({len(document.sections)} sections{speakers}{guess})")
     print(f"\n{len(stored)} documents")
     return 0
 
@@ -202,6 +213,9 @@ def _digest(args: argparse.Namespace, store: KnowledgeStore, knowledge_dir: Path
     if plan.not_digested:
         left_out = ", ".join(f"{n} {kind}" for kind, n in sorted(plan.not_digested.items()))
         print(f"Never digested (other people's words stay off the live prompt): {left_out}")
+        if kb_digest.GUESSED_RESEARCH in plan.not_digested:
+            print("  Research typed by guess (`kb list` shows it) is digested once you confirm it "
+                  "with `kb add --type research <path>`.")
     if not plan.to_summarize:
         if plan.dropped:
             kb_digest.save(knowledge_dir, plan.kept)

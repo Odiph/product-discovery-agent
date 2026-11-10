@@ -6,7 +6,8 @@ capture script, no audio route. The audio socket is BINARY ONLY and bounded,
 because it is the one route a client can push data into the laptop through:
 text is ignored, a frame that is not whole 16-bit samples or is over the size
 cap is refused, and only one phone may stream at a time -- two phones would
-interleave two rooms into one transcript.
+interleave two rooms into one transcript. The newest connection wins, so a
+stray token holder cannot lock the operator's own phone out.
 """
 
 from __future__ import annotations
@@ -111,7 +112,9 @@ def test_a_frame_that_is_not_whole_samples_or_is_over_the_cap_is_refused(tmp_pat
     assert got == []
 
 
-def test_only_one_phone_may_stream_at_a_time(tmp_path):
+def test_only_one_phone_streams_at_a_time_and_the_newest_wins(tmp_path):
+    # Last connection wins (test_web_hardening.py has the full squatter case):
+    # the operator can always reclaim the mic by reloading the phone page.
     got = []
     app, _ = build(tmp_path, sink=got.append)
     with _running_server(app) as (base, _loop):
@@ -120,13 +123,14 @@ def test_only_one_phone_may_stream_at_a_time(tmp_path):
             assert wait_for(lambda: got == [b"\x01\x00"])
             with ws_connect(_audio_url(base), open_timeout=5) as second:
                 with pytest.raises(ConnectionClosed) as exc:
-                    second.recv(timeout=5)
-                assert exc.value.rcvd.code == web_server.WS_CLOSE_MIC_BUSY
-        # the slot frees when the first phone leaves
-        assert wait_for(lambda: True)
+                    first.recv(timeout=5)
+                assert exc.value.rcvd.code == web_server.WS_CLOSE_MIC_REPLACED
+                second.send(b"\x02\x00")
+                assert wait_for(lambda: got[-1] == b"\x02\x00")
+        # the slot frees when the phones leave
         with ws_connect(_audio_url(base), open_timeout=5) as again:
-            again.send(b"\x02\x00")
-            assert wait_for(lambda: got[-1] == b"\x02\x00")
+            again.send(b"\x03\x00")
+            assert wait_for(lambda: got[-1] == b"\x03\x00")
 
 
 def test_a_wrong_token_never_reaches_the_sink(tmp_path):

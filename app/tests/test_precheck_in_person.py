@@ -174,3 +174,41 @@ def test_the_cli_refuses_phone_with_in_person(monkeypatch, capsys):
     monkeypatch.setattr(main_mod, "construct_pyaudio", lambda: (_ for _ in ()).throw(AssertionError()))
     assert main_mod.main(["precheck", "--in-person", "--phone"]) == 2
     assert "--phone" in capsys.readouterr().err
+
+
+# --- Tailscale Funnel: the in-person surface must never be on the public internet ---
+
+
+def _funnelled(raw: str, host: str = NAME) -> str:
+    config = json.loads(raw)
+    config["AllowFunnel"] = {f"{host}:443": True}
+    return json.dumps(config)
+
+
+def test_funnel_on_for_this_name_fails_with_a_fix_even_though_serve_is_right():
+    report = _build(serve_reader=lambda: _funnelled(_serve(f"http://127.0.0.1:{PORT}")))
+    assert report.exit_code == 1
+    assert _row(report, "Tailscale serve").result == RESULT_PASS
+    row = _row(report, "Not public")
+    assert row.result == RESULT_FAIL
+    assert "public internet" in row.remedy
+    assert "tailscale funnel --https=443 off" in row.remedy and f"tailscale serve --bg {PORT}" in row.remedy
+
+
+def test_funnel_on_in_a_foreground_session_fails_too():
+    nested = json.loads(_funnelled(_serve(f"http://127.0.0.1:{PORT}")))
+    raw = json.dumps({"Foreground": {"s1": nested}})
+    assert _row(_build(serve_reader=lambda: raw), "Not public").result == RESULT_FAIL
+
+
+def test_funnel_off_or_on_for_another_name_passes():
+    assert _row(_build(), "Not public").result == RESULT_PASS
+    other = _funnelled(_serve(f"http://127.0.0.1:{PORT}"), host="other.tail1234.ts.net")
+    assert _row(_build(serve_reader=lambda: other), "Not public").result == RESULT_PASS
+    explicit_off = json.dumps({**json.loads(_serve(f"http://127.0.0.1:{PORT}")), "AllowFunnel": {f"{NAME}:443": False}})
+    assert _row(_build(serve_reader=lambda: explicit_off), "Not public").result == RESULT_PASS
+
+
+def test_funnel_row_is_skipped_without_a_name_or_a_readable_status():
+    assert _row(_build(dns_detector=lambda: None), "Not public").result == RESULT_SKIPPED
+    assert _row(_build(serve_reader=lambda: None), "Not public").result == RESULT_SKIPPED

@@ -9,6 +9,7 @@ customer's transcript out of the repository.
 
 from __future__ import annotations
 
+import dataclasses
 import json
 import os
 from dataclasses import dataclass
@@ -50,7 +51,15 @@ class KnowledgeStore:
                 existing = self._read(path)
             except KnowledgeStoreError:
                 existing = None  # damaged: re-adding the source is the repair
-            if existing is not None and existing.content_hash == document.content_hash:
+            # A type the operator confirmed stays confirmed when the same file
+            # is later re-added by guess (a folder re-add, an edit): same id
+            # means same type and origin, and only `kb remove` un-confirms it.
+            if existing is not None and existing.document.explicit_type and not document.explicit_type:
+                document = dataclasses.replace(document, explicit_type=True)
+            # Same content is unchanged -- unless this add CONFIRMS a guess.
+            if existing is not None and existing.content_hash == document.content_hash and (
+                existing.document.explicit_type == document.explicit_type
+            ):
                 return UNCHANGED
             outcome = UPDATED
         else:

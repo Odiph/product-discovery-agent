@@ -25,6 +25,9 @@ from xml.etree import ElementTree
 from app.kb.document import EMAIL, RESEARCH, Document, Section
 
 MAX_DOCX_XML_BYTES = 50_000_000
+# Every title is cut here, at ingestion, as the PDF adapter's is: a subject
+# line or a `<title>` is the sender's or the page's text, of any length.
+MAX_TITLE_CHARS = 120
 _WORD_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 _SKIPPED_HTML = frozenset({"script", "style", "noscript", "svg", "head", "template"})
 _BLOCK_HTML = frozenset({
@@ -45,7 +48,7 @@ def from_text(path: Path, text: str, *, source_type: str = RESEARCH) -> Document
     return Document(
         source_type=source_type,
         origin=str(Path(path).resolve()),
-        title=_markdown_title(text) or Path(path).stem,
+        title=(_markdown_title(text) or Path(path).stem)[:MAX_TITLE_CHARS],
         sections=tuple(_paragraphs(text)),
     )
 
@@ -58,7 +61,7 @@ def from_html(path: Path, text: str) -> Document:
     return Document(
         source_type=RESEARCH,
         origin=str(Path(path).resolve()),
-        title=(parser.title or "").strip() or Path(path).stem,
+        title=((parser.title or "").strip() or Path(path).stem)[:MAX_TITLE_CHARS],
         sections=tuple(_numbered_paragraphs(body.split("\n\n"), "paragraph")),
     )
 
@@ -80,7 +83,7 @@ def from_docx(path: Path) -> Document:
     return Document(
         source_type=RESEARCH,
         origin=str(Path(path).resolve()),
-        title=next((p for p in paragraphs if p), Path(path).stem)[:120],
+        title=next((p for p in paragraphs if p), Path(path).stem)[:MAX_TITLE_CHARS],
         sections=tuple(_numbered_paragraphs(paragraphs, "paragraph")),
     )
 
@@ -145,7 +148,7 @@ def _email_document(message: EmailMessage, *, origin: str, fallback_title: str) 
     return Document(
         source_type=EMAIL,
         origin=origin,
-        title=str(message.get("Subject") or "").strip() or fallback_title,
+        title=(str(message.get("Subject") or "").strip() or fallback_title)[:MAX_TITLE_CHARS],
         date=_email_date(message),
         participants=tuple(people),
         sections=tuple(_paragraphs(_strip_quoted_history(body))),

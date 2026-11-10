@@ -67,8 +67,10 @@ tool asks for or records consent on your behalf.
 |---|---|---|
 | Live audio of both sides | Soniox (speech-to-text) | Throughout every recorded call |
 | Transcript text, your brief, survey, hypotheses, your own rules (`process.md`) and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions` |
-| Research and code you added with `kb add` (never interviews, conversations or emails) | The same coach endpoint | When you run `kb digest`, once per new or changed document. Its notes then ride in the coach's prompt every cycle |
-| In-person room audio (`room.wav`, kept on the laptop after `start --in-person`) | Soniox, when you run `diarize-after` (the uploaded copy is deleted afterwards); the local file is deleted by `confirm-speakers --confirm` | Once per in-person meeting, only when you run `diarize-after` |
+| Code you added with `kb add`, and research you typed yourself with `kb add --type research` (never interviews, conversations, emails, or anything typed as research by guess) | The same coach endpoint | When you run `kb digest`, once per new or changed document. Its notes then ride in the coach's prompt every cycle |
+| In-person room audio | Soniox, live during `start --in-person`, and again when you run `diarize-after` (the uploaded copy is deleted afterwards) | Every in-person meeting |
+| In-person room audio, phone to laptop | Your Tailscale tailnet: encrypted end to end between your own devices, possibly through Tailscale's relay servers | Throughout every in-person meeting |
+| Your laptop's Tailscale machine name | Public certificate-transparency logs, once you turn on HTTPS Certificates | Once, when the certificate is issued |
 | Retained audio (`--retain-audio`, off by default) | Nothing, unless you run the benchmark, which uploads it to the STT vendors it compares | Only when you run `benchmark/` yourself |
 
 Each vendor's own policy governs retention and training use, and they change,
@@ -79,15 +81,37 @@ If you process other people's personal data, a data processing agreement with
 each vendor is your responsibility. To avoid a vendor, set `COACH_BASE_URL` to
 a model you run yourself; without `ANTHROPIC_API_KEY` and `COACH_BASE_URL` the
 coach is simply off and only Soniox receives anything. Nothing is sent
-anywhere else: no telemetry, no analytics.
+anywhere else: no telemetry, no analytics. The one other outbound request is
+`fetch-voiceprint-model`, a one-time download from GitHub that sends nothing
+of yours.
+
+**Voiceprints (in-person mode only).** To tell the two people in the room
+apart, the app computes a voiceprint (a speaker embedding) for each voice from
+the first two minutes of the meeting. Voiceprints are kept in memory only,
+never written to disk, never sent anywhere, and are gone when the run ends;
+`diarize-after` recomputes them from the room audio. Some laws treat a
+voiceprint as biometric data: Illinois's BIPA requires written consent before
+one is collected, even briefly, and GDPR Article 9 and Israel's Privacy
+Protection Law (Amendment 13) may count it as specially protected data. Name
+it in your consent line: "...and the software tells our
+voices apart by voiceprint, which it does not keep".
 
 **What stays on your machine:** transcripts, session metadata, extracted
 claims and hypotheses, and the knowledge base (`kb`, below), under `sessions/` and `projects/`. Both are
 git-ignored in full. They hold verbatim speech, so treat the folders as
-confidential and delete sessions you no longer need. If someone asks you to
-erase their data, delete their session directory and remove that session's
-entries from the project's `context/facts.json`; there is no delete command
-yet.
+confidential and delete sessions you no longer need. If someone asks you to erase their data, run
+`.venv\Scripts\python.exe -m app forget <session_id> --project <node>` (leave
+out `--project` for a root session). It lists what it would delete, as counts
+and paths with no transcript text, and deletes only when you add `--yes`. It
+removes the session directory (transcript, room audio, renders, critiques),
+that interview's rows in `context/facts.json`, `rejections.json`,
+`demotions.json` and `declined_proposals.json`, and any knowledge-base copy
+made with `kb add --sessions`. A file it cannot read is left untouched and
+named, so repair it and run the command again. A session with the same id in
+another project is reported, not deleted. It does not reach copies you made
+yourself (exports, backups, moved files, a transcript re-added as a plain
+file) or what Soniox or your coach provider keep under their own retention
+terms.
 
 **A note on the code comments.** Many comments cite design notes such as
 `04-01-PLAN.md`, `03-RESEARCH.md` or `STATE.md`, and phase or gate numbers.
@@ -98,9 +122,15 @@ benchmark's `edge-tts` dependency is LGPL-3.0, used as an unmodified library.
 **Who can reach the running app:** during a call, a small page is served on
 your local network (port 8765) so a phone on the same Wi-Fi can follow along.
 Every route on it requires a random token generated fresh for that run, and it
-is plain HTTP, so use it only on a network you trust. The console, the
+is plain HTTP: anyone who can watch traffic on that Wi-Fi can read the token
+from the URL and, with it, the live transcript and suggestions. Use it only on
+a network you trust (your own, or your phone's hotspot). In-person mode does
+not use this page: it listens on `127.0.0.1` behind `tailscale serve`, which is
+HTTPS and reachable by any device on your tailnet that has the token, never by
+the Wi-Fi you are on. Tailscale Funnel would put it on the public internet, so
+`precheck --in-person` fails while Funnel is on for that name. The console, the
 authoring page and the hub listen on `127.0.0.1` only. The MCP server is
-read-only and never returns quotes, transcripts or audio. See `SECURITY.md`.
+read-only and never returns quotes, transcripts, audio or interviewee names. See `SECURITY.md`.
 
 ## Setup (first run on a new machine)
 
@@ -323,8 +353,11 @@ for the hotspot first, always.
 For a meeting across a table rather than a call, run the engine on the laptop
 and use your phone as the one microphone in the room. A phone browser grants
 the microphone only over HTTPS. Tailscale gives the laptop a real HTTPS name
-that only your own devices can reach, from any network; the app itself listens
-on `127.0.0.1` only, so the Wi-Fi you are on never sees it.
+that only devices on your tailnet can reach, from any network; the app itself
+listens on `127.0.0.1` only, so the Wi-Fi you are on never sees it. Anyone you
+have shared a machine or the tailnet with can reach the name too, so keep the
+tailnet to your own devices (or restrict it with a Tailscale access rule), and
+never turn on Funnel for it: `precheck --in-person` fails if you do.
 
 **Once per machine:**
 
@@ -370,6 +403,9 @@ python -m app extract <session>            # refuses until the speakers are conf
 `confirm-speakers --confirm` deletes the kept room audio. `--disputed
 label|voiceprint` settles turns the voiceprint disagreed with;
 `--accept-live-roles` confirms a session that has no audio to re-pass.
+
+Opening the phone page on a second device takes the microphone over; reload
+the first page to take it back.
 
 ## Screen-sharing during the call
 
@@ -682,6 +718,11 @@ confirmed with `git check-ignore`, never by reading `.gitignore`) containing:
 - `transcript.md` — only after `python -m app render` is run (see below).
 - `interviewee.wav` / `interviewer.wav` — only if `--retain-audio` was passed
   (see below). Already covered by the existing `*.wav` ignore rule.
+- In-person runs only: `room.wav`, the room audio of the meeting, kept
+  **without** any flag so `diarize-after` can re-pass it, and deleted by
+  `confirm-speakers --confirm` (or `--accept-live-roles`). Until you run one of
+  those it is a full recording of a real person; `start --in-person` reminds
+  you when it ends. Also `evidence.jsonl`, the slower evidence pass's turns.
 
 ## Reading the transcript after the call
 
@@ -862,6 +903,22 @@ A PDF is read for its text only. A scanned PDF has no text until you run OCR
 on it, and a password-protected one needs an unlocked copy. Both are skipped,
 with the reason given.
 
+- **Research by guess stays private.** A file is "research" either because you
+  said so (`kb add --type research <path>`) or because nothing else fit. Only
+  the first kind is ever sent to a model or returned as text to another agent:
+  a call transcript saved as a PDF, a `.docx` or plain prose would otherwise
+  leak someone's words. `kb add` tells you how many documents it typed by
+  guess; re-add them with `--type research` once you have checked they hold no
+  one else's speech. Code (repository READMEs and `docs/`) is your own and is
+  used as is.
+- **Secrets are refused.** Files named like credentials (`*secret*`,
+  `*password*`, `.env*`, `*.pem`, `*.key`, `id_rsa`, ...) are not read, and a
+  document containing a key-shaped value (an API key, a private key block, a
+  `token = ...` assignment) is skipped with the reason given, never stored.
+- **It stays in the folder you give it.** Hidden files, `.git`, `.venv`,
+  `node_modules`, symbolic links and Windows junctions are skipped, and
+  nothing outside the folder is read.
+
 - **Local only, except `kb digest`.** Adding, searching and topics run on your
   machine and call no model. The index lives in `projects/<node>/knowledge/`, git-ignored with the
   rest of `projects/`.
@@ -882,9 +939,9 @@ with the reason given.
   and brief (up to about 4,000 characters) go into the coach's cached prompt,
   once, so nothing is added to each cycle's latency. The coach is told they are
   background, not evidence from any interview. Interviews, conversations and
-  emails are never digested: other customers' words never reach a live prompt.
-  The type is the one `kb add` gave the file, so a call transcript saved as a
-  PDF counts as research: check the list `kb digest` prints before `--yes`.
+  emails are never digested, and neither is research typed by guess (above):
+  other customers' words never reach a live prompt. Check the list `kb digest`
+  prints before `--yes`.
   A document changed or removed since the last digest is left out, and `start`
   says so.
 
@@ -902,8 +959,9 @@ with the reason given.
 | | what keeps coming up that no hypothesis predicted | `themes` |
 | | what you keep doing, and the offers you walked past | `critique-questions --all`, then `mirror` |
 
-Every command above takes `--project`. Only `extract`, `critique-questions`
-and the live coach call a model.
+Every command above takes `--project`. Of these, only `extract`,
+`critique-questions` and the live coach call a model; outside this table, so
+does `kb digest`.
 
 ## Retaining the raw audio (rehearsal sessions only)
 

@@ -23,11 +23,13 @@ from app.kb.document import CODE, CONVERSATION, EMAIL, INTERVIEW, RESEARCH, Docu
 from app.kb.store import KnowledgeStore
 
 
-def _doc(title: str, *texts: str, source_type: str = RESEARCH, origin: "str | None" = None) -> Document:
+def _doc(title: str, *texts: str, source_type: str = RESEARCH, origin: "str | None" = None,
+         explicit_type: bool = True) -> Document:
     return Document(
         source_type=source_type,
         origin=origin or f"/notes/{title}.md",
         title=title,
+        explicit_type=explicit_type,
         sections=tuple(Section(text=t, location=f"line {i}") for i, t in enumerate(texts, start=1)),
     )
 
@@ -275,3 +277,26 @@ def test_a_section_longer_than_a_part_is_split_not_cut(monkeypatch):
     pieces = digest_model.parts(document)
     assert "".join(s.text for part in pieces for s in part) == "a" * 25
     assert {s.location for part in pieces for s in part} == {"line 1"}
+
+
+# --- research typed by guess --------------------------------------------------
+
+
+def test_research_typed_by_guess_is_never_digested():
+    guessed = _doc("Call notes", "Dana said it hurts.", explicit_type=False)
+    given = _doc("Pricing", "Plans start at forty dollars.")
+    repo = _doc("Repo", "A Python CLI.", source_type=CODE, origin="/repo", explicit_type=False)
+    plan = digest.plan((), [guessed, given, repo])
+    assert [d.title for d in plan.to_summarize] == ["Pricing", "Repo"]
+    assert plan.not_digested == {digest.GUESSED_RESEARCH: 1}
+
+
+def test_a_digest_entry_for_research_typed_by_guess_never_reaches_the_coach(tmp_path):
+    """Enforced on read too, against the stored document: an entry made
+    before this rule, or written by hand, is filtered out."""
+    store = KnowledgeStore.for_node(tmp_path)
+    guessed = _doc("Call notes", "Dana said invoices hurt.", explicit_type=False)
+    store.put(guessed)
+    digest.save(tmp_path / "knowledge", (_entry(guessed, ("Invoices hurt.", "line 1")),))
+    notes, stale = digest.coach_notes(tmp_path / "knowledge", "invoices")
+    assert notes == () and stale == 1

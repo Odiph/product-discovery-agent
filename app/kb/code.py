@@ -15,6 +15,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Iterable, Optional
 
+from app.kb import secret_scan
 from app.kb.document import CODE, Document, Section
 from app.kb.written import _paragraphs
 
@@ -36,17 +37,37 @@ def is_repository(path: Path) -> bool:
 
 
 def from_repository(root: Path) -> Document:
+    return read_repository(root)[0]
+
+
+def read_repository(root: Path) -> "tuple[Document, tuple[tuple[str, str], ...]]":
+    """The document, and the prose files refused for holding a secret, as
+    (path, reason). One runbook with a key pasted in costs that file, not the
+    repository: the rest of its prose is still the operator's own."""
     root = Path(root).resolve()
     sections = [Section(text=_tree_summary(root), location="summary")]
+    refused: "list[tuple[str, str]]" = []
     for prose in _prose_files(root):
         relative = prose.relative_to(root).as_posix()
+        refusal = secret_scan.name_refusal(prose)
+        if refusal:
+            refused.append((str(prose), refusal))
+            continue
         try:
             text = prose.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
-        for section in _paragraphs(text):
-            sections.append(Section(text=section.text, location=f"{relative}:{section.location.split()[-1]}"))
-    return Document(source_type=CODE, origin=str(root), title=f"Repository {root.name}", sections=tuple(sections))
+        found = [Section(text=section.text, location=f"{relative}:{section.location.split()[-1]}")
+                 for section in _paragraphs(text)]
+        refusal = secret_scan.document_refusal(
+            Document(source_type=CODE, origin=str(prose), title=relative, sections=tuple(found))
+        )
+        if refusal:
+            refused.append((str(prose), refusal))
+            continue
+        sections.extend(found)
+    document = Document(source_type=CODE, origin=str(root), title=f"Repository {root.name}", sections=tuple(sections))
+    return document, tuple(refused)
 
 
 def _walk(root: Path) -> Iterable[Path]:
@@ -59,7 +80,7 @@ def _walk(root: Path) -> Iterable[Path]:
         except OSError:
             continue
         for entry in entries:
-            if entry.is_symlink():
+            if not _inside(root, entry):
                 continue
             if entry.is_dir():
                 if entry.name not in _SKIPPED_DIRS and not entry.name.startswith("."):
@@ -71,8 +92,9 @@ def _walk(root: Path) -> Iterable[Path]:
 
 def _inside(root: Path, path: Path) -> bool:
     """A cloned repository can hold `README.md -> ~/secrets.txt` or a `docs`
-    link to a home folder. Nothing reached through a link is read."""
-    if path.is_symlink():
+    link to a home folder. Nothing reached through a link is read -- an NTFS
+    junction included, which `is_symlink()` does not see (Python 3.12)."""
+    if path.is_symlink() or path.is_junction():
         return False
     try:
         return path.resolve().is_relative_to(root)

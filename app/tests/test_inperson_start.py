@@ -112,6 +112,32 @@ def test_an_in_person_run_turns_one_phone_stream_into_both_roles(tmp_path):
         # At least the 4 s the phone sent; the pacer zero-fills the rest.
         assert room.getnframes() >= 4 * 16000
 
+    # A real customer's voice is on disk with no flag on it, so the run says so
+    # as it ends, and names the commands that remove it.
+    tail = output[output.index("Transcript written to"):]
+    assert f"room.wav is still on this laptop" in tail, output
+    assert f"python -m app diarize-after {session.name}" in tail
+    assert f"python -m app confirm-speakers {session.name} --confirm" in tail
+    assert f"python -m app forget {session.name}" in tail
+
+
+def test_the_room_audio_reminder_carries_the_project_flag(tmp_path):
+    from app.main import _room_audio_reminder
+
+    session_dir = tmp_path / "20261110T101500"
+    session_dir.mkdir()
+    (session_dir / "room.wav").write_bytes(b"RIFF")
+    text = _room_audio_reminder(session_dir, project="acme/onboarding")
+    assert str(session_dir / "room.wav") in text
+    assert "python -m app confirm-speakers 20261110T101500 --confirm --project acme/onboarding" in text
+    assert "--accept-live-roles" in text
+
+
+def test_no_room_audio_reminder_when_nothing_was_kept(tmp_path):
+    from app.main import _room_audio_reminder
+
+    assert _room_audio_reminder(tmp_path, project=None) is None
+
 
 def test_the_phone_surface_is_not_reachable_from_the_lan_in_person(tmp_path):
     proc, lines = _start(tmp_path, "--seconds", "6")

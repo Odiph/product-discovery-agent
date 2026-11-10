@@ -19,10 +19,11 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from app.kb import index as kb_index
-from app.kb.document import CODE, EMAIL, INTERVIEW, RESEARCH, SOURCE_TYPES
+from app.kb.document import CODE, CONVERSATION, EMAIL, INTERVIEW, RESEARCH, SOURCE_TYPES
 from app.kb.store import KnowledgeStore
 
 TEXT_SAFE_TYPES = frozenset({RESEARCH, CODE})
+UNTITLED_TYPES = frozenset({INTERVIEW, CONVERSATION, EMAIL})
 MAX_LIMIT = 25
 MAX_QUERY_CHARS = 500
 
@@ -52,27 +53,29 @@ def search(arguments: "Mapping[str, Any]", node) -> "dict[str, Any]":
     for document in documents:
         counts[document.source_type] = counts.get(document.source_type, 0) + 1
     hits = kb_index.KeywordIndex(documents).search(query, limit=limit, source_types=types)
+    guessed = frozenset(d.doc_id for d in documents if d.source_type == RESEARCH and not d.explicit_type)
     return {
         "project": node.path,
         "documents": counts,
-        "hits": [_project_hit(hit) for hit in hits],
+        "hits": [_project_hit(hit, text_allowed=hit.doc_id not in guessed) for hit in hits],
         # A count, never a name or a parse message: those can carry content.
         "damaged_documents": len(damaged),
         "error": None,
     }
 
 
-def _project_hit(hit: kb_index.Hit) -> "dict[str, Any]":
-    """Field by field, never `asdict(hit)`: the snippet and the speaker name
-    are exactly the fields that must not cross for speech."""
+def _project_hit(hit: kb_index.Hit, *, text_allowed: bool) -> "dict[str, Any]":
+    """Field by field, never `asdict(hit)`: the snippet, the title and the
+    speaker name are exactly the fields that must not cross for speech.
+    `text_allowed` is False for research typed by guess."""
     projected: "dict[str, Any]" = {
         "doc_id": hit.doc_id,
         "source_type": hit.source_type,
-        "title": None if hit.source_type == EMAIL else hit.title,
+        "title": None if hit.source_type in UNTITLED_TYPES else hit.title,
         "date": hit.date,
         "location": hit.location,
         "score": hit.score,
-        "text": hit.snippet if hit.source_type in TEXT_SAFE_TYPES else None,
+        "text": hit.snippet if hit.source_type in TEXT_SAFE_TYPES and text_allowed else None,
     }
     if hit.source_type == INTERVIEW:
         projected["role"] = hit.speaker
@@ -97,7 +100,8 @@ DESCRIPTION = (
     "emails, research notes and code, added by the operator with `python -m app kb add`. Every "
     "hit cites its document and the exact place in it (turn, line, paragraph). Hits from "
     "interviews, conversations and emails carry NO text -- that is customer speech, read on the "
-    "operator's machine -- only research and code hits carry a snippet. Source types are "
+    "operator's machine -- only research and code hits carry a snippet (research only when the "
+    "operator typed it so). Source types are "
     "different kinds of knowing and are never evidence for or against a hypothesis: only "
     "get_standing says where a hypothesis stands. An empty 'documents' means nothing has been "
     "added yet, not that nothing is known."

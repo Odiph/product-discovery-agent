@@ -170,7 +170,9 @@ def research_and_email(root, tmp_path):
     notes.write_text("# Notes\n\nThey export to spreadsheets every Friday.\n", encoding="utf-8")
     mail = tmp_path / "m.eml"
     mail.write_text("From: a@b.c\nSubject: hi\n\nCustomer words here.\n", encoding="utf-8")
-    assert _kb("add", str(notes), str(mail), "--project", "acme") == 0
+    # Research is digested only when the operator typed it so.
+    assert _kb("add", str(notes), "--type", "research", "--project", "acme") == 0
+    assert _kb("add", str(mail), "--project", "acme") == 0
     return notes
 
 
@@ -227,7 +229,8 @@ def test_a_failed_document_is_reported_and_the_rest_kept(root, tmp_path, monkeyp
 
     for name in ("a", "b"):
         (tmp_path / f"{name}.md").write_text(f"# {name}\n\nText {name}.\n", encoding="utf-8")
-    assert _kb("add", str(tmp_path / "a.md"), str(tmp_path / "b.md"), "--project", "acme") == 0
+    assert _kb("add", str(tmp_path / "a.md"), str(tmp_path / "b.md"), "--type", "research",
+               "--project", "acme") == 0
     _stub_vendor(monkeypatch, [TimeoutError(), _points("B point.")])
     assert _kb("digest", "--yes", "--project", "acme") == 1
     assert "failed" in capsys.readouterr().err
@@ -250,8 +253,38 @@ def test_an_interrupted_digest_keeps_the_documents_already_paid_for(root, tmp_pa
 
     for name in ("a", "b"):
         (tmp_path / f"{name}.md").write_text(f"# {name}\n\nText {name}.\n", encoding="utf-8")
-    assert _kb("add", str(tmp_path / "a.md"), str(tmp_path / "b.md"), "--project", "acme") == 0
+    assert _kb("add", str(tmp_path / "a.md"), str(tmp_path / "b.md"), "--type", "research",
+               "--project", "acme") == 0
     _stub_vendor(monkeypatch, [_points("First point."), KeyboardInterrupt()])
     with pytest.raises(KeyboardInterrupt):
         _kb("digest", "--yes", "--project", "acme")
     assert [p.text for e in digest.load(_node(root) / "knowledge") for p in e.points] == ["First point."]
+
+
+def test_add_says_how_many_were_typed_research_by_guess_and_how_to_confirm(root, tmp_path, capsys):
+    notes = tmp_path / "n.md"
+    notes.write_text("# N\n\nSome research.\n", encoding="utf-8")
+    assert _kb("add", str(notes), "--project", "acme") == 0
+    out = capsys.readouterr().out
+    assert "1 document(s) typed research by guess" in out
+    assert "kb add --type research" in out
+
+    assert _kb("digest", "--project", "acme") == 0
+    assert "1 research typed by guess" in capsys.readouterr().out
+
+    # Confirming overwrites the same document: same id, now explicit.
+    assert _kb("add", str(notes), "--type", "research", "--project", "acme") == 0
+    out = capsys.readouterr().out
+    assert "1 updated" in out and "by guess" not in out
+    (stored,) = KnowledgeStore.for_node(_node(root)).all()
+    assert stored.document.explicit_type is True
+
+
+def test_a_secret_is_a_skip_line_that_does_not_print_it(root, tmp_path, capsys):
+    key = "AKIA" + "QWERTYUIOPASDFGH"
+    notes = tmp_path / "runbook.md"
+    notes.write_text(f"# Runbook\n\nUse {key} to deploy.\n", encoding="utf-8")
+    assert _kb("add", str(notes), "--project", "acme") == 1
+    out = capsys.readouterr().out
+    assert "skipped" in out and "secret" in out and key not in out
+    assert KnowledgeStore.for_node(_node(root)).all() == []

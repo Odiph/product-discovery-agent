@@ -54,13 +54,11 @@ import { BackoffCalculator } from "./live-state.mjs";
   // Close codes the server sends on purpose (app/web/server.py); retrying
   // them cannot succeed, so they end the recording instead.
   var CLOSE_BAD_TOKEN = 4404;
-  var CLOSE_MIC_BUSY = 4409;
+  // The laptop's mic slot is last-connection-wins: a newer page took the mic.
+  // Final, never retried -- retrying would steal it back, and two pages would
+  // then take the mic from each other forever.
+  var CLOSE_MIC_REPLACED = 4410;
   var CLOSE_BAD_AUDIO = 1003;
-  // After a network drop the laptop can still hold THIS phone's dead socket
-  // (until its ping times out) and answer the reconnect with "busy". Within
-  // this window of the last good connection, busy means "our own ghost":
-  // keep retrying. Outside it, it really is another phone.
-  var OWN_GHOST_WINDOW_MS = 60000;
   var RECORDING_MESSAGE = "Recording. The first voice is taken to be you.";
 
   // The processor runs on the audio thread and only copies channel 0 out;
@@ -88,7 +86,6 @@ import { BackoffCalculator } from "./live-state.mjs";
   var wakeLock = null;
   var wakeLockPending = false;
   var droppedFrames = 0;
-  var lastAliveAt = 0; // when an opened socket last closed; 0 = none this recording
 
   function setStatus(text, kind) {
     statusEl.textContent = text;
@@ -114,9 +111,7 @@ import { BackoffCalculator } from "./live-state.mjs";
     var ws = new WebSocket(audioUrl);
     ws.binaryType = "arraybuffer";
     socket = ws;
-    var opened = false;
     ws.onopen = function () {
-      opened = true;
       backoff.reset();
       setStatus(RECORDING_MESSAGE, "live");
     };
@@ -124,17 +119,11 @@ import { BackoffCalculator } from "./live-state.mjs";
       if (socket === ws) {
         socket = null;
       }
-      if (opened) {
-        lastAliveAt = Date.now();
-      }
       if (!recording) {
         return;
       }
-      if (event.code === CLOSE_MIC_BUSY && lastAliveAt > 0 && Date.now() - lastAliveAt < OWN_GHOST_WINDOW_MS) {
-        setStatus("Reconnecting: the laptop is still closing the old connection.", "warn");
-        scheduleReconnect();
-      } else if (event.code === CLOSE_MIC_BUSY) {
-        stopRecording("Another phone is already recording this session.", "error");
+      if (event.code === CLOSE_MIC_REPLACED) {
+        stopRecording("Another page took over the microphone. Reload this page to take it back.", "error");
       } else if (event.code === CLOSE_BAD_TOKEN) {
         stopRecording("This link is no longer valid. Rescan the code on the laptop.", "error");
       } else if (event.code === CLOSE_BAD_AUDIO) {
@@ -345,7 +334,6 @@ import { BackoffCalculator } from "./live-state.mjs";
     }
     recording = true;
     droppedFrames = 0;
-    lastAliveAt = 0;
     backoff.reset();
     button.textContent = "Stop recording";
     button.disabled = false;

@@ -29,6 +29,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import time
 import urllib.error
 import urllib.request
@@ -70,12 +71,40 @@ class SonioxAsyncError(Exception):
     """The vendor refused, failed, or timed out. Never carries key material."""
 
 
+class RedirectRefused(urllib.error.URLError):
+    """The API answered with a redirect. Never followed: urllib copies the
+    request's headers onto the redirected request, so following it would hand
+    the Bearer key (and the meeting audio) to whatever host `Location` names.
+    An `OSError`, so `_request` reports it as a failed call like any other."""
+
+
+class _RefuseRedirects(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: ANN001 -- stdlib signature
+        # Neither the target URL nor any header goes into the message: the
+        # target is attacker-chosen text and the headers carry the key.
+        raise RedirectRefused(f"HTTP {code} redirect refused")
+
+
+# Built once: the default handler chain, with redirects refused instead of followed.
+_OPENER = urllib.request.build_opener(_RefuseRedirects)
+
+# What may appear in the multipart `filename`: a quote or CR/LF would end the
+# header early, and anything beyond this set (a person's name in Hebrew, say)
+# tells the vendor nothing the pass needs.
+_UNSAFE_NAME_CHARS = re.compile(r"[^A-Za-z0-9._-]")
+
+
+def _safe_upload_name(path: Path) -> str:
+    stem = _UNSAFE_NAME_CHARS.sub("", path.stem).strip(".") or "audio"
+    return stem + _UNSAFE_NAME_CHARS.sub("", path.suffix)
+
+
 def urllib_transport(method: str, url: str, headers: "dict[str, str]", body: Body) -> "tuple[int, bytes]":
     # urllib sends an iterable body piece by piece; with Content-Length set by
     # the caller it is not chunk-encoded.
     request = urllib.request.Request(url, data=body, method=method, headers=headers)
     try:
-        with urllib.request.urlopen(request, timeout=HTTP_TIMEOUT_S) as response:
+        with _OPENER.open(request, timeout=HTTP_TIMEOUT_S) as response:
             return response.status, response.read()
     except urllib.error.HTTPError as exc:
         return exc.code, exc.read()
@@ -125,7 +154,7 @@ class SonioxAsyncClient:
         self._refuse_if_too_long(Path(path))
         # Unique per upload: if the upload times out after the vendor stored
         # the file, this name is the only way to find it again.
-        upload_name = f"{uuid.uuid4().hex}-{Path(path).name}"
+        upload_name = f"{uuid.uuid4().hex}-{_safe_upload_name(Path(path))}"
         try:
             file_id = self._upload(Path(path), upload_name)
         except SonioxAsyncError:

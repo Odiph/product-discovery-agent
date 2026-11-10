@@ -19,8 +19,12 @@ reach a live prompt (GC-08). They are refused when the digest is made and
 filtered again when it is read -- against the stored document's own type, so
 a hand-edited digest cannot carry one in under another label.
 
-The type is what the operator gave `kb add`: a call transcript saved as a PDF
-or added with `--type research` is research to this module. That is why
+**Research only when the operator typed it so.** A PDF, a saved page or a
+`.md` without `Name:` lines is research by GUESS, and a call transcript saved
+as one is speech. Guessed research is refused here and filtered again on
+read, against the stored document's own `explicit_type`, like the type
+filter above; `kb add --type research <path>` confirms one. A transcript
+added with `--type research` is still research to this module: that is why
 `kb digest` lists what it would send and sends nothing without `--yes`.
 """
 
@@ -46,6 +50,8 @@ MAX_LABEL_CHARS = 120
 # paid as a cache read on every cycle after the first.
 COACH_BUDGET_CHARS = 4000
 _SEARCH_LIMIT = 200
+GUESSED_RESEARCH = "research typed by guess"
+"""The `Plan.not_digested` key for research the operator has not confirmed."""
 
 
 class DigestError(ValueError):
@@ -101,6 +107,9 @@ def plan(entries: Sequence[Entry], documents: Iterable[Document], *, damaged_ids
         if document.source_type not in DIGEST_SOURCE_TYPES:
             skipped[document.source_type] += 1
             continue
+        if not _digestible(document.source_type, document.explicit_type):
+            skipped[GUESSED_RESEARCH] += 1
+            continue
         entry = by_id.get(document.doc_id)
         if entry is not None and entry.content_hash == document.content_hash:
             kept.append(entry)
@@ -110,6 +119,12 @@ def plan(entries: Sequence[Entry], documents: Iterable[Document], *, damaged_ids
     kept_ids = {entry.doc_id for entry in kept}
     dropped = tuple(entry for entry in entries if entry.doc_id not in kept_ids)
     return Plan(tuple(to_summarize), tuple(kept), dropped, dict(skipped))
+
+
+def _digestible(source_type: str, explicit_type: bool) -> bool:
+    """Code always (a repository is typed by what the folder is); research
+    only when the operator named the type."""
+    return source_type == CODE or (source_type == RESEARCH and explicit_type)
 
 
 def load(knowledge_dir: Path) -> "tuple[Entry, ...]":
@@ -191,13 +206,16 @@ def select(entries: Sequence[Entry], query: str, *, budget_chars: int = COACH_BU
 
 def coach_notes(knowledge_dir: Path, query: str, *, budget_chars: int = COACH_BUDGET_CHARS) -> "tuple[tuple[CoachNote, ...], int]":
     """What the coach is shown at `start`, and how many digest entries were
-    left out because their document changed or was removed since `kb digest`
+    left out because their document changed, was removed, or is research typed by guess, since `kb digest`
     last ran (the caller says so). Raises `DigestError` for a damaged digest."""
     entries = load(knowledge_dir)
     if not entries:
         return (), 0
     stored, _ = KnowledgeStore(knowledge_dir).scan()
-    current = {item.doc_id: (item.content_hash, item.document.source_type) for item in stored}
+    current = {
+        item.doc_id: (item.content_hash, item.document.source_type)
+        for item in stored if _digestible(item.document.source_type, item.document.explicit_type)
+    }
     fresh = tuple(
         entry for entry in entries
         if current.get(entry.doc_id) == (entry.content_hash, entry.source_type)

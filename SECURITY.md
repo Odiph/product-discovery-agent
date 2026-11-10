@@ -26,13 +26,29 @@ to another program, to a third party, or to git.
   phone on the same Wi-Fi can join. Every route requires a per-run random
   token, compared in constant time; a wrong token gets a generic 404. It is
   **plain HTTP**: anyone who can observe traffic on that network can read the
-  page. Use it only on a network you trust, or not at all.
+  token and the page. Use it only on a network you trust, or not at all.
+  Every response carries a strict Content-Security-Policy, `nosniff` and
+  `no-referrer`, and the WebSockets refuse a browser Origin that is not the
+  page's own host.
+- **In-person mode** listens on `127.0.0.1` only, behind `tailscale serve`
+  (HTTPS). It is reachable by every device on your tailnet that has the token,
+  including machines shared into it, so keep the tailnet to your own devices
+  or restrict it with an access rule. `precheck --in-person` fails while
+  Tailscale Funnel is on for the name, because Funnel would expose it to the
+  public internet. Room audio crosses the tailnet encrypted, possibly through
+  Tailscale's relays. The microphone socket accepts one phone at a time; a new
+  connection replaces the old one, so a stray client cannot hold it.
 - **The console, authoring page and hub** bind to `127.0.0.1` only, and check
   the `Host` header and the request `Content-Type`, so another website in your
   own browser cannot drive them.
 - **The MCP server** is read-only over stdio. It returns abstracted claims and
-  hypothesis standings, never quotes, transcripts or audio; a test pins that
-  boundary.
+  hypothesis standings, never quotes, transcripts, audio or interviewee
+  names; a test pins that boundary. `search_knowledge` returns text only for
+  your code and for research you typed yourself, never for anything typed by
+  guess.
+- **The knowledge base** (`kb add`) skips credential-named files and refuses
+  any document holding a key-shaped value, and never follows a symbolic link
+  or Windows junction out of the folder it was given.
 - **The Claude Code plugin** gives another repository that same read-only
   view. Its `/link-discovery` command also writes local deny rules so sessions
   in that repository cannot read this checkout's `projects/`, `sessions/` and

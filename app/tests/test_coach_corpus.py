@@ -325,6 +325,16 @@ def test_the_corpus_has_no_seed_path_only_the_loader_and_the_store_reference_the
     # anywhere, and D-01 (the corpus grows only from this tool's own
     # interviews) is untouched by two commands that only read what those
     # interviews already produced.
+    #
+    # `session/forget.py` joined 2026-11-10 with `python -m app forget`, the
+    # erasure command a person's deletion request needs. It names
+    # FACTS_FILENAME to check existence and to label its report, and it
+    # removes facts ONLY through `corpus_store.replace_session_facts(...,
+    # ())` -- so `corpus_store` stays the one writer of the corpus and its
+    # strict loader still decides whether the file parses. It can only SHRINK
+    # the corpus, never seed it, so D-01 holds. It never names the hypothesis
+    # artifact (gate 19 is unchanged) and never reads `Fact.quoted_text`
+    # (gate 20 is unchanged).
     app_dir = REPO_ROOT / "app"
     touching = set()
     for py_file in sorted(app_dir.rglob("*.py")):
@@ -334,7 +344,7 @@ def test_the_corpus_has_no_seed_path_only_the_loader_and_the_store_reference_the
             touching.add(py_file.relative_to(app_dir).as_posix())
     assert touching == {
         "coach/context.py", "coach/corpus.py", "coach/corpus_store.py",
-        "main.py", "mcp/tools.py",
+        "main.py", "mcp/tools.py", "session/forget.py",
         "web/accept.py", "web/author.py", "web/console.py", "web/review.py",
     }, (
         f"a module besides the loader, the fact writer, the two hypothesis-writing surfaces "

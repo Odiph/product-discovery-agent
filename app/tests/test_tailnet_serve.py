@@ -83,3 +83,40 @@ def test_https_handshake_reports_none_on_success_and_the_reason_on_failure():
 
     failure = tailnet.https_handshake_error(NAME, connect=refused)
     assert not failure.tls and "refused" in failure.detail
+
+
+# --- AllowFunnel: `serve status --json` maps "<name>:443" -> true when Funnel is on ---
+
+
+def test_funnel_is_found_in_the_background_or_a_foreground_config():
+    on = {f"{NAME}:443": True}
+    assert tailnet.funnel_enabled(json.dumps({**_web("http://127.0.0.1:8000"), "AllowFunnel": on}), NAME)
+    assert tailnet.funnel_enabled(json.dumps({"Foreground": {"s": {"AllowFunnel": on}}}), NAME)
+
+
+def test_funnel_off_another_name_another_port_or_odd_shapes_is_not_funnel():
+    for raw in (
+        json.dumps(_web("http://127.0.0.1:8000")),
+        json.dumps({"AllowFunnel": {f"{NAME}:443": False}}),
+        json.dumps({"AllowFunnel": {"other.tail1234.ts.net:443": True}}),
+        json.dumps({"AllowFunnel": {f"{NAME}:8443": True}}),
+        json.dumps({"AllowFunnel": {f"{NAME}:443": "true"}}),  # only a real JSON true counts
+        json.dumps({"AllowFunnel": [f"{NAME}:443"]}),
+        json.dumps({"Foreground": {"s": None}}),
+        json.dumps({"Foreground": [{"AllowFunnel": {f"{NAME}:443": True}}]}),
+        "", "not json", "[]", "null",
+    ):
+        assert not tailnet.funnel_enabled(raw, NAME), raw
+
+
+def test_the_run_start_warning_fires_only_when_funnel_is_on():
+    on = json.dumps({"AllowFunnel": {f"{NAME}:443": True}})
+    warning = tailnet.public_funnel_warning(NAME, 8000, serve_reader=lambda: on)
+    assert warning and "public internet" in warning and "tailscale serve --bg 8000" in warning
+    assert tailnet.public_funnel_warning(NAME, 8000, serve_reader=lambda: "{}") is None
+    assert tailnet.public_funnel_warning(NAME, 8000, serve_reader=lambda: None) is None
+
+
+def test_the_module_does_not_claim_only_the_operators_phone_can_reach_it():
+    doc = tailnet.__doc__ or ""
+    assert "nobody else" not in doc and "any device" in doc

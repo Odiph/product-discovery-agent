@@ -20,10 +20,10 @@ SENTINEL = "kbsentinelword"
 SPEECH = f"we rebuilt the {SENTINEL} by hand every friday"
 
 
-def _doc(source_type, origin, *, speaker=None, title="t"):
+def _doc(source_type, origin, *, speaker=None, title="t", explicit_type=True):
     return Document(
         source_type=source_type, origin=origin, title=title, date="2026-10-01",
-        participants=("dana@example.com",),
+        participants=("dana@example.com",), explicit_type=explicit_type,
         sections=(Section(text=SPEECH, location="turn 1", speaker=speaker),),
     )
 
@@ -33,8 +33,8 @@ def repo(tmp_path):
     node = tmp_path / "projects" / "acme"
     (node / "context").mkdir(parents=True)
     store = KnowledgeStore.for_node(node)
-    store.put(_doc(INTERVIEW, "session:S1", speaker="interviewee"))
-    store.put(_doc(CONVERSATION, "/x/call.vtt", speaker="Dana Cohen"))
+    store.put(_doc(INTERVIEW, "session:S1", speaker="interviewee", title="Interview with Dana Cohen"))
+    store.put(_doc(CONVERSATION, "/x/call.vtt", speaker="Dana Cohen", title="call with Dana Cohen"))
     store.put(_doc(EMAIL, "/x/m.eml", title=f"Re: the {SENTINEL} subject"))
     store.put(_doc(RESEARCH, "/x/notes.md", title="Notes"))
     store.put(_doc(CODE, "/x/repo", title="Repository repo"))
@@ -96,3 +96,30 @@ def test_a_damaged_store_reports_the_failure_class_not_its_content(repo):
     assert len(payload["documents"]) == 4, "the other documents must still be searched"
     blob = json.dumps({k: v for k, v in payload.items() if k != "hits"})
     assert SENTINEL not in blob
+
+
+def test_no_title_crosses_for_any_speech_type(repo):
+    """An interview's title is "Interview with <participant>" and a
+    conversation's is its file stem ("call with Dana"): names, both."""
+    payload = _call({"project": "acme", "query": SENTINEL}, repo)
+    by_type = {hit["source_type"]: hit for hit in payload["hits"]}
+    for speech_type in (INTERVIEW, CONVERSATION, EMAIL):
+        assert by_type[speech_type]["title"] is None
+        assert by_type[speech_type]["date"] == "2026-10-01"
+    assert by_type[RESEARCH]["title"] == "Notes"
+
+
+def test_research_typed_by_guess_crosses_as_a_citation_only(tmp_path):
+    """A PDF or a `.md` is research by guess: it may be a call transcript.
+    Its text crosses only once the operator has said `--type research`."""
+    node = tmp_path / "projects" / "acme"
+    (node / "context").mkdir(parents=True)
+    store = KnowledgeStore.for_node(node)
+    store.put(_doc(RESEARCH, "/x/guessed.pdf", explicit_type=False))
+    store.put(_doc(CODE, "/x/repo", explicit_type=False))
+    payload = _call({"project": "acme", "query": SENTINEL}, tmp_path)
+    by_type = {hit["source_type"]: hit for hit in payload["hits"]}
+    assert by_type[RESEARCH]["text"] is None and by_type[RESEARCH]["location"] == "turn 1"
+    assert SENTINEL not in json.dumps(by_type[RESEARCH])
+    # Code is a repository's own prose, typed by what the folder is: unchanged.
+    assert SENTINEL in by_type[CODE]["text"]
