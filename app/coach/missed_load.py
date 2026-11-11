@@ -14,13 +14,14 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Optional, Sequence
+from typing import Callable, Optional, Sequence
 
 from app.coach import context as coach_context
 from app.coach import corpus as coach_corpus
 from app.coach import missed as missed_mod
 from app.coach import mirror_load
 from app.coach import walked_past
+from app.coach.prompt_judge import PromptItem
 from app.session import evidence as ev
 from app.session.reader import list_session_ids
 
@@ -36,13 +37,29 @@ def read_claims(context_dir: Path) -> "tuple[missed_mod.CitedClaim, ...]":
 
 
 def load(context_dir: Path, sessions_root: Path, *, groups: "Optional[Sequence]" = None,
-         claims: "Optional[Sequence[missed_mod.CitedClaim]]" = None) -> missed_mod.Report:
+         claims: "Optional[Sequence[missed_mod.CitedClaim]]" = None,
+         judge: "Optional[Callable[[PromptItem], Optional[bool]]]" = None) -> missed_mod.Report:
     """`groups`: the model's topics, or `None` for the lexical grouping.
-    `claims`: `read_claims`' result when the caller already has it."""
+    `claims`: `read_claims`' result when the caller already has it.
+    `judge`: the model's prompted judgment (`missed.find`), or `None` for
+    the word rule."""
+    claims, turns_by_session, kwargs = _inputs(context_dir, sessions_root, groups=groups, claims=claims)
+    return missed_mod.find(claims, turns_by_session, judge=judge, **kwargs)
+
+
+def prompt_items(context_dir: Path, sessions_root: Path, *, groups: "Optional[Sequence]" = None,
+                 claims: "Optional[Sequence[missed_mod.CitedClaim]]" = None) -> "tuple[PromptItem, ...]":
+    """What `load(..., judge=...)` would ask the judge: the interviewer's
+    turns and the topic labels, never the interviewee's words."""
+    claims, turns_by_session, kwargs = _inputs(context_dir, sessions_root, groups=groups, claims=claims)
+    return missed_mod.prompt_items(claims, turns_by_session, **kwargs)
+
+
+def _inputs(context_dir, sessions_root, *, groups, claims):
     context_dir, sessions_root = Path(context_dir), Path(sessions_root)
     claims = read_claims(context_dir) if claims is None else tuple(claims)
     if not claims:
-        return missed_mod.find((), {})
+        return (), {}, {}
     # Only directories actually on disk: a session id is a corpus string, and
     # `sessions_root / id` must never be built from one that is not listed.
     on_disk = set(list_session_ids(sessions_root)) if sessions_root.is_dir() else set()
@@ -60,10 +77,11 @@ def load(context_dir: Path, sessions_root: Path, *, groups: "Optional[Sequence]"
         turns_by_session[session_id] = turns
         if ev.extract_refusal(meta) is not None:
             unconfirmed.add(session_id)
-    return missed_mod.find(claims, turns_by_session, unconfirmed=frozenset(unconfirmed), groups=groups,
-                           scripts=session_scripts(context_dir, sessions_root, sorted(turns_by_session)),
-                           vocabulary=missed_mod.project_vocabulary(turns_by_session),
-                           flagged={sid: flagged_seqs(sessions_root / sid) for sid in turns_by_session})
+    return claims, turns_by_session, dict(
+        unconfirmed=frozenset(unconfirmed), groups=groups,
+        scripts=session_scripts(context_dir, sessions_root, sorted(turns_by_session)),
+        vocabulary=missed_mod.project_vocabulary(turns_by_session),
+        flagged={sid: flagged_seqs(sessions_root / sid) for sid in turns_by_session})
 
 
 # The critic's flags that mean "this question put the interviewer's idea in
@@ -111,12 +129,12 @@ def session_scripts(context_dir: Path, sessions_root: Path,
                                         if isinstance(e, dict) and isinstance(e.get("text"), str))
             continue
         if project is None:
-            project = _project_survey(Path(context_dir))
+            project = project_survey(Path(context_dir))
         scripts[session_id] = project
     return scripts
 
 
-def _project_survey(context_dir: Path) -> "tuple[str, ...]":
+def project_survey(context_dir: Path) -> "tuple[str, ...]":
     if not (context_dir / coach_context.SURVEY_FILENAME).is_file():
         return ()  # no guide at all: nothing to exclude, and nothing worth a warning
     try:

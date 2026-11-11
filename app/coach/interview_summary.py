@@ -551,14 +551,20 @@ class PromptSplit:
     asked_only_interviews: int
     """Interviews where it came up only right after a question about it."""
     unprompted: FollowThrough
-    """Over the unprompted occurrences alone, by `follow_through`'s rule."""
+    """Over the interviews where it came up unprompted at least once. Such an
+    interview counts as followed up when ANY of its occurrences was, prompted
+    or not: an interviewer who followed up on the first mention has not
+    walked past the topic because it came back unasked at "anything else?"
+    (2026-11-11: the overlay control, followed up in all 5 interviews, read
+    "followed up in 1" once the first mentions were judged prompted)."""
 
 
 def split_by_prompt(outcomes: "Iterable[tuple[str, Optional[bool], bool]]") -> PromptSplit:
     """`outcomes`: one `(session_id, followed, prompted)` per occurrence."""
     rows = list(outcomes)
-    unprompted = follow_through((session_id, followed) for session_id, followed, prompted in rows if not prompted)
     raised = {session_id for session_id, _, _ in rows}
     spontaneous = {session_id for session_id, _, prompted in rows if not prompted}
+    unprompted = follow_through((session_id, followed) for session_id, followed, _ in rows
+                                if session_id in spontaneous)
     return PromptSplit(raised_interviews=len(raised), asked_only_interviews=len(raised - spontaneous),
                        unprompted=unprompted)

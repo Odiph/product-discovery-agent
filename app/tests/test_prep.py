@@ -4,6 +4,7 @@ reason drawn from arithmetic the project already does, and nothing is written.""
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -73,8 +74,8 @@ def node(tmp_path, monkeypatch):
     context, sessions = tmp_path / "context", tmp_path / "sessions"
     context.mkdir()
     (context / "survey.json").write_text(json.dumps([
-        {"id": "q1", "order": 0, "text": "Walk me through the last time"},
-        {"id": "q2", "order": 1, "text": "What did you do next?"},
+        {"id": "q1", "order": 0, "text": "Walk me through your last weekly report export"},
+        {"id": "q2", "order": 1, "text": "What happened after the export failed?"},
     ]), encoding="utf-8")
     (context / "hypotheses.json").write_text(json.dumps([
         {"id": "h1", "statement": "they export by hand", "falsifier": "nobody exports",
@@ -86,7 +87,7 @@ def node(tmp_path, monkeypatch):
         (directory / "session.json").write_text(json.dumps({"context_survey": [{"id": "q1"}, {"id": "q2"}]}),
                                                 encoding="utf-8")
         (directory / "transcript.jsonl").write_text("".join(json.dumps(r) + "\n" for r in [
-            _segment(0, "interviewer", "Walk me through the last time"),
+            _segment(0, "interviewer", "Walk me through your last weekly report export"),
             {"kind": "event", "seq": 1, "event": "coverage-asked", "detail": {"question_id": "q1"}},
             _segment(2, "interviewee", "sure"),
         ]), encoding="utf-8")
@@ -171,23 +172,145 @@ def test_an_untracked_interview_is_left_out_of_the_guide_not_counted_as_never_as
     assert "never asked in the 2 interviews that had it" in item.reason and "3 untracked" in item.reason
 
 
-def _untracked_session(sessions, name, meta):
+def test_reconstructed_interviews_count_and_the_reason_says_so():
+    survey = [SurveyItem(id="q1", order=0, text="x")]
+    guides = {"S1": frozenset({"q1"}), "I1": None, "I2": None}
+    (item,) = prep_mod.item_proposals(survey, {"q1": ["S1", "I1", "I2"]}, guides, reconstructed={"I1", "I2"})
+    assert item.action == prep_mod.KEEP
+    assert item.reason == "asked in at least 3 of the 3 interviews that had it (2 reconstructed from the transcript)"
+    # Reconstructed silence is not "never asked": the matcher misses reworded
+    # questions, so with one live record behind it the most it says is "check".
+    (item,) = prep_mod.item_proposals(survey, {}, guides, reconstructed={"I1", "I2"})
+    assert item.action == prep_mod.KEEP and "check by hand" in item.reason
+    guides["S2"] = frozenset({"q1"})
+    (item,) = prep_mod.item_proposals(survey, {}, guides, reconstructed={"I1", "I2"})
+    assert item.action == prep_mod.MOVE_EARLIER
+    assert "never asked in the 4 interviews that had it" in item.reason and "2 reconstructed" in item.reason
+
+
+def _untracked_session(sessions, name, meta, said="Walk me through your last weekly report export"):
     directory = sessions / name
     directory.mkdir()
     (directory / "session.json").write_text(json.dumps(meta), encoding="utf-8")
     (directory / "transcript.jsonl").write_text(
-        json.dumps(_segment(0, "interviewer", "Walk me through the last time")) + "\n", encoding="utf-8")
+        json.dumps(_segment(0, "interviewer", said)) + "\n", encoding="utf-8")
 
 
-def test_imported_and_coach_off_interviews_do_not_make_prep_say_never_asked(node, capsys):
+def test_imported_and_coach_off_interviews_are_reconstructed_from_the_transcript(node, capsys):
+    # Neither has a coverage record, but both transcripts hold q1's words: the
+    # interviewer DID ask it. Their silence on q2 is reconstructed silence.
     sessions = node.parent / "sessions"
     _untracked_session(sessions, "20260907T100000", {"engine": "import", "coach_enabled": False})
     _untracked_session(sessions, "20260908T100000", {"engine": "soniox", "coach_enabled": False})
+    # Coach off, and nothing it said matches the guide: no way to tell
+    # "asked none" from "the words do not match" (another language, say).
+    _untracked_session(sessions, "20260909T100000", {"engine": "soniox", "coach_enabled": False},
+                       said="hello there, can you hear me")
     assert main_mod.main(["prep"]) == 0
     out = capsys.readouterr().out
-    assert "from 4 interview(s) so far" in out
-    # q2 was never asked in the two TRACKED interviews; the two untracked ones say nothing.
-    assert "never asked in the 2 interviews that had it" in out and "2 untracked" in out
+    assert "from 5 interview(s) so far" in out
+    assert ("keep: asked in at least 4 of the 4 interviews that had it "
+            "(2 reconstructed from the transcript; 1 untracked interviews left out)") in out
+    assert ("move-earlier: never asked in the 4 interviews that had it: move it earlier, or drop it if it "
+            "no longer matters (2 reconstructed from the transcript; 1 untracked interviews left out)") in out
+    assert "matches each of your turns against the guide's wording" in out
+
+
+# --- the mock project, imported -------------------------------------------------------
+
+DEMO = Path(__file__).resolve().parents[2] / "demo" / "claudictive-beta"
+
+# Which guide questions each mock interviewer really asked, read by hand
+# against context/survey.json and recorded in GROUND-TRUTH.json
+# (`guide_questions_asked`). s6 counts only where voice was asked about
+# neutrally; a pitch ("wouldn't voice be amazing mid-fight?") is recorded as a
+# pitch, not s6. Itay never asked s4 or s7; s6 was asked in three.
+ALL = {f"s{n}" for n in range(1, 11)}
+TRULY_ASKED = {
+    Path(entry["file"]).name: {q["id"] for q in entry["guide_questions_asked"]}
+    for entry in json.loads((DEMO / "GROUND-TRUTH.json").read_text(encoding="utf-8"))["interviews"]
+}
+
+
+def test_the_answer_key_records_what_was_asked():
+    assert TRULY_ASKED == {
+        "01-yoni.txt": ALL - {"s6"}, "02-maya.txt": ALL - {"s6"}, "03-itay.txt": ALL - {"s4", "s6", "s7"},
+        "04-shira.txt": ALL - {"s6"}, "05-daniel.txt": ALL - {"s6"}, "06-noa.txt": ALL - {"s6"},
+        "07-avi.txt": ALL - {"s6"}, "08-tamar.txt": ALL, "09-omer.txt": ALL, "10-lior.txt": ALL - {"s6"},
+        "11-gal.txt": ALL - {"s6"}, "12-roni.txt": ALL,
+    }
+
+
+# What the word-overlap matcher recovers from them. It never invents a
+# question (checked below), but it misses most reworded ones: "ספרי לי על
+# עצמך" is s1 in a feminine form, and the two English interviews share no
+# word with a Hebrew guide at all.
+RECONSTRUCTED = {"s1": 7, "s2": 2, "s3": 4, "s4": 2, "s5": 7, "s6": 1, "s7": 9, "s8": 6, "s9": 9, "s10": 5}
+ENGLISH = {"05-daniel.txt", "10-lior.txt"}
+
+
+def _import_demo(sessions_root, drop=lambda line: False) -> "dict[str, str]":
+    """Each mock transcript imported as `python -m app import` would; returns
+    session id -> file name. `drop` removes transcript lines first."""
+    from datetime import datetime, timedelta
+
+    from app.session import transcript_import as ti
+
+    staging = sessions_root.parent / "staging"
+    staging.mkdir()
+    names = {}
+    for n, source in enumerate(sorted((DEMO / "transcripts").glob("*.txt"))):
+        copy = staging / source.name
+        copy.write_text("".join(line for line in source.read_text(encoding="utf-8").splitlines(keepends=True)
+                                if not drop(line)), encoding="utf-8")
+        plan = ti.plan_file(copy, me="Interviewer")
+        started = datetime(2026, 6, 15, 9) + timedelta(hours=n)
+        meta = ti.session_metadata(plan, started=started, started_at_source="test", participant=None)
+        names[ti.write_session(sessions_root, plan, meta, started=started).name] = source.name
+    return names
+
+
+def test_the_mock_interviews_reconstruct_only_questions_really_asked(tmp_path):
+    from app.coach import prep_load
+    from app.coach.context import load_survey
+
+    survey = load_survey(DEMO / "context")
+    names = _import_demo(tmp_path / "sessions")
+    guides, asked_in, _, untracked, reconstructed = prep_load.interviews_and_coverage(
+        tmp_path / "sessions", survey=survey)
+    assert len(guides) == 12
+    assert {names[s] for s in untracked} == ENGLISH
+    assert len(reconstructed) == 10 and not set(reconstructed) & set(untracked)
+    assert {q: len(asked_in.get(q, ())) for q in RECONSTRUCTED} == RECONSTRUCTED
+    for question, sessions in asked_in.items():
+        for session in sessions:
+            assert question in TRULY_ASKED[names[session]], (question, names[session])
+
+    items = {p.item_id: p for p in prep_mod.item_proposals(survey, asked_in, guides,
+                                                           untracked=untracked, reconstructed=reconstructed)}
+    assert all(p.action == prep_mod.KEEP for p in items.values())
+    assert items["s7"].reason == ("asked in at least 9 of the 10 interviews that had it "
+                                  "(10 reconstructed from the transcript; 2 untracked interviews left out)")
+
+
+def test_a_question_cut_from_every_mock_interview_is_flagged_for_a_check_never_moved(tmp_path):
+    from app.coach import prep_load
+    from app.coach.context import load_survey
+
+    survey = load_survey(DEMO / "context")
+    # Every interviewer turn asking s7, the one-to-ten rating, removed.
+    _import_demo(tmp_path / "sessions", drop=lambda line: line.startswith("Interviewer") and "עד עשר" in line)
+    # The author page is offered nothing to apply: a check is not a change.
+    assert prep_load.survey_proposals(survey, tmp_path / "sessions") == ()
+    guides, asked_in, _, untracked, reconstructed = prep_load.interviews_and_coverage(
+        tmp_path / "sessions", survey=survey)
+    proposals = {p.item_id: p for p in prep_mod.item_proposals(survey, asked_in, guides,
+                                                               untracked=untracked, reconstructed=reconstructed)}
+    # All ten are reconstructed, so "never asked" would rest on the matcher's
+    # silence alone (it missed s2 in 8 of 10 where it WAS asked).
+    assert proposals["s7"].action == prep_mod.KEEP
+    assert proposals["s7"].reason.startswith("not found in the 10 interviews that had it")
+    assert "check by hand" in proposals["s7"].reason
 
 
 def test_a_gap_the_knowledge_base_already_covers_says_where(node, tmp_path, capsys, monkeypatch):
@@ -205,3 +328,22 @@ def test_a_gap_the_knowledge_base_already_covers_says_where(node, tmp_path, caps
     out = capsys.readouterr().out
     assert "on file: [email] Re: exports -- line 1" in out
     assert "lunch" not in out and "[interview]" not in out
+
+
+def _topic(label, raised, judged, followed):
+    return SimpleNamespace(label=tuple(label), tally=SimpleNamespace(
+        raised_interviews=raised, judged_interviews=judged, followed_interviews=followed))
+
+
+def test_a_raised_topic_is_proposed_only_when_mostly_walked_past():
+    raised = prep_mod.raised_topics([
+        _topic(["dead time"], 9, 9, 1),
+        _topic(["overlay"], 5, 5, 5),     # followed up every time: already asked about
+        _topic(["window"], 6, 6, 5),      # walked past once, followed up five times: in hand
+        _topic(["even"], 4, 4, 2),        # as often followed as not: not proposed
+        _topic(["voice"], 3, 0, 0),       # nothing could be judged: says nothing about you
+        _topic(["price"], 4, 3, 1),
+    ], 12)
+    assert [t.label for t in raised] == ["dead time", "price"]
+    assert raised[0].reason.startswith("raised without being asked in 9 of 12 interviews, followed up in 1:")
+    assert "(1 could not be judged)" in raised[1].reason

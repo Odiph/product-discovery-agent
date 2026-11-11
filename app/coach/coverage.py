@@ -130,7 +130,7 @@ def match_coverage_question(
         system=_MATCH_SYSTEM_PROMPT,
         messages=[{"role": "user", "content": _build_match_prompt(segment_text, unasked_items)}],
         tools=[_coverage_tool_schema()],
-        tool_choice={"type": "tool", "name": _COVERAGE_TOOL_NAME},
+        tool_choice=reasoning_client.tool_choice(model, _COVERAGE_TOOL_NAME),
     )
     valid_ids = {item.id for item in unasked_items}
     for block in response.content:

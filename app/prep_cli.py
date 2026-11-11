@@ -11,7 +11,9 @@ import sys
 from typing import Callable
 
 from app import config as config_mod
+from app import missed_cli
 from app.coach import mirror_load
+from app.coach import missed as missed_mod
 from app.coach import interview_summary as summary_mod
 from app.coach import prep as prep_mod
 from app.coach import prep_load
@@ -45,10 +47,17 @@ def run(args: argparse.Namespace, apply_project, read_corpus_refs) -> int:
     except ContextValidationError:
         survey = ()
 
-    guides, asked_in, unconfirmed, untracked = prep_load.interviews_and_coverage(cfg.sessions_root)
+    reading = prep_load.model_reading(cfg.context_dir, cfg.sessions_root, survey)
+    guides, asked_in, unconfirmed, untracked, reconstructed = prep_load.interviews_and_coverage(
+        cfg.sessions_root, survey=survey, reading=reading.asked)
+    read_by_model = [s for s in reconstructed if s in (reading.asked or {})]
     interviews = list(guides)
     extracted = {ref.session_id for ref in refs}
     mirror = mirror_load.load(cfg.sessions_root)
+    try:
+        raised = missed_cli.cached_report(cfg.context_dir, cfg.sessions_root)
+    except CorpusValidationError:
+        raised = None  # `missed` reports the error; prep still has the rest to say
     plan = prep_mod.build(
         survey=survey,
         asked_in=asked_in,
@@ -59,9 +68,25 @@ def run(args: argparse.Namespace, apply_project, read_corpus_refs) -> int:
         unextracted=[s for s in interviews if s not in extracted and s not in unconfirmed],
         flag_labels=FLAG_LABELS,
         untracked=untracked,
+        reconstructed=reconstructed,
+        read_by_model=read_by_model,
+        raised_from=raised.report.topics if raised is not None else (),
+        extracted_interviews=raised.report.interviews if raised is not None else 0,
     )
     _print(plan, has_hypotheses=bool(hypotheses), has_survey=bool(survey),
-           known=_already_known(plan.gaps, cfg.context_dir.parent))
+           known=_already_known(plan.gaps, cfg.context_dir.parent), raised=raised)
+    by_words = len(reconstructed) - len(read_by_model)
+    if read_by_model and survey:
+        print(f"\n{len(read_by_model)} interview(s) had no live coverage record (imported, or the coach was "
+              f"off): which questions they asked is from the model's reading of the transcript "
+              f"(context/coverage.json, made by `python -m app coverage`; prep itself calls no model).")
+    if by_words and survey:
+        print(f"\n{by_words} interview(s) had no live coverage record (imported, or the coach was "
+              f"off), so which questions they asked was reconstructed: this matches each of your turns "
+              f"against the guide's wording, and misses a question you asked in other words. "
+              f"`python -m app coverage` has the model read them instead.")
+    if reading.note:
+        print(f"\n{reading.note}")
     if unconfirmed:
         # `extract` refuses these until their speakers are confirmed, so they
         # must not be in the "run extract" line above.
@@ -110,7 +135,7 @@ KNOWN_PER_GAP = 2
 MIN_KNOWN_WORDS = 3
 
 
-def _print(plan: prep_mod.Prep, *, has_hypotheses: bool, has_survey: bool, known=None) -> None:
+def _print(plan: prep_mod.Prep, *, has_hypotheses: bool, has_survey: bool, known=None, raised=None) -> None:
     print(f"Prep for the next interview -- from {plan.interviews} interview(s) so far.\n")
     if plan.unextracted:
         print(f"! {len(plan.unextracted)} interview(s) not extracted yet, so the hypothesis gaps below "
@@ -134,6 +159,19 @@ def _print(plan: prep_mod.Prep, *, has_hypotheses: bool, has_survey: bool, known
         marker = ">" if item.action == prep_mod.MOVE_EARLIER else " "
         print(f" {marker} {item.order + 1:>2}. {item.text}")
         print(f"       {item.action}: {item.reason}")
+
+    if raised is not None and raised.report.interviews:
+        print("\nWhat they keep raising that you did not ask about:")
+        print(f"  {raised.grouping}")
+        print(f"  {raised.prompted}")
+        if not plan.raised:
+            print(f"  Nothing: no topic came up unprompted in {missed_mod.MIN_INTERVIEWS} or more "
+                  f"interviews and was walked past more often than followed up.")
+        for topic in plan.raised:
+            print(f"  > {topic.label}")
+            print(f"      {topic.reason}")
+        if plan.raised:
+            print("  Add a question in `python -m app author`; per interview: `python -m app missed`.")
 
     if plan.avoid or plan.follow:
         print("\nYou, last time and before:")

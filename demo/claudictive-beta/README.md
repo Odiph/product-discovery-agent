@@ -39,7 +39,12 @@ Two control topics make a "what did we miss" detector earn its answer:
 
 `GROUND-TRUTH.json` (rendered as `GROUND-TRUTH.md`) records, per interview, each
 planted line, its turn number, the interviewer's next line, and whether it was
-followed up.
+followed up. It is also the answer key for "without being asked": which guide
+questions the interviewer really asked (by turn), where they pitched a topic,
+and, for every mention of voice input, themes and price, whether it answered
+a question or pitch about it. Voice (21 mentions) and price (21) are always
+prompted; themes is volunteered twice in 14; every planted aside and control
+line is volunteered. The rules it follows are in its `prompted_policy`.
 
 ## Contents
 
@@ -70,16 +75,33 @@ copy demo\claudictive-beta\context\*.json projects\claudictive-beta\context\
 python -m app import demo/claudictive-beta/transcripts --project claudictive-beta --me Interviewer --date 2026-06-15 --yes
 python -m app extract --all --project claudictive-beta --yes           # 12 model calls
 python -m app critique-questions --all --project claudictive-beta      # 12 model calls
-python -m app missed --project claudictive-beta --group model --yes    # 1 model call, then cached
+python -m app missed --project claudictive-beta --group model --yes    # 2 model calls, then cached
+python -m app coverage --project claudictive-beta --yes                # 1 model call, then cached
+python -m app prep --project claudictive-beta
 python -m app standing --project claudictive-beta
 python -m app mirror --project claudictive-beta
 python -m app tree --project claudictive-beta
 ```
 
-Leave out `--yes` on `import`, `extract --all` and `missed --group model` to see
-what each would do and what it would send, without doing it.
+Leave out `--yes` on `import`, `extract --all`, `missed --group model` and
+`coverage` to see what each would do and what it would send, without doing it.
+`missed --group model --yes` makes two calls: one grouping the claims, one
+judging, from your own turns only, whether each topic was already asked
+about. `coverage --yes` reads which guide questions each interview asked, for
+`prep`; `python -m benchmark.coverage_recall projects/claudictive-beta` then
+scores that reading against the answer key.
+
+Set `JUDGE_MODEL=anthropic/claude-sonnet-5.5` (or another strong model) in
+`.env` for the two judgments over your own turns: on `gemini-2.5-flash` the
+prompted judgment moved the dead-time topic from 7 interviews to 3 between two
+runs of the same prompt.
 
 What to expect, and how close the tool gets to the ground truth above, is in
-`GROUND-TRUTH.md`. On 2026-11-11 `missed` reported the dead-time topic in 9 of
-12 interviews with 1 follow-up against a ground truth of 8 and 0: the model
-grouping merged one unrelated claim into the topic.
+`GROUND-TRUTH.md`. On 2026-11-11, judged by Sonnet 5.5, `missed` reported the
+dead-time topic in 9 of 12 interviews with 1 follow-up against a ground truth
+of 8 and 0. The model grouping merged one unrelated claim into the topic, and
+the word-based follow-up judge counts 05's pitch ("talk to Claude in the
+middle of a match?" shares "match" with the topic) as a follow-up. The
+followed-up control scored 5 of 5, and the guide's own questions (voice,
+price) dropped out of the headline. `coverage` found all 109 guide questions
+asked, and `prep` lists the dead time as a topic to add to the guide.

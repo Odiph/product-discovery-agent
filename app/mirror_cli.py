@@ -13,11 +13,10 @@ import argparse
 from typing import Callable, Optional
 
 from app import config as config_mod
-from app import grouping_cli, missed_cli
+from app import missed_cli
 from app.coach import mirror as mirror_mod
 from app.coach import mirror_load
 from app.coach import missed as missed_mod
-from app.coach import missed_load
 from app.coach.corpus import CorpusValidationError
 
 FLAG_LABELS = {
@@ -130,21 +129,20 @@ def _print_walked_past(report: mirror_mod.Mirror, show_from) -> None:
 def _print_missed_topics(cfg) -> None:
     """The `missed` headlines, one per topic: walked-past moments are single
     turns, this is the same failure seen across interviews. Silent when no
-    claims are extracted -- the mirror does not need a corpus to work."""
+    claims are extracted -- the mirror does not need a corpus to work.
+    Cached only (`missed_cli.cached_report`): the mirror never calls a model."""
     try:
-        claims = missed_load.read_claims(cfg.context_dir)
-        # `auto` never calls: a fresh model grouping is used, as `missed` would.
-        groups = grouping_cli.resolve(cfg.context_dir, claims, mode=grouping_cli.AUTO, yes=False).groups
-        missed = missed_load.load(cfg.context_dir, cfg.sessions_root, groups=groups, claims=claims)
+        cached = missed_cli.cached_report(cfg.context_dir, cfg.sessions_root)
     except CorpusValidationError:
         print("\nTopics they kept raising: the extracted claims could not be read; run `missed` for the error.")
         return
-    if missed.state == missed_mod.STATE_NO_EXTRACTION:
+    if cached.report.state == missed_mod.STATE_NO_EXTRACTION:
         return
-    grouped = "grouped by model" if groups is not None else "grouped by shared words"
-    print(f"\nTopics they kept raising (in {missed_mod.MIN_INTERVIEWS}+ interviews, {grouped}; per interview: "
+    print(f"\nTopics they kept raising (in {missed_mod.MIN_INTERVIEWS}+ interviews; per interview: "
           f"`python -m app missed`):")
-    missed_cli.print_report(missed, indent="  ", details=False)
+    print(f"  {cached.grouping}")
+    print(f"  {cached.prompted}")
+    missed_cli.print_report(cached.report, indent="  ", details=False)
 
 
 def _clip(text: str) -> str:

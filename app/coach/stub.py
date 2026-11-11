@@ -154,4 +154,7 @@ class _StubMessages:
         **_kwargs: Any,
     ) -> Any:
         tool_name = tool_choice.get("name") if tool_choice else None
+        if tool_name is None and _kwargs.get("tools"):
+            # `auto` (a model that refuses a forced tool): the one tool offered.
+            tool_name = _kwargs["tools"][0].get("name")
         return self._client._record_and_respond(model=model, tool_name=tool_name, timeout_s=self.timeout_s)

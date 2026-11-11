@@ -322,7 +322,7 @@ def assemble_generate_request(
             }
         ],
         "tools": [_generate_tool_schema()],
-        "tool_choice": {"type": "tool", "name": GENERATE_TOOL_NAME},
+        "tool_choice": reasoning_client.tool_choice(model, GENERATE_TOOL_NAME),
     }
 
 

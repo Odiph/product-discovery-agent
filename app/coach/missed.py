@@ -22,6 +22,16 @@ you mean", "מה זאת אומרת", "when you say"). A late "Why?" after an unr
 aside is about the aside. Short turns ("Mm, okay.") are not moves and use up
 none of the window, as in `walked_past`.
 
+**Prompted.** An offer answering a question about its topic is not an
+aside. With a `judge` (`missed --group model`), the model decides that from
+the interviewer's own words (`prompt_judge.py`, items from `prompt_items`):
+the last interviewer turn before the offer, the substantive ones before it as
+context, and the topic's label -- never the offer. Without one, word overlap
+decides (`_prompted`): a guide question prompts when its own subject words
+are the topic's terms, any other question through shared words. Measured on
+the mock interviews, that word rule recognised 52 of 91 guide questions and
+caught no pitch, which is why the model rule exists.
+
 **A detector, not a judge**, bounding the misses from below: a shared word
 counts as a follow-up, so a "followed up in 0" is a strong claim and a
 "followed up in 3" may flatter. Three things never count (measured
@@ -37,9 +47,10 @@ per-interview arithmetic is `interview_summary.follow_through`.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Mapping, Optional, Sequence
+from typing import Any, Callable, Mapping, Optional, Sequence
 
 from app.coach import interview_summary as summary_mod
+from app.coach import prompt_judge
 from app.coach import themes
 from app.coach import walked_past
 from app.coach.walked_past import Turn
@@ -114,6 +125,9 @@ class Occurrence:
     """The interviewer's last substantive question before it was already
     about the topic (`_prompted`). Unknown -- no transcript -- counts as
     unprompted, so a missing file can never hide an aside."""
+    unanswered: bool = False
+    """The judge had no answer for the question before it (counted as
+    unprompted)."""
 
     @property
     def followed(self) -> Optional[bool]:
@@ -162,6 +176,7 @@ def find(
     scripts: "Mapping[str, Sequence[str]]" = {},
     vocabulary: "frozenset[str]" = frozenset(),
     flagged: "Mapping[str, frozenset[int]]" = {},
+    judge: "Optional[Callable[[prompt_judge.PromptItem], Optional[bool]]]" = None,
 ) -> Report:
     """`turns_by_session`: each session's `walked_past.turns`; a session
     absent from it had no readable transcript. `unconfirmed`: sessions whose
@@ -172,7 +187,10 @@ def find(
     `vocabulary`: `project_vocabulary(turns_by_session)`. `flagged`: each
     session's seqs of questions the critic marked a pitch or leading
     (`missed_load.flagged_seqs`). All three only ever REMOVE evidence of a
-    follow-up."""
+    follow-up. `judge`: the model's answer for a `prompt_judge.PromptItem`
+    (True, False, or None for no answer); when given, it decides "prompted"
+    for every occurrence with an interviewer turn before it, in place of the
+    word match (`_prompted`). No answer counts as unprompted."""
     script_sets = {sid: script_keys(texts) for sid, texts in scripts.items()}
     subjects = {sid: script_subjects(items) for sid, items in script_sets.items()}
     prompt_vocabulary = project_vocabulary(turns_by_session, share=PROMPT_VOCABULARY_SHARE)
@@ -185,7 +203,8 @@ def find(
         occurrences = _occurrences([by_id[f] for f in cluster.fact_ids], cluster.terms - vocabulary,
                                    turns_by_session, unconfirmed, script_sets, vocabulary, flagged, subjects,
                                    prompt_terms=cluster.terms - prompt_vocabulary,
-                                   prompt_vocabulary=prompt_vocabulary)
+                                   prompt_vocabulary=prompt_vocabulary,
+                                   judge=judge, label=cluster.label)
         split = summary_mod.split_by_prompt((o.session_id, o.followed, o.prompted) for o in occurrences)
         topic = Topic(label=cluster.label, fact_ids=cluster.fact_ids, occurrences=occurrences,
                       tally=split.unprompted, raised_interviews=split.raised_interviews,
@@ -195,6 +214,36 @@ def find(
     topics.sort(key=lambda t: (-t.tally.missed_interviews, -t.tally.raised_interviews, t.label))
     asked.sort(key=lambda t: (-t.raised_interviews, t.label))
     return Report(interviews=summary_mod.count_interviews(claims), topics=tuple(topics), asked_topics=tuple(asked))
+
+
+def prompt_items(claims: "Sequence[CitedClaim]", turns_by_session: "Mapping[str, Sequence[Turn]]",
+                 **kwargs: Any) -> "tuple[prompt_judge.PromptItem, ...]":
+    """Every item a `judge` passed to `find` with the same arguments would be
+    asked, each once: what `missed --group model` sends."""
+    asked: "list[prompt_judge.PromptItem]" = []
+
+    def record(item: prompt_judge.PromptItem) -> None:
+        asked.append(item)
+        return None
+
+    find(claims, turns_by_session, **{**kwargs, "judge": record})
+    return prompt_judge.unique_items(asked)
+
+
+def topic_name(label: "tuple[str, ...]") -> str:
+    return ", ".join(label)
+
+
+def question_turns(sequence: "Sequence[Turn]", position: int) -> "Optional[tuple[Turn, tuple[Turn, ...]]]":
+    """The interviewer's last turn before `position`, whatever its length
+    ("Anything else?" is what was answered), and up to
+    `prompt_judge.EARLIER_TURNS` substantive interviewer turns before it,
+    oldest first. `None` when the interviewer had not spoken yet."""
+    before = [turn for turn in sequence[:position] if turn.speaker == walked_past.INTERVIEWER]
+    if not before:
+        return None
+    earlier = [turn for turn in before[:-1] if len(turn.text.split()) >= walked_past.MIN_MOVE_WORDS]
+    return before[-1], tuple(earlier[-prompt_judge.EARLIER_TURNS:])
 
 
 def project_vocabulary(turns_by_session: "Mapping[str, Sequence[Turn]]", *,
@@ -223,13 +272,17 @@ def script_keys(texts: "Sequence[str]") -> "tuple[tuple[frozenset[str], ...], ..
     """Each guide question as one set of match keys per content word; a
     question of fewer than `MIN_SCRIPT_WORDS` content words is too short to
     recognise and is left out."""
+    return tuple(words for _, words in _script_items(texts))
+
+
+def _script_items(texts):
     items = []
     for text in texts:
         if isinstance(text, str):
             words = tuple(keys for keys in (themes.match_keys(w) for w in text.split()) if keys)
             if len(words) >= MIN_SCRIPT_WORDS:
-                items.append(words)
-    return tuple(items)
+                items.append((text, words))
+    return items
 
 
 def is_scripted(text: str, items: "tuple[tuple[frozenset[str], ...], ...]") -> bool:
@@ -255,13 +308,25 @@ def script_subjects(items: "tuple[tuple[frozenset[str], ...], ...]") -> "tuple[f
     return tuple(subjects)
 
 
+def _judged(sequence, position: int, judge, label: "tuple[str, ...]") -> "tuple[bool, bool]":
+    """(prompted, unanswered) by the model's judgment of the interviewer's
+    own turns (`question_turns`); the offer is never part of it."""
+    found = question_turns(sequence, position)
+    if found is None:
+        return False, False
+    question, earlier = found
+    answer = judge(prompt_judge.item(question.text, (t.text for t in earlier), topic_name(label)))
+    return answer is True, answer is None
+
+
 def _prompted(sequence, position: int, terms: "frozenset[str]", scripted, subjects,
               vocabulary: "frozenset[str]") -> bool:
-    """Whether the interviewer's last substantive question before the offer
-    -- past backchannels and the interviewee's own turns -- was already about
-    the topic. A guide question prompts only when its own subject
-    (`script_subjects`) is one of the topic's terms; any other question prompts through the topic's
-    terms or the offer's words, the project's vocabulary excluded."""
+    """By word overlap: whether the interviewer's last substantive question
+    before the offer -- past backchannels and the interviewee's own turns --
+    was already about the topic. A guide question prompts only when its own
+    subject (`script_subjects`) is one of the topic's terms; any other
+    question prompts through the topic's terms or the offer's words, the
+    project's vocabulary excluded."""
     offer = sequence[position]
     question = next((turn for turn in reversed(sequence[:position]) if turn.speaker == walked_past.INTERVIEWER
                      and len(turn.text.split()) >= walked_past.MIN_MOVE_WORDS), None)
@@ -281,10 +346,12 @@ def _occurrences(members, terms, turns_by_session, unconfirmed, script_sets=None
                  flagged: "Optional[Mapping[str, frozenset[int]]]" = None,
                  subjects: "Optional[Mapping[str, tuple]]" = None, *,
                  prompt_terms: "frozenset[str]" = frozenset(),
-                 prompt_vocabulary: "frozenset[str]" = frozenset()) -> "tuple[Occurrence, ...]":
+                 prompt_vocabulary: "frozenset[str]" = frozenset(),
+                 judge=None,
+                 label: "tuple[str, ...]" = ()) -> "tuple[Occurrence, ...]":
     seen: "dict[tuple[str, Any], Occurrence]" = {}
     for claim in members:
-        prompted = False
+        prompted = unanswered = False
         seq = min(claim.seqs)
         sequence = turns_by_session.get(claim.session_id)
         position = _turn_holding(sequence, claim.seqs) if sequence else None
@@ -298,11 +365,16 @@ def _occurrences(members, terms, turns_by_session, unconfirmed, script_sets=None
             scripted = (script_sets or {}).get(claim.session_id, ())
             key, outcome = (claim.session_id, ("turn", position)), _judge(
                 sequence, position, terms, scripted, vocabulary, (flagged or {}).get(claim.session_id, frozenset()))
-            prompted = outcome != NOT_INTERVIEWEE and _prompted(
-                sequence, position, prompt_terms, scripted, (subjects or {}).get(claim.session_id, ()),
-                prompt_vocabulary)
+            if outcome == NOT_INTERVIEWEE:
+                pass
+            elif judge is not None:
+                prompted, unanswered = _judged(sequence, position, judge, label)
+            else:
+                prompted = _prompted(sequence, position, prompt_terms, scripted,
+                                     (subjects or {}).get(claim.session_id, ()), prompt_vocabulary)
         if key not in seen or seq < seen[key].seq:
-            seen[key] = Occurrence(session_id=claim.session_id, seq=seq, outcome=outcome, prompted=prompted)
+            seen[key] = Occurrence(session_id=claim.session_id, seq=seq, outcome=outcome, prompted=prompted,
+                                   unanswered=unanswered)
     return tuple(sorted(seen.values(), key=lambda o: (o.session_id, o.seq)))
 
 

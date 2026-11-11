@@ -279,7 +279,7 @@ def assemble_critique_request(
             }
         ],
         "tools": [_critic_tool_schema()],
-        "tool_choice": {"type": "tool", "name": CRITIC_TOOL_NAME},
+        "tool_choice": reasoning_client.tool_choice(model, CRITIC_TOOL_NAME),
     }
 
 

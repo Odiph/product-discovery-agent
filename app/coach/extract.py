@@ -535,7 +535,7 @@ def assemble_extract_request(
             }
         ],
         "tools": [_extract_tool_schema()],
-        "tool_choice": {"type": "tool", "name": EXTRACT_TOOL_NAME},
+        "tool_choice": reasoning_client.tool_choice(model, EXTRACT_TOOL_NAME),
     }
 
 

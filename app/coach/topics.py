@@ -181,7 +181,7 @@ def assemble_request(lines: "Sequence[ClaimLine]", *, model: str, max_tokens: in
         "system": _SYSTEM,
         "messages": [{"role": "user", "content": f"{len(lines)} claims:\n{body}\n\nCall {TOOL_NAME}."}],
         "tools": [_tool_schema()],
-        "tool_choice": {"type": "tool", "name": TOOL_NAME},
+        "tool_choice": reasoning_client.tool_choice(model, TOOL_NAME),
     }
 
 

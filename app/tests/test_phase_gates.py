@@ -535,6 +535,12 @@ def test_gate_ten_context_artifacts_are_git_ignored():
         # 2026-11-11: the model's topic grouping (app/coach/topics_store.py):
         # labels and fact ids, named for the same reason.
         "context/topics.json",
+        # 2026-11-11: the prompted judgment (app/coach/prompt_judge_store.py):
+        # the interviewer's own turns and the grouping's labels, and the
+        # coverage reading (app/coach/coverage_store.py): the interviewer's
+        # turns and the survey. Named for the same reason.
+        "context/prompted.json",
+        "context/coverage.json",
     ):
         result = subprocess.run(["git", "check-ignore", "-q", relative_path], cwd=str(REPO_ROOT))
         assert result.returncode == 0, f"{relative_path} is NOT reported as git-ignored"

@@ -530,7 +530,7 @@ def create_author_app(*, context_dir: Path, static_dir: Path) -> FastAPI:
         # An invalid item, or a file that changed between the two reads.
         except (ContextValidationError, OSError, ValueError):
             survey = ()
-        proposals = prep_load.survey_proposals(survey, _sessions_root_for(context_dir)) if survey else ()
+        proposals = prep_load.survey_proposals(survey, _sessions_root_for(context_dir), context_dir) if survey else ()
         return JSONResponse({
             "proposals": [
                 {"item_id": p.item_id, "text": p.text, "action": p.action, "reason": p.reason}

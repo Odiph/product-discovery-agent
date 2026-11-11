@@ -28,7 +28,7 @@ def test_the_page_is_offered_exactly_what_prep_would_change(node):  # noqa: F811
     assert response.status_code == 200
     assert response.json() == {"proposals": [{
         "item_id": "q2",
-        "text": "What did you do next?",
+        "text": "What happened after the export failed?",
         "action": prep_mod.MOVE_EARLIER,
         "reason": "never asked in the 2 interviews that had it: move it earlier, or drop it if it no longer matters",
     }], "survey": "present"}

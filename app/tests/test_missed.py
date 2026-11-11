@@ -732,3 +732,17 @@ def test_a_claim_citing_interviewer_speech_is_never_prompted():
     (topic,) = report.topics
     assert {o.outcome for o in topic.occurrences} == {missed_mod.NOT_INTERVIEWEE}
     assert not any(o.prompted for o in topic.occurrences)
+
+
+def test_a_follow_up_on_a_prompted_mention_still_counts_for_that_interview():
+    # The overlay control: the first mention answers "what bothers you?"
+    # (prompted) and is followed up; it comes back unasked at "anything
+    # else?" and is walked past. The interviewer did not walk past the topic.
+    split = summary_mod.split_by_prompt([
+        ("S1", True, True), ("S1", False, False),
+        ("S2", False, False),
+        ("S3", True, True),
+    ])
+    assert split.raised_interviews == 3 and split.asked_only_interviews == 1
+    assert split.unprompted.raised_interviews == 2
+    assert split.unprompted.followed_interviews == 1

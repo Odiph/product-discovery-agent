@@ -142,9 +142,41 @@ def resolve_extract_model() -> str:
     return os.environ.get("EXTRACT_MODEL") or resolve_model()
 
 
+def resolve_judge_model() -> str:
+    """`JUDGE_MODEL`: the model for the two judgments over your own questions
+    (`missed --group model`'s prompted judgment, `coverage`). Unset, it is the
+    extract model. Measured 2026-11-11 on the mock interviews: gemini-2.5-flash
+    swung from 7 to 3 interviews on the planted topic between two runs of the
+    same prompt; claude-sonnet-5.5 matched the answer key."""
+    return os.environ.get("JUDGE_MODEL") or resolve_extract_model()
+
+
 def with_timeout(client: "anthropic.Anthropic", timeout_s: float) -> "anthropic.Anthropic":
     """Binds an explicit per-call timeout via the SDK's own per-call options
     override (§C4). Every call site in `app/coach/` must go through this --
     it is what forces each call to name its own bound rather than silently
     inheriting the client's 10-minute default."""
     return client.with_options(timeout=timeout_s)
+
+
+# Models that answer a forced `tool_choice` (`{"type": "tool"}` or `"any"`)
+# with a 400 "not supported for this model". Matched on the bare id, so an
+# OpenRouter-style "anthropic/claude-sonnet-5.5" counts (2026-11-11: the
+# prompted judge failed on it through OpenRouter).
+_NO_FORCED_TOOL = ("claude-opus-5-5", "claude-sonnet-5-5", "claude-fable-5-1", "claude-fable-5-2",
+                   "claude-mythos-5-1", "claude-mythos-5-2")
+
+
+def accepts_forced_tool(model: str) -> bool:
+    bare = (model or "").rsplit("/", 1)[-1].replace(".", "-").lower()
+    return not any(bare.startswith(prefix) for prefix in _NO_FORCED_TOOL)
+
+
+def tool_choice(model: str, tool_name: str) -> dict:
+    """The `tool_choice` for a call that must answer through `tool_name`: forced
+    where the model allows it, else `auto`. Each call site offers only that one
+    tool and already treats a reply without it as a failure, so `auto` costs
+    a failed call at worst, never a silently wrong answer."""
+    if accepts_forced_tool(model):
+        return {"type": "tool", "name": tool_name}
+    return {"type": "auto"}

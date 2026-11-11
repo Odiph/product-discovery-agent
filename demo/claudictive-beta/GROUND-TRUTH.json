@@ -10,16 +10,51 @@
     "interviews": 12,
     "between_rounds_aside": {
       "raised_in": 8,
-      "followed_up_in": 0
+      "followed_up_in": 0,
+      "occurrences": 8,
+      "prompted": 0,
+      "volunteered": 8,
+      "volunteered_in": 8
     },
     "control_a_overlay_covers_hud": {
       "raised_in": 5,
-      "followed_up_in": 5
+      "followed_up_in": 5,
+      "occurrences": 5,
+      "prompted": 0,
+      "volunteered": 5,
+      "volunteered_in": 5
     },
     "control_b_hotkey_collision": {
       "raised_in": 2,
-      "followed_up_in": 0
-    }
+      "followed_up_in": 0,
+      "occurrences": 2,
+      "prompted": 0,
+      "volunteered": 2,
+      "volunteered_in": 2
+    },
+    "voice": {
+      "occurrences": 21,
+      "prompted": 21,
+      "volunteered": 0,
+      "raised_in": 12,
+      "volunteered_in": 0
+    },
+    "themes": {
+      "occurrences": 14,
+      "prompted": 12,
+      "volunteered": 2,
+      "raised_in": 12,
+      "volunteered_in": 2
+    },
+    "price": {
+      "occurrences": 21,
+      "prompted": 21,
+      "volunteered": 0,
+      "raised_in": 12,
+      "volunteered_in": 0
+    },
+    "guide_questions_asked": 109,
+    "guide_questions_asked_hebrew_interviews": 91
   },
   "interviews": [
     {
@@ -35,7 +70,11 @@
         "full_line": "Yoni 00:05:03: נגיד אני מריץ build ארוך של המשחק, וזה לוקח כמה דקות, אז אני נכנס לגיים. ושואל את Claude אם הbuild עבר, או מבקש ממנו לתקן משהו קטן. בעיקר כשאני מחכה בqueue, זה כמו חמש דקות של כלום ואני ממילא בוהה במסך.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:05:59: מעולה, מעולה. ואיזה features היית רוצה שנוסיף?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:04:50: ובפעמים האלה, מה אתה עושה עם זה?",
+        "why_not_prompted": "s4 'what do you do with it?' asks WHAT, not WHEN"
       },
       "control_a_overlay_covers_hud": {
         "present": false
@@ -43,7 +82,104 @@
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:17:02"
+      "duration": "00:17:02",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 13
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s7",
+          "turn": 29
+        },
+        {
+          "id": "s8",
+          "turn": 33
+        },
+        {
+          "id": "s9",
+          "turn": 39
+        },
+        {
+          "id": "s10",
+          "turn": 51
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 19,
+          "about": [
+            "voice",
+            "in_match"
+          ],
+          "line": "Interviewer 00:06:34: כן! זה בדיוק משהו שאנחנו חושבים עליו. אתה לא חושב שזה יהיה מטורף לדבר עם Claude באמצע teamfight?"
+        },
+        {
+          "turn": 35,
+          "about": [
+            "price"
+          ],
+          "line": "Interviewer 00:11:40: נגיד חמישה דולר בחודש?"
+        }
+      ],
+      "off_script_topic_questions": [],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "s5 features"
+          },
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "pitch"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "'anything else?' continues s5"
+          }
+        ],
+        "price": [
+          {
+            "turn": 34,
+            "prompted": true,
+            "answers_turn": 33,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 36,
+            "prompted": true,
+            "answers_turn": 35,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/02-maya.txt",
@@ -58,7 +194,11 @@
         "full_line": "Maya 00:05:34: בדרך כלל אני מבקשת ממנו לבדוק משהו בside project, נגיד שיריץ טסטים. בין round לround אני ממילא עושה alt-tab לבדוק אם הpipeline עבר, אז ככה זה יותר נוח.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:06:28: מעולה. איזה features חסרים לך?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:05:20: ומה את עושה איתו בדרך כלל?",
+        "why_not_prompted": "s4 asks WHAT, not WHEN"
       },
       "control_a_overlay_covers_hud": {
         "present": true,
@@ -68,12 +208,112 @@
         "full_line": "Maya 00:06:44: אממ, אני הייתי רוצה שהוא יהיה פחות... כאילו, יש פעם אחת שהחלון פשוט כיסה לי את הkill feed ואת חצי מהHUD, ולא ראיתי שמישהו מגיע מאחורה.",
         "interviewer_next_turn": 19,
         "interviewer_next_line": "Interviewer 00:07:32: רגע, מה זאת אומרת כיסה? תספרי לי בדיוק מתי זה קרה.",
-        "followed_up": true
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 17,
+        "answers_line": "Interviewer 00:06:28: מעולה. איזה features חסרים לך?",
+        "why_not_prompted": "s5 asks for features; a complaint is not a feature wish"
       },
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:19:03"
+      "duration": "00:19:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 13
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s7",
+          "turn": 31
+        },
+        {
+          "id": "s8",
+          "turn": 37
+        },
+        {
+          "id": "s9",
+          "turn": 41
+        },
+        {
+          "id": "s10",
+          "turn": 47
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 29,
+          "about": [
+            "mobile_app"
+          ],
+          "line": "Interviewer 00:11:35: חח, theme של Overwatch, אוקיי. מעולה. ומה עם mobile app? היית משתמשת באפליקציה בטלפון שמתחברת לזה?"
+        },
+        {
+          "turn": 35,
+          "about": [
+            "in_match"
+          ],
+          "line": "Interviewer 00:13:43: מעולה. את חושבת שגיימרים רוצים לעבוד עם Claude תוך כדי משחק?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 39,
+          "about": "price",
+          "line": "Interviewer 00:15:11: הבנתי. ומה היה גורם לך לשלם יותר?"
+        }
+      ],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "'more features?' continues s5"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "'more features?' continues s5"
+          }
+        ],
+        "price": [
+          {
+            "turn": 38,
+            "prompted": true,
+            "answers_turn": 37,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 40,
+            "prompted": true,
+            "answers_turn": 39,
+            "why": "off-script 'what would make you pay more?'"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/03-itay.txt",
@@ -88,7 +328,11 @@
         "full_line": "Itay 00:11:47: שזה מהיר לפתוח. Hotkey ואתה שם. ושהוא זוכר את הproject. אחרי שאני מת ואני מחכה לround הבא, יש לי שלושים-ארבעים שניות שאני רק צופה בחברים, אז אני זורק לו שאלה.",
         "interviewer_next_turn": 27,
         "interviewer_next_line": "Interviewer 00:12:57: מעולה. והחלק הכי פחות אהוב?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 25,
+        "answers_line": "Interviewer 00:11:20: מעולה, מעולה. בוא נעבור הלאה. מה החלק האהוב עליך?",
+        "why_not_prompted": "'your favourite part?' names nothing"
       },
       "control_a_overlay_covers_hud": {
         "present": false
@@ -96,7 +340,106 @@
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:21:03"
+      "duration": "00:21:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 13
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s8",
+          "turn": 29
+        },
+        {
+          "id": "s9",
+          "turn": 35
+        },
+        {
+          "id": "s10",
+          "turn": 43
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s4",
+        "s6",
+        "s7"
+      ],
+      "pitches": [
+        {
+          "turn": 19,
+          "about": [
+            "voice",
+            "in_match"
+          ],
+          "line": "Interviewer 00:07:45: וואו, macro, זה רעיון מעולה. אתה לא חושב שעם voice זה יהיה עוד יותר טוב? פשוט להגיד לו באמצע clutch?"
+        },
+        {
+          "turn": 21,
+          "about": [
+            "voice"
+          ],
+          "line": "Interviewer 00:09:36: חח, כן. אבל עם voice זה יפתור את זה, לא?"
+        },
+        {
+          "turn": 31,
+          "about": [
+            "voice",
+            "price"
+          ],
+          "line": "Interviewer 00:14:51: ואם היה פיצ'ר voice?"
+        }
+      ],
+      "off_script_topic_questions": [],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "pitch"
+          },
+          {
+            "turn": 32,
+            "prompted": true,
+            "answers_turn": 31,
+            "why": "pitch (voice and price)"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "'anything else?' continues the features talk (s5)"
+          }
+        ],
+        "price": [
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 32,
+            "prompted": true,
+            "answers_turn": 31,
+            "why": "pitch (voice and price)"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/04-shira.txt",
@@ -114,12 +457,107 @@
         "full_line": "Shira 00:05:45: החלון. הוא נפתח בדיוק על הminimap בפינה, ובApex אם אתה לא רואה את הring אתה מת.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:06:19: רגע, תסבירי לי. מתי זה קרה בפעם האחרונה? מה בדיוק ראית?",
-        "followed_up": true
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:05:27: מעולה. ומה הכי מפריע לך בשימוש?",
+        "why_not_prompted": "'what bothers you most?' names nothing"
       },
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:18:03"
+      "duration": "00:18:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 11
+        },
+        {
+          "id": "s4",
+          "turn": 13
+        },
+        {
+          "id": "s5",
+          "turn": 25
+        },
+        {
+          "id": "s7",
+          "turn": 31
+        },
+        {
+          "id": "s8",
+          "turn": 35
+        },
+        {
+          "id": "s9",
+          "turn": 37
+        },
+        {
+          "id": "s10",
+          "turn": 43
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 29,
+          "about": [
+            "mobile_app",
+            "in_match"
+          ],
+          "line": "Interviewer 00:11:07: ומה דעתך על mobile companion app? כאילו לראות את Claude בטלפון בזמן שאת משחקת?"
+        },
+        {
+          "turn": 39,
+          "about": [
+            "in_match"
+          ],
+          "line": "Interviewer 00:15:04: מעולה. ואת חושבת שזה משהו שגיימרים צריכים? לעבוד עם AI תוך כדי משחק?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 27,
+          "about": "themes",
+          "line": "Interviewer 00:10:35: summary קצר, מעולה. ומה עם themes?"
+        }
+      ],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "s5 features"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "off-script 'what about themes?'"
+          }
+        ],
+        "price": [
+          {
+            "turn": 36,
+            "prompted": true,
+            "answers_turn": 35,
+            "why": "s8 pay"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/05-daniel.txt",
@@ -134,7 +572,11 @@
         "full_line": "Daniel 00:06:00: I asked Claude to summarize a PR one of my guys opened. And once to check a failing deploy. Mostly it's while the game is loading, the loading in FC takes forever, so I'm already checking Slack on my phone anyway.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:07:04: Great. What features would you like to see?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:05:44: And what did you do with it those times?",
+        "why_not_prompted": "s4 asks WHAT, not WHEN"
       },
       "control_a_overlay_covers_hud": {
         "present": false
@@ -142,7 +584,115 @@
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:20:03"
+      "duration": "00:20:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 13
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s7",
+          "turn": 25
+        },
+        {
+          "id": "s8",
+          "turn": 29
+        },
+        {
+          "id": "s9",
+          "turn": 33
+        },
+        {
+          "id": "s10",
+          "turn": 47
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 19,
+          "about": [
+            "voice",
+            "in_match"
+          ],
+          "line": "Interviewer 00:07:42: Yeah, we hear that a lot. Don't you think it would be amazing to just talk to Claude in the middle of a match?"
+        },
+        {
+          "turn": 41,
+          "about": [
+            "mobile_app"
+          ],
+          "line": "Interviewer 00:16:19: It's an idea for an app on your phone that shows Claude's status. Would you use that?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 23,
+          "about": "themes",
+          "line": "Interviewer 00:09:20: A status line, great, noted. What about themes?"
+        },
+        {
+          "turn": 31,
+          "about": "price",
+          "line": "Interviewer 00:12:28: Haha. And how much would you pay?"
+        }
+      ],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "s5 features"
+          },
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "pitch"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "off-script 'what about themes?'"
+          }
+        ],
+        "price": [
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 32,
+            "prompted": true,
+            "answers_turn": 31,
+            "why": "off-script 'how much?'"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/06-noa.txt",
@@ -157,7 +707,11 @@
         "full_line": "Noa 00:06:21: בודקת אם הtraining נגמר, או מבקשת שיכתוב לי plot של התוצאות. בין משחק למשחק, כשהוא מחפש match, אני ממילא מציצה בnotebook במסך השני, אז זה פשוט יותר נוח לשאול אותו.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:07:28: מעולה. ואיזה features את רוצה?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:06:08: ומה את עושה איתו?",
+        "why_not_prompted": "s4 asks WHAT, not WHEN"
       },
       "control_a_overlay_covers_hud": {
         "present": false
@@ -170,9 +724,122 @@
         "full_line": "Noa 00:04:28: הhotkey. הdefault שלכם זה אותו key שיש לי לpush-to-talk בDiscord, אז כל פעם שדיברתי עם החבר שלי נפתח החלון.",
         "interviewer_next_turn": 13,
         "interviewer_next_line": "Interviewer 00:05:15: הבנתי. מעולה. בואי נעבור לשאלה הבאה. כמה פעמים בשבוע את משתמשת?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 11,
+        "answers_line": "Interviewer 00:04:09: מעולה, מעולה. היה משהו שהיה קשה?",
+        "why_not_prompted": "'was anything hard?' asks about the install"
       },
-      "duration": "00:19:03"
+      "duration": "00:19:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 13
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s8",
+          "turn": 27
+        },
+        {
+          "id": "s7",
+          "turn": 31
+        },
+        {
+          "id": "s9",
+          "turn": 33
+        },
+        {
+          "id": "s10",
+          "turn": 43
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 21,
+          "about": [
+            "voice"
+          ],
+          "line": "Interviewer 00:09:04: מעולה. את חושבת שvoice יגרום לך להשתמש בזה יותר?"
+        },
+        {
+          "turn": 23,
+          "about": [
+            "voice"
+          ],
+          "line": "Interviewer 00:10:09: מעולה, אז voice זה המפתח. בואי נעבור הלאה. מה את הכי אוהבת?"
+        },
+        {
+          "turn": 29,
+          "about": [
+            "price"
+          ],
+          "line": "Interviewer 00:13:07: ונגיד אם זה היה ארבעה דולר בחודש?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 37,
+          "about": "themes",
+          "line": "Interviewer 00:15:27: מעולה, מעולה. ומה לגבי העיצוב?"
+        }
+      ],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "'more?' continues s5"
+          },
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "pitch (leading)"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 38,
+            "prompted": true,
+            "answers_turn": 37,
+            "why": "off-script 'what about the design?'"
+          }
+        ],
+        "price": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/07-avi.txt",
@@ -190,12 +857,99 @@
         "full_line": "Avi 00:05:08: כן, פעם אחת פתחתי אותו והוא כיסה לי את המפה בפינה, והבן שלי צעק עליי שאני לא רואה את הסטורם.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:05:43: חח, רגע, מה זאת אומרת כיסה? איפה בדיוק הוא נפתח?",
-        "followed_up": true
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:04:55: מעולה. משהו שמפריע לך?",
+        "why_not_prompted": "'anything bothering you?' names nothing"
       },
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:16:03"
+      "duration": "00:16:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 11
+        },
+        {
+          "id": "s4",
+          "turn": 13
+        },
+        {
+          "id": "s5",
+          "turn": 25
+        },
+        {
+          "id": "s7",
+          "turn": 35
+        },
+        {
+          "id": "s8",
+          "turn": 37
+        },
+        {
+          "id": "s9",
+          "turn": 41
+        },
+        {
+          "id": "s10",
+          "turn": 45
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 43,
+          "about": [
+            "in_match"
+          ],
+          "line": "Interviewer 00:14:19: מעולה, מעולה. ואתה חושב שהיית משתמש בזה באמצע קרב?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 33,
+          "about": "themes",
+          "line": "Interviewer 00:11:13: הבנתי. ומה דעתך על themes?"
+        }
+      ],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "'more features?' continues s5"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 34,
+            "prompted": true,
+            "answers_turn": 33,
+            "why": "off-script 'what about themes?'"
+          }
+        ],
+        "price": [
+          {
+            "turn": 38,
+            "prompted": true,
+            "answers_turn": 37,
+            "why": "s8 pay"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/08-tamar.txt",
@@ -210,7 +964,11 @@
         "full_line": "Tamar 00:07:07: הוא בסדר. לפעמים איטי, אבל זה Claude, לא אתם. האמת שאני כותבת לו בעיקר בqueue ובpicking phase, יש שם זמן מת ואני לא צריכה לעשות כלום.",
         "interviewer_next_turn": 19,
         "interviewer_next_line": "Interviewer 00:08:05: מעולה. בואי נדבר על features. מה היית רוצה שנוסיף?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 17,
+        "answers_line": "Interviewer 00:06:45: מעולה. איך את מרגישה עם המהירות שלו?",
+        "why_not_prompted": "'how do you feel about its speed?' asks about speed"
       },
       "control_a_overlay_covers_hud": {
         "present": false
@@ -218,7 +976,113 @@
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:22:02"
+      "duration": "00:22:02",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 13
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 19
+        },
+        {
+          "id": "s6",
+          "turn": 23
+        },
+        {
+          "id": "s7",
+          "turn": 27
+        },
+        {
+          "id": "s8",
+          "turn": 33
+        },
+        {
+          "id": "s9",
+          "turn": 37
+        },
+        {
+          "id": "s10",
+          "turn": 49
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 25,
+          "about": [
+            "voice",
+            "in_match"
+          ],
+          "line": "Interviewer 00:10:48: מעולה. את לא חושבת שזה יהיה מדהים לתת לו פקודה באמצע teamfight?"
+        },
+        {
+          "turn": 31,
+          "about": [
+            "reminder"
+          ],
+          "line": "Interviewer 00:13:50: הבנתי. אולי reminder יעזור?"
+        },
+        {
+          "turn": 35,
+          "about": [
+            "price"
+          ],
+          "line": "Interviewer 00:15:18: מעולה! ואם זה היה עשר?"
+        }
+      ],
+      "off_script_topic_questions": [],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "s6 voice"
+          },
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "pitch"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "'more?' continues s5"
+          }
+        ],
+        "price": [
+          {
+            "turn": 34,
+            "prompted": true,
+            "answers_turn": 33,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 36,
+            "prompted": true,
+            "answers_turn": 35,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/09-omer.txt",
@@ -236,12 +1100,124 @@
         "full_line": "Omer 00:05:25: הוא מכסה את הhotbar. החלון נפתח למטה באמצע, בדיוק על הinventory bar.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:05:56: רגע, תראה לי, מה זאת אומרת מכסה? באיזה מצב זה קרה?",
-        "followed_up": true
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:05:11: מעולה. משהו שמפריע לך?",
+        "why_not_prompted": "'anything bothering you?' names nothing"
       },
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:17:03"
+      "duration": "00:17:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 11
+        },
+        {
+          "id": "s4",
+          "turn": 13
+        },
+        {
+          "id": "s5",
+          "turn": 25
+        },
+        {
+          "id": "s6",
+          "turn": 27
+        },
+        {
+          "id": "s7",
+          "turn": 33
+        },
+        {
+          "id": "s8",
+          "turn": 35
+        },
+        {
+          "id": "s9",
+          "turn": 39
+        },
+        {
+          "id": "s10",
+          "turn": 45
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 29,
+          "about": [
+            "voice"
+          ],
+          "line": "Interviewer 00:10:51: הבנתי. אבל אתה לא חושב שאחרים יאהבו voice?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 31,
+          "about": "themes",
+          "line": "Interviewer 00:11:27: מעולה. ומה עם themes?"
+        },
+        {
+          "turn": 37,
+          "about": "price",
+          "line": "Interviewer 00:13:36: וכמה?"
+        }
+      ],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "s6 voice"
+          },
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "pitch (leading)"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 32,
+            "prompted": true,
+            "answers_turn": 31,
+            "why": "off-script 'what about themes?'"
+          },
+          {
+            "turn": 46,
+            "prompted": false,
+            "answers_turn": 45,
+            "why": "s10 'anything to add?' names nothing"
+          }
+        ],
+        "price": [
+          {
+            "turn": 36,
+            "prompted": true,
+            "answers_turn": 35,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 38,
+            "prompted": true,
+            "answers_turn": 37,
+            "why": "off-script 'how much?'"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/10-lior.txt",
@@ -256,7 +1232,11 @@
         "full_line": "Lior 00:05:52: I check on whatever I left Claude doing. Like, did the refactor finish, did the tests pass. Honestly between rounds I check Slack anyway, and the warmup before a match too, so I just open Claude there instead.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:07:01: Great. What features would you like?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:05:38: And what do you do with it?",
+        "why_not_prompted": "s4 asks WHAT, not WHEN"
       },
       "control_a_overlay_covers_hud": {
         "present": false
@@ -264,7 +1244,104 @@
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:18:03"
+      "duration": "00:18:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 13
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s7",
+          "turn": 23
+        },
+        {
+          "id": "s8",
+          "turn": 27
+        },
+        {
+          "id": "s9",
+          "turn": 29
+        },
+        {
+          "id": "s10",
+          "turn": 43
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 21,
+          "about": [
+            "voice",
+            "in_match"
+          ],
+          "line": "Interviewer 00:08:29: Great, great. Don't you think with voice you could use it during the actual fights?"
+        },
+        {
+          "turn": 37,
+          "about": [
+            "themes"
+          ],
+          "line": "Interviewer 00:15:02: So themes, maybe a gamer design?"
+        }
+      ],
+      "off_script_topic_questions": [],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "'what else?' continues s5"
+          },
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "pitch"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 36,
+            "prompted": false,
+            "answers_turn": 35,
+            "why": "'the thing you like least?' names nothing"
+          },
+          {
+            "turn": 38,
+            "prompted": true,
+            "answers_turn": 37,
+            "why": "pitch"
+          }
+        ],
+        "price": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "s8 pay"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/11-gal.txt",
@@ -279,7 +1356,11 @@
         "full_line": "Gal 00:05:53: אני מריץ compile של המנוע, זה לוקח עשרים דקות לפעמים. אז אני שואל אותו אם זה עבר ואם יש errors. בPUBG יש את הlobby ואת המטוס, זה דקה וחצי שאתה סתם יושב, אז שם אני כותב לו.",
         "interviewer_next_turn": 17,
         "interviewer_next_line": "Interviewer 00:07:05: מעולה. איזה features היית רוצה?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:05:33: מעולה. ומה אתה עושה איתו בדרך כלל?",
+        "why_not_prompted": "s4 asks WHAT, not WHEN"
       },
       "control_a_overlay_covers_hud": {
         "present": true,
@@ -289,12 +1370,124 @@
         "full_line": "Gal 00:08:17: כן, הדבר הכי מעצבן, החלון יושב בדיוק על הminimap בפינה הימנית למטה. בPUBG זה המפה שלך, בלי זה אתה עיוור.",
         "interviewer_next_turn": 21,
         "interviewer_next_line": "Interviewer 00:09:03: רגע, מה זאת אומרת יושב על הminimap? מתי זה קרה לך? תתאר לי.",
-        "followed_up": true
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 19,
+        "answers_line": "Interviewer 00:07:55: plugin לUnreal, מעניין, רשמתי. עוד משהו?",
+        "why_not_prompted": "'anything else?' continues s5; a complaint is not a feature wish"
       },
       "control_b_hotkey_collision": {
         "present": false
       },
-      "duration": "00:23:03"
+      "duration": "00:23:03",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 9
+        },
+        {
+          "id": "s3",
+          "turn": 11
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s7",
+          "turn": 35
+        },
+        {
+          "id": "s8",
+          "turn": 37
+        },
+        {
+          "id": "s9",
+          "turn": 41
+        },
+        {
+          "id": "s10",
+          "turn": 53
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 29,
+          "about": [
+            "transparent_window"
+          ],
+          "line": "Interviewer 00:12:40: זה ממש מעניין. אז אולי משהו שקוף?"
+        },
+        {
+          "turn": 33,
+          "about": [
+            "voice",
+            "in_match"
+          ],
+          "line": "Interviewer 00:14:00: חח כן. אתה לא חושב שעם voice היית יכול להשתמש בזה תוך כדי קרב?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 39,
+          "about": "price",
+          "line": "Interviewer 00:16:38: מעניין. וכמה?"
+        },
+        {
+          "turn": 45,
+          "about": "themes",
+          "line": "Interviewer 00:18:23: הבנתי. מעולה, מעולה. ומה עם themes?"
+        }
+      ],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 32,
+            "prompted": true,
+            "answers_turn": 31,
+            "why": "'more features?' continues s5"
+          },
+          {
+            "turn": 34,
+            "prompted": true,
+            "answers_turn": 33,
+            "why": "pitch"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 46,
+            "prompted": true,
+            "answers_turn": 45,
+            "why": "off-script 'what about themes?'"
+          }
+        ],
+        "price": [
+          {
+            "turn": 38,
+            "prompted": true,
+            "answers_turn": 37,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 40,
+            "prompted": true,
+            "answers_turn": 39,
+            "why": "off-script 'how much?'"
+          }
+        ]
+      }
     },
     {
       "file": "transcripts/12-roni.txt",
@@ -315,9 +1508,118 @@
         "full_line": "Roni 00:04:19: כן, הhotkey שלכם זה אותו מקש שיש לי בBG3 לquick save. אז כל פעם ששמרתי, נפתח החלון. ולהפך.",
         "interviewer_next_turn": 15,
         "interviewer_next_line": "Interviewer 00:04:52: מעולה. בואי נעבור לשאלה הבאה. כמה פעמים את משתמשת?",
-        "followed_up": false
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 13,
+        "answers_line": "Interviewer 00:04:04: הבנתי, רשמתי. מעולה. משהו נוסף?",
+        "why_not_prompted": "'anything else?' continues the install question"
       },
-      "duration": "00:15:02"
+      "duration": "00:15:02",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 11
+        },
+        {
+          "id": "s3",
+          "turn": 15
+        },
+        {
+          "id": "s4",
+          "turn": 17
+        },
+        {
+          "id": "s5",
+          "turn": 19
+        },
+        {
+          "id": "s6",
+          "turn": 21
+        },
+        {
+          "id": "s7",
+          "turn": 35
+        },
+        {
+          "id": "s8",
+          "turn": 37
+        },
+        {
+          "id": "s9",
+          "turn": 41
+        },
+        {
+          "id": "s10",
+          "turn": 47
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 23,
+          "about": [
+            "voice"
+          ],
+          "line": "Interviewer 00:07:24: חח מעולה. את חושבת שvoice יגרום לך להשתמש בזה יותר?"
+        },
+        {
+          "turn": 39,
+          "about": [
+            "price"
+          ],
+          "line": "Interviewer 00:11:48: הבנתי. ונגיד שני דולר?"
+        }
+      ],
+      "off_script_topic_questions": [],
+      "asked_topics": {
+        "voice": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "s6 voice"
+          },
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "pitch (leading)"
+          }
+        ],
+        "themes": [
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "s5 features"
+          }
+        ],
+        "price": [
+          {
+            "turn": 38,
+            "prompted": true,
+            "answers_turn": 37,
+            "why": "s8 pay"
+          },
+          {
+            "turn": 40,
+            "prompted": true,
+            "answers_turn": 39,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      }
     }
-  ]
+  ],
+  "prompted_policy": {
+    "prompted": "An interviewee turn is PROMPTED when it answers an interviewer question or pitch about its topic, and VOLUNTEERED otherwise.",
+    "pitch": "A pitch or a leading question about a topic ('wouldn't voice be amazing mid-fight?') counts as asking about it.",
+    "broad": "A broad question asks only for what it names: 'what features would you like?' asks about every feature wish; 'what do you usually do with it?' asks WHAT, not WHEN, WHERE or WHY; an open question ('anything bothering you?', 'your favourite part?', 'anything to add?') names nothing, so what comes up in answer to it was volunteered.",
+    "continuation": "A bare 'anything else?' / 'what else?' continues the question before it: in the middle of the features talk it asks for more features.",
+    "guide_s6": "s6 (voice) counts as asked only where voice was asked about neutrally; a pitch about voice is a pitch, recorded under pitches."
+  }
 }

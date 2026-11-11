@@ -72,7 +72,7 @@ tool asks for or records consent on your behalf.
 | Data | Sent to | When |
 |---|---|---|
 | Live audio of both sides | Soniox (speech-to-text) | Throughout every recorded call |
-| Transcript text, your brief, survey, hypotheses, your own rules (`process.md`) and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions`. `missed --group model --yes` (and `themes --group model --yes`) sends the extracted claims once, never quotes |
+| Transcript text, your brief, survey, hypotheses, your own rules (`process.md`) and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions`. `missed --group model --yes` (and `themes --group model --yes`) sends the extracted claims once, never quotes; `missed --group model --yes` then sends, once, YOUR OWN turns (the question right before each recurring topic, and up to two of your questions before it) with the topic labels, never the interviewee's words, so under `--group model` it is no longer claims only. `coverage --yes` sends your own turns of imported interviews and the survey, once |
 | Code you added with `kb add`, and research you typed yourself with `kb add --type research` (never interviews, conversations, emails, or anything typed as research by guess) | The same coach endpoint | When you run `kb digest`, once per new or changed document. Its notes then ride in the coach's prompt every cycle |
 | In-person room audio | Soniox, live during `start --in-person`, and again when you run `diarize-after` (the uploaded copy is deleted afterwards) | Every in-person meeting |
 | In-person room audio, phone to laptop | Your Tailscale tailnet: encrypted end to end between your own devices, possibly through Tailscale's relay servers | Throughout every in-person meeting |
@@ -476,6 +476,18 @@ Unset, it falls back to `COACH_MODEL` and changes nothing. It selects a
 *model*, not a *provider*: there is one client construction site, so whatever
 you name has to be served by the same `COACH_BASE_URL` endpoint.
 
+**`JUDGE_MODEL`** picks the model for the two judgments made over your own
+questions: whether you had already asked about a topic (`missed --group
+model`) and which guide questions you asked (`coverage`). Unset, it is
+`EXTRACT_MODEL`. Pick a strong one: on the mock interviews `gemini-2.5-flash`
+put the planted topic at 7 interviews in one run and 3 in the next, while
+`claude-sonnet-5.5` matched the answer key. Each cache records its model, so
+changing it re-judges once and never reuses the old answer.
+
+```
+JUDGE_MODEL=anthropic/claude-sonnet-5.5
+```
+
 Worth setting, because the extraction model is measurably the weak link: it
 labels merely-implied claims `evidence`, at 3/18 on a hand-adjudicated real
 interview. `app/coach/extract.py`'s own docstring carries the measurement and
@@ -858,6 +870,35 @@ it the file's modified time is used and recorded as such. Importing the same
 file twice is refused. Audio files are refused: importing recordings is not
 built yet. Then run `extract --all --project acme`.
 
+An imported interview has no live record of which guide questions you asked,
+so `prep` reconstructs it from the transcript: each of your turns is matched
+to a guide question by the words they share, and the reason says how many
+interviews were counted that way. A question asked in other words is missed
+(on the mock interviews it found 52 of the 91 questions really asked), so
+those counts read "at least", and a question it never finds is flagged for
+you to check by hand, never moved: only interviews with a live record can say
+"never asked". An interview where nothing matches the guide at all (one held
+in another language than the guide, say) is left out and named as untracked.
+
+To have the model read them instead:
+
+```
+.venv\Scripts\python.exe -m app coverage --project acme          # shows what it would send
+.venv\Scripts\python.exe -m app coverage --project acme --yes    # one call, cached
+```
+
+`coverage` sends the survey and YOUR OWN turns from every interview with no
+live record (never the interviewee's), asks once which guide question each
+turn asks, and caches the answer in `context/coverage.json`. `prep` (and the
+`author` page) then use it, labelled "from the model's reading of the
+transcript", while it is fresh: a new interview, a changed survey or another
+judge model makes it stale, and `prep` falls back to the word match and
+says so. `prep` itself still calls no model. It stays one-way: a question the
+model found counts as asked, and one it did not find is still "check by
+hand", because the model's recall on real interviews is not measured
+(`python -m benchmark.coverage_recall projects/claudictive-beta` measures it
+on the mock interviews after a live run).
+
 ### More commands after the call
 
 All take `--project PATH` like the rest, and none calls a model unless noted.
@@ -886,8 +927,10 @@ All take `--project PATH` like the rest, and none calls a model unless noted.
   not know (a hypothesis with no decision criterion, none or only unclear
   evidence, a contested one, a thin one) with the reason for each; walks the
   guide question by question, marking the ones never reached in the
-  interviews that had them; and repeats your habits from `mirror`. No model
-  call and nothing written: change the guide in `author`, which shows the
+  interviews that had them; lists the topics interviewees kept raising
+  without being asked that you walked past more often than you followed up
+  (from `missed`'s cached grouping and judgment, naming which rule decided);
+  and repeats your habits from `mirror`. No model call and nothing written: change the guide in `author`, which shows the
   same survey proposals above the survey with **Move to top**, **Remove from
   survey** and **Dismiss**. Applying one changes the survey on the page only;
   nothing is written until you press **Save survey**.
@@ -906,10 +949,23 @@ All take `--project PATH` like the rest, and none calls a model unless noted.
   --yes` makes it, grouping the claims by meaning and caching the result in
   `context/topics.json`. Later runs use that cache while the claims and model
   are unchanged, and the first line of output always says which grouping was
-  used. The follow-up judgment never calls a model, and is generous: a word a
-  later question shares with the offer counts as a follow-up, except the next
-  question on your guide and words you use in most interviews (the product's
-  name).
+  used. "Without being asked" is decided by word overlap between your question
+  and the topic, which misses a reworded or translated guide question and every
+  pitch; with `--group model --yes` a second call instead asks the model, for
+  each recurring topic, whether your question right before it (and up to two
+  of your questions before that, so "Anything else?" reads as continuing "What
+  features would you like?") already asked about it. A pitch or leading
+  question counts as asking. That call sends your own words, never the
+  interviewee's; without `--yes` it shows how many of your turns and topics it
+  would send, a few examples and the cost. Cached in `context/prompted.json`;
+  the output always says which rule decided. The follow-up judgment never
+  calls a model, and is generous: a word a later question shares with the
+  offer counts as a follow-up, except the next question on your guide and
+  words you use in most interviews (the product's name).
+- **`coverage [--yes]`**: which guide questions your imported (or coach-off)
+  interviews really asked, read by the model once from your own turns, for
+  `prep`. See "Importing past interviews". **This one calls the reasoning
+  vendor** (with `--yes`).
 - **`tree`**: the project's Opportunity Solution Tree (Teresa Torres). The
   outcome you set in `author` sits at the root; under it, the hypotheses you
   classified as opportunities (needs or pains heard from users), and under
@@ -1016,7 +1072,7 @@ with the reason given.
 
 Every command above takes `--project`. Of these, only `extract`,
 `critique-questions` and the live coach call a model; outside this table, so
-does `kb digest`.
+do `kb digest`, `coverage --yes` and `--group model --yes`.
 
 ## Retaining the raw audio (rehearsal sessions only)
 

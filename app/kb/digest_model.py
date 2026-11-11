@@ -104,7 +104,7 @@ def assemble_request(document: Document, part: Sequence[Section], *, model: str,
         "system": _SYSTEM.format(max_points=MAX_POINTS_PER_PART, max_chars=MAX_POINT_CHARS),
         "messages": [{"role": "user", "content": f"Document ({document.source_type}): {document.title}\n\n{body}"}],
         "tools": [_tool_schema()],
-        "tool_choice": {"type": "tool", "name": DIGEST_TOOL_NAME},
+        "tool_choice": reasoning_client.tool_choice(model, DIGEST_TOOL_NAME),
     }
 
 

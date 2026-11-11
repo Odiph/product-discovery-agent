@@ -89,7 +89,7 @@ from app.coach.coverage import CoverageDetector, CoverageState
 from app.coach.pipeline import SuggestionPipeline
 from app.coach.trigger import TurnTrigger
 from app import (
-    evidence_cli, extract_all as extract_all_mod, import_cli, kb_cli, mirror_cli, missed_cli,
+    coverage_cli, evidence_cli, extract_all as extract_all_mod, import_cli, kb_cli, mirror_cli, missed_cli,
     prep_cli, process_cli, themes_cli, tree_cli,
 )
 from app.session import evidence as evidence_mod
@@ -921,6 +921,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     forget.add_argument("--yes", action="store_true", help="delete; without it nothing is touched")
     _add_project_argument(forget)
 
+    coverage_cli.add_parser(subparsers, _add_project_argument)
     evidence_cli.add_parsers(subparsers, _add_project_argument)
     import_cli.add_parser(subparsers, _add_project_argument)
     kb_cli.add_parsers(subparsers, _add_project_argument)
@@ -3327,6 +3328,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return run_evidence_step(args)
         if args.command == "kb":
             return kb_cli.run(args)
+        if args.command == "coverage":
+            return coverage_cli.run(args, _apply_project)
         if args.command == "missed":
             return missed_cli.run(args, _apply_project)
         if args.command == "import":

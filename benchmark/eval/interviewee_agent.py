@@ -522,7 +522,7 @@ def assemble_interviewee_request(
             }
         ],
         "tools": [_interviewee_tool_schema()],
-        "tool_choice": {"type": "tool", "name": INTERVIEWEE_TOOL_NAME},
+        "tool_choice": reasoning_client.tool_choice(model, INTERVIEWEE_TOOL_NAME),
     }
 
 
