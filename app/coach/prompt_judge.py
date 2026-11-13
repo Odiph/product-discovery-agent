@@ -40,7 +40,7 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any, Iterable, Optional, Sequence
 
-from app.coach import reasoning_client
+from app.coach import reasoning_client, token_estimate
 
 logger = logging.getLogger(__name__)
 
@@ -48,14 +48,14 @@ TOOL_NAME = "judge_questions_against_topics"
 # A dozen interviews with ~25 recurring topics come back as a few hundred ids.
 DEFAULT_MAX_TOKENS = 4096
 DEFAULT_TIMEOUT_S = 120.0
-CHARS_PER_TOKEN = 4.0
 EARLIER_TURNS = 2
 _UNTRUSTED_STOP_REASONS = frozenset({"refusal", "max_tokens", "pause_turn", "model_context_window_exceeded"})
 
 
 class JudgeFailure(Exception):
-    def __init__(self, *, reason: str, stop_reason: "str | None" = None) -> None:
-        super().__init__(f"prompted judgment failed: {reason}"
+    def __init__(self, *, reason: str, stop_reason: "str | None" = None,
+                 what: str = "prompted judgment") -> None:
+        super().__init__(f"{what} failed: {reason}"
                          + (f" (stop_reason={stop_reason})" if stop_reason else ""))
         self.reason = reason
         self.stop_reason = stop_reason
@@ -184,16 +184,18 @@ def assemble_request(items: "Sequence[PromptItem]", *, model: str, max_tokens: i
 
 
 def estimate_input_tokens(request: dict) -> int:
-    """Four characters a token, as `topics` estimates: +/-15%, low for Hebrew."""
-    return round(len(json.dumps(request, ensure_ascii=False)) / CHARS_PER_TOKEN)
+    return token_estimate.estimate(request)
 
 
-def _raw_answers(response: Any) -> "list[tuple[str, bool]]":
+def raw_answers(response: Any, *, tool_name: str = TOOL_NAME, field: str = "asked",
+                what: str = "prompted judgment") -> "list[tuple[str, bool]]":
+    """(id, boolean) pairs from the `tool_name` block's `items`, each read
+    from `field`. Shared with `follow_judge`, whose answer has the same shape."""
     stop_reason = getattr(response, "stop_reason", None)
     if stop_reason in _UNTRUSTED_STOP_REASONS:
-        raise JudgeFailure(reason="untrusted-stop-reason", stop_reason=stop_reason)
+        raise JudgeFailure(reason="untrusted-stop-reason", stop_reason=stop_reason, what=what)
     for block in getattr(response, "content", None) or ():
-        if getattr(block, "type", None) != "tool_use" or getattr(block, "name", None) != TOOL_NAME:
+        if getattr(block, "type", None) != "tool_use" or getattr(block, "name", None) != tool_name:
             continue
         try:
             raw = block.input["items"]
@@ -201,36 +203,43 @@ def _raw_answers(response: Any) -> "list[tuple[str, bool]]":
                 raise ValueError("items must be an array")
             parsed = []
             for entry in raw:
-                alias, asked = entry["id"], entry["asked"]
-                if not isinstance(alias, str) or not isinstance(asked, bool):
+                alias, answer = entry["id"], entry[field]
+                if not isinstance(alias, str) or not isinstance(answer, bool):
                     raise ValueError("an answer needs a string id and a boolean")
-                parsed.append((alias, asked))
+                parsed.append((alias, answer))
             return parsed
         except (KeyError, TypeError, ValueError) as exc:
-            raise JudgeFailure(reason="parse-error", stop_reason=stop_reason) from exc
-    raise JudgeFailure(reason="no-tool-use-block", stop_reason=stop_reason)
+            raise JudgeFailure(reason="parse-error", stop_reason=stop_reason, what=what) from exc
+    raise JudgeFailure(reason="no-tool-use-block", stop_reason=stop_reason, what=what)
 
 
-def validate(raw: "Sequence[tuple[str, bool]]", items: "Sequence[PromptItem]", *, model: str) -> Judgment:
-    """Aliases back to items, with every drop recorded (module docstring)."""
-    items = unique_items(items)
-    aliases = _aliases(items)
+_raw_answers = raw_answers
+
+
+def match_ids(raw: "Sequence[tuple[str, bool]]", aliases: "Sequence[str]") -> "tuple[dict[str, bool], Dropped]":
+    """The answers for ids that were sent, first answer kept, and every drop."""
     unknown: "list[str]" = []
     repeated: "list[str]" = []
     answered: "dict[str, bool]" = {}
-    for alias, asked in raw:
+    for alias, answer in raw:
         key = alias.strip()
         if key not in aliases:
             unknown.append(alias)
         elif key in answered:
             repeated.append(key)
         else:
-            answered[key] = asked
+            answered[key] = answer
     unanswered = tuple(alias for alias in aliases if alias not in answered)
+    return answered, Dropped(unknown_ids=tuple(unknown), repeated_ids=tuple(repeated), unanswered_ids=unanswered)
+
+
+def validate(raw: "Sequence[tuple[str, bool]]", items: "Sequence[PromptItem]", *, model: str) -> Judgment:
+    """Aliases back to items, with every drop recorded (module docstring)."""
+    items = unique_items(items)
+    aliases = _aliases(items)
+    answered, dropped = match_ids(raw, tuple(aliases))
     answers = tuple((aliases[alias], asked) for alias, asked in answered.items())
-    return Judgment(model=model, key=judgment_key(items, model), answers=answers,
-                    dropped=Dropped(unknown_ids=tuple(unknown), repeated_ids=tuple(repeated),
-                                    unanswered_ids=unanswered))
+    return Judgment(model=model, key=judgment_key(items, model), answers=answers, dropped=dropped)
 
 
 def judge(client: Any, items: "Sequence[PromptItem]", *, model: str, max_tokens: int = DEFAULT_MAX_TOKENS,

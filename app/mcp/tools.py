@@ -49,6 +49,7 @@ reads the detail on their own machine, where the file is.
 
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional
@@ -362,6 +363,18 @@ def _load_hypotheses_across(nodes, errors: "list[dict[str, str]]") -> "tuple[tup
 # --- list_projects --------------------------------------------------------------------
 
 
+# The one next step `list_projects` names for each gap (BACKLOG B8), so a
+# coding agent never answers a new user with a raw error.
+HINT_NO_PROJECT = ("No project yet. Run `python -m app demo --yes` to load 12 mock interviews (no API call, "
+                   "no key), or `python -m app author --project <name>` to start your own.")
+HINT_NO_INTERVIEWS = ("No interviews here yet. Record one with `python -m app start --project {path}` or bring "
+                      "one in with `python -m app import <file> --project {path}`.")
+HINT_OUTSIDE_PROJECTS = ("This node points outside projects/ (a link or junction), so nothing here is read. "
+                         "Move the folder into projects/ instead.")
+HINT_NOT_EXTRACTED = ("Interviews but no claims yet. Run `python -m app extract --all --project {path}` "
+                      "(it previews the cost first).")
+
+
 def list_projects(arguments: "Mapping[str, Any]", *, repo_root: "Optional[Path]") -> "dict[str, Any]":
     nodes = projects_mod.list_projects(repo_root=repo_root)
     return {
@@ -373,10 +386,36 @@ def list_projects(arguments: "Mapping[str, Any]", *, repo_root: "Optional[Path]"
                 "has_context": node.has_context,
                 "has_sessions": node.has_sessions,
                 "corpus": project_meta_mod.corpus_kind(node.path, repo_root=repo_root),
+                "hint": _next_step(node.path, repo_root=repo_root),
             }
             for node in nodes
-        ]
+        ],
+        "hint": None if nodes else HINT_NO_PROJECT,
     }
+
+
+def _next_step(path: str, *, repo_root: "Optional[Path]") -> "Optional[str]":
+    """The hint for one node: no interviews, interviews but no claims, or
+    `None`. Any unreadable file reads as the earlier gap, never an error."""
+    try:
+        paths = projects_mod.resolve(path, repo_root=repo_root)
+    except projects_mod.ProjectPathError:
+        return HINT_OUTSIDE_PROJECTS
+    try:
+        sessions = session_reader.list_session_ids(paths.sessions_root) if paths.sessions_root.is_dir() else ()
+    except OSError:
+        sessions = ()
+    if not sessions:
+        return HINT_NO_INTERVIEWS.format(path=path)
+    return None if _has_claims(paths.context_dir) else HINT_NOT_EXTRACTED.format(path=path)
+
+
+def _has_claims(context_dir: Path) -> bool:
+    try:
+        facts = json.loads((context_dir / coach_corpus.FACTS_FILENAME).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    return isinstance(facts, list) and bool(facts)
 
 
 # --- get_survey -----------------------------------------------------------------------
@@ -906,7 +945,7 @@ _TOOL_ORDER: "tuple[tuple[str, str, dict[str, Any], Callable[..., dict[str, Any]
         "operator's own machine. Check 'unextracted_projects' before concluding anything from an "
         "empty result: a project nobody has run extraction on has no facts to return, which is "
         "not the same answer as an interview that produced none."
-        "Every entry in 'extraction' carries a 'corpus' of demo, real or undeclared, and it is NOT a formality: some nodes on this machine hold hand-authored demonstration claims that read exactly like customer research, naming a 'he' or a 'she' and citing a session id. Nothing else in a fact distinguishes them -- 'kind' says evidence-vs-inference, which is how firmly the claim follows from what was said, not whether a person said it. Never report a demo claim as a finding, and treat undeclared as not-yet-established rather than real. ",
+        "Every entry in 'extraction' carries a 'corpus' of demo, real or undeclared, and it is NOT a formality: some nodes on this machine hold hand-authored demonstration claims that read exactly like customer research, naming a 'he' or a 'she' and citing a session id. Nothing else in a fact distinguishes them -- 'kind' says evidence-vs-inference, which is how firmly the claim follows from what was said, not whether a person said it. Never report a demo claim as a finding, and treat undeclared as not-yet-established rather than real. In a walkthrough of a demo node you may show its results, provided every answer says they come from mock interviews. ",
         _scoped_schema(hypothesis_id=_HYPOTHESIS_ID_ARGUMENT),
         get_facts,
     ),
@@ -921,7 +960,7 @@ _TOOL_ORDER: "tuple[tuple[str, str, dict[str, Any], Callable[..., dict[str, Any]
         "READ 'unextracted_projects' FIRST: every count here is zero for a project whose "
         "interviews have never been extracted, and that zero means 'not looked at yet', not "
         "'nothing bears on this'. Only the second is a research finding."
-        "Every entry in 'extraction' carries a 'corpus' of demo, real or undeclared, and it is NOT a formality: some nodes on this machine hold hand-authored demonstration claims that read exactly like customer research, naming a 'he' or a 'she' and citing a session id. Nothing else in a fact distinguishes them -- 'kind' says evidence-vs-inference, which is how firmly the claim follows from what was said, not whether a person said it. Never report a demo claim as a finding, and treat undeclared as not-yet-established rather than real. ",
+        "Every entry in 'extraction' carries a 'corpus' of demo, real or undeclared, and it is NOT a formality: some nodes on this machine hold hand-authored demonstration claims that read exactly like customer research, naming a 'he' or a 'she' and citing a session id. Nothing else in a fact distinguishes them -- 'kind' says evidence-vs-inference, which is how firmly the claim follows from what was said, not whether a person said it. Never report a demo claim as a finding, and treat undeclared as not-yet-established rather than real. In a walkthrough of a demo node you may show its results, provided every answer says they come from mock interviews. ",
         _scoped_schema(hypothesis_id=_HYPOTHESIS_ID_ARGUMENT),
         get_standing,
     ),

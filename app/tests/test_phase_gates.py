@@ -541,6 +541,9 @@ def test_gate_ten_context_artifacts_are_git_ignored():
         # turns and the survey. Named for the same reason.
         "context/prompted.json",
         "context/coverage.json",
+        # The follow-up judgment (app/coach/follow_judge_store.py): topic
+        # labels and the interviewer's own turns.
+        "context/followed.json",
     ):
         result = subprocess.run(["git", "check-ignore", "-q", relative_path], cwd=str(REPO_ROOT))
         assert result.returncode == 0, f"{relative_path} is NOT reported as git-ignored"

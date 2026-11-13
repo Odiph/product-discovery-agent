@@ -12,7 +12,10 @@ from __future__ import annotations
 import argparse
 from typing import Callable, Optional
 
+from pathlib import Path
+
 from app import config as config_mod
+from app import project_meta
 from app import missed_cli
 from app.coach import mirror as mirror_mod
 from app.coach import mirror_load
@@ -46,6 +49,8 @@ def run(args: argparse.Namespace, apply_project) -> int:
 
     use_utf8_console()
     cfg = apply_project(config_mod.load_config(), args)
+    if project_meta.is_demo_node(Path(cfg.sessions_root).parent):
+        print(project_meta.MOCK_LABEL)
     report = mirror_load.load(cfg.sessions_root)
     if not report.sessions:
         print("No interviews with speech in this project yet.")
@@ -142,6 +147,7 @@ def _print_missed_topics(cfg) -> None:
           f"`python -m app missed`):")
     print(f"  {cached.grouping}")
     print(f"  {cached.prompted}")
+    print(f"  {cached.followed}")
     missed_cli.print_report(cached.report, indent="  ", details=False)
 
 

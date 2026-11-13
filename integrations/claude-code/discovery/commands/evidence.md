@@ -5,8 +5,11 @@ argument-hint: <feature, decision or question>
 
 Answer from this product's interview evidence: $ARGUMENTS
 
-Follow the `discovery-evidence` skill. Read `.discovery-copilot.json` first; if
-it is missing, stop and suggest `/link-discovery`.
+Follow the `discovery-evidence` skill. Read `.discovery-copilot.json` first. If
+it is missing, call `list_projects`: when every project there has
+`corpus: demo` (a first run after `/start`), use that project, and say on
+every result that it comes from mock interviews, not real users. Otherwise
+stop and suggest `/link-discovery`.
 
 1. `get_standing` for the linked project and scope. Pick the hypotheses that
    bear on the question. Say so if none do.

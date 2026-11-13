@@ -19,7 +19,7 @@ import sys
 from dataclasses import dataclass
 from typing import Optional, Sequence
 
-from app.coach import reasoning_client
+from app.coach import reasoning_client, token_estimate
 from app.coach import topics as topics_mod
 from app.coach import topics_store
 
@@ -52,7 +52,7 @@ def add_arguments(parser: argparse.ArgumentParser, *, command: str) -> None:
 
 def resolve(context_dir, claims: Sequence, *, mode: str, yes: bool) -> Resolution:
     lines = topics_mod.claim_lines(claims)
-    model = reasoning_client.resolve_extract_model()
+    model = reasoning_client.resolve_extract_model(context_dir)
     if mode == LEXICAL:
         return Resolution(None, "Grouping: by shared words (--group lexical).")
     state = topics_store.load(context_dir, lines, model)
@@ -70,10 +70,10 @@ def _run(context_dir, lines, model, state, *, yes: bool) -> Resolution:
            topics_store.UNREADABLE: f"the cached grouping is unusable: {state.reason}"}[state.status]
     if not lines:
         return Resolution(None, "Grouping: by model -- there are no extracted claims to group.", exit_code=0)
-    plan = (f"One call to {model}: {len(lines)} claims (claim text, interview id and an alias each; never "
+    plan = (f"One call to {model}{reasoning_client.pin_note(context_dir)}: {len(lines)} claims (claim text, interview id and an alias each; never "
             f"quotes), ~{topics_mod.estimate_input_tokens(request):,} input tokens, plus up to "
-            f"{topics_mod.DEFAULT_MAX_TOKENS:,} output tokens (estimated at "
-            f"{topics_mod.CHARS_PER_TOKEN:.0f} characters a token, +/-15%).")
+            f"{topics_mod.DEFAULT_MAX_TOKENS:,} output tokens "
+            f"({token_estimate.BASIS}).")
     if not yes:
         return Resolution(None, f"Grouping: by model -- not run ({why}).",
                           notes=(plan, "Nothing called. Re-run with --yes to group them."), exit_code=0)
@@ -84,7 +84,8 @@ def _run(context_dir, lines, model, state, *, yes: bool) -> Resolution:
     except reasoning_client.CoachConfigError as exc:
         return _error(str(exc))
     except topics_mod.GroupingFailure as exc:
-        return _error(f"{exc}. Nothing was written; the previous grouping (if any) is unchanged.")
+        return _error(f"{exc}{reasoning_client.pin_note(context_dir)}. Nothing was written; the previous "
+                      f"grouping (if any) is unchanged.")
     except (OSError, ValueError) as exc:
         return _error(f"the grouping could not be saved ({type(exc).__name__}: {exc}).")
     return Resolution(grouping.topics, _model_headline(grouping, "just made, saved to"),

@@ -56,11 +56,24 @@ def is_in_person(meta: "dict[str, Any]") -> bool:
     return meta.get("capture") == "in-person"
 
 
+def is_imported_recording(meta: "dict[str, Any]") -> bool:
+    """A recording brought in with `import` (app/session/audio_import.py): it
+    takes the in-person road but was never a live meeting, so it has no live
+    roles to fall back on."""
+    return is_in_person(meta) and bool(meta.get("imported_from"))
+
+
 def extract_refusal(meta: "dict[str, Any]") -> Optional[str]:
     """Why `extract` must not run on this session yet, or None."""
     if not is_in_person(meta) or meta.get(EVIDENCE_KEY) == EVIDENCE_CONFIRMED:
         return None
     state = meta.get(EVIDENCE_KEY) or "unknown"
+    if is_imported_recording(meta):
+        return (
+            f"this is an imported recording (one audio file, both voices) and its speakers are not "
+            f"confirmed (evidence: {state}). Run `confirm-speakers` on it first (after `diarize-after`, "
+            f"if the file pass did not finish at import)."
+        )
     return (
         f"this is an in-person session (one microphone) and its speakers are not confirmed "
         f"(evidence: {state}). Live roles are for coaching only; run `diarize-after` and then "

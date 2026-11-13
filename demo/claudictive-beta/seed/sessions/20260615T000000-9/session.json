@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "10-lior.txt",
+  "import_sha256": "48cb6c568e4a7ca4808e86a7432258faa37112ce22595b7803c505a7c35985e1",
+  "imported_at": "2026-11-11T00:19:52.653+02:00",
+  "started_at": "2026-06-15T00:00:00.000+03:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-06-15T00:17:56.000+03:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Lior": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Lior"
+}

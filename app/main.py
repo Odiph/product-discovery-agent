@@ -89,7 +89,7 @@ from app.coach.coverage import CoverageDetector, CoverageState
 from app.coach.pipeline import SuggestionPipeline
 from app.coach.trigger import TurnTrigger
 from app import (
-    coverage_cli, evidence_cli, extract_all as extract_all_mod, import_cli, kb_cli, mirror_cli, missed_cli,
+    coverage_cli, demo_cli, setup_cli, evidence_cli, extract_all as extract_all_mod, import_cli, kb_cli, mirror_cli, missed_cli,
     prep_cli, process_cli, themes_cli, tree_cli,
 )
 from app.session import evidence as evidence_mod
@@ -927,6 +927,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     kb_cli.add_parsers(subparsers, _add_project_argument)
     mirror_cli.add_parser(subparsers, _add_project_argument)
     missed_cli.add_parser(subparsers, _add_project_argument)
+    demo_cli.add_parser(subparsers)
+    setup_cli.add_parser(subparsers)
     prep_cli.add_parser(subparsers, _add_project_argument)
     process_cli.add_parser(subparsers, _add_project_argument)
     themes_cli.add_parser(subparsers, _add_project_argument)
@@ -3332,6 +3334,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return coverage_cli.run(args, _apply_project)
         if args.command == "missed":
             return missed_cli.run(args, _apply_project)
+        if args.command == "setup":
+            return setup_cli.run(args)
+        if args.command == "demo":
+            return demo_cli.run(args, open_hub=lambda project: run_hub(
+                argparse.Namespace(project=project, session=None)))
         if args.command == "import":
             return import_cli.run(args, _apply_project)
         if args.command == "mirror":

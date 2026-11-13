@@ -1,0 +1,5255 @@
+[
+  {
+    "id": "d77c1675-c0da-4525-90e3-54b1f41db559",
+    "session_id": "20260615T000000",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee is an indie developer with a one-person studio.",
+    "provenance": "evidence",
+    "quoted_text": "אני indie dev, יש לי סטודיו של בן אדם אחד",
+    "bearings": []
+  },
+  {
+    "id": "625021fa-9d70-4271-ba11-3aafe3c06d8f",
+    "session_id": "20260615T000000",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee has been building a game in Unity for about two years.",
+    "provenance": "evidence",
+    "quoted_text": "אני בונה משחק בUnity כבר שנתיים בערך.",
+    "bearings": []
+  },
+  {
+    "id": "80f5686b-4b16-4622-9944-bc095bdb3c34",
+    "session_id": "20260615T000000",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee plays a lot of League of Legends.",
+    "provenance": "evidence",
+    "quoted_text": "ואני משחק League, הרבה League. יותר מדי League.",
+    "bearings": []
+  },
+  {
+    "id": "6163f636-5332-4868-a601-00bfd48ec1b4",
+    "session_id": "20260615T000000",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee has been using Claude Code since it was released.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, מאז שיצא בערך?",
+    "bearings": []
+  },
+  {
+    "id": "4e771b05-be54-413b-b2d2-6ee6cc12838e",
+    "session_id": "20260615T000000",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee writes most of their C# scripts and editor tools with Claude Code.",
+    "provenance": "evidence",
+    "quoted_text": "אני כותב איתו את רוב הscripts בC#. גם tools לeditor.",
+    "bearings": []
+  },
+  {
+    "id": "f0656ece-5d15-4204-9111-e5292ec7f745",
+    "session_id": "20260615T000000",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee saw a post with a GIF in a developers' group and registered for the Claudictive beta because it looked cool.",
+    "provenance": "evidence",
+    "quoted_text": "ראיתי את הפוסט שלך בקבוצה של המפתחים, עם הGIF, וזה נראה cool אז נרשמתי לbeta.",
+    "bearings": []
+  },
+  {
+    "id": "bbe3c6a4-f9a8-4d71-acd3-bbdac699f0fb",
+    "session_id": "20260615T000000",
+    "seqs": [
+      9
+    ],
+    "claim": "The Claudictive installation process was okay.",
+    "provenance": "evidence",
+    "quoted_text": "היה... בסדר.",
+    "bearings": []
+  },
+  {
+    "id": "55ca302f-d77f-4491-9a47-574776344613",
+    "session_id": "20260615T000000",
+    "seqs": [
+      9
+    ],
+    "claim": "The interviewee had to install Overwolf, which felt a bit strange since they didn't have it before.",
+    "provenance": "evidence",
+    "quoted_text": "הייתי צריך להתקין את Overwolf, שזה קצת מוזר כי לא היה לי את זה לפני.",
+    "bearings": []
+  },
+  {
+    "id": "4f128625-4eaa-4dc6-9bce-cb012569b89a",
+    "session_id": "20260615T000000",
+    "seqs": [
+      9
+    ],
+    "claim": "Connecting the API key for Claudictive took about ten minutes.",
+    "provenance": "evidence",
+    "quoted_text": "ואז לחבר את הAPI key. לקח אולי עשר דקות.",
+    "bearings": []
+  },
+  {
+    "id": "8ada2855-2798-4ad7-a0e5-13e9d0119b9a",
+    "session_id": "20260615T000000",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee didn't get stuck during installation, but the hotkey to open Claudictive wasn't clear and they had to look for it in the settings.",
+    "provenance": "evidence",
+    "quoted_text": "רק לא היה ברור לי איזה hotkey זה פותח, הייתי צריך לחפש בsettings.",
+    "bearings": []
+  },
+  {
+    "id": "4ab31f58-f939-4062-8f73-69ef3da86ff5",
+    "session_id": "20260615T000000",
+    "seqs": [
+      13
+    ],
+    "claim": "The interviewee uses Claudictive maybe once or twice a week, less than at the beginning.",
+    "provenance": "evidence",
+    "quoted_text": "אמממ, בכנות? לא הרבה. אולי פעם-פעמיים בשבוע. בהתחלה יותר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "93d577f2-fffe-4f3b-adb3-be3b7afd615e",
+    "session_id": "20260615T000000",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee uses Claudictive when running a long game build that takes a few minutes, while waiting in a game queue, or when waiting for a game to start.",
+    "provenance": "evidence",
+    "quoted_text": "נגיד אני מריץ build ארוך של המשחק, וזה לוקח כמה דקות, אז אני נכנס לגיים. ושואל את Claude אם הbuild עבר, או מבקש ממנו לתקן משהו קטן. בעיקר כשאני מחכה בqueue, זה כמו חמש דקות של כלום ואני ממילא בוהה במסך.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "d0c8967b-22d8-42c3-bfbc-08454e7aabdb",
+    "session_id": "20260615T000000",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee wants a voice input feature so they don't have to type.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, נגיד voice? שאני לא אצטרך להקליד. זה יהיה נחמד.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "fd39c2e1-11fe-4810-ba26-ebc32d3d513d",
+    "session_id": "20260615T000000",
+    "seqs": [
+      19
+    ],
+    "claim": "Speaking to Claude during a teamfight sounds cool.",
+    "provenance": "inference",
+    "quoted_text": "חח כן, זה נשמע מגניב. כאילו, לגמרי.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "b860725e-127d-4985-ba8e-768cc39edc26",
+    "session_id": "20260615T000000",
+    "seqs": [
+      21
+    ],
+    "claim": "The interviewee wants the Claudictive window to be smaller because it's currently quite large.",
+    "provenance": "evidence",
+    "quoted_text": "אולי שהחלון יהיה יותר קטן? הוא די גדול כרגע.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "10e55b3f-fe16-432c-9b24-6e0f3eac4c3e",
+    "session_id": "20260615T000000",
+    "seqs": [
+      21
+    ],
+    "claim": "The interviewee wants a darker dark theme because the current one is a bit glaring at night.",
+    "provenance": "evidence",
+    "quoted_text": "ואולי dark theme יותר כהה, הוא קצת בוהק בלילה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "892c2f0a-7312-42f8-bde3-49eac37ee696",
+    "session_id": "20260615T000000",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee wants to see the diff, not just text.",
+    "provenance": "evidence",
+    "quoted_text": "כן. ואולי שיהיה אפשר לראות את הdiff, לא רק טקסט.",
+    "bearings": []
+  },
+  {
+    "id": "66c539db-6d5e-47cb-a577-9607ceb48016",
+    "session_id": "20260615T000000",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee has used Discord and sometimes Steam overlays, mainly to see who is talking.",
+    "provenance": "evidence",
+    "quoted_text": "כן, את של Discord, ושל Steam לפעמים. זה בעיקר לראות מי מדבר.",
+    "bearings": []
+  },
+  {
+    "id": "ea4d7f2c-b1db-45cd-95a6-a4c2dcf8a7a3",
+    "session_id": "20260615T000000",
+    "seqs": [
+      27
+    ],
+    "claim": "Claudictive feels heavier than other overlays and opens almost full screen, unlike Discord's small corner overlay.",
+    "provenance": "evidence",
+    "quoted_text": "זה יותר... כבד? כאילו, הוא נפתח על כל המסך כמעט. של Discord זה קטנטן בפינה.",
+    "bearings": []
+  },
+  {
+    "id": "c89093b0-7ecf-4bf9-9741-cd7ec46b5566",
+    "session_id": "20260615T000000",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee rates the idea of Claudictive a nine out of ten, calling it excellent.",
+    "provenance": "evidence",
+    "quoted_text": "הרעיון? תשע. הרעיון מעולה, באמת.",
+    "bearings": []
+  },
+  {
+    "id": "c4b05477-1d3e-4154-9d75-a7e16d0bbcc8",
+    "session_id": "20260615T000000",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee would describe Claudictive to a friend as Claude Code but inside the game, accessible with a button press.",
+    "provenance": "evidence",
+    "quoted_text": "שזה כמו Claude Code אבל בתוך המשחק. אתה לוחץ על כפתור והוא שם.",
+    "bearings": []
+  },
+  {
+    "id": "5292b02f-4270-48bd-acfb-6abd06092956",
+    "session_id": "20260615T000000",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee might pay for Claudictive, depending on the price, as they already pay for Claude and another subscription is a bit much.",
+    "provenance": "evidence",
+    "quoted_text": "אממ... תלוי כמה. אני כבר משלם על Claude, אז עוד מנוי זה קצת...",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "790f28d7-a512-4b44-bfc8-d773e30ddc25",
+    "session_id": "20260615T000000",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee might pay $5 a month for Claudictive if it is more polished.",
+    "provenance": "inference",
+    "quoted_text": "יכול להיות. כן, אולי. אם זה יהיה יותר polished.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "b0432d99-c04b-4f8d-a1f6-fad7287c1078",
+    "session_id": "20260615T000000",
+    "seqs": [
+      37
+    ],
+    "claim": "Faster response times might make the interviewee use Claudictive more, as sometimes it takes too long to answer and they return to the game.",
+    "provenance": "evidence",
+    "quoted_text": "לא יודע, אולי אם הוא יהיה יותר מהיר? לפעמים לוקח לו זמן לענות ואני כבר חוזר למשחק.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "05864120-4330-4bae-b44a-64aea00fe003",
+    "session_id": "20260615T000000",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee would recommend Claudictive to developer friends who play games.",
+    "provenance": "evidence",
+    "quoted_text": "כן, בטח. יש לי כמה חברים מפתחים שמשחקים, הם יאהבו את זה.",
+    "bearings": []
+  },
+  {
+    "id": "f348502f-1975-4690-bbba-20d142992216",
+    "session_id": "20260615T000000",
+    "seqs": [
+      41
+    ],
+    "claim": "The interviewee dislikes that Claudictive sometimes doesn't remember the context of the previous conversation.",
+    "provenance": "evidence",
+    "quoted_text": "לא... לא ממש. אולי שהוא לפעמים לא זוכר את הcontext של השיחה הקודמת.",
+    "bearings": []
+  },
+  {
+    "id": "9cf145f3-7d33-4800-b095-bea2f72e1d18",
+    "session_id": "20260615T000000",
+    "seqs": [
+      43
+    ],
+    "claim": "The interviewee does not use Claudictive when not playing games, preferring to open the terminal instead.",
+    "provenance": "evidence",
+    "quoted_text": "לא, אז אני פשוט פותח את הterminal. זה יותר נוח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "9a701605-415d-433d-a05a-0dd1ef4100aa",
+    "session_id": "20260615T000000",
+    "seqs": [
+      45
+    ],
+    "claim": "Claudictive is only for use during gameplay.",
+    "provenance": "evidence",
+    "quoted_text": "כן.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "085375b9-1b07-4e1b-bf5b-f34b7f4faa2a",
+    "session_id": "20260615T000000",
+    "seqs": [
+      47
+    ],
+    "claim": "The hotkey (Ctrl Shift something) is okay and the interviewee has gotten used to it.",
+    "provenance": "evidence",
+    "quoted_text": "הוא בסדר. Ctrl Shift משהו. התרגלתי.",
+    "bearings": []
+  },
+  {
+    "id": "9309d15b-70f2-41f6-a348-163d48d0122f",
+    "session_id": "20260615T000000",
+    "seqs": [
+      49
+    ],
+    "claim": "The small toast notifications when Claude finishes a task are nice and the most used feature.",
+    "provenance": "evidence",
+    "quoted_text": "אה זה דווקא נחמד. ה-toast הקטן הזה. זה הדבר שאני הכי משתמש בו האמת.",
+    "bearings": []
+  },
+  {
+    "id": "d5b7d867-e88d-42a1-bdae-65f70c930031",
+    "session_id": "20260615T000000",
+    "seqs": [
+      51
+    ],
+    "claim": "The interviewee thinks Claudictive is a really cool project and hopes it succeeds.",
+    "provenance": "inference",
+    "quoted_text": "לא, רק שזה פרויקט ממש cool ואני מקווה שזה יצליח. באמת.",
+    "bearings": []
+  },
+  {
+    "id": "ffaeca1a-6546-48ce-9ef8-87d4d71b4da9",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      3
+    ],
+    "claim": "I am a backend engineer at a fintech company.",
+    "provenance": "evidence",
+    "quoted_text": "אני backend engineer בחברת fintech",
+    "bearings": []
+  },
+  {
+    "id": "7923c93a-09ad-44f4-9933-050a0df8bf21",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      3
+    ],
+    "claim": "I primarily use Go and some Kubernetes in my work.",
+    "provenance": "evidence",
+    "quoted_text": "בעיקר Go, קצת Kubernetes.",
+    "bearings": []
+  },
+  {
+    "id": "624914e1-1619-45fc-a41a-4e8a8dcd4524",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      3
+    ],
+    "claim": "In the evenings, I play Overwatch, ranked, and I main support.",
+    "provenance": "evidence",
+    "quoted_text": "ובערב אני משחקת Overwatch, ranked, support main.",
+    "bearings": []
+  },
+  {
+    "id": "3b3a60dc-894c-4af5-8906-5a85669f1c12",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      5
+    ],
+    "claim": "I use Claude Code every day at work.",
+    "provenance": "evidence",
+    "quoted_text": "בעבודה כל יום.",
+    "bearings": []
+  },
+  {
+    "id": "71322ebb-1e95-48aa-9d20-7c8b6ffc3339",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      5
+    ],
+    "claim": "I use Claude Code less at home; I have a small side project.",
+    "provenance": "evidence",
+    "quoted_text": "בבית פחות, יש לי side project קטן.",
+    "bearings": []
+  },
+  {
+    "id": "5a3bf4dc-e60f-414a-924f-ed9ad39183ca",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      7
+    ],
+    "claim": "A friend from work, who is also in beta, sent me a link to Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "חבר מהעבודה שלח לי לינק. הוא בbeta גם.",
+    "bearings": []
+  },
+  {
+    "id": "c4d16592-3089-4b8e-b338-c875ee41ba10",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      9
+    ],
+    "claim": "Onboarding for Claudictive was smooth.",
+    "provenance": "evidence",
+    "quoted_text": "האמת היה smooth.",
+    "bearings": []
+  },
+  {
+    "id": "301ceebd-a4fa-4872-af91-d628c39e422f",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      9
+    ],
+    "claim": "I installed it, it asked for an API key, and then there was a screen with an explanation about the hotkey.",
+    "provenance": "evidence",
+    "quoted_text": "התקנתי, הוא ביקש API key, ואז היה מסך עם הסבר על הhotkey. היה בסדר.",
+    "bearings": []
+  },
+  {
+    "id": "5ac4adb2-2a46-4f74-bffe-5dcd7cc2f40b",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      9
+    ],
+    "claim": "The onboarding experience was generally okay.",
+    "provenance": "inference",
+    "quoted_text": "היה בסדר.",
+    "bearings": []
+  },
+  {
+    "id": "a411f5ca-7a6a-4e99-ba05-18f64a6241cd",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      11
+    ],
+    "claim": "Claudictive did not tell me that Overwatch needs to be run in borderless mode.",
+    "provenance": "evidence",
+    "quoted_text": "רק שהוא לא אמר לי שצריך להריץ את Overwatch בborderless.",
+    "bearings": []
+  },
+  {
+    "id": "dbcdee51-2c87-4b96-9957-51f75139b75c",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      11
+    ],
+    "claim": "In fullscreen, the overlay did not appear initially.",
+    "provenance": "evidence",
+    "quoted_text": "בfullscreen הoverlay לא עלה בהתחלה.",
+    "bearings": []
+  },
+  {
+    "id": "7500d3d9-f38d-41e5-9bdc-8e5415203738",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      13
+    ],
+    "claim": "In the first week, I used Claudictive every evening.",
+    "provenance": "evidence",
+    "quoted_text": "שבוע ראשון כל ערב.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "b28252bf-62e0-45f1-9d5d-10fdd7ceb86a",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      13
+    ],
+    "claim": "Now I use Claudictive less, maybe once a week.",
+    "provenance": "evidence",
+    "quoted_text": "עכשיו... פחות. אולי פעם בשבוע.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "c48dcf1f-a11e-45c7-a7ce-274a216b3c8a",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      15
+    ],
+    "claim": "I usually ask Claudictive to check something in my side project, like running tests.",
+    "provenance": "evidence",
+    "quoted_text": "בדרך כלל אני מבקשת ממנו לבדוק משהו בside project, נגיד שיריץ טסטים.",
+    "bearings": []
+  },
+  {
+    "id": "4644d929-d808-4406-818e-6e82e89d7659",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      15
+    ],
+    "claim": "Using Claudictive between rounds is more convenient because I already alt-tab to check if the pipeline passed.",
+    "provenance": "evidence",
+    "quoted_text": "בין round לround אני ממילא עושה alt-tab לבדוק אם הpipeline עבר, אז ככה זה יותר נוח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "4371e41a-3b19-46a4-b830-e69b45a06e0d",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      17
+    ],
+    "claim": "I would like Claudictive to be less obtrusive.",
+    "provenance": "inference",
+    "quoted_text": "אממ, אני הייתי רוצה שהוא יהיה פחות...",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "3acc694b-49fb-4bed-9328-d1663c243b18",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      19
+    ],
+    "claim": "The incident where the window covered the kill feed happened on King's Row.",
+    "provenance": "inference",
+    "quoted_text": "זה היה בKing's Row, אני חושבת.",
+    "bearings": []
+  },
+  {
+    "id": "723c891b-1dce-4d5b-a6de-541c5ce30e68",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      21
+    ],
+    "claim": "The Claudictive window remained open because I didn't remember the hotkey to close it, which took a few seconds.",
+    "provenance": "evidence",
+    "quoted_text": "נשאר פתוח, כי לא זכרתי מה הhotkey לסגור. זה לקח לי כמה שניות.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ca4cf0dd-77b7-4e2a-a796-de16eaf7f1d2",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      23
+    ],
+    "claim": "I dragged the Claudictive window to the bottom center, but then it covered the ultimate meter.",
+    "provenance": "evidence",
+    "quoted_text": "כן, גררתי אותו לאמצע למטה. אבל אז הוא מכסה את הultimate meter.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "3910a6d8-9647-4e17-b3b9-96e2f53a2741",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      23
+    ],
+    "claim": "There isn't a truly good place for the Claudictive window.",
+    "provenance": "evidence",
+    "quoted_text": "אז אין באמת מקום טוב.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "57d9193a-d284-46ac-a295-bb40a384c5c3",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      25
+    ],
+    "claim": "If the Claudictive window were semi-transparent or smaller, it would help.",
+    "provenance": "inference",
+    "quoted_text": "אם הוא היה חצי שקוף או קטן יותר זה היה עוזר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2483eed2-24cd-4c71-ba89-ba4d622bfb9b",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      27
+    ],
+    "claim": "Voice input would be nice for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "voice input יהיה נחמד.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "33b13392-82e1-4685-8e3a-3987f5844371",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      27
+    ],
+    "claim": "I would like Claudictive to have an Overwatch-themed theme, something orange.",
+    "provenance": "evidence",
+    "quoted_text": "ושיהיה theme שמתאים לOverwatch, משהו כזה כתום.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2193f8c7-29af-4684-a517-fabb7ecfddf4",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      29
+    ],
+    "claim": "I might use a mobile app that connects to Claudictive, but I'm not sure.",
+    "provenance": "inference",
+    "quoted_text": "אולי? כאילו, זה נשמע נחמד. לא בטוחה.",
+    "bearings": []
+  },
+  {
+    "id": "411510ea-d723-4992-93ce-6a994df3504d",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      31
+    ],
+    "claim": "I rate the idea of Claudictive an eight and a half out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "שמונה וחצי. הרעיון ממש חמוד.",
+    "bearings": []
+  },
+  {
+    "id": "4eb8f2c6-fa3b-47b0-8bff-65742e6bdd3f",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      31
+    ],
+    "claim": "The idea of Claudictive is really cute.",
+    "provenance": "evidence",
+    "quoted_text": "הרעיון ממש חמוד.",
+    "bearings": []
+  },
+  {
+    "id": "71c520ab-620c-4dc0-bc52-9271a54bc8a0",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      33
+    ],
+    "claim": "Claudictive is still a bit rough, but that's okay because it's in beta.",
+    "provenance": "inference",
+    "quoted_text": "לא יודעת, זה עוד קצת rough. אבל זה beta, זה בסדר.",
+    "bearings": []
+  },
+  {
+    "id": "94bfa744-b31c-4b41-a6a0-c7c4638848d2",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      35
+    ],
+    "claim": "I think gamers want to work with Claude while playing.",
+    "provenance": "inference",
+    "quoted_text": "כן, בטח. כאילו, אני רוצה. אחרת לא הייתי מתקינה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "93a6a916-f641-428d-9df0-61445f3b5a60",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      35
+    ],
+    "claim": "I want to work with Claude while playing.",
+    "provenance": "evidence",
+    "quoted_text": "כאילו, אני רוצה. אחרת לא הייתי מתקינה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "294c2026-19a2-45d8-b522-3f31976e0d4d",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      37
+    ],
+    "claim": "I would pay for Claudictive if my company paid for it.",
+    "provenance": "evidence",
+    "quoted_text": "אם החברה הייתה משלמת, כן חח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ba70de75-0b2f-49d8-91b3-93fdd37673ac",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      37
+    ],
+    "claim": "From my own pocket, I might pay three to four dollars for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "מהכיס שלי... אולי שלושה-ארבעה דולר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "3345a452-4f8c-4c45-9b99-5b0f899865c0",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      39
+    ],
+    "claim": "I would pay more for Claudictive if it also worked with Cursor or other tools, not just Claude Code.",
+    "provenance": "inference",
+    "quoted_text": "אם זה היה עובד גם עם Cursor, או עם עוד tools. לא רק Claude Code.",
+    "bearings": []
+  },
+  {
+    "id": "38fc96ba-1cab-4c3a-afb5-74f6fb126ff7",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      41
+    ],
+    "claim": "I have already recommended Claudictive to two friends, and one of them installed it.",
+    "provenance": "evidence",
+    "quoted_text": "כן, כבר המלצתי לשניים. אחד מהם התקין.",
+    "bearings": []
+  },
+  {
+    "id": "3265cb80-61c7-4e1b-9699-6121355386e1",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      43
+    ],
+    "claim": "I don't know if my friend who installed Claudictive is using it.",
+    "provenance": "evidence",
+    "quoted_text": "לא יודעת, צריכה לשאול אותו.",
+    "bearings": []
+  },
+  {
+    "id": "5a825b23-276e-4bab-a00a-055d03f7c398",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      45
+    ],
+    "claim": "I would remove the notification sound from Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "את הסאונד של הnotification.",
+    "bearings": []
+  },
+  {
+    "id": "778054ac-429e-49c7-bc73-91dbd5b3d0c9",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      45
+    ],
+    "claim": "The notification sound is a bit loud and mixes with the game sounds.",
+    "provenance": "evidence",
+    "quoted_text": "הוא קצת חזק ומתערבב עם הsounds של המשחק.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "278ff015-9686-4468-a948-60d0ac78f2fa",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      47
+    ],
+    "claim": "I think we covered everything.",
+    "provenance": "inference",
+    "quoted_text": "לא, נראה לי כיסינו הכל.",
+    "bearings": []
+  },
+  {
+    "id": "06b882d8-14f8-4e30-a040-75fc1814cb78",
+    "session_id": "20260615T000000-1",
+    "seqs": [
+      47
+    ],
+    "claim": "The issue with the window covering parts of the screen needs to be fixed.",
+    "provenance": "inference",
+    "quoted_text": "רק תתקן את העניין עם החלון שמכסה חח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "51b73def-8c6f-4b64-b98e-725faa9793f5",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee is a gameplay programmer at a mobile games studio.",
+    "provenance": "evidence",
+    "quoted_text": "אני gameplay programmer בסטודיו של mobile games.",
+    "bearings": []
+  },
+  {
+    "id": "0154280f-4116-4f43-ac65-078e6899340c",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee uses C++ and Unreal Engine.",
+    "provenance": "evidence",
+    "quoted_text": "C++, Unreal.",
+    "bearings": []
+  },
+  {
+    "id": "089ab59f-bb46-4c5f-800e-046ff767d0e6",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee plays PUBG with co-workers almost every evening after work.",
+    "provenance": "evidence",
+    "quoted_text": "ואחרי העבודה אני משחק PUBG עם אנשים מהעבודה. כמעט כל ערב.",
+    "bearings": []
+  },
+  {
+    "id": "740fca38-b64f-4037-a545-818d83290b20",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee primarily uses Claude Code for internal tools.",
+    "provenance": "evidence",
+    "quoted_text": "בעיקר לtools פנימיים",
+    "bearings": []
+  },
+  {
+    "id": "c8eeb83c-5261-4f37-a10f-f362683687c3",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee sometimes uses Claude Code to read legacy engine code that no one understands.",
+    "provenance": "evidence",
+    "quoted_text": "ולפעמים לקרוא קוד legacy של המנוע שאף אחד לא מבין.",
+    "bearings": []
+  },
+  {
+    "id": "f244b391-9cf5-4f6c-998b-f1c0ae72acd5",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      7
+    ],
+    "claim": "Someone on the interviewee's team found Claudictive and made everyone install it.",
+    "provenance": "evidence",
+    "quoted_text": "מישהו בצוות מצא את זה. הוא הכריח את כולנו להתקין.",
+    "bearings": []
+  },
+  {
+    "id": "f45a80c4-5e49-40b7-a77d-63f76206b11a",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      9
+    ],
+    "claim": "The installation of Claudictive was fine because the interviewee is already familiar with Overwolf.",
+    "provenance": "evidence",
+    "quoted_text": "בסדר. אני כבר מכיר Overwolf, אז זה היה פשוט.",
+    "bearings": []
+  },
+  {
+    "id": "ae7d820b-1470-41ec-a64e-f8ab4c3e3c73",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee initially used Claudictive every evening.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, בהתחלה כל ערב.",
+    "bearings": []
+  },
+  {
+    "id": "40c9461d-8c12-4ec0-8052-8c830d3a7cfd",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee now uses Claudictive about twice a week.",
+    "provenance": "evidence",
+    "quoted_text": "עכשיו אולי פעמיים בשבוע.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "c030b518-2130-41d0-b582-b898efce43f1",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      13
+    ],
+    "claim": "The decrease in usage is probably due to the novelty wearing off.",
+    "provenance": "inference",
+    "quoted_text": "לא יודע. חידוש שנגמר, כנראה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "89c4adb8-7123-461c-8bb0-74621cfeca4f",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      13
+    ],
+    "claim": "The interviewee still thinks Claudictive is cool.",
+    "provenance": "evidence",
+    "quoted_text": "כאילו, זה עדיין מגניב.",
+    "bearings": []
+  },
+  {
+    "id": "a29c991b-a00d-418a-b047-a8a00c3e5b0f",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee uses Claudictive to check if engine compiles have passed and if there are errors, as compiles can take twenty minutes.",
+    "provenance": "evidence",
+    "quoted_text": "אני מריץ compile של המנוע, זה לוקח עשרים דקות לפעמים. אז אני שואל אותו אם זה עבר ואם יש errors.",
+    "bearings": []
+  },
+  {
+    "id": "0ec7e66a-3981-4550-a241-95c47d3e1aa5",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee uses Claudictive in PUBG during the lobby and airplane phases, which are about a minute and a half of waiting.",
+    "provenance": "evidence",
+    "quoted_text": "בPUBG יש את הlobby ואת המטוס, זה דקה וחצי שאתה סתם יושב, אז שם אני כותב לו.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "d095dac6-b36d-4665-9357-4e2df21a30eb",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee wants a plugin for Unreal that directly shows compile errors.",
+    "provenance": "evidence",
+    "quoted_text": "שיהיה plugin ל-Unreal. שאני אראה את הerrors של הcompile ישר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "63b02964-6cf1-4410-8372-b384dcb8fef7",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      19
+    ],
+    "claim": "The Claudictive window covers the minimap in PUBG, which is in the bottom right corner.",
+    "provenance": "evidence",
+    "quoted_text": "הדבר הכי מעצבן, החלון יושב בדיוק על הminimap בפינה הימנית למטה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "5c28ca87-25cc-4e26-9ea2-79bb1ff7ee52",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      19
+    ],
+    "claim": "The minimap is essential in PUBG; without it, the player is 'blind'.",
+    "provenance": "evidence",
+    "quoted_text": "בPUBG זה המפה שלך, בלי זה אתה עיוור.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "bef79915-4727-445f-a6f9-445419984b04",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      21
+    ],
+    "claim": "The Claudictive window opened over the map while the interviewee was driving in a car to the circle, preventing them from seeing where to go.",
+    "provenance": "evidence",
+    "quoted_text": "נגיד אני על האוטו, נוסע לcircle, ואני פותח לבדוק את הcompile. והחלון נפתח בדיוק על המפה. ואני לא רואה לאן לנסוע.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "e6df3a87-109b-48e4-b637-fdbb840dad49",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee quickly closed Claudictive and once crashed into a tree because the window was covering the minimap.",
+    "provenance": "evidence",
+    "quoted_text": "סגרתי אותו מהר. ופעם אחת נכנסתי לעץ חח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "36af759b-fbc3-442b-80aa-37aa77f7a2ac",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      25
+    ],
+    "claim": "The issue of the Claudictive window covering the minimap happened several times.",
+    "provenance": "evidence",
+    "quoted_text": "כמה פעמים.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "20c9dc37-ea9f-442f-af38-31f4d2db7232",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee started opening Claudictive only when not driving to avoid the minimap issue.",
+    "provenance": "evidence",
+    "quoted_text": "ואז התחלתי לפתוח אותו רק כשאני לא נוהג.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "7293ba71-ea3e-4148-9d6f-b572acd2c5ef",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      27
+    ],
+    "claim": "There is no empty space on the PUBG screen for the Claudictive window.",
+    "provenance": "evidence",
+    "quoted_text": "האמת שאין מקום ריק במסך של PUBG.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "576e681e-e68c-4fe1-ae00-4f4c74faa04c",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee would like the Claudictive window to be transparent or very small, like a subtitle.",
+    "provenance": "evidence",
+    "quoted_text": "כן, שקוף, או קטן מאוד. כמו subtitle.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "02f6cd72-77a8-4095-ac57-7d6526316714",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      31
+    ],
+    "claim": "Voice input is a desired feature, and the interviewee believes everyone would agree.",
+    "provenance": "evidence",
+    "quoted_text": "voice input. ברור. כולם יגידו לך voice.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "6f3fb9df-0df6-49ea-a800-cdcdb0356f9e",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee talks with their squad constantly, so they are unsure how voice input for Claudictive would work during gameplay.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, אני מדבר עם הsquad כל הזמן. אז לא יודע איך זה יעבוד.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ab8a9cc7-fd2f-4917-86a8-1ba15f4b79c3",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee rates the idea of Claudictive an eight out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "שמונה.",
+    "bearings": []
+  },
+  {
+    "id": "47733277-11bc-4ac1-9563-ad79dc0b832b",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      35
+    ],
+    "claim": "As a game developer, the interviewee appreciates Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "כגיים דב אני מעריך את זה.",
+    "bearings": []
+  },
+  {
+    "id": "3d49a0bc-c5df-47b6-9dc8-2f2edf9d0ed9",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee might pay for Claudictive personally.",
+    "provenance": "evidence",
+    "quoted_text": "אני? אולי.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "bd9cf00c-8f23-44cd-90e7-7a8fa520fad2",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      37
+    ],
+    "claim": "The studio might pay for Claudictive if it becomes an Unreal plugin.",
+    "provenance": "evidence",
+    "quoted_text": "הסטודיו? אם זה יהיה plugin לUnreal, אולי כן.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ffe4938d-69da-47c9-a231-3575bba6c8cc",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee estimates a price of five dollars per user for Claudictive.",
+    "provenance": "inference",
+    "quoted_text": "לא יודע. חמישה דולר למשתמש? משהו כזה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "ed0cb14e-7a71-4668-93b0-268b5493b660",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      41
+    ],
+    "claim": "The entire team has already installed Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "כבר כל הצוות מותקן חח. אז כן.",
+    "bearings": []
+  },
+  {
+    "id": "1ae210a0-08ca-4744-b0dd-5cfd52b91233",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      43
+    ],
+    "claim": "The interviewee thinks most of the team has stopped using Claudictive.",
+    "provenance": "inference",
+    "quoted_text": "אני חושב שרובם הפסיקו.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "b5b98407-9e44-462e-9ccd-216931147426",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      45
+    ],
+    "claim": "The interviewee does not care about themes for Claudictive, only dark mode.",
+    "provenance": "evidence",
+    "quoted_text": "לא אכפת לי. dark mode וזהו.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "9ad3f29e-1b99-4ec5-91cf-af92c63e2137",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      47
+    ],
+    "claim": "A mobile companion app could be nice for checking compiles on the phone.",
+    "provenance": "evidence",
+    "quoted_text": "כן, זה יכול להיות נחמד. לראות את הcompile בטלפון.",
+    "bearings": []
+  },
+  {
+    "id": "25d2709f-8b1f-475c-8b6a-97c164b7d9d8",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      47
+    ],
+    "claim": "The interviewee's team already has a Slack bot for checking compiles.",
+    "provenance": "evidence",
+    "quoted_text": "אבל יש לנו כבר Slack bot לזה.",
+    "bearings": []
+  },
+  {
+    "id": "d91389a9-1c9f-4167-9a25-eb5d83aac3bd",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      49
+    ],
+    "claim": "The best thing about Claudictive is that it's on the same screen, eliminating the need to leave the game.",
+    "provenance": "evidence",
+    "quoted_text": "שהוא באותו מסך. אני לא צריך לצאת מהמשחק.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "4a9096f3-8160-4ccf-a0ef-f706725a0ad3",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      49
+    ],
+    "claim": "Alt-tabbing in PUBG is a nightmare and sometimes crashes the game.",
+    "provenance": "evidence",
+    "quoted_text": "alt-tab בPUBG זה סיוט, לפעמים זה קורס.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2eac7099-1bcc-4881-9022-f1b5008e8b44",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      51
+    ],
+    "claim": "The least favorite thing about Claudictive, besides the minimap issue, is that it doesn't always understand which project the interviewee is working on, as they have multiple repos.",
+    "provenance": "evidence",
+    "quoted_text": "חוץ מהמפה? שהוא לא תמיד מבין באיזה project אני. יש לי כמה repos.",
+    "bearings": []
+  },
+  {
+    "id": "057d5f41-944c-4dc5-b56e-25ea4a4408ca",
+    "session_id": "20260615T000000-10",
+    "seqs": [
+      53
+    ],
+    "claim": "The interviewee would be satisfied if the Claudictive window was moved from the map.",
+    "provenance": "evidence",
+    "quoted_text": "תזיזו את החלון מהמפה ואני מרוצה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2c9cddde-7a50-4236-b295-a3ce479078fa",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      3
+    ],
+    "claim": "I finished a full stack bootcamp a few months ago.",
+    "provenance": "evidence",
+    "quoted_text": "סיימתי bootcamp לפני כמה חודשים, full stack",
+    "bearings": []
+  },
+  {
+    "id": "07df2271-914a-4e24-9b47-4a511be96068",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      3
+    ],
+    "claim": "I am currently looking for my first job.",
+    "provenance": "evidence",
+    "quoted_text": "ועכשיו מחפשת עבודה ראשונה.",
+    "bearings": []
+  },
+  {
+    "id": "72979567-4925-4cf0-913f-a7feefa79f89",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      3
+    ],
+    "claim": "In the meantime, I'm building portfolio projects with Claude Code.",
+    "provenance": "evidence",
+    "quoted_text": "ובינתיים בונה פרויקטים לportfolio עם Claude Code.",
+    "bearings": []
+  },
+  {
+    "id": "113e7b2e-2e73-46c9-8ba1-71f88968dfb9",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      5
+    ],
+    "claim": "I am playing Baldur's Gate 3 for the third time.",
+    "provenance": "evidence",
+    "quoted_text": "Baldur's Gate 3, כבר פעם שלישית.",
+    "bearings": []
+  },
+  {
+    "id": "9d842161-ac15-47aa-a230-35e5846f730e",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      5
+    ],
+    "claim": "I play Sims when I want to relax.",
+    "provenance": "evidence",
+    "quoted_text": "וSims כשאני רוצה להירגע.",
+    "bearings": []
+  },
+  {
+    "id": "ec7a26a2-a225-4c01-baf7-1854f2f68fec",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      7
+    ],
+    "claim": "Claude Code is like a private tutor.",
+    "provenance": "evidence",
+    "quoted_text": "הוא כמו מורה פרטי.",
+    "bearings": []
+  },
+  {
+    "id": "b9ac3a0b-dab8-42c9-95ec-18da4c837758",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      7
+    ],
+    "claim": "I'm building my portfolio with Claude Code and asking him a lot about why he did things.",
+    "provenance": "evidence",
+    "quoted_text": "אני בונה איתו את הportfolio, ושואלת אותו הרבה למה הוא עשה דברים.",
+    "bearings": []
+  },
+  {
+    "id": "4728bfca-f8bb-425b-b615-e6bc47bbbb8d",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      9
+    ],
+    "claim": "Someone from the bootcamp sent Claudictive in the group.",
+    "provenance": "evidence",
+    "quoted_text": "מישהו מהbootcamp שלח בקבוצה.",
+    "bearings": []
+  },
+  {
+    "id": "7ddfc9f6-2426-4d1a-9918-a75dc1dab669",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      11
+    ],
+    "claim": "The installation was a bit complicated.",
+    "provenance": "evidence",
+    "quoted_text": "קצת מסובך.",
+    "bearings": []
+  },
+  {
+    "id": "574d6691-7569-4a6a-9157-03e8dceea182",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      11
+    ],
+    "claim": "I didn't know what an API key was and had to look it up.",
+    "provenance": "evidence",
+    "quoted_text": "לא ידעתי מה זה API key, הייתי צריכה לחפש.",
+    "bearings": []
+  },
+  {
+    "id": "f306e051-a3cf-417e-a324-3d237f60e8be",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      11
+    ],
+    "claim": "Perhaps there should be an explanation for the API key during installation.",
+    "provenance": "inference",
+    "quoted_text": "אולי צריך הסבר.",
+    "bearings": []
+  },
+  {
+    "id": "d2062cc1-d491-4145-9215-ae57883579a4",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      13
+    ],
+    "claim": "Claudictive's hotkey is the same as the quick save key in BG3.",
+    "provenance": "evidence",
+    "quoted_text": "הhotkey שלכם זה אותו מקש שיש לי בBG3 לquick save.",
+    "bearings": []
+  },
+  {
+    "id": "fff3ebce-f284-4053-b73a-102895f14432",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      13
+    ],
+    "claim": "Every time I saved in BG3, the Claudictive window would open, and vice versa.",
+    "provenance": "evidence",
+    "quoted_text": "אז כל פעם ששמרתי, נפתח החלון. ולהפך.",
+    "bearings": []
+  },
+  {
+    "id": "8c14a94d-2ea2-4148-a722-31b10b0a80c9",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      15
+    ],
+    "claim": "I use Claudictive almost never, maybe three times in total.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, כמעט לא, האמת. אולי שלוש פעמים סך הכל.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "daac9169-b1e7-458a-b461-19e0bb66a644",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      17
+    ],
+    "claim": "The few times I used Claudictive, I asked it questions about code.",
+    "provenance": "evidence",
+    "quoted_text": "שאלתי אותו שאלות על הקוד.",
+    "bearings": []
+  },
+  {
+    "id": "4b0993bc-aa00-44da-9514-d79933575a0d",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      17
+    ],
+    "claim": "Claudictive's answers were very long and I didn't understand everything.",
+    "provenance": "evidence",
+    "quoted_text": "אבל הוא ענה ממש ארוך ולא הבנתי הכל.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "52e34860-5ae4-45f4-81be-d6521a4d76b3",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      19
+    ],
+    "claim": "I would like themes, something beautiful, and larger text.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, אולי themes? משהו יפה. וגם שהטקסט יהיה יותר גדול.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "1b7da865-94c4-46cd-97c6-4945c87a2273",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      21
+    ],
+    "claim": "Voice input would be cool, like talking to a companion in the game.",
+    "provenance": "evidence",
+    "quoted_text": "כן! זה יהיה cool. לדבר איתו כמו עם companion במשחק חח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "d5373753-3a79-45af-8773-d0bcababf3ed",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      23
+    ],
+    "claim": "Voice input might make me use Claudictive more.",
+    "provenance": "inference",
+    "quoted_text": "אולי. כן, אני חושבת שכן.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "4d85a7da-ce68-4bbe-879b-ed29b9adec0a",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      25
+    ],
+    "claim": "I would download a mobile app for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "כן, למה לא. הייתי מורידה.",
+    "bearings": []
+  },
+  {
+    "id": "5ce8a51b-5fe5-4440-af7c-6c1999f18c3d",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      27
+    ],
+    "claim": "I like that Claudictive feels like another character or companion in the game.",
+    "provenance": "evidence",
+    "quoted_text": "שזה מרגיש כמו עוד דמות במשחק. כאילו companion.",
+    "bearings": []
+  },
+  {
+    "id": "454be4e0-abb5-461b-9b1e-2edb3f359859",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      29
+    ],
+    "claim": "BG3 is not fast on my old laptop anyway.",
+    "provenance": "evidence",
+    "quoted_text": "לא, BG3 ממילא לא מהיר אצלי, יש לי laptop ישן חח.",
+    "bearings": []
+  },
+  {
+    "id": "03747bab-18f6-44c1-afa9-4132956ef068",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      31
+    ],
+    "claim": "I did not know Claudictive had notifications.",
+    "provenance": "evidence",
+    "quoted_text": "לא ידעתי שיש.",
+    "bearings": []
+  },
+  {
+    "id": "c56705cc-4cf7-404c-8a58-1eb73a3bc6d9",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      35
+    ],
+    "claim": "I love the idea of Claudictive; it's very cute.",
+    "provenance": "evidence",
+    "quoted_text": "עשר! זה ממש חמוד. אני אוהבת את הרעיון שהAI איתך במשחק.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "b837c813-2b76-45c5-a29f-c49e14bc548f",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      37
+    ],
+    "claim": "I am currently unemployed.",
+    "provenance": "evidence",
+    "quoted_text": "אממ... אני כרגע מובטלת חח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "3540f26b-3d6f-4d6d-8e5b-874cf0a38342",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      37
+    ],
+    "claim": "I wouldn't pay for Claudictive right now, but maybe after I find a job.",
+    "provenance": "inference",
+    "quoted_text": "אז לא עכשיו. אולי אחרי שאמצא עבודה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "c2a8068b-8126-4a45-b2d5-795f7d4e5058",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      39
+    ],
+    "claim": "Two dollars for Claudictive would be okay.",
+    "provenance": "evidence",
+    "quoted_text": "אולי. כן, שניים זה בסדר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "af2be914-e62f-42de-9e83-d7b712a1e42d",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      41
+    ],
+    "claim": "I would recommend Claudictive to my bootcamp group.",
+    "provenance": "evidence",
+    "quoted_text": "כן, לכל הקבוצה של הbootcamp. הם יאהבו.",
+    "bearings": []
+  },
+  {
+    "id": "fbb943a7-1595-4459-925c-d26d1ce5e65f",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      43
+    ],
+    "claim": "I would describe Claudictive as 'Claude living inside your game'.",
+    "provenance": "evidence",
+    "quoted_text": "\"Claude שגר בתוך המשחק שלך\". חמוד, לא?",
+    "bearings": []
+  },
+  {
+    "id": "1fea5f64-9685-4ba2-b1bb-861079959a77",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      45
+    ],
+    "claim": "What I liked least is that it looks a bit scary, all that text, like a terminal.",
+    "provenance": "evidence",
+    "quoted_text": "שהוא נראה קצת מפחיד, כל הטקסט הזה. כמו terminal.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "658fd1f5-7d41-4546-ba2f-510d11c2922c",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      45
+    ],
+    "claim": "I would like Claudictive to be more friendly.",
+    "provenance": "evidence",
+    "quoted_text": "הייתי רוצה שיהיה יותר friendly.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "a331f2b7-27ae-4403-aea1-f3e4613e325a",
+    "session_id": "20260615T000000-11",
+    "seqs": [
+      47
+    ],
+    "claim": "Claudictive is a really cool idea.",
+    "provenance": "evidence",
+    "quoted_text": "רק שזה רעיון ממש מגניב.",
+    "bearings": []
+  },
+  {
+    "id": "2e1cbaa3-b474-4080-bf39-6f6fe2166500",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee is a third-year computer science student.",
+    "provenance": "evidence",
+    "quoted_text": "אני סטודנט למדעי המחשב, שנה שלישית.",
+    "bearings": []
+  },
+  {
+    "id": "b9f48b60-3de9-44c4-9d1b-5c20da7e1224",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee plays Valorant seriously at an Immortal rank and participates in small tournaments with a team.",
+    "provenance": "evidence",
+    "quoted_text": "ואני משחק Valorant, די ברצינות. Immortal. משחק בטורנירים קטנים עם קבוצה.",
+    "bearings": []
+  },
+  {
+    "id": "1f78d156-708d-4ce1-986b-0b74d8bab855",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee mainly uses Claude Code for course exercises and a final project.",
+    "provenance": "evidence",
+    "quoted_text": "בעיקר לתרגילים בקורסים, ולפרויקט גמר.",
+    "bearings": []
+  },
+  {
+    "id": "5766cfb0-3fa9-4816-ae41-07802d2e0658",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee and their team are building something with React and FastAPI for their final project.",
+    "provenance": "evidence",
+    "quoted_text": "אנחנו בונים משהו עם React וFastAPI.",
+    "bearings": []
+  },
+  {
+    "id": "49ebe582-2e4b-4459-b9ac-6b11d5f04e1a",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee found Claudictive through a retweet on Twitter.",
+    "provenance": "evidence",
+    "quoted_text": "ראיתי בטוויטר. מישהו עשה retweet.",
+    "bearings": []
+  },
+  {
+    "id": "5b03ae80-3de4-4d13-80b7-0b5e9fc863de",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      9
+    ],
+    "claim": "The interviewee finds giving Overwolf permissions a bit scary because Valorant's anti-cheat, Vanguard, is aggressive, and they were afraid of being banned.",
+    "provenance": "evidence",
+    "quoted_text": "בסדר. קצת מפחיד לתת לOverwolf הרשאות, כי Vanguard של Riot הוא anti-cheat די אגרסיבי. פחדתי שיעיפו אותי.",
+    "bearings": []
+  },
+  {
+    "id": "4b1c2933-56d7-41b3-862e-718cfbe77e3d",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      11
+    ],
+    "claim": "There haven't been any issues with Claudictive and Vanguard so far, but the fear of being banned still exists.",
+    "provenance": "evidence",
+    "quoted_text": "לא, בינתיים לא. אבל עדיין יש לי את הפחד הזה.",
+    "bearings": []
+  },
+  {
+    "id": "aa090ba3-1094-4788-b6ba-fc932530e999",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      13
+    ],
+    "claim": "The interviewee used Claudictive a lot at first, but now uses it almost never.",
+    "provenance": "evidence",
+    "quoted_text": "בהתחלה ניסיתי הרבה. עכשיו כמעט לא.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "06e9311d-6b9a-43e1-8370-9a05ca8f6273",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee used Claudictive a lot at first because it was new and they would open it every game.",
+    "provenance": "evidence",
+    "quoted_text": "כי זה היה חדש. הייתי פותח את זה כל משחק.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "35d6ad73-4781-4d4a-81d6-0afe6c533356",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee would like a macro feature, a single button that sends a pre-made message like \"run tests,\" to avoid typing.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, אולי שיהיה macro, כאילו כפתור אחד ששולח הודעה מוכנה. נגיד \"תריץ טסטים\". ככה לא צריך להקליד.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "3eca72e1-fdba-4ef7-84fa-e43a48d8097c",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      19
+    ],
+    "claim": "The interviewee is unsure about using voice input in the middle of a clutch situation.",
+    "provenance": "evidence",
+    "quoted_text": "חח, לא יודע לגבי באמצע clutch.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "3b6f20d5-e365-4d12-96ea-f91dde285931",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      19
+    ],
+    "claim": "The interviewee once tried to type during a round and died within two seconds, finding it impossible as it requires both hands and full attention.",
+    "provenance": "evidence",
+    "quoted_text": "האמת ניסיתי פעם לכתוב לו באמצע round, ומתתי תוך שתי שניות. זה פשוט לא אפשרי, אתה צריך את שתי הידיים ואת כל הראש.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      },
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "ba9ad1bc-7274-43aa-aa18-2e10d71cdc77",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      21
+    ],
+    "claim": "Voice input might solve the problem of typing during a round.",
+    "provenance": "inference",
+    "quoted_text": "אולי?",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "e3569959-eb11-458e-8c99-6eedc008797c",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      21
+    ],
+    "claim": "Voice input might get mixed with team voice chat.",
+    "provenance": "evidence",
+    "quoted_text": "אני גם מדבר עם הקבוצה בvoice, אז זה יתערבב. לא יודע.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "f4993282-a208-45e0-9587-693c0ccc41e2",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee wants the Claudictive window to be smaller.",
+    "provenance": "evidence",
+    "quoted_text": "שהחלון יהיה יותר קטן.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "026b4cf1-d77c-4ca2-a8aa-983ae6841d7c",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee wants to be able to change colors or themes in Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "ושיהיה אפשר לשנות צבעים, כאילו theme.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "db2173dc-b440-469b-b2dc-b2936a9e665e",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee likes that Claudictive is fast to open with a hotkey.",
+    "provenance": "evidence",
+    "quoted_text": "שזה מהיר לפתוח. Hotkey ואתה שם.",
+    "bearings": []
+  },
+  {
+    "id": "ee8ae3b7-1f82-4ef3-ae95-14755a1b48bd",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee asks Claudictive questions when waiting for the next round after dying, as there are 30-40 seconds of spectating teammates.",
+    "provenance": "evidence",
+    "quoted_text": "אחרי שאני מת ואני מחכה לround הבא, יש לי שלושים-ארבעים שניות שאני רק צופה בחברים, אז אני זורק לו שאלה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "a2172404-932c-4fd0-badc-69a315fe9af1",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      27
+    ],
+    "claim": "The interviewee's least favorite part is that sometimes the answers are too long, and they don't have enough time to read them, desiring shorter answers.",
+    "provenance": "evidence",
+    "quoted_text": "שלפעמים התשובה ארוכה מדי. אני לא מספיק לקרוא, כאילו, צריך תשובות קצרות.",
+    "bearings": []
+  },
+  {
+    "id": "dc5de661-111a-480c-bb12-6241f7681408",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      29
+    ],
+    "claim": "As a student, the interviewee is unsure if they would pay for Claudictive, but perhaps a small amount like two to three dollars.",
+    "provenance": "evidence",
+    "quoted_text": "אני סטודנט אחי חח. לא יודע. אולי משהו קטן, שניים-שלושה דולר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "be60c7e1-0b94-405b-907b-3f603038e7b8",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee might pay a bit more if Claudictive had a voice feature.",
+    "provenance": "inference",
+    "quoted_text": "אולי קצת יותר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "2d1347f9-940f-48ef-ba31-ce221d9c849b",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee would tell a friend that Claudictive is a cool tool for gamer-developers, like a Discord overlay but for Claude.",
+    "provenance": "evidence",
+    "quoted_text": "שזה כלי מגניב למי שמפתח וגם גיימר. שזה כמו Discord overlay אבל לClaude.",
+    "bearings": []
+  },
+  {
+    "id": "4e0eea8e-d3f2-47fe-babf-2a7f81291fe5",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee would recommend Claudictive to friends from their degree program but not to their team, as they are not programmers.",
+    "provenance": "evidence",
+    "quoted_text": "כן, לחברים מהתואר, בטח. לקבוצה פחות, הם לא מתכנתים.",
+    "bearings": []
+  },
+  {
+    "id": "cbfb8784-5e51-4b51-957a-79d2e135cd52",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      37
+    ],
+    "claim": "The Claudictive window design is okay but a bit generic, like any other application.",
+    "provenance": "evidence",
+    "quoted_text": "בסדר. קצת generic. כאילו, נראה כמו כל אפליקציה.",
+    "bearings": []
+  },
+  {
+    "id": "7ffb135a-9221-441e-a50a-bf6a6a4ec382",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      39
+    ],
+    "claim": "There is a small FPS drop of about ten frames when Claudictive is open, which is noticeable in Valorant.",
+    "provenance": "evidence",
+    "quoted_text": "אה כן, יש drop קטן כשהוא פתוח. אולי עשרה FPS. בValorant זה מורגש.",
+    "bearings": []
+  },
+  {
+    "id": "e3deb576-0c46-46a7-958f-d0ae4b013d0a",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      41
+    ],
+    "claim": "The interviewee would not use Claudictive in a tournament, as they only focus on the game.",
+    "provenance": "evidence",
+    "quoted_text": "לא, בטורניר אני לא נוגע בכלום חוץ מהמשחק. זה ברור.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "cce483af-891f-4d29-8b22-fe2576cfa820",
+    "session_id": "20260615T000000-2",
+    "seqs": [
+      43
+    ],
+    "claim": "The interviewee believes Claudictive is a good idea and encourages continuation.",
+    "provenance": "inference",
+    "quoted_text": "רק... תמשיך עם זה. זה רעיון טוב.",
+    "bearings": []
+  },
+  {
+    "id": "31053507-f170-4043-bd43-9fba6f89b78a",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee is a QA automation engineer who writes tests using Playwright and Python.",
+    "provenance": "evidence",
+    "quoted_text": "אני QA automation, כותבת טסטים בPlaywright ובPython.",
+    "bearings": []
+  },
+  {
+    "id": "cb57c395-866d-494d-a1c6-d516c3863146",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee plays Apex with a regular squad three to four times a week.",
+    "provenance": "evidence",
+    "quoted_text": "ואני משחקת Apex עם squad קבוע, שלוש-ארבע פעמים בשבוע.",
+    "bearings": []
+  },
+  {
+    "id": "948d9913-24b7-4a8c-abb3-e31f60569f0b",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee mainly uses Claude Code to write tests and fix flaky tests, and it is very good at that.",
+    "provenance": "evidence",
+    "quoted_text": "בעיקר לכתוב טסטים, לתקן flaky tests. הוא ממש טוב בזה.",
+    "bearings": []
+  },
+  {
+    "id": "a7a453b2-416d-4aac-8ef6-913ba44ffe74",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      7
+    ],
+    "claim": "The onboarding for Claudictive was a bit long because Overwolf asked the interviewee to create an account, which the interviewee dislikes.",
+    "provenance": "evidence",
+    "quoted_text": "היה קצת ארוך. Overwolf ביקש ממני ליצור account, ואני לא אוהבת ליצור accounts. אבל עברתי את זה.",
+    "bearings": []
+  },
+  {
+    "id": "c2adc9ca-0cc6-498b-9741-8dd3e80b7c07",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      9
+    ],
+    "claim": "Apart from creating an account, the Claudictive installation was fine, and the explanation for the hotkey was clear.",
+    "provenance": "evidence",
+    "quoted_text": "לא, חוץ מזה היה בסדר. ההסבר על הhotkey היה ברור.",
+    "bearings": []
+  },
+  {
+    "id": "4ce5ad29-2ea8-41bd-80d3-20271d66bc2a",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee uses Claudictive once a week or less.",
+    "provenance": "evidence",
+    "quoted_text": "אממ... פעם בשבוע? פחות?",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "3deb3b0b-c5a3-4dea-8773-e912c33b9b0b",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      13
+    ],
+    "claim": "The interviewee primarily uses Claudictive to ask if the test suite passed, leaving Claude to run tests and then checking the results.",
+    "provenance": "evidence",
+    "quoted_text": "בעיקר שואלת אם הsuite עבר. אני משאירה את Claude להריץ טסטים ואז בודקת.",
+    "bearings": []
+  },
+  {
+    "id": "61d59fc0-6c7a-49b5-bdd2-4f0b81decdc3",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      15
+    ],
+    "claim": "The most annoying thing about using Claudictive is the window, which opens exactly on the minimap in the corner.",
+    "provenance": "evidence",
+    "quoted_text": "החלון. הוא נפתח בדיוק על הminimap בפינה, ובApex אם אתה לא רואה את הring אתה מת.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "8ff5511b-c2b9-4987-ae12-306e6675f4cb",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee experienced a problem with the Claudictive window covering the minimap in Apex yesterday while on Storm Point, causing them not to see the ring closing.",
+    "provenance": "evidence",
+    "quoted_text": "אתמול, בעצם. היינו בStorm Point, פתחתי לבדוק משהו, והחלון כיסה את כל הפינה השמאלית העליונה. לא ראיתי שהring סוגר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "1bdc9fea-ef64-439d-882d-c082518615f7",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      19
+    ],
+    "claim": "This issue with the window has happened multiple times, leading to frustration.",
+    "provenance": "evidence",
+    "quoted_text": "כמה פעמים. בפעם השנייה כבר הייתי מעוצבנת.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "edc1add4-c47a-4eef-a981-aee6ec839451",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      21
+    ],
+    "claim": "The interviewee did not know that the Claudictive window could be moved.",
+    "provenance": "evidence",
+    "quoted_text": "לא ידעתי שאפשר להזיז אותו. אפשר?",
+    "bearings": []
+  },
+  {
+    "id": "dcbdbaaa-c435-4f67-848e-92d16d591670",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee wants voice input for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "voice, ברור.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "42adbbf9-5ab3-4318-b650-ce9973b128ba",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee would like a short summary of the output from Claudictive, not the entire output.",
+    "provenance": "evidence",
+    "quoted_text": "ואולי שיהיה summary קצר, לא כל הoutput.",
+    "bearings": []
+  },
+  {
+    "id": "ba1ee468-cc93-4b31-afd4-a089c4dc3314",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      27
+    ],
+    "claim": "Themes for Claudictive would be nice but are not critical.",
+    "provenance": "evidence",
+    "quoted_text": "כן, נחמד. לא קריטי.",
+    "bearings": []
+  },
+  {
+    "id": "272ef824-85e3-4eaf-8aca-161af3ea3b8d",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      29
+    ],
+    "claim": "A mobile companion app to see Claude on the phone while playing could be interesting, placed next to the keyboard.",
+    "provenance": "evidence",
+    "quoted_text": "אה, זה דווקא יכול להיות מעניין. לשים את הטלפון ליד המקלדת.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "e16736af-9918-4292-a1f4-2fc697c23c4f",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee rates their liking of the Claudictive concept as a seven out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "שבע? כן, שבע.",
+    "bearings": []
+  },
+  {
+    "id": "e061560a-23f7-49e8-a8fa-e7ce161820f5",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      33
+    ],
+    "claim": "To raise the interviewee's liking of Claudictive to a ten, it needs to be more stable, as sometimes the overlay doesn't load and requires restarting Overwolf.",
+    "provenance": "evidence",
+    "quoted_text": "אם זה יהיה יותר יציב. לפעמים הoverlay פשוט לא עולה ואני צריכה לעשות restart לOverwolf.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "782f673d-8188-416a-8a27-aa40d55e1ee5",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee would pay for Claudictive if it were stable, and five dollars is an acceptable price.",
+    "provenance": "evidence",
+    "quoted_text": "כן, אם יהיה יציב. חמישה דולר זה בסדר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "da866975-8755-4792-afa5-5e5949aff3ab",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee would recommend Claudictive to one friend from their squad who is also a programmer, but not to the others.",
+    "provenance": "evidence",
+    "quoted_text": "לחבר אחד מהsquad, הוא גם מתכנת. האחרים לא.",
+    "bearings": []
+  },
+  {
+    "id": "f92ac9f7-0744-4e1c-ac9b-630df7804f3d",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee thinks it's cool for gamers to work with AI while gaming, but is unsure how many people actually need it.",
+    "provenance": "evidence",
+    "quoted_text": "כן... כאילו, אני חושבת שזה מגניב. אני לא בטוחה כמה אנשים צריכים את זה, אבל זה מגניב.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "2fe32686-7b41-4d94-b13d-72556e87b5f0",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      41
+    ],
+    "claim": "The font in Claudictive is too small, especially at 1440 resolution.",
+    "provenance": "evidence",
+    "quoted_text": "הfont קטן מדי. בresolution של 1440 זה ממש קטן.",
+    "bearings": []
+  },
+  {
+    "id": "799b57eb-ab58-4701-b803-fbf8cb319997",
+    "session_id": "20260615T000000-3",
+    "seqs": [
+      43
+    ],
+    "claim": "The main thing the interviewee wants fixed is the Claudictive window.",
+    "provenance": "evidence",
+    "quoted_text": "לא, רק החלון. תתקנו את החלון חח.",
+    "bearings": []
+  },
+  {
+    "id": "4a34e530-4a15-4880-b070-0bcce92e0345",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      1
+    ],
+    "claim": "English is easier for the interviewee for work-related matters.",
+    "provenance": "evidence",
+    "quoted_text": "English is easier for me for work stuff.",
+    "bearings": []
+  },
+  {
+    "id": "4172cf94-68ef-42ad-90c3-943f628c13bb",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      1
+    ],
+    "claim": "The interviewee lived in Boston for five years, and his English proficiency stuck.",
+    "provenance": "evidence",
+    "quoted_text": "Five years in Boston, it stuck.",
+    "bearings": []
+  },
+  {
+    "id": "ecb04e40-a317-4319-bf25-3a0aa420b3d4",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee leads a team of eight at a SaaS company.",
+    "provenance": "evidence",
+    "quoted_text": "I lead a team of eight at a SaaS company",
+    "bearings": []
+  },
+  {
+    "id": "b3b3dc40-c88c-4353-b021-b93628dc9c20",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee's team is mostly focused on backend development and some data.",
+    "provenance": "evidence",
+    "quoted_text": "mostly backend and some data.",
+    "bearings": []
+  },
+  {
+    "id": "a40286b1-3281-4f79-9cc5-1cbe81e13d2e",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee plays FC, Ultimate Team, usually late at night after the children are asleep.",
+    "provenance": "evidence",
+    "quoted_text": "And I play FC, Ultimate Team, usually late at night after the kids are asleep.",
+    "bearings": []
+  },
+  {
+    "id": "70cb88cc-65ea-4063-b971-2665d82e63f3",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee has used Claude Code for about a year.",
+    "provenance": "evidence",
+    "quoted_text": "About a year.",
+    "bearings": []
+  },
+  {
+    "id": "ab835a99-7770-4bb4-ba0d-a911ad8b9d4c",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee uses Claude Code mostly for reviews and for personal scripts.",
+    "provenance": "evidence",
+    "quoted_text": "I use it for reviews mostly, and for my own little scripts.",
+    "bearings": []
+  },
+  {
+    "id": "1ba577b8-47a4-43bc-9889-05a7fa122d6e",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee does not code as much as they used to.",
+    "provenance": "evidence",
+    "quoted_text": "I don't code as much as I used to.",
+    "bearings": []
+  },
+  {
+    "id": "be9a56f0-bf9f-4bed-a0ea-e2be6254ace6",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      7
+    ],
+    "claim": "One of the interviewee's engineers is in the Claudictive beta.",
+    "provenance": "evidence",
+    "quoted_text": "One of my engineers is in the beta.",
+    "bearings": []
+  },
+  {
+    "id": "b0b6618a-b534-4e72-a4c1-9949e0d78789",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee's engineer showed Claudictive during a demo day event they have on Thursdays.",
+    "provenance": "evidence",
+    "quoted_text": "He showed it in a demo day thing we have on Thursdays.",
+    "bearings": []
+  },
+  {
+    "id": "bf95489b-2084-437e-a7ea-0189f4409248",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      9
+    ],
+    "claim": "The onboarding process for Claudictive was fine.",
+    "provenance": "evidence",
+    "quoted_text": "Fine.",
+    "bearings": []
+  },
+  {
+    "id": "ffcf6522-8ba5-41be-8128-3f871d29c169",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      9
+    ],
+    "claim": "The interviewee considers Overwolf to be a bit bloated.",
+    "provenance": "evidence",
+    "quoted_text": "It's Overwolf, so, you know, a bit bloated.",
+    "bearings": []
+  },
+  {
+    "id": "afd9ca8a-0afd-40be-ae92-b459f5391dc3",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      9
+    ],
+    "claim": "Claudictive worked the first time for the interviewee.",
+    "provenance": "evidence",
+    "quoted_text": "But it worked first time.",
+    "bearings": []
+  },
+  {
+    "id": "5e191a8b-1c58-4b40-ac62-0d131cb206fb",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      11
+    ],
+    "claim": "The permissions screen in Claudictive was confusing to the interviewee.",
+    "provenance": "evidence",
+    "quoted_text": "The permissions screen. It asked for a lot of things and I wasn't sure why it needs all of them.",
+    "bearings": []
+  },
+  {
+    "id": "20f0ee28-51ea-4bb6-939d-36c3fcce4d55",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      13
+    ],
+    "claim": "The interviewee does not use Claudictive much, maybe twice in the last two weeks.",
+    "provenance": "evidence",
+    "quoted_text": "Not much. Maybe twice in the last two weeks.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "df62dac1-b665-4449-a338-c3ca8a166b1d",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee used Claudictive to summarize a PR (pull request) opened by one of his team members.",
+    "provenance": "evidence",
+    "quoted_text": "I asked Claude to summarize a PR one of my guys opened.",
+    "bearings": []
+  },
+  {
+    "id": "39556aea-4658-41f4-935f-fe8ff2b76904",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee used Claudictive once to check a failing deploy.",
+    "provenance": "evidence",
+    "quoted_text": "And once to check a failing deploy.",
+    "bearings": []
+  },
+  {
+    "id": "ea0151da-dedb-4fae-a3b4-7c73f59e4130",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee mostly uses Claudictive while the game is loading.",
+    "provenance": "evidence",
+    "quoted_text": "Mostly it's while the game is loading,",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "022504d0-5924-4756-9ad7-52b8ba1b9a19",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      15
+    ],
+    "claim": "The loading time in FC takes a long time.",
+    "provenance": "evidence",
+    "quoted_text": "the loading in FC takes forever,",
+    "bearings": []
+  },
+  {
+    "id": "11f55763-207a-4f0f-ae27-9f9044c48808",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee checks Slack on their phone anyway during game loading times.",
+    "provenance": "evidence",
+    "quoted_text": "so I'm already checking Slack on my phone anyway.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "82c3ea7d-47f9-4058-a700-88becd89780d",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee would like to see a voice feature in Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "Voice, probably.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "73a4e0d9-1784-49f8-9ee6-a642e73b68ec",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee guesses that everyone will ask for a voice feature.",
+    "provenance": "inference",
+    "quoted_text": "Everyone will say voice I guess.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "5f650214-254b-4252-b114-0be13cf59c3e",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      19
+    ],
+    "claim": "The interviewee thinks talking to Claude in the middle of an FC match sounds cool.",
+    "provenance": "inference",
+    "quoted_text": "I mean... sure, it sounds cool.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "1a70b2b6-7bed-496d-926b-4b12f680e7b6",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      19
+    ],
+    "claim": "FC matches are pretty intense.",
+    "provenance": "evidence",
+    "quoted_text": "In FC the matches are pretty intense though.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "7c83ab51-2bd6-4241-9c76-0d489d951765",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      21
+    ],
+    "claim": "The interviewee would like a smaller mode for Claudictive, like just a status line.",
+    "provenance": "evidence",
+    "quoted_text": "Maybe a smaller mode. Like just a status line, is my thing done or not.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "e8d2fc76-d4be-4485-ad79-7461498ccc10",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee does not care much about themes; dark is fine.",
+    "provenance": "evidence",
+    "quoted_text": "Don't care much. Dark is fine.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "5cabaacd-e5c9-4f2e-aa27-452dfc2fb1bc",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee rates the idea of Claudictive an eight out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "The idea, eight.",
+    "bearings": []
+  },
+  {
+    "id": "cb6ebbbf-13b4-4eb9-80ae-6f30edaf8d1d",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee rates the current execution of Claudictive a six out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "The execution right now, maybe six.",
+    "bearings": []
+  },
+  {
+    "id": "e1ed982c-4a63-4f7b-9d53-54fa5f9803a4",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee believes the current execution rating of six is fine because it's in beta.",
+    "provenance": "inference",
+    "quoted_text": "It's beta, it's fine.",
+    "bearings": []
+  },
+  {
+    "id": "cea85f4f-8723-49b8-84e8-d930dbeb03d3",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      27
+    ],
+    "claim": "Speed would make the execution of Claudictive a ten.",
+    "provenance": "evidence",
+    "quoted_text": "Speed, mostly.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "cad7b49a-05f2-446a-bc90-d2b1ca3e1847",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      27
+    ],
+    "claim": "Sometimes hitting the hotkey for Claudictive results in a delay of one or two seconds.",
+    "provenance": "evidence",
+    "quoted_text": "Sometimes I hit the hotkey and nothing happens for a second or two.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "74c58788-ff55-4a2b-ab12-1a95568a1354",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee might personally pay for Claudictive.",
+    "provenance": "inference",
+    "quoted_text": "Me personally, maybe.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "2bf7c11f-b619-41f1-a8f2-af200ec89243",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee would probably not buy Claudictive for their team because most of them don't game or wouldn't admit it.",
+    "provenance": "inference",
+    "quoted_text": "Would I buy it for my team? Probably not, most of them don't game. Or they game but they wouldn't admit it to me.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "4803ab1b-67e6-4e06-a436-d2d4d972513c",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee would pay about five dollars a month for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "Five bucks a month, maybe.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2858aa32-5383-4a97-8a85-0b4ef8ec9db8",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee pays for many small things and often forgets about them.",
+    "provenance": "evidence",
+    "quoted_text": "I pay for a lot of these little things and I forget about them.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "5a4e2c5f-0565-4b71-98d5-21427b5cb8e7",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee would recommend Claudictive to a couple of friends.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, to a couple of people.",
+    "bearings": []
+  },
+  {
+    "id": "c2ffa998-b8da-4e7e-aa2c-46f3a375811c",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      33
+    ],
+    "claim": "There is a guy on the interviewee's team who plays Apex every lunch break.",
+    "provenance": "evidence",
+    "quoted_text": "There's a guy on my team who plays Apex every lunch break.",
+    "bearings": []
+  },
+  {
+    "id": "fd5c4282-9845-4de9-bb9a-526bcafdd4a3",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee uses and likes the notification toast feature when a task finishes.",
+    "provenance": "evidence",
+    "quoted_text": "The toast when a task finishes? Yeah, that's nice actually. I like that one.",
+    "bearings": []
+  },
+  {
+    "id": "8997efa8-4935-40fb-88fe-94bfb9498d1e",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      37
+    ],
+    "claim": "The Claudictive window is too big and covers most of the screen.",
+    "provenance": "evidence",
+    "quoted_text": "The window is big. It covers most of the screen.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8f7af6bd-5546-45cb-85ad-a85c9441bcf3",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      37
+    ],
+    "claim": "The font in Claudictive is \"kind of... default.\"",
+    "provenance": "evidence",
+    "quoted_text": "And the font is kind of... default.",
+    "bearings": []
+  },
+  {
+    "id": "972a1ea3-a6e0-4976-b53c-27abd5ae0865",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee did not see the beta email mentioning a mobile companion idea.",
+    "provenance": "evidence",
+    "quoted_text": "No, I didn't see that email.",
+    "bearings": []
+  },
+  {
+    "id": "87dd3771-95e3-475d-b42b-356b6107ccec",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      41
+    ],
+    "claim": "The interviewee might use a mobile app that shows Claude's status, but is unsure.",
+    "provenance": "inference",
+    "quoted_text": "Maybe. I don't know.",
+    "bearings": []
+  },
+  {
+    "id": "44dabca4-08e9-4401-b23b-51a6819c5e80",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      41
+    ],
+    "claim": "The interviewee already has Slack and GitHub on their phone.",
+    "provenance": "evidence",
+    "quoted_text": "I already have Slack on my phone, and GitHub.",
+    "bearings": []
+  },
+  {
+    "id": "c7d47c25-15f9-4134-a7ce-d88df1a87145",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      43
+    ],
+    "claim": "The interviewee thinks seeing diffs is missing in Claudictive compared to the terminal.",
+    "provenance": "evidence",
+    "quoted_text": "Seeing diffs.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "a6540dbc-874a-4d5c-95cc-6a07c85755af",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      43
+    ],
+    "claim": "In the Claudictive overlay, you only see text, not what changed.",
+    "provenance": "evidence",
+    "quoted_text": "In the overlay you only see text. I want to see what changed.",
+    "bearings": []
+  },
+  {
+    "id": "eaa8dcf5-69e5-497f-8cda-8f12a1f2df7f",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      45
+    ],
+    "claim": "The interviewee would remove the onboarding tour because it has too many screens.",
+    "provenance": "evidence",
+    "quoted_text": "The onboarding tour. Too many screens.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "307cac89-1641-48f9-880a-df3dea8a3078",
+    "session_id": "20260615T000000-4",
+    "seqs": [
+      47
+    ],
+    "claim": "The interviewee thinks Claudictive is a fun idea.",
+    "provenance": "evidence",
+    "quoted_text": "it's a fun idea.",
+    "bearings": []
+  },
+  {
+    "id": "67f0dbad-08cc-4b73-a75d-c2a238531009",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee is a data scientist at a health-tech startup.",
+    "provenance": "evidence",
+    "quoted_text": "אני data scientist בסטארטאפ של health-tech.",
+    "bearings": []
+  },
+  {
+    "id": "0bd0bf28-b110-4789-af73-ce75c379ec56",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee uses a lot of Python, notebooks, and models that train for hours in their work.",
+    "provenance": "evidence",
+    "quoted_text": "הרבה Python, הרבה notebooks, מודלים שמתאמנים שעות.",
+    "bearings": []
+  },
+  {
+    "id": "aad28595-3796-44ff-8123-8d03b7365ace",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee plays Rocket League, mainly 2v2 with a friend.",
+    "provenance": "evidence",
+    "quoted_text": "ואני משחקת Rocket League, בעיקר 2v2 עם חבר.",
+    "bearings": []
+  },
+  {
+    "id": "31cd7203-0e63-4290-8a97-96c7a7ecd396",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee primarily uses Claude Code to write data pipelines and clean up notebook code for production.",
+    "provenance": "evidence",
+    "quoted_text": "בעיקר לכתוב pipelines של data, ולנקות קוד של notebooks שהופך למשהו production.",
+    "bearings": []
+  },
+  {
+    "id": "380da818-c52a-4bd4-9e88-5fae539659e6",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee found out about Claudictive from a LinkedIn post but doesn't remember who posted it.",
+    "provenance": "evidence",
+    "quoted_text": "מישהו פרסם בLinkedIn. לא זוכרת מי.",
+    "bearings": []
+  },
+  {
+    "id": "7b7c74de-c350-4780-ae0e-aa3bf33f049d",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      9
+    ],
+    "claim": "The installation of Claudictive was relatively easy.",
+    "provenance": "evidence",
+    "quoted_text": "קלה. יחסית.",
+    "bearings": []
+  },
+  {
+    "id": "8f49e2b3-c656-483f-bd30-2623c7d396e7",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      9
+    ],
+    "claim": "The interviewee already had Overwolf installed for a stats-related application.",
+    "provenance": "evidence",
+    "quoted_text": "היה לי כבר Overwolf בגלל משהו של stats.",
+    "bearings": []
+  },
+  {
+    "id": "5316f728-1dba-469b-858e-aafff0c406bb",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      11
+    ],
+    "claim": "The default hotkey for Claudictive was the same as the interviewee's push-to-talk key in Discord.",
+    "provenance": "evidence",
+    "quoted_text": "הhotkey. הdefault שלכם זה אותו key שיש לי לpush-to-talk בDiscord, אז כל פעם שדיברתי עם החבר שלי נפתח החלון.",
+    "bearings": []
+  },
+  {
+    "id": "30d29b74-c747-4850-a62b-bb5f40483364",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      13
+    ],
+    "claim": "After changing the hotkey, the interviewee uses Claudictive about twice a week.",
+    "provenance": "evidence",
+    "quoted_text": "אחרי ששיניתי את הhotkey? אולי פעמיים בשבוע.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "8ad5be52-bb73-4a90-9b67-e30624b2617d",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee uses Claudictive to check if training is finished or to ask it to write a plot of results.",
+    "provenance": "evidence",
+    "quoted_text": "בודקת אם הtraining נגמר, או מבקשת שיכתוב לי plot של התוצאות.",
+    "bearings": []
+  },
+  {
+    "id": "5fabc69a-18ce-4a84-808b-ff0d53842f47",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee glances at a notebook on a second screen between Rocket League matches, when the game is searching for a match, so it's more convenient to use Claudictive then.",
+    "provenance": "evidence",
+    "quoted_text": "בין משחק למשחק, כשהוא מחפש match, אני ממילא מציצה בnotebook במסך השני, אז זה פשוט יותר נוח לשאול אותו.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "e58b3db9-bbeb-4d77-8ca8-0419d0e095bb",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee wants Claudictive to display images, so if it generates a plot, they want to see it in the overlay, not just \"saved to file.\"",
+    "provenance": "evidence",
+    "quoted_text": "שהוא יציג תמונות. אם הוא עושה plot, אני רוצה לראות אותו בoverlay, לא רק \"saved to file\".",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "f834bb5d-0760-4258-b06e-dc420176739d",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      19
+    ],
+    "claim": "The interviewee would like voice input and pre-made commands/shortcuts as features.",
+    "provenance": "evidence",
+    "quoted_text": "voice אולי. וקיצורים, כאילו פקודות מוכנות.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "038ab3bf-8c79-470e-925d-7e7905c2cea0",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      21
+    ],
+    "claim": "Voice input might lead to more usage if it works well.",
+    "provenance": "inference",
+    "quoted_text": "אולי. כאילו, כן, אם זה יעבוד טוב.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "84d23ffd-9e10-4f8c-a813-9cfbd3959b61",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      21
+    ],
+    "claim": "Typing is problematic in Rocket League because you don't have a free hand at all.",
+    "provenance": "evidence",
+    "quoted_text": "בRocket League אין לך יד פנויה בכלל אז הקלדה זה בעייתי.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "1e5fe07b-26f3-4c11-afcc-93273d474a0c",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee likes that Claudictive remembers the session and they don't have to explain everything again.",
+    "provenance": "evidence",
+    "quoted_text": "שזה זוכר את הsession. שאני לא צריכה להסביר הכל מחדש.",
+    "bearings": []
+  },
+  {
+    "id": "c1d45a09-55c2-41a1-9926-d6dd602ba910",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee dislikes that Claudictive sometimes asks for permission questions, like \"can I run this command,\" and if they are in a game, they don't see it, and it just waits.",
+    "provenance": "evidence",
+    "quoted_text": "שלפעמים הוא שואל אותי שאלות של permission, \"can I run this command\", ואני צריכה לאשר, ואם אני במשחק אני לא רואה, והוא פשוט מחכה.",
+    "bearings": []
+  },
+  {
+    "id": "31936303-bdeb-4338-87d6-578027570760",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      27
+    ],
+    "claim": "The interviewee is not sure if they would pay for Claudictive, but perhaps if it were part of a Claude subscription.",
+    "provenance": "inference",
+    "quoted_text": "אממ, לא בטוחה. אולי אם זה היה חלק מהמנוי של Claude.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "90d7f495-95da-4bda-a5f4-1cae21b52c0e",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee considers $4 a month to be a reasonable price for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "אולי. כן, ארבעה זה סביר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "cdfdda2f-c406-4dba-8faf-5ad8c13d4139",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee rates the idea of Claudictive an eight out of ten, believing it's a great idea.",
+    "provenance": "evidence",
+    "quoted_text": "שמונה. הרעיון מעולה.",
+    "bearings": []
+  },
+  {
+    "id": "c2540551-12dc-4f8c-8cd8-2a0dc3942d6f",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee would recommend Claudictive to friends from work who play games.",
+    "provenance": "evidence",
+    "quoted_text": "כן, לחברים מהעבודה. יש כמה שמשחקים.",
+    "bearings": []
+  },
+  {
+    "id": "c12c2836-6810-46b0-8bc4-51c6c449b25c",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee would describe Claudictive to their friends as \"Claude inside the game.\"",
+    "provenance": "evidence",
+    "quoted_text": "\"Claude בתוך המשחק\". פשוט.",
+    "bearings": []
+  },
+  {
+    "id": "259a30b4-1440-400d-ba12-65c2a1c8b3f1",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee finds the design of Claudictive acceptable.",
+    "provenance": "evidence",
+    "quoted_text": "בסדר.",
+    "bearings": []
+  },
+  {
+    "id": "c79c3da7-5cd1-4420-b970-a79087a20e7d",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee would like Claudictive to be more transparent.",
+    "provenance": "evidence",
+    "quoted_text": "הייתי רוצה שיהיה יותר שקוף.",
+    "bearings": []
+  },
+  {
+    "id": "9b5fb8c6-67f6-49d8-af19-048ac7cb6b2e",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee would like a light theme for Claudictive because they sometimes play during the day.",
+    "provenance": "evidence",
+    "quoted_text": "ואולי theme בהיר כי אני משחקת ביום לפעמים.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "fdceda9f-603f-4f14-9967-987282f3b04f",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee hasn't noticed any performance issues with Claudictive, perhaps only a slight loading time when opening it for the first time.",
+    "provenance": "evidence",
+    "quoted_text": "לא שמתי לב לבעיה. אולי קצת זמן טעינה כשפותחים בפעם הראשונה.",
+    "bearings": []
+  },
+  {
+    "id": "cad00cb9-46ec-4617-ae5f-91d2997bb704",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      41
+    ],
+    "claim": "The interviewee is not interested in a mobile app for Claudictive because they have enough apps.",
+    "provenance": "evidence",
+    "quoted_text": "לא, יש לי מספיק אפליקציות חח.",
+    "bearings": []
+  },
+  {
+    "id": "c5355f6b-df80-4847-ba22-6b03738f2854",
+    "session_id": "20260615T000000-5",
+    "seqs": [
+      43
+    ],
+    "claim": "The interviewee wants the default hotkey to be changed.",
+    "provenance": "evidence",
+    "quoted_text": "אה, רק, תשנו את הdefault hotkey.",
+    "bearings": []
+  },
+  {
+    "id": "e0f52944-a4fb-4735-bfb5-d34df7709072",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      1
+    ],
+    "claim": "I have about 20 minutes until I need to pick up my daughter from kindergarten.",
+    "provenance": "evidence",
+    "quoted_text": "יש לי בערך עשרים דקות עד שאני צריך לאסוף את הקטנה מהגן.",
+    "bearings": []
+  },
+  {
+    "id": "469fc303-ec6a-4615-9598-2f039321e88f",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      3
+    ],
+    "claim": "I am a full stack freelancer.",
+    "provenance": "evidence",
+    "quoted_text": "אני freelancer, full stack.",
+    "bearings": []
+  },
+  {
+    "id": "7ea7e9a9-4752-407d-b6bb-a53e4f4e4450",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      3
+    ],
+    "claim": "I work with Next.js and Node.js, whatever the client wants.",
+    "provenance": "evidence",
+    "quoted_text": "Next, Node, מה שהלקוח רוצה.",
+    "bearings": []
+  },
+  {
+    "id": "7503da05-03a2-4fbd-ae31-f019c7dbf629",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      3
+    ],
+    "claim": "I have two children.",
+    "provenance": "evidence",
+    "quoted_text": "שני ילדים.",
+    "bearings": []
+  },
+  {
+    "id": "d85a967a-f98b-44a6-9d10-06f30bd2134b",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      3
+    ],
+    "claim": "I play Fortnite with my eleven-year-old son on the weekends.",
+    "provenance": "evidence",
+    "quoted_text": "ואני משחק Fortnite עם הבן שלי בסופ\"ש, הוא בן אחת עשרה.",
+    "bearings": []
+  },
+  {
+    "id": "83a5197a-9d59-4163-b12b-0ece93076a6f",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      5
+    ],
+    "claim": "I use Claude Code for everything.",
+    "provenance": "evidence",
+    "quoted_text": "לכל דבר.",
+    "bearings": []
+  },
+  {
+    "id": "e8381a3f-89df-4ae7-a449-95fa79d8dc5f",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      5
+    ],
+    "claim": "Since I work alone, Claude Code is like a junior developer working with me.",
+    "provenance": "evidence",
+    "quoted_text": "אני לבד, אז הוא כמו junior שעובד איתי.",
+    "bearings": []
+  },
+  {
+    "id": "6b26394a-0cd3-4657-b510-97d3c78470e5",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      7
+    ],
+    "claim": "My son saw Claudictive on YouTube and told me it was for me.",
+    "provenance": "evidence",
+    "quoted_text": "דווקא הבן שלי ראה את זה ביוטיוב. הוא אמר \"אבא, זה בשבילך\".",
+    "bearings": []
+  },
+  {
+    "id": "11c1118f-9dbe-4ad1-b409-7f4d595771e5",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      9
+    ],
+    "claim": "My son installed Claudictive for me, so I don't know the installation process.",
+    "provenance": "evidence",
+    "quoted_text": "הוא התקין לי, אז אני לא יודע חח.",
+    "bearings": []
+  },
+  {
+    "id": "4f6c6aa8-802e-4004-b5ae-764257b29188",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      9
+    ],
+    "claim": "The installation was fast.",
+    "provenance": "evidence",
+    "quoted_text": "היה מהר.",
+    "bearings": []
+  },
+  {
+    "id": "b8b46eb1-ec48-4d67-abe6-01f9d9e5af36",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      11
+    ],
+    "claim": "I use Claudictive once or twice a week on weekends when I play with my son.",
+    "provenance": "evidence",
+    "quoted_text": "בסופ\"ש, כשאני משחק עם הבן. אז פעם-פעמיים בשבוע.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "2b88c18c-dfb5-4b43-a81d-b4170b169d09",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      13
+    ],
+    "claim": "If a client is waiting for something, I let Claude Code work and then check what it did.",
+    "provenance": "evidence",
+    "quoted_text": "אם יש לקוח שמחכה למשהו, אני נותן לClaude לעבוד ובודק מה הוא עשה.",
+    "bearings": []
+  },
+  {
+    "id": "3247b0e8-ebec-4f78-b6a1-e826edbe1e09",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      15
+    ],
+    "claim": "Once, Claudictive opened and covered the map in the corner of the screen, and my son yelled at me for not seeing the storm in Fortnite.",
+    "provenance": "evidence",
+    "quoted_text": "כן, פעם אחת פתחתי אותו והוא כיסה לי את המפה בפינה, והבן שלי צעק עליי שאני לא רואה את הסטורם.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "dfabd55e-aa75-4f92-b48e-ad62126f9783",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      17
+    ],
+    "claim": "Claudictive opened in the upper right corner, exactly where the mini-map is in Fortnite.",
+    "provenance": "evidence",
+    "quoted_text": "בצד ימין למעלה, איפה שהמפה הקטנה בFortnite. בדיוק שם.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "b3a3f125-6b0b-4f4e-b136-50f432e00ecf",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      19
+    ],
+    "claim": "Claudictive stayed open for about ten seconds until I closed it, which is a long time in Fortnite.",
+    "provenance": "evidence",
+    "quoted_text": "עד שסגרתי. אולי עשר שניות. בFortnite זה הרבה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "dd7172a6-a50f-44f1-9bdc-c8e40f0ed2cd",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      21
+    ],
+    "claim": "I would like Claudictive to appear in a different place, or for me to choose where it opens.",
+    "provenance": "evidence",
+    "quoted_text": "שהוא יופיע במקום אחר, או שאני אבחר איפה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "e152862f-c941-4660-8ad7-2ac2ecfe4602",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      21
+    ],
+    "claim": "I would like Claudictive to close automatically after a few seconds.",
+    "provenance": "evidence",
+    "quoted_text": "או שהוא ייסגר לבד אחרי כמה שניות.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "a30c73ee-9229-4db4-964f-f7458d15a3e5",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      23
+    ],
+    "claim": "The issue of Claudictive covering the map happened two more times.",
+    "provenance": "evidence",
+    "quoted_text": "עוד פעמיים.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "4150fc4e-0d50-47aa-aa1a-2f4594ebef73",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      23
+    ],
+    "claim": "After the incidents of Claudictive covering the map, I stopped opening it during gameplay.",
+    "provenance": "evidence",
+    "quoted_text": "אחרי זה פשוט הפסקתי לפתוח אותו כשאנחנו בתוך המשחק.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "144455e9-279d-4584-9fae-c45296c71f88",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      25
+    ],
+    "claim": "I would like to be able to see what Claude Code has done without opening the full window, perhaps like a small notification.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, שיהיה אפשר לראות מה הוא עשה בלי לפתוח את כל החלון. כמו notification קטנה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "5a8410a1-40f8-42be-9dd4-c2cd7a3113e7",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      27
+    ],
+    "claim": "I was not aware that notifications already exist for Claudictive and that I might need to activate them in settings.",
+    "provenance": "evidence",
+    "quoted_text": "אה, לא. אני צריך להפעיל את זה?",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "f0ce3443-fa76-46fa-ab2a-44ffd09b3d09",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      29
+    ],
+    "claim": "I might want voice input for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "voice אולי.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "760cf89d-ca37-453d-95a9-920765f47842",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      29
+    ],
+    "claim": "I would like Claudictive to be available on mobile because sometimes I am not on my computer at all.",
+    "provenance": "evidence",
+    "quoted_text": "ושיהיה mobile, כי לפעמים אני בכלל לא במחשב.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "3f4dccc3-62cd-4d7f-8162-e5c75725fee6",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      31
+    ],
+    "claim": "I do not use Claudictive during the week because I don't have time to play games then.",
+    "provenance": "evidence",
+    "quoted_text": "לא, באמצע השבוע אין לי זמן לשחק בכלל. אז לא.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "bbaa3435-b0e6-49f0-b031-2931ad95692e",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      33
+    ],
+    "claim": "Themes for Claudictive do not matter to me.",
+    "provenance": "evidence",
+    "quoted_text": "לא משנה לי.",
+    "bearings": []
+  },
+  {
+    "id": "161c498d-cda9-4279-b741-48185276dcd5",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      33
+    ],
+    "claim": "My son wants a Fortnite theme for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "הבן שלי רוצה theme של Fortnite חח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "0b278362-1f03-4135-8a96-2b9cf26e6c96",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      35
+    ],
+    "claim": "I rate the idea of Claudictive a nine out of ten; it's a cute idea.",
+    "provenance": "evidence",
+    "quoted_text": "תשע. זה רעיון חמוד, באמת.",
+    "bearings": []
+  },
+  {
+    "id": "80fab304-e991-4ff1-9f10-400f5613f68a",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      35
+    ],
+    "claim": "My son thinks I am cool because of Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "הבן שלי חושב שאני cool בגללו חח.",
+    "bearings": []
+  },
+  {
+    "id": "e1df1e52-302c-4b9e-b5fe-33e76722ff76",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      37
+    ],
+    "claim": "I would pay for Claudictive if it saves me time.",
+    "provenance": "evidence",
+    "quoted_text": "אם זה חוסך לי זמן, כן.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "0746c4a2-cca8-4bb3-8541-70e76b6e4cee",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      37
+    ],
+    "claim": "I am not sure if Claudictive saves me time yet.",
+    "provenance": "evidence",
+    "quoted_text": "אבל אני לא בטוח שזה חוסך לי זמן עדיין.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "82009aec-0b78-44fb-a30c-cb0d4e3b0e5f",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      39
+    ],
+    "claim": "Claudictive would save me time if it did more on its own without asking me all the time.",
+    "provenance": "evidence",
+    "quoted_text": "אם הוא היה עושה יותר לבד, בלי לשאול אותי כל הזמן.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "142de923-ab95-4b9e-a06c-1c2e7d288bf1",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      41
+    ],
+    "claim": "I would recommend Claudictive to my freelancer friends.",
+    "provenance": "evidence",
+    "quoted_text": "כן, לחברים freelancers. בטח.",
+    "bearings": []
+  },
+  {
+    "id": "bcdc1946-2cdb-4ff2-845e-fcf3e85c823b",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      43
+    ],
+    "claim": "I don't think I would use Claudictive in the middle of a battle, because my son would kill me.",
+    "provenance": "evidence",
+    "quoted_text": "חח, לא נראה לי. הבן שלי היה הורג אותי.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "cb67a1d6-3077-4dc6-8b0a-0ac4216cc86c",
+    "session_id": "20260615T000000-6",
+    "seqs": [
+      45
+    ],
+    "claim": "I would like the Claudictive window to be moved away from the map.",
+    "provenance": "evidence",
+    "quoted_text": "רק תזיזו את החלון מהמפה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "7b46fc3c-c4f0-4188-9ab5-4626c5597807",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      1
+    ],
+    "claim": "The interviewee enjoys the project.",
+    "provenance": "evidence",
+    "quoted_text": "אני אוהבת את הפרויקט.",
+    "bearings": []
+  },
+  {
+    "id": "dd302d44-925d-455c-8fde-a66e4bac1d83",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee is a mobile developer at an agency, working with Kotlin and Swift depending on the client.",
+    "provenance": "evidence",
+    "quoted_text": "אני mobile developer בagency, Kotlin וSwift, תלוי בלקוח.",
+    "bearings": []
+  },
+  {
+    "id": "5372f974-8597-4c7e-9957-5e001109eaed",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee has been playing Dota for about ten years.",
+    "provenance": "evidence",
+    "quoted_text": "ואני משחקת Dota כבר... עשר שנים? משהו כזה.",
+    "bearings": []
+  },
+  {
+    "id": "5cc12eae-aeff-4a6f-b031-d43e290d2959",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee primarily uses Claude Code for boilerplate and debugging crashes.",
+    "provenance": "evidence",
+    "quoted_text": "בעיקר לboilerplate, וגם לdebug של crashes.",
+    "bearings": []
+  },
+  {
+    "id": "b381fb58-deed-4507-803d-f752f123fe4e",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      5
+    ],
+    "claim": "Claude Code is good at reading stack traces.",
+    "provenance": "evidence",
+    "quoted_text": "הוא טוב בלקרוא stack traces.",
+    "bearings": []
+  },
+  {
+    "id": "845721b7-a311-446e-b461-a40e4e35e3f6",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee signed up for the beta from the landing page.",
+    "provenance": "evidence",
+    "quoted_text": "נרשמתי מהדף נחיתה.",
+    "bearings": []
+  },
+  {
+    "id": "bb8dcecf-ad0a-477e-aa76-8502d3501759",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee thinks they saw the beta on Hacker News.",
+    "provenance": "inference",
+    "quoted_text": "ראיתי את זה בHacker News, אני חושבת.",
+    "bearings": []
+  },
+  {
+    "id": "bca51604-86ba-4a87-87f7-dff5064ed48b",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      9
+    ],
+    "claim": "The onboarding process was okay, but with a bit too many screens.",
+    "provenance": "evidence",
+    "quoted_text": "היה בסדר. קצת הרבה מסכים. אבל עבר.",
+    "bearings": []
+  },
+  {
+    "id": "13b2e8ec-bf5f-4ae4-b203-3535c16fd1bb",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      11
+    ],
+    "claim": "The screen explaining what Claude Code is was unnecessary for the interviewee.",
+    "provenance": "evidence",
+    "quoted_text": "המסך שמסביר מה זה Claude Code. אני יודעת מה זה, לא צריכה הסבר.",
+    "bearings": []
+  },
+  {
+    "id": "2d451bee-a839-4598-a151-374c7f17c861",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee suggests an option to skip the Claude Code explanation screen.",
+    "provenance": "inference",
+    "quoted_text": "אולי skip.",
+    "bearings": []
+  },
+  {
+    "id": "417422b9-bb12-4b96-868a-e34ca554fed0",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      13
+    ],
+    "claim": "The interviewee uses Claude Code a few times a week, for short durations of one to two minutes.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, כמה פעמים בשבוע. אבל קצר. דקה-שתיים.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "d406bc55-3a77-4449-b393-9ec2fd0faf9f",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      15
+    ],
+    "claim": "During their short usage, the interviewee asks Claude Code to build the application and fix what broke, then checks it later.",
+    "provenance": "evidence",
+    "quoted_text": "אני מבקשת ממנו להריץ build של האפליקציה ולתקן את מה שנשבר. ואז אני חוזרת אחרי זה לבדוק.",
+    "bearings": []
+  },
+  {
+    "id": "aa539f69-7aea-4639-b585-2a0b79fca63a",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      17
+    ],
+    "claim": "Claude Code's speed is okay, sometimes slow, but the interviewee attributes the slowness to Claude, not the developers.",
+    "provenance": "evidence",
+    "quoted_text": "הוא בסדר. לפעמים איטי, אבל זה Claude, לא אתם.",
+    "bearings": []
+  },
+  {
+    "id": "8fe8d2f8-abaf-4dd5-9731-17524d502225",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee primarily writes to Claude Code during the queue and picking phase in Dota, as there is dead time then.",
+    "provenance": "evidence",
+    "quoted_text": "האמת שאני כותבת לו בעיקר בqueue ובpicking phase, יש שם זמן מת ואני לא צריכה לעשות כלום.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ee01db6d-d04c-4ed3-b590-5a89f9e7be43",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      19
+    ],
+    "claim": "The interviewee would like the ability to send screenshots to Claude Code, for example from an emulator.",
+    "provenance": "evidence",
+    "quoted_text": "אממ... שיהיה אפשר לשלוח לו screenshot? נגיד מהאמולטור.",
+    "bearings": []
+  },
+  {
+    "id": "20cadfd1-602e-45e9-9b0e-215b6a418e7b",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      21
+    ],
+    "claim": "The interviewee wants themes for Claude Code, specifically mentioning something like Dracula.",
+    "provenance": "evidence",
+    "quoted_text": "themes. אני יודעת שזה שטותי אבל אני אוהבת themes. משהו כמו Dracula.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "14ad4a90-b59c-4027-ba29-0ed4b5957bd2",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee does not talk much while playing games.",
+    "provenance": "evidence",
+    "quoted_text": "אממ, אני לא מדברת הרבה כשאני משחקת.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "3d595574-ee54-4803-a274-5dad9c95266e",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee might consider voice input, saying \"yes, why not.\"",
+    "provenance": "inference",
+    "quoted_text": "אבל אולי. כן, למה לא.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "27829065-7afb-47ea-9af1-2ac765725cd8",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      25
+    ],
+    "claim": "During a teamfight in Dota, the interviewee barely breathes.",
+    "provenance": "evidence",
+    "quoted_text": "חח, בDota באמצע teamfight אני בקושי נושמת.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "dac9f334-9426-495a-90ea-53a5fbeddd60",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      25
+    ],
+    "claim": "The idea of giving a command during a teamfight sounds cool as a concept.",
+    "provenance": "inference",
+    "quoted_text": "אבל זה נשמע cool בתור רעיון.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "1d56c543-3a1b-4056-bef7-d89dcc0e2bc4",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      27
+    ],
+    "claim": "The interviewee rates their liking for the idea of Claude Code as a nine out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "תשע! באמת.",
+    "bearings": []
+  },
+  {
+    "id": "b814437d-e140-4cbb-9779-a70c914c5856",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      27
+    ],
+    "claim": "The interviewee feels Claude Code is exactly for them.",
+    "provenance": "evidence",
+    "quoted_text": "זה בדיוק בשבילי.",
+    "bearings": []
+  },
+  {
+    "id": "2cf3a910-ef50-42bd-896c-46b77d12747d",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee's low weekly usage might be because they don't always remember Claude Code is there.",
+    "provenance": "inference",
+    "quoted_text": "לא יודעת... אולי כי אני לא תמיד זוכרת שהוא שם. כאילו, הוא לא בראש שלי.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "a0a01421-bee6-446e-b149-111345f9feae",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      31
+    ],
+    "claim": "A reminder feature, something that pops up, might help the interviewee remember Claude Code.",
+    "provenance": "inference",
+    "quoted_text": "כן, אולי. משהו שקופץ.",
+    "bearings": []
+  },
+  {
+    "id": "0b191460-c129-439f-98f5-792fb84cb1db",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee would pay for Claude Code.",
+    "provenance": "evidence",
+    "quoted_text": "כן. אני משלמת על הרבה tools.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "03fceb9d-c077-4eb2-a9d8-14e3bdb272e5",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee finds five to seven dollars an acceptable price for Claude Code.",
+    "provenance": "evidence",
+    "quoted_text": "חמישה, שבעה דולר, בסדר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "6a251439-d2a9-44b1-a6b7-faa9953ff1ef",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      35
+    ],
+    "claim": "Ten dollars for Claude Code would require it to be \"really good,\" so not at the current stage.",
+    "provenance": "evidence",
+    "quoted_text": "עשר זה כבר צריך להיות ממש טוב. אז לא עכשיו.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "43443f6d-3656-4f7d-b771-9d11a02f7f77",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee would recommend Claude Code to friends, specifically to a WhatsApp group of developer friends who play Dota.",
+    "provenance": "evidence",
+    "quoted_text": "כן, יש לי קבוצת WhatsApp של מפתחים שמשחקים Dota. הייתי שולחת להם.",
+    "bearings": []
+  },
+  {
+    "id": "0cdd99fa-9150-45aa-9a8d-cad1040ae552",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee would write something like \"Check this out, Claude Code in-game\" to their friends.",
+    "provenance": "evidence",
+    "quoted_text": "\"תראו את זה, Claude Code בתוך המשחק\". משהו כזה.",
+    "bearings": []
+  },
+  {
+    "id": "611efbaf-d19f-4c8e-83f2-02ac18421777",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      41
+    ],
+    "claim": "The most annoying thing for the interviewee is that the window doesn't save its size and they have to resize it every time.",
+    "provenance": "evidence",
+    "quoted_text": "שהחלון לא שומר את הגודל. כל פעם אני צריכה לשנות אותו מחדש.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8842e13c-4c32-4c63-8531-397f3ae9a642",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      43
+    ],
+    "claim": "The notifications are okay, but sometimes a bit late.",
+    "provenance": "evidence",
+    "quoted_text": "הם בסדר. לפעמים מאוחרים קצת.",
+    "bearings": []
+  },
+  {
+    "id": "6da74394-5c5a-47b8-8941-acbce6367f74",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      45
+    ],
+    "claim": "As a mobile developer, the interviewee would always say yes to mobile companion apps, but isn't sure they would actually use one.",
+    "provenance": "inference",
+    "quoted_text": "אולי. אני mobile dev אז אני תמיד אומרת כן לאפליקציות חח. אבל לא בטוחה שהייתי משתמשת.",
+    "bearings": []
+  },
+  {
+    "id": "22fe5794-6b73-4b06-8cf6-9abd67c6df7e",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      47
+    ],
+    "claim": "The most important thing to improve is making it easier to remember Claude Code exists and making it faster.",
+    "provenance": "evidence",
+    "quoted_text": "שיהיה יותר קל לזכור שהוא קיים. ושיהיה מהיר.",
+    "bearings": []
+  },
+  {
+    "id": "f01e19ae-4a64-4540-83fb-9a609d3d70e7",
+    "session_id": "20260615T000000-7",
+    "seqs": [
+      49
+    ],
+    "claim": "The interviewee wants the development of Claude Code to continue because they like it.",
+    "provenance": "evidence",
+    "quoted_text": "לא, רק תמשיך. אני אוהבת את זה.",
+    "bearings": []
+  },
+  {
+    "id": "07b10310-b347-4f9d-b141-279969a63720",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee works in DevOps, focusing on Terraform, AWS, and pipelines.",
+    "provenance": "evidence",
+    "quoted_text": "אני devops, הרבה Terraform, AWS, pipelines.",
+    "bearings": []
+  },
+  {
+    "id": "fe9ac75e-4811-4851-9877-ae7264155f8d",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      3
+    ],
+    "claim": "The interviewee is a casual gamer, playing Minecraft survival with friends and Stardew Valley alone.",
+    "provenance": "evidence",
+    "quoted_text": "ואני גיימר casual. Minecraft survival עם חברים, Stardew לבד. דברים רגועים.",
+    "bearings": []
+  },
+  {
+    "id": "020b362f-e79c-45d0-846b-6b0134e57377",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee primarily uses Claude Code to write Terraform modules and debug broken pipelines.",
+    "provenance": "evidence",
+    "quoted_text": "בעיקר לכתוב Terraform modules ולדבג pipelines שנשברו.",
+    "bearings": []
+  },
+  {
+    "id": "271144c9-0410-44d5-89a1-fa644fbae5e4",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee sometimes uses Claude Code for bash scripts.",
+    "provenance": "evidence",
+    "quoted_text": "ולפעמים scripts של bash.",
+    "bearings": []
+  },
+  {
+    "id": "0a8181e3-77f6-4b17-a234-e34ac012f92e",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee found out about Claudictive from a friend on their Minecraft server who is in the beta.",
+    "provenance": "evidence",
+    "quoted_text": "חבר מהשרת של Minecraft. הוא בbeta.",
+    "bearings": []
+  },
+  {
+    "id": "48a499ab-4545-4590-9150-b06318c858bf",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      9
+    ],
+    "claim": "The installation of Claudictive was smooth and without complaints.",
+    "provenance": "evidence",
+    "quoted_text": "חלקה. אין לי תלונות.",
+    "bearings": []
+  },
+  {
+    "id": "8319af5e-cf53-4414-934e-f69c2d1ba586",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee uses Claudictive quite often because Minecraft is a game that can be paused.",
+    "provenance": "evidence",
+    "quoted_text": "דווקא די הרבה. כי Minecraft זה משחק שאתה יכול לעזוב.",
+    "bearings": []
+  },
+  {
+    "id": "838e0847-153e-45c8-8872-28a91636c36e",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee uses Claudictive in Minecraft by standing in the middle of a field and asking it questions.",
+    "provenance": "evidence",
+    "quoted_text": "אני עומד באמצע השדה ושואל אותו.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2b4c2315-7ae6-4753-b913-d7775183769f",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      13
+    ],
+    "claim": "The interviewee asks Claudictive if a Terraform apply was successful, and if not, what the error is.",
+    "provenance": "evidence",
+    "quoted_text": "אם הapply של Terraform עבר, ואם לא, מה השגיאה. דברים כאלה.",
+    "bearings": []
+  },
+  {
+    "id": "54b69f58-1c2e-4075-b71f-1741c48d29da",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      15
+    ],
+    "claim": "Claudictive's window covers the hotbar in Minecraft, specifically the inventory bar.",
+    "provenance": "evidence",
+    "quoted_text": "הוא מכסה את הhotbar. החלון נפתח למטה באמצע, בדיוק על הinventory bar.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "90d59ab8-e415-406c-83d3-1dfe9553b546",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      17
+    ],
+    "claim": "The Claudictive window always opens in the same place, covering the hotbar, which makes it difficult to see what's in hand.",
+    "provenance": "evidence",
+    "quoted_text": "כל פעם שאני פותח אותו. הוא תמיד נפתח שם. ואז אני לא רואה מה ביד שלי, ופעם אכלתי TNT חח. כאילו, הנחתי TNT במקום לפיד.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "d4e0a0b3-9de0-4e26-b2c6-f2d8294cf4de",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      19
+    ],
+    "claim": "The issue of Claudictive covering important UI elements is less problematic in Stardew Valley because the toolbar is at the top.",
+    "provenance": "evidence",
+    "quoted_text": "בStardew פחות, כי שם הtoolbar למעלה אצלי.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8c423dd3-f578-4b47-b676-2f0e20c20a5b",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      19
+    ],
+    "claim": "In Stardew Valley, Claudictive covers the in-game clock.",
+    "provenance": "evidence",
+    "quoted_text": "אבל שם הוא מכסה את השעון.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "60a29988-c456-4597-9a05-2d12e8633c98",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      21
+    ],
+    "claim": "The clock is very important in Stardew Valley as the whole day revolves around the time.",
+    "provenance": "evidence",
+    "quoted_text": "בStardew? מאוד. כל היום מסתובב סביב השעה.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "fc9a1889-de52-4528-83a9-d1fa3b384142",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee would like Claudictive to remember the window's position for each game separately.",
+    "provenance": "evidence",
+    "quoted_text": "שהוא יזכור איפה שמתי אותו, לכל משחק בנפרד. זה היה מושלם.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "9265379a-b53b-4059-b186-7d2cb99a524e",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee wants to be able to scroll through long logs without them being cut off.",
+    "provenance": "evidence",
+    "quoted_text": "שיהיה אפשר לראות logs ארוכים בלי שזה ייחתך. כאילו scroll.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8add1540-5f5b-4d24-ac51-89a27fe00ac2",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      27
+    ],
+    "claim": "The interviewee does not like talking to computers and prefers typing.",
+    "provenance": "evidence",
+    "quoted_text": "לא, אני לא אוהב לדבר עם מחשבים חח. אני מעדיף להקליד.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "1b26efbf-4dd6-4c6b-b27b-69599adcbc6b",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee believes it's possible others might like voice input, but they are unsure.",
+    "provenance": "evidence",
+    "quoted_text": "יכול להיות. לא יודע.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "5801e3f5-49be-43e0-8c39-cf87c8580c05",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee would love a Minecraft-themed pixel font theme for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "אם יהיה theme של Minecraft, pixel font, הייתי מת על זה חח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "292a1b33-e95a-4e15-9bf4-5f0b1c3094f6",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee rates the idea of Claudictive an eight out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "שמונה.",
+    "bearings": []
+  },
+  {
+    "id": "4c57c0ac-02f6-4b3f-b959-afaa3c95e745",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      33
+    ],
+    "claim": "Claudictive is particularly good for games like Minecraft.",
+    "provenance": "evidence",
+    "quoted_text": "הוא טוב במיוחד למשחקים כמו שלי.",
+    "bearings": []
+  },
+  {
+    "id": "145c2662-b7c0-4fb6-a314-41ea523af98a",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee would pay for Claudictive if it worked with other agents, not just Claude.",
+    "provenance": "evidence",
+    "quoted_text": "כן, אם זה היה עובד גם עם עוד agents. לא רק Claude.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "87a83be2-3f74-4ab3-9173-f6db97242c22",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee would pay three to five dollars, but no more, for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "שלושה דולר? חמישה? לא יותר.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "89db1ca9-b685-4921-a2fa-7100a7880f5c",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee would recommend Claudictive to everyone on their Minecraft server, as half of them are programmers.",
+    "provenance": "evidence",
+    "quoted_text": "כן, לכל השרת חח. חצי מהם מתכנתים.",
+    "bearings": []
+  },
+  {
+    "id": "3106041b-7b23-465c-a9aa-8142c527a613",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      41
+    ],
+    "claim": "The interviewee describes Claudictive as a terminal that pops up inside the game.",
+    "provenance": "evidence",
+    "quoted_text": "כמו terminal שקופץ בתוך המשחק.",
+    "bearings": []
+  },
+  {
+    "id": "513ee501-7547-48e6-b59a-70a48e873115",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      43
+    ],
+    "claim": "Besides the hotbar issue, the worst thing about Claudictive is that there is no history, and the conversation sometimes disappears when closing and reopening.",
+    "provenance": "evidence",
+    "quoted_text": "חוץ מהhotbar? שאין היסטוריה. כשסוגרים ופותחים, השיחה נעלמת לפעמים.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "199c88da-8e3f-455a-a40c-66b929b6b453",
+    "session_id": "20260615T000000-8",
+    "seqs": [
+      45
+    ],
+    "claim": "The interviewee reiterates their desire for a pixel theme.",
+    "provenance": "evidence",
+    "quoted_text": "תעשו pixel theme, זה הכל חח.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "ff991f4f-20d0-4523-9d24-54477ea09d37",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      1
+    ],
+    "claim": "English is fine for the interview because my whole day is in English anyway.",
+    "provenance": "evidence",
+    "quoted_text": "English is fine, my whole day is in English anyway.",
+    "bearings": []
+  },
+  {
+    "id": "9fc957eb-37fe-4af2-93c3-d479652d469a",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      1
+    ],
+    "claim": "My team is in San Francisco.",
+    "provenance": "evidence",
+    "quoted_text": "My team is in San Francisco.",
+    "bearings": []
+  },
+  {
+    "id": "2ed30232-2a06-4130-b46d-3d1719ef2bf5",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      3
+    ],
+    "claim": "I am a frontend developer, working with React and TypeScript.",
+    "provenance": "evidence",
+    "quoted_text": "Frontend dev, React and TypeScript",
+    "bearings": []
+  },
+  {
+    "id": "6b858e79-748d-4f6f-a3c2-a2995911438a",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      3
+    ],
+    "claim": "I work remotely for a US startup, which means I work weird hours.",
+    "provenance": "evidence",
+    "quoted_text": "remote for a US startup. So I work weird hours.",
+    "bearings": []
+  },
+  {
+    "id": "b59a571e-9216-4c43-901d-6ecdc454ba27",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      3
+    ],
+    "claim": "I play CS2, premier, with a rating like twelve-thirteen thousand.",
+    "provenance": "evidence",
+    "quoted_text": "And I play CS2, premier, like twelve-thirteen thousand rating.",
+    "bearings": []
+  },
+  {
+    "id": "7206d757-d4e0-46cd-958a-bc7acd719edf",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      5
+    ],
+    "claim": "I use Claude Code a lot for components, tests, and refactors.",
+    "provenance": "evidence",
+    "quoted_text": "A lot. Components, tests, refactors.",
+    "bearings": []
+  },
+  {
+    "id": "68ccd81c-6b42-4275-97b1-be0e72b83aa6",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      5
+    ],
+    "claim": "I let Claude Code run on a branch while I do other stuff.",
+    "provenance": "evidence",
+    "quoted_text": "I let it run on a branch while I do other stuff.",
+    "bearings": []
+  },
+  {
+    "id": "62115182-77e1-4eee-bcf7-f51b9a597d75",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      7
+    ],
+    "claim": "Someone posted Claudictive in a Discord server for devs who game.",
+    "provenance": "evidence",
+    "quoted_text": "Someone posted it in a Discord server for devs who game.",
+    "bearings": []
+  },
+  {
+    "id": "db777d62-7e76-456f-8200-2ab58827cab7",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      7
+    ],
+    "claim": "I signed up for Claudictive the same day I found out about it.",
+    "provenance": "evidence",
+    "quoted_text": "I signed up the same day.",
+    "bearings": []
+  },
+  {
+    "id": "9b7ca5e6-27b6-4205-bbe5-1deca502830e",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      9
+    ],
+    "claim": "The onboarding for Claudictive was pretty smooth.",
+    "provenance": "evidence",
+    "quoted_text": "Pretty smooth.",
+    "bearings": []
+  },
+  {
+    "id": "ca61daa5-d8ec-4f37-acc9-736a9d130971",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      9
+    ],
+    "claim": "Claudictive did not detect CS2 at first; I had to restart Overwolf.",
+    "provenance": "evidence",
+    "quoted_text": "One thing, it didn't detect CS2 at first, I had to restart Overwolf.",
+    "bearings": []
+  },
+  {
+    "id": "adb51821-1d86-42f7-b99e-3d6a1f3d6eb5",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      11
+    ],
+    "claim": "The API key step for Claudictive was clear.",
+    "provenance": "evidence",
+    "quoted_text": "The API key step was clear.",
+    "bearings": []
+  },
+  {
+    "id": "8e1995ab-2e22-4fd7-ab70-9413f9b482e8",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      13
+    ],
+    "claim": "I use Claudictive a couple of times a week.",
+    "provenance": "evidence",
+    "quoted_text": "Couple times a week.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "00c44a31-23ab-4aea-8bd4-c6d49d14e936",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      13
+    ],
+    "claim": "I use Claudictive less often than I initially thought I would.",
+    "provenance": "evidence",
+    "quoted_text": "Less than I thought I would, honestly.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "4e87ced7-3c99-4e2a-84e4-72408a39b8ee",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      15
+    ],
+    "claim": "I use Claudictive to check on what Claude was doing, like if a refactor finished or if tests passed.",
+    "provenance": "evidence",
+    "quoted_text": "I check on whatever I left Claude doing. Like, did the refactor finish, did the tests pass.",
+    "bearings": []
+  },
+  {
+    "id": "0cf366e3-362f-4a69-9419-f49015df9f0c",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      15
+    ],
+    "claim": "I check Slack between rounds and during match warmup, and I open Claude instead at those times.",
+    "provenance": "evidence",
+    "quoted_text": "Honestly between rounds I check Slack anyway, and the warmup before a match too, so I just open Claude there instead.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "d288883d-0910-422a-844a-a80632f239a7",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      17
+    ],
+    "claim": "I would like a compact mode for Claudictive, like a tiny bar with a status (green or red).",
+    "provenance": "evidence",
+    "quoted_text": "A compact mode. Like a tiny bar with a status, green or red.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "06b8e270-d6ff-44f9-9eaa-a0a52f0cf5af",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      19
+    ],
+    "claim": "Voice input would be cool for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "Voice would be cool.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "810a894e-0f00-49a7-b6ca-384ea66a86c8",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      19
+    ],
+    "claim": "Keybind macros, like one key sending 'run the tests', would be a good feature.",
+    "provenance": "evidence",
+    "quoted_text": "And maybe keybind macros, like one key sends \"run the tests\".",
+    "bearings": []
+  },
+  {
+    "id": "2ea2d455-567e-4539-bff5-5040f3794df4",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      21
+    ],
+    "claim": "Using voice input during a fight in CS is not possible because you need to hear footsteps.",
+    "provenance": "evidence",
+    "quoted_text": "Uh, during a fight in CS? No way. You need to hear footsteps.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      },
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ba13cd62-7603-4543-89ae-034060ac8f0a",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      21
+    ],
+    "claim": "Voice input in general (outside of active combat) would be useful.",
+    "provenance": "evidence",
+    "quoted_text": "But voice in general, sure.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "118e3fdb-9aad-4e4e-b07b-27595b28c888",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      23
+    ],
+    "claim": "I like the idea of Claudictive, rating it an eight out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "Eight. It's a cool idea.",
+    "bearings": []
+  },
+  {
+    "id": "ded61a1b-b69e-4ebe-8837-167d58ddd71d",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      25
+    ],
+    "claim": "What would make Claudictive a ten would be if it was faster to open and close.",
+    "provenance": "evidence",
+    "quoted_text": "If it was faster to open and close.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "216248fd-1e08-4480-82ab-cd04aa758b96",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      25
+    ],
+    "claim": "Claudictive sometimes steals focus from the game, and my mouse gets stuck in the overlay when I close it.",
+    "provenance": "evidence",
+    "quoted_text": "And if it didn't steal focus from the game. Sometimes I close it and my mouse is still stuck in the overlay.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "84704953-ce90-4aed-afac-af134d5cebe1",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      27
+    ],
+    "claim": "I would probably pay for Claudictive, around five bucks.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, probably. Like five bucks.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "e88dfb8b-7520-4512-9691-1e7e6d011d6b",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      27
+    ],
+    "claim": "I pay for 'way dumber stuff' than Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "I pay for way dumber stuff.",
+    "bearings": []
+  },
+  {
+    "id": "3b9f0796-7473-4374-9fc6-c423009a7b40",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      29
+    ],
+    "claim": "I would recommend Claudictive to people in the Discord server for devs who game.",
+    "provenance": "evidence",
+    "quoted_text": "Sure, to the Discord people.",
+    "bearings": []
+  },
+  {
+    "id": "c031970d-8740-497a-a3b9-e6d616c3338b",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      29
+    ],
+    "claim": "The Discord people are the target audience for Claudictive.",
+    "provenance": "inference",
+    "quoted_text": "They're the target audience, right?",
+    "bearings": []
+  },
+  {
+    "id": "5f10297a-76a0-4cca-9b55-d2a4c24113b4",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      31
+    ],
+    "claim": "I would describe Claudictive as 'Claude Code overlay for gamers'.",
+    "provenance": "evidence",
+    "quoted_text": "\"Claude Code overlay for gamers\".",
+    "bearings": []
+  },
+  {
+    "id": "a4e50465-e4a9-4286-81d3-d878795f817c",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      31
+    ],
+    "claim": "The description 'Claude Code overlay for gamers' is pretty self-explanatory.",
+    "provenance": "evidence",
+    "quoted_text": "Pretty self-explanatory.",
+    "bearings": []
+  },
+  {
+    "id": "ab08b957-970d-48d0-80fd-d809c22d1948",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      33
+    ],
+    "claim": "The thing I like most about Claudictive is that it's always there, has one hotkey, and provides notifications when it's done.",
+    "provenance": "evidence",
+    "quoted_text": "That it's always there. One hotkey. And the notification when it's done.",
+    "bearings": []
+  },
+  {
+    "id": "f1d983fc-d3a3-44f2-94d7-c00802e223e1",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      35
+    ],
+    "claim": "The thing I like least about Claudictive is its look; it resembles a default Electron app and doesn't feel like a gaming product.",
+    "provenance": "evidence",
+    "quoted_text": "The look. It looks like a default Electron app. It doesn't feel like a gaming thing.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "f3976c6c-85e0-4ea1-8042-6e134f3af437",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      37
+    ],
+    "claim": "I would like themes or a gamer design for Claudictive, something that looks like it belongs in the game.",
+    "provenance": "evidence",
+    "quoted_text": "something that looks like it belongs in the game.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "ad5d33a2-d532-49d3-bef4-6345a1b06ca2",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      39
+    ],
+    "claim": "I would rather not have a mobile companion app for Claudictive because I keep my phone away when I play premier to avoid distraction.",
+    "provenance": "evidence",
+    "quoted_text": "No, I'd rather keep my phone away when I play premier. It's distracting.",
+    "bearings": []
+  },
+  {
+    "id": "27841d74-cd16-45c1-8127-516b5f87f07c",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      41
+    ],
+    "claim": "I turned off the sound on notifications for Claudictive.",
+    "provenance": "evidence",
+    "quoted_text": "The sound on notifications. I turned it off.",
+    "bearings": []
+  },
+  {
+    "id": "3c3ccba2-9467-4ddc-a065-ad5bf9c502d5",
+    "session_id": "20260615T000000-9",
+    "seqs": [
+      43
+    ],
+    "claim": "Claudictive is a fun project.",
+    "provenance": "inference",
+    "quoted_text": "it's a fun project.",
+    "bearings": []
+  }
+]

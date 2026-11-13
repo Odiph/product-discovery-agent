@@ -1,0 +1,1318 @@
+{
+  "version": 1,
+  "model": "anthropic/claude-sonnet-5.5",
+  "key": "0e21c9d39e6ac96a5a4155a70d8782da1eb01f24732139607cbffcd9ace309b4",
+  "items": [
+    {
+      "question": "הבנתי. מעולה. בוא נעבור הלאה. אם היית צריך לתת ציון מאחד עד עשר לכמה אתה אוהב את הרעיון?",
+      "earlier": [
+        "רשמתי. חלון קטן, theme. מעולה.",
+        "diff, אוקיי. מעולה. עכשיו, שאלה על הטכנולוגיה, השתמשת פעם בoverlay אחר? כמו של Discord?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "מגניב. טוב, מעולה. בוא נעבור לשאלה האחרונה. יש עוד משהו שאתה רוצה להגיד לי?",
+      "earlier": [
+        "מעולה. משהו על הhotkey? הוא נוח?",
+        "מעולה. והnotifications? כשClaude מסיים משימה?"
+      ],
+      "topic": "likes the idea",
+      "asked": false
+    },
+    {
+      "question": "מעולה. בואי נעבור לשאלה הבאה. מאחד עד עשר, כמה את אוהבת את הרעיון?",
+      "earlier": [
+        "מעולה. רשמתי. עוד features?",
+        "חח, theme של Overwatch, אוקיי. מעולה. ומה עם mobile app? היית משתמשת באפליקציה בטלפון שמתחברת לזה?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "ולמה זה ירד?",
+      "earlier": [
+        "חח. איך היה ההתקנה?",
+        "מעולה, מעולה. בוא נעבור לשאלה הבאה. כמה אתה משתמש בזה?"
+      ],
+      "topic": "likes the idea",
+      "asked": false
+    },
+    {
+      "question": "מעולה. בוא נעבור לשאלה הבאה. מאחד עד עשר, כמה אתה אוהב את הרעיון?",
+      "earlier": [
+        "מעולה, רשמתי. עוד features?",
+        "חח כן. אתה לא חושב שעם voice היית יכול להשתמש בזה תוך כדי קרב?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "מעולה, מעולה. בואי נעבור הלאה. מאחד עד עשר, כמה את אוהבת את הרעיון?",
+      "earlier": [
+        "הבנתי. ומה דעתך על הnotifications?",
+        "בsettings, אני אשלח לך."
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "רשמתי, friendly. מעולה. שאלה אחרונה, משהו להוסיף?",
+      "earlier": [
+        "מעולה. ואיך היית מתארת את זה?",
+        "חח מאוד. מעולה. ומה הכי פחות אהבת?"
+      ],
+      "topic": "likes the idea",
+      "asked": false
+    },
+    {
+      "question": "מעולה. משהו אחרון?",
+      "earlier": [
+        "הבנתי. מעולה. משהו לגבי performance? FPS?",
+        "הבנתי, רשמתי FPS. מעולה. אוקיי, שאלה אחרונה כמעט. היית משתמש בזה גם בטורניר?"
+      ],
+      "topic": "likes the idea",
+      "asked": false
+    },
+    {
+      "question": "מעולה. אנחנו חושבים על זה. בואי נעבור לשאלה הבאה. מאחד עד עשר כמה את אוהבת את הרעיון?",
+      "earlier": [
+        "summary קצר, מעולה. ומה עם themes?",
+        "ומה דעתך על mobile companion app? כאילו לראות את Claude בטלפון בזמן שאת משחקת?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "Great. Let's move on. On a scale of one to ten, how much do you like the idea?",
+      "earlier": [
+        "Yeah, we hear that a lot. Don't you think it would be amazing to just talk to Claude in the middle of a match?",
+        "A status line, great, noted. What about themes?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "Got it. Great. And final question, anything else you want to tell me?",
+      "earlier": [
+        "Great. Let's move to the last few questions. Is there any feature you think is missing compared to the terminal?",
+        "Diffs, great. Anything you'd remove?"
+      ],
+      "topic": "likes the idea",
+      "asked": false
+    },
+    {
+      "question": "מעולה. מאחד עד עשר, כמה את אוהבת את הרעיון?",
+      "earlier": [
+        "הבנתי. מעולה. עכשיו, לגבי תשלום. היית משלמת על Claudictive?",
+        "ונגיד אם זה היה ארבעה דולר בחודש?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "מעולה. מאחד עד עשר, כמה אתה אוהב את הרעיון?",
+      "earlier": [
+        "רשמתי. ואתה משתמש בזה גם באמצע השבוע, כשאתה לא משחק עם הבן?",
+        "הבנתי. ומה דעתך על themes?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "היי תמר, תודה שהסכמת להתראיין.",
+      "earlier": [],
+      "topic": "likes the idea",
+      "asked": false
+    },
+    {
+      "question": "מעולה, מעולה. בואי נעבור לשאלה הבאה. מאחד עד עשר, כמה את אוהבת את הרעיון?",
+      "earlier": [
+        "חח לא שטותי בכלל. מעולה. ומה לגבי voice input?",
+        "מעולה. את לא חושבת שזה יהיה מדהים לתת לו פקודה באמצע teamfight?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "חח מעולה. בוא נעבור לשאלה הבאה. מאחד עד עשר, כמה אתה אוהב את הרעיון?",
+      "earlier": [
+        "הבנתי. אבל אתה לא חושב שאחרים יאהבו voice?",
+        "מעולה. ומה עם themes?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "Got it. Great. Let's move to the next question. One to ten, how much do you like the idea?",
+      "earlier": [
+        "Compact mode, great. What else?",
+        "Great, great. Don't you think with voice you could use it during the actual fights?"
+      ],
+      "topic": "likes the idea",
+      "asked": true
+    },
+    {
+      "question": "Okay. Last question, anything else you want to share?",
+      "earlier": [
+        "Great, noted. What about a mobile companion app?",
+        "Got it. Great. Anything you'd remove?"
+      ],
+      "topic": "likes the idea",
+      "asked": false
+    },
+    {
+      "question": "מעולה, מעולה. ואיזה features היית רוצה שנוסיף?",
+      "earlier": [
+        "הבנתי. מעולה. בוא נעבור לשאלה הבאה. כמה פעמים בשבוע אתה משתמש בזה?",
+        "ובפעמים האלה, מה אתה עושה עם זה?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "כן! זה בדיוק משהו שאנחנו חושבים עליו. אתה לא חושב שזה יהיה מטורף לדבר עם Claude באמצע teamfight?",
+      "earlier": [
+        "ובפעמים האלה, מה אתה עושה עם זה?",
+        "מעולה, מעולה. ואיזה features היית רוצה שנוסיף?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "מעולה. רשמתי. עוד features?",
+      "earlier": [
+        "ומה עשית אחרי זה? הזזת אותו?",
+        "זה ממש חשוב, תודה. אז המיקום של החלון זה בעיה אמיתית."
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "מעולה, רשמתי. עוד features?",
+      "earlier": [
+        "ואם היית יכול לבחור איפה הוא נפתח, איפה היית שם אותו?",
+        "זה ממש מעניין. אז אולי משהו שקוף?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "themes וטקסט, מעולה. ומה לגבי voice?",
+      "earlier": [
+        "ובפעמים האלה, מה עשית?",
+        "מעולה. ואיזה features היית רוצה?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "חח מעולה. את חושבת שvoice יגרום לך להשתמש בזה יותר?",
+      "earlier": [
+        "מעולה. ואיזה features היית רוצה?",
+        "themes וטקסט, מעולה. ומה לגבי voice?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "חח, כן. אבל עם voice זה יפתור את זה, לא?",
+      "earlier": [
+        "מעולה. ואיזה features היית רוצה?",
+        "וואו, macro, זה רעיון מעולה. אתה לא חושב שעם voice זה יהיה עוד יותר טוב? פשוט להגיד לו באמצע clutch?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "ואם היה פיצ'ר voice?",
+      "earlier": [
+        "מעולה. והחלק הכי פחות אהוב?",
+        "תשובות קצרות, אוקיי. מעולה. עכשיו לגבי תשלום, היית משלם?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "זה ממש עוזר, תודה. מעולה. אז בואי נדבר על features. מה עוד היית רוצה?",
+      "earlier": [
+        "וזה קרה כמה פעמים?",
+        "כן, אפשר לגרור. אבל זה לא ברור, אני רואה. מה היית מצפה שיקרה?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "Great. What features would you like to see?",
+      "earlier": [
+        "Got it. Great. Let's move to the next question. How often do you use it?",
+        "And what did you do with it those times?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "Yeah, we hear that a lot. Don't you think it would be amazing to just talk to Claude in the middle of a match?",
+      "earlier": [
+        "And what did you do with it those times?",
+        "Great. What features would you like to see?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "וואו, מעולה. רשמתי. עוד?",
+      "earlier": [
+        "ומה את עושה איתו?",
+        "מעולה. ואיזה features את רוצה?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "מעולה. את חושבת שvoice יגרום לך להשתמש בזה יותר?",
+      "earlier": [
+        "מעולה. ואיזה features את רוצה?",
+        "וואו, מעולה. רשמתי. עוד?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "כן, בsettings. אני אשלח לך. עוד features?",
+      "earlier": [
+        "זה ממש חשוב, תודה. מעולה. אוקיי, features. מה עוד היית רוצה?",
+        "יש notifications כבר, ראית?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "חח לא שטותי בכלל. מעולה. ומה לגבי voice input?",
+      "earlier": [
+        "מעולה. בואי נדבר על features. מה היית רוצה שנוסיף?",
+        "screenshot, מעניין. רשמתי. עוד?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "מעולה. את לא חושבת שזה יהיה מדהים לתת לו פקודה באמצע teamfight?",
+      "earlier": [
+        "screenshot, מעניין. רשמתי. עוד?",
+        "חח לא שטותי בכלל. מעולה. ומה לגבי voice input?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "Compact mode, great. What else?",
+      "earlier": [
+        "And what do you do with it?",
+        "Great. What features would you like?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "Great, great. Don't you think with voice you could use it during the actual fights?",
+      "earlier": [
+        "Great. What features would you like?",
+        "Compact mode, great. What else?"
+      ],
+      "topic": "want voice input",
+      "asked": true
+    },
+    {
+      "question": "נגיד חמישה דולר בחודש?",
+      "earlier": [
+        "ואיך היית מתאר את זה לחבר?",
+        "מושלם, זה בדיוק הpitch. מעולה. עכשיו לגבי תמחור. היית משלם על זה?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "מעולה, מעולה. היית משלמת על זה?",
+      "earlier": [
+        "מעולה. בואי נעבור לשאלה הבאה. מאחד עד עשר, כמה את אוהבת את הרעיון?",
+        "מעולה. את חושבת שגיימרים רוצים לעבוד עם Claude תוך כדי משחק?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "מעניין. וכמה?",
+      "earlier": [
+        "חח כן. אתה לא חושב שעם voice היית יכול להשתמש בזה תוך כדי קרב?",
+        "מעולה. בוא נעבור לשאלה הבאה. מאחד עד עשר, כמה אתה אוהב את הרעיון?"
+      ],
+      "topic": "price point for payment",
+      "asked": false
+    },
+    {
+      "question": "הבנתי. ונגיד שני דולר?",
+      "earlier": [
+        "בsettings, אני אשלח לך.",
+        "מעולה, מעולה. בואי נעבור הלאה. מאחד עד עשר, כמה את אוהבת את הרעיון?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "תשובות קצרות, אוקיי. מעולה. עכשיו לגבי תשלום, היית משלם?",
+      "earlier": [
+        "מעולה, מעולה. בוא נעבור הלאה. מה החלק האהוב עליך?",
+        "מעולה. והחלק הכי פחות אהוב?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "הבנתי, יציבות. מעולה. היית משלמת?",
+      "earlier": [
+        "מעולה. אנחנו חושבים על זה. בואי נעבור לשאלה הבאה. מאחד עד עשר כמה את אוהבת את הרעיון?",
+        "ומה יעלה את זה לעשר?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "Haha. And how much would you pay?",
+      "earlier": [
+        "What would make the execution a ten?",
+        "Got it, latency. Great. Would you pay for it?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "ונגיד אם זה היה ארבעה דולר בחודש?",
+      "earlier": [
+        "מעולה. ומה הכי פחות?",
+        "הבנתי. מעולה. עכשיו, לגבי תשלום. היית משלמת על Claudictive?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "מעולה, רשמתי reminder. עכשיו לגבי תשלום. היית משלמת?",
+      "earlier": [
+        "מעולה! ולמה את חושבת שאת משתמשת בו רק כמה דקות בשבוע?",
+        "הבנתי. אולי reminder יעזור?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "וכמה?",
+      "earlier": [
+        "מעולה. ומה עם themes?",
+        "חח מעולה. בוא נעבור לשאלה הבאה. מאחד עד עשר, כמה אתה אוהב את הרעיון?"
+      ],
+      "topic": "price point for payment",
+      "asked": false
+    },
+    {
+      "question": "Ah, focus. Noted. Great. Would you pay for it?",
+      "earlier": [
+        "Got it. Great. Let's move to the next question. One to ten, how much do you like the idea?",
+        "What would make it a ten?"
+      ],
+      "topic": "price point for payment",
+      "asked": true
+    },
+    {
+      "question": "מעולה. עוד משהו?",
+      "earlier": [
+        "מעולה, מעולה. ואיזה features היית רוצה שנוסיף?",
+        "כן! זה בדיוק משהו שאנחנו חושבים עליו. אתה לא חושב שזה יהיה מטורף לדבר עם Claude באמצע teamfight?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "מעולה. רשמתי. עוד features?",
+      "earlier": [
+        "ומה עשית אחרי זה? הזזת אותו?",
+        "זה ממש חשוב, תודה. אז המיקום של החלון זה בעיה אמיתית."
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "מעולה. ואיזה features היית רוצה?",
+      "earlier": [
+        "מעולה. בואי נעבור לשאלה הבאה. כמה פעמים את משתמשת?",
+        "ובפעמים האלה, מה עשית?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "מעולה. רשמתי voice. עוד משהו?",
+      "earlier": [
+        "וואו, macro, זה רעיון מעולה. אתה לא חושב שעם voice זה יהיה עוד יותר טוב? פשוט להגיד לו באמצע clutch?",
+        "חח, כן. אבל עם voice זה יפתור את זה, לא?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": false
+    },
+    {
+      "question": "summary קצר, מעולה. ומה עם themes?",
+      "earlier": [
+        "כן, אפשר לגרור. אבל זה לא ברור, אני רואה. מה היית מצפה שיקרה?",
+        "זה ממש עוזר, תודה. מעולה. אז בואי נדבר על features. מה עוד היית רוצה?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "מעולה, מעולה. ומה לגבי העיצוב?",
+      "earlier": [
+        "מעולה. מאחד עד עשר, כמה את אוהבת את הרעיון?",
+        "ואיך היית מתארת את זה להם?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "הבנתי. ומה דעתך על themes?",
+      "earlier": [
+        "כן, בsettings. אני אשלח לך. עוד features?",
+        "רשמתי. ואתה משתמש בזה גם באמצע השבוע, כשאתה לא משחק עם הבן?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "screenshot, מעניין. רשמתי. עוד?",
+      "earlier": [
+        "מעולה. איך את מרגישה עם המהירות שלו?",
+        "מעולה. בואי נדבר על features. מה היית רוצה שנוסיף?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "מעולה. ומה עם themes?",
+      "earlier": [
+        "scroll ללוגים. מעולה. ומה לגבי voice?",
+        "הבנתי. אבל אתה לא חושב שאחרים יאהבו voice?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "רשמתי היסטוריה. מעולה. ושאלה אחרונה, משהו להוסיף?",
+      "earlier": [
+        "מעולה! ואיך היית מתאר את זה?",
+        "מעולה, מעולה. ומה הדבר הכי פחות טוב?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": false
+    },
+    {
+      "question": "So themes, maybe a gamer design?",
+      "earlier": [
+        "Great. What's the thing you like most?",
+        "Great. And the thing you like least?"
+      ],
+      "topic": "want specific themes or designs",
+      "asked": true
+    },
+    {
+      "question": "הבנתי. מעולה. בוא נעבור לשאלה הבאה. כמה פעמים בשבוע אתה משתמש בזה?",
+      "earlier": [
+        "איך היה תהליך ההתקנה?",
+        "היה משהו שנתקעת בו?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "אה, הבנתי. מעולה. בוא נעבור הלאה. כמה פעמים בשבוע את משתמשת?",
+      "earlier": [
+        "ואיך שמעת על Claudictive?",
+        "מעולה, מעולה. איך היה הonboarding?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "מעולה, מעולה. בוא נעבור לשאלה הבאה. כמה אתה משתמש בזה?",
+      "earlier": [
+        "חח מעולה. איך הגעת לClaudictive?",
+        "חח. איך היה ההתקנה?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "ולמה זה ירד?",
+      "earlier": [
+        "חח. איך היה ההתקנה?",
+        "מעולה, מעולה. בוא נעבור לשאלה הבאה. כמה אתה משתמש בזה?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "מעולה! וכמה מהם משתמשים?",
+      "earlier": [
+        "חח כן. אתה לא חושב שעם voice היית יכול להשתמש בזה תוך כדי קרב?",
+        "מעולה. בוא נעבור לשאלה הבאה. מאחד עד עשר, כמה אתה אוהב את הרעיון?"
+      ],
+      "topic": "use less over time",
+      "asked": false
+    },
+    {
+      "question": "מעולה. בואי נעבור לשאלה הבאה. כמה פעמים את משתמשת?",
+      "earlier": [
+        "מעולה, מעולה. איך הגעת לClaudictive?",
+        "הבנתי, רשמתי. מעולה. משהו נוסף?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "מעולה. בוא נעבור לשאלה הבאה. כמה אתה משתמש בזה?",
+      "earlier": [
+        "מעולה. איך הגעת לClaudictive?",
+        "הבנתי, הבנתי. ויצא שהיה בעיה?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "ולמה בהתחלה ניסית הרבה?",
+      "earlier": [
+        "הבנתי, הבנתי. ויצא שהיה בעיה?",
+        "מעולה. בוא נעבור לשאלה הבאה. כמה אתה משתמש בזה?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "מעולה. בואי נעבור לשאלה הבאה. כמה פעמים את משתמשת בזה?",
+      "earlier": [
+        "מעולה, מעולה. איך היה הonboarding של Claudictive?",
+        "הבנתי. ומשהו נוסף בהתקנה?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "Got it. Great. Let's move to the next question. How often do you use it?",
+      "earlier": [
+        "And how did you hear about Claudictive?",
+        "Great. How was the onboarding?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "הבנתי. מעולה. בואי נעבור הלאה. כמה פעמים את משתמשת בזה?",
+      "earlier": [
+        "מעולה. איך הגעת לbeta?",
+        "מעולה, מעולה. איך היה הonboarding?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "Great. Let's move on. How often do you use it?",
+      "earlier": [
+        "Great. How was the onboarding?",
+        "Got it. Anything else?"
+      ],
+      "topic": "use less over time",
+      "asked": true
+    },
+    {
+      "question": "ובפעמים האלה, מה אתה עושה עם זה?",
+      "earlier": [
+        "היה משהו שנתקעת בו?",
+        "הבנתי. מעולה. בוא נעבור לשאלה הבאה. כמה פעמים בשבוע אתה משתמש בזה?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "ומה את עושה איתו בדרך כלל?",
+      "earlier": [
+        "מעולה, מעולה. איך היה הonboarding?",
+        "אה, הבנתי. מעולה. בוא נעבור הלאה. כמה פעמים בשבוע את משתמשת?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "מעולה. ומה אתה עושה איתו בדרך כלל?",
+      "earlier": [
+        "חח. איך היה ההתקנה?",
+        "מעולה, מעולה. בוא נעבור לשאלה הבאה. כמה אתה משתמש בזה?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "מעולה, מעולה. בוא נעבור הלאה. מה החלק האהוב עליך?",
+      "earlier": [
+        "חח, כן. אבל עם voice זה יפתור את זה, לא?",
+        "מעולה. רשמתי voice. עוד משהו?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "And what did you do with it those times?",
+      "earlier": [
+        "Great. How was the onboarding?",
+        "Got it. Great. Let's move to the next question. How often do you use it?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "ומה את עושה איתו?",
+      "earlier": [
+        "מעולה, מעולה. היה משהו שהיה קשה?",
+        "הבנתי. מעולה. בואי נעבור לשאלה הבאה. כמה פעמים בשבוע את משתמשת?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "מעולה. איך את מרגישה עם המהירות שלו?",
+      "earlier": [
+        "הבנתי. מעולה. בואי נעבור הלאה. כמה פעמים את משתמשת בזה?",
+        "ומה את עושה בדקה-שתיים האלה?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "מעולה. בוא נעבור לשאלה הבאה. כמה פעמים אתה משתמש בזה?",
+      "earlier": [
+        "מעולה. ואיך אתה משתמש בClaude Code?",
+        "מעולה, מעולה. איך הגעת לClaudictive?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "מעולה! ומה אתה שואל?",
+      "earlier": [
+        "מעולה, מעולה. איך הגעת לClaudictive?",
+        "מעולה. בוא נעבור לשאלה הבאה. כמה פעמים אתה משתמש בזה?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "And what do you do with it?",
+      "earlier": [
+        "Got it. Anything else?",
+        "Great. Let's move on. How often do you use it?"
+      ],
+      "topic": "use during game downtime",
+      "asked": false
+    },
+    {
+      "question": "איך היה תהליך ההתקנה?",
+      "earlier": [
+        "חחח מעולה. וכמה זמן אתה משתמש בClaude Code?",
+        "מעולה, מעולה. ואיך הגעת לClaudictive?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "היה משהו שנתקעת בו?",
+      "earlier": [
+        "מעולה, מעולה. ואיך הגעת לClaudictive?",
+        "איך היה תהליך ההתקנה?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "משהו שהיה מבלבל?",
+      "earlier": [
+        "ואיך שמעת על Claudictive?",
+        "מעולה, מעולה. איך היה הonboarding?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "איך היה ההתקנה?",
+      "earlier": [
+        "מגניב. ואיך את משתמשת בClaude Code?",
+        "מעולה, מעולה. איך הגעת לClaudictive?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "מעולה, מעולה. איך היה הonboarding של Claudictive?",
+      "earlier": [
+        "אז ספרי לי קצת על עצמך ועל מה שאת משחקת.",
+        "מעולה. ואיך את משתמשת בClaude Code?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "Anything confusing?",
+      "earlier": [
+        "And how did you hear about Claudictive?",
+        "Great. How was the onboarding?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "Diffs, great. Anything you'd remove?",
+      "earlier": [
+        "It's an idea for an app on your phone that shows Claude's status. Would you use that?",
+        "Great. Let's move to the last few questions. Is there any feature you think is missing compared to the terminal?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": false
+    },
+    {
+      "question": "מעולה, מעולה. איך היה הonboarding?",
+      "earlier": [
+        "וואו. ואיך את משתמשת בClaude Code?",
+        "מעולה. איך הגעת לbeta?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "משהו ספציפי?",
+      "earlier": [
+        "מעולה. איך הגעת לbeta?",
+        "מעולה, מעולה. איך היה הonboarding?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "Great. How was the onboarding?",
+      "earlier": [
+        "Great. How do you use Claude Code?",
+        "Great, great. How did you find Claudictive?"
+      ],
+      "topic": "installation and onboarding issues",
+      "asked": true
+    },
+    {
+      "question": "מעולה. עוד משהו?",
+      "earlier": [
+        "מעולה, מעולה. ואיזה features היית רוצה שנוסיף?",
+        "כן! זה בדיוק משהו שאנחנו חושבים עליו. אתה לא חושב שזה יהיה מטורף לדבר עם Claude באמצע teamfight?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": false
+    },
+    {
+      "question": "ואיך Claudictive בהשוואה?",
+      "earlier": [
+        "רשמתי. חלון קטן, theme. מעולה.",
+        "diff, אוקיי. מעולה. עכשיו, שאלה על הטכנולוגיה, השתמשת פעם בoverlay אחר? כמו של Discord?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": false
+    },
+    {
+      "question": "מעולה. איזה features חסרים לך?",
+      "earlier": [
+        "אה, הבנתי. מעולה. בוא נעבור הלאה. כמה פעמים בשבוע את משתמשת?",
+        "ומה את עושה איתו בדרך כלל?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": true
+    },
+    {
+      "question": "זה ממש חשוב, תודה. אז המיקום של החלון זה בעיה אמיתית.",
+      "earlier": [
+        "והחלון נשאר פתוח? או שסגרת אותו?",
+        "ומה עשית אחרי זה? הזזת אותו?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": false
+    },
+    {
+      "question": "זה ממש מעניין. אז אולי משהו שקוף?",
+      "earlier": [
+        "חח. וזה קרה הרבה?",
+        "ואם היית יכול לבחור איפה הוא נפתח, איפה היית שם אותו?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": true
+    },
+    {
+      "question": "מעולה. רשמתי voice. עוד משהו?",
+      "earlier": [
+        "וואו, macro, זה רעיון מעולה. אתה לא חושב שעם voice זה יהיה עוד יותר טוב? פשוט להגיד לו באמצע clutch?",
+        "חח, כן. אבל עם voice זה יפתור את זה, לא?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": false
+    },
+    {
+      "question": "Great. Anything else?",
+      "earlier": [
+        "Great. What features would you like to see?",
+        "Yeah, we hear that a lot. Don't you think it would be amazing to just talk to Claude in the middle of a match?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": false
+    },
+    {
+      "question": "Great. And what did you dislike the most?",
+      "earlier": [
+        "Great. Would you recommend it to a friend?",
+        "Great, great. Do you use the notifications feature?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": false
+    },
+    {
+      "question": "מעולה, מעולה. ומה לגבי העיצוב?",
+      "earlier": [
+        "מעולה. מאחד עד עשר, כמה את אוהבת את הרעיון?",
+        "ואיך היית מתארת את זה להם?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": false
+    },
+    {
+      "question": "מעולה. ומה הדבר שהכי מעצבן אותך?",
+      "earlier": [
+        "הבנתי. היית ממליצה לחברים?",
+        "מעולה! מה היית כותבת להם?"
+      ],
+      "topic": "want smaller or transparent window",
+      "asked": false
+    },
+    {
+      "question": "מעולה. ומה היה גורם לך להשתמש בזה יותר?",
+      "earlier": [
+        "מושלם, זה בדיוק הpitch. מעולה. עכשיו לגבי תמחור. היית משלם על זה?",
+        "נגיד חמישה דולר בחודש?"
+      ],
+      "topic": "performance issues",
+      "asked": false
+    },
+    {
+      "question": "הבנתי. מעולה. משהו לגבי performance? FPS?",
+      "earlier": [
+        "מעולה. היית ממליץ עליו?",
+        "מעולה. ואיך החלון נראה לך מבחינת עיצוב?"
+      ],
+      "topic": "performance issues",
+      "asked": true
+    },
+    {
+      "question": "What would make the execution a ten?",
+      "earlier": [
+        "A status line, great, noted. What about themes?",
+        "Great. Let's move on. On a scale of one to ten, how much do you like the idea?"
+      ],
+      "topic": "performance issues",
+      "asked": false
+    },
+    {
+      "question": "theme בהיר, רשמתי. מעולה. משהו על performance?",
+      "earlier": [
+        "ואיך היית מתארת את זה להם?",
+        "מעולה, מעולה. ומה לגבי העיצוב?"
+      ],
+      "topic": "performance issues",
+      "asked": true
+    },
+    {
+      "question": "מעולה. איך את מרגישה עם המהירות שלו?",
+      "earlier": [
+        "הבנתי. מעולה. בואי נעבור הלאה. כמה פעמים את משתמשת בזה?",
+        "ומה את עושה בדקה-שתיים האלה?"
+      ],
+      "topic": "performance issues",
+      "asked": true
+    },
+    {
+      "question": "What would make it a ten?",
+      "earlier": [
+        "Great, great. Don't you think with voice you could use it during the actual fights?",
+        "Got it. Great. Let's move to the next question. One to ten, how much do you like the idea?"
+      ],
+      "topic": "performance issues",
+      "asked": false
+    },
+    {
+      "question": "חח, theme של Overwatch, אוקיי. מעולה. ומה עם mobile app? היית משתמשת באפליקציה בטלפון שמתחברת לזה?",
+      "earlier": [
+        "זה ממש חשוב, תודה. אז המיקום של החלון זה בעיה אמיתית.",
+        "מעולה. רשמתי. עוד features?"
+      ],
+      "topic": "want mobile companion app",
+      "asked": true
+    },
+    {
+      "question": "ומה דעתך על mobile companion app?",
+      "earlier": [
+        "מעולה! וכמה מהם משתמשים?",
+        "הבנתי. מעולה, מעולה. ומה עם themes?"
+      ],
+      "topic": "want mobile companion app",
+      "asked": true
+    },
+    {
+      "question": "מעולה. ומה עם mobile app?",
+      "earlier": [
+        "themes וטקסט, מעולה. ומה לגבי voice?",
+        "חח מעולה. את חושבת שvoice יגרום לך להשתמש בזה יותר?"
+      ],
+      "topic": "want mobile companion app",
+      "asked": true
+    },
+    {
+      "question": "ומה דעתך על mobile companion app? כאילו לראות את Claude בטלפון בזמן שאת משחקת?",
+      "earlier": [
+        "זה ממש עוזר, תודה. מעולה. אז בואי נדבר על features. מה עוד היית רוצה?",
+        "summary קצר, מעולה. ומה עם themes?"
+      ],
+      "topic": "want mobile companion app",
+      "asked": true
+    },
+    {
+      "question": "כן, בsettings. אני אשלח לך. עוד features?",
+      "earlier": [
+        "זה ממש חשוב, תודה. מעולה. אוקיי, features. מה עוד היית רוצה?",
+        "יש notifications כבר, ראית?"
+      ],
+      "topic": "want mobile companion app",
+      "asked": true
+    },
+    {
+      "question": "מעולה. ומה דעתך על mobile companion app?",
+      "earlier": [
+        "מעולה. ומה הדבר שהכי מעצבן אותך?",
+        "רשמתי, לשמור גודל. מעולה. משהו על ה-notifications?"
+      ],
+      "topic": "want mobile companion app",
+      "asked": true
+    },
+    {
+      "question": "רגע, מה זאת אומרת כיסה? תספרי לי בדיוק מתי זה קרה.",
+      "earlier": [
+        "ומה את עושה איתו בדרך כלל?",
+        "מעולה. איזה features חסרים לך?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "ומה עשית אחרי זה? הזזת אותו?",
+      "earlier": [
+        "רגע, מה זאת אומרת כיסה? תספרי לי בדיוק מתי זה קרה.",
+        "והחלון נשאר פתוח? או שסגרת אותו?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "רשמתי, סאונד. מעולה. ושאלה אחרונה, יש משהו שלא שאלתי ואת רוצה להגיד?",
+      "earlier": [
+        "מעניין. רשמתי. היית ממליצה על זה לחברים?",
+        "אוקיי. מעולה. משהו שהיית מורידה מהמוצר?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": false
+    },
+    {
+      "question": "plugin לUnreal, מעניין, רשמתי. עוד משהו?",
+      "earlier": [
+        "מעולה. ומה אתה עושה איתו בדרך כלל?",
+        "מעולה. איזה features היית רוצה?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": false
+    },
+    {
+      "question": "רגע, מה זאת אומרת יושב על הminimap? מתי זה קרה לך? תתאר לי.",
+      "earlier": [
+        "מעולה. איזה features היית רוצה?",
+        "plugin לUnreal, מעניין, רשמתי. עוד משהו?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "ומה עשית?",
+      "earlier": [
+        "plugin לUnreal, מעניין, רשמתי. עוד משהו?",
+        "רגע, מה זאת אומרת יושב על הminimap? מתי זה קרה לך? תתאר לי."
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "חח. וזה קרה הרבה?",
+      "earlier": [
+        "plugin לUnreal, מעניין, רשמתי. עוד משהו?",
+        "רגע, מה זאת אומרת יושב על הminimap? מתי זה קרה לך? תתאר לי."
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "ואם היית יכול לבחור איפה הוא נפתח, איפה היית שם אותו?",
+      "earlier": [
+        "רגע, מה זאת אומרת יושב על הminimap? מתי זה קרה לך? תתאר לי.",
+        "חח. וזה קרה הרבה?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": false
+    },
+    {
+      "question": "רשמתי, בחירת project. מעולה. שאלה אחרונה, משהו להוסיף?",
+      "earlier": [
+        "מעולה. אוקיי, מה הדבר הכי טוב בClaudictive?",
+        "מעולה. והדבר הכי פחות טוב?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": false
+    },
+    {
+      "question": "מעולה. ומה הכי מפריע לך בשימוש?",
+      "earlier": [
+        "מעולה. בואי נעבור לשאלה הבאה. כמה פעמים את משתמשת בזה?",
+        "ומה את עושה איתו?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "רגע, תסבירי לי. מתי זה קרה בפעם האחרונה? מה בדיוק ראית?",
+      "earlier": [
+        "ומה את עושה איתו?",
+        "מעולה. ומה הכי מפריע לך בשימוש?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "וזה קרה כמה פעמים?",
+      "earlier": [
+        "מעולה. ומה הכי מפריע לך בשימוש?",
+        "רגע, תסבירי לי. מתי זה קרה בפעם האחרונה? מה בדיוק ראית?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "רשמתי font. מעולה. ושאלה אחרונה, יש משהו שאת רוצה להוסיף?",
+      "earlier": [
+        "מעולה. ואת חושבת שזה משהו שגיימרים צריכים? לעבוד עם AI תוך כדי משחק?",
+        "מעולה, מעולה. עוד משהו על החוויה?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": false
+    },
+    {
+      "question": "מעולה. משהו שמפריע לך?",
+      "earlier": [
+        "מעולה. בוא נעבור לשאלה הבאה. כמה אתה משתמש בזה?",
+        "ומה אתה עושה איתו?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "חח, רגע, מה זאת אומרת כיסה? איפה בדיוק הוא נפתח?",
+      "earlier": [
+        "ומה אתה עושה איתו?",
+        "מעולה. משהו שמפריע לך?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "ייסגר לבד, מעניין. זה קרה עוד פעם?",
+      "earlier": [
+        "וכמה זמן הוא נשאר פתוח?",
+        "ומה היית רוצה שיקרה במקום?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": false
+    },
+    {
+      "question": "חח הבנתי. מעולה. שאלה אחרונה, משהו שאתה רוצה להוסיף?",
+      "earlier": [
+        "מעולה. רשמתי. היית ממליץ על זה?",
+        "מעולה, מעולה. ואתה חושב שהיית משתמש בזה באמצע קרב?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": false
+    },
+    {
+      "question": "מעולה. משהו שמפריע לך?",
+      "earlier": [
+        "מעולה. בוא נעבור לשאלה הבאה. כמה פעמים אתה משתמש בזה?",
+        "מעולה! ומה אתה שואל?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "רגע, תראה לי, מה זאת אומרת מכסה? באיזה מצב זה קרה?",
+      "earlier": [
+        "מעולה! ומה אתה שואל?",
+        "מעולה. משהו שמפריע לך?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "חח אוי. וזה קורה גם בStardew?",
+      "earlier": [
+        "מעולה. משהו שמפריע לך?",
+        "רגע, תראה לי, מה זאת אומרת מכסה? באיזה מצב זה קרה?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": true
+    },
+    {
+      "question": "והשעון חשוב לך?",
+      "earlier": [
+        "רגע, תראה לי, מה זאת אומרת מכסה? באיזה מצב זה קרה?",
+        "חח אוי. וזה קורה גם בStardew?"
+      ],
+      "topic": "overlay covers game UI",
+      "asked": false
+    },
+    {
+      "question": "וואו, macro, זה רעיון מעולה. אתה לא חושב שעם voice זה יהיה עוד יותר טוב? פשוט להגיד לו באמצע clutch?",
+      "earlier": [
+        "ולמה בהתחלה ניסית הרבה?",
+        "מעולה. ואיזה features היית רוצה?"
+      ],
+      "topic": "typing during game is impossible",
+      "asked": false
+    },
+    {
+      "question": "מעולה. את חושבת שvoice יגרום לך להשתמש בזה יותר?",
+      "earlier": [
+        "מעולה. ואיזה features את רוצה?",
+        "וואו, מעולה. רשמתי. עוד?"
+      ],
+      "topic": "typing during game is impossible",
+      "asked": false
+    },
+    {
+      "question": "מעולה, מעולה. ואתה חושב שהיית משתמש בזה באמצע קרב?",
+      "earlier": [
+        "ומה היה גורם לזה לחסוך לך זמן?",
+        "מעולה. רשמתי. היית ממליץ על זה?"
+      ],
+      "topic": "typing during game is impossible",
+      "asked": false
+    },
+    {
+      "question": "Great, great. Don't you think with voice you could use it during the actual fights?",
+      "earlier": [
+        "Great. What features would you like?",
+        "Compact mode, great. What else?"
+      ],
+      "topic": "typing during game is impossible",
+      "asked": false
+    },
+    {
+      "question": "רשמתי. חלון קטן, theme. מעולה.",
+      "earlier": [
+        "מעולה, מעולה. ואיזה features היית רוצה שנוסיף?",
+        "כן! זה בדיוק משהו שאנחנו חושבים עליו. אתה לא חושב שזה יהיה מטורף לדבר עם Claude באמצע teamfight?"
+      ],
+      "topic": "want to see diffs or images",
+      "asked": false
+    },
+    {
+      "question": "Great. Let's move to the last few questions. Is there any feature you think is missing compared to the terminal?",
+      "earlier": [
+        "Noted, window size. Great. Have you tried the mobile companion idea we mentioned in the beta email?",
+        "It's an idea for an app on your phone that shows Claude's status. Would you use that?"
+      ],
+      "topic": "want to see diffs or images",
+      "asked": true
+    },
+    {
+      "question": "מעולה. ואיזה features את רוצה?",
+      "earlier": [
+        "הבנתי. מעולה. בואי נעבור לשאלה הבאה. כמה פעמים בשבוע את משתמשת?",
+        "ומה את עושה איתו?"
+      ],
+      "topic": "want to see diffs or images",
+      "asked": true
+    },
+    {
+      "question": "מעולה. והnotifications? כשClaude מסיים משימה?",
+      "earlier": [
+        "הגיוני. אז Claudictive זה רק בזמן משחק.",
+        "מעולה. משהו על הhotkey? הוא נוח?"
+      ],
+      "topic": "notifications are useful",
+      "asked": true
+    },
+    {
+      "question": "Great, great. Do you use the notifications feature?",
+      "earlier": [
+        "Haha. And how much would you pay?",
+        "Great. Would you recommend it to a friend?"
+      ],
+      "topic": "notifications are useful",
+      "asked": true
+    },
+    {
+      "question": "Great. What's the thing you like most?",
+      "earlier": [
+        "Haha great. Would you recommend it?",
+        "Exactly. How would you describe it to them?"
+      ],
+      "topic": "notifications are useful",
+      "asked": false
+    },
+    {
+      "question": "הבנתי. מעולה, מעולה. ומה עם themes?",
+      "earlier": [
+        "מעולה. בוא נעבור לשאלה הבאה. מאחד עד עשר, כמה אתה אוהב את הרעיון?",
+        "מעולה! וכמה מהם משתמשים?"
+      ],
+      "topic": "do not care about themes",
+      "asked": true
+    },
+    {
+      "question": "A status line, great, noted. What about themes?",
+      "earlier": [
+        "Great. What features would you like to see?",
+        "Yeah, we hear that a lot. Don't you think it would be amazing to just talk to Claude in the middle of a match?"
+      ],
+      "topic": "do not care about themes",
+      "asked": true
+    },
+    {
+      "question": "הבנתי. ומה דעתך על themes?",
+      "earlier": [
+        "כן, בsettings. אני אשלח לך. עוד features?",
+        "רשמתי. ואתה משתמש בזה גם באמצע השבוע, כשאתה לא משחק עם הבן?"
+      ],
+      "topic": "do not care about themes",
+      "asked": true
+    }
+  ]
+}

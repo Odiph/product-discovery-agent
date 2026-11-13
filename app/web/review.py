@@ -53,6 +53,7 @@ from __future__ import annotations
 import json
 import logging
 from dataclasses import dataclass
+import html
 from pathlib import Path
 from typing import Any, Optional, Sequence
 
@@ -60,6 +61,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response
 
+from app import project_meta as project_meta_mod
 from app import projects as projects_mod
 from app.mcp import mirror as mirror_payload
 from app.coach import corpus as coach_corpus
@@ -92,6 +94,14 @@ class _ReviewStaticAssets:
     index_html: bytes
     review_js: bytes
     review_css: bytes
+
+
+def _with_mock_banner(index_html: bytes) -> bytes:
+    """The hub page for a `demo` node: the mock label first, so its numbers
+    never read as findings about real users. Plain text, no script."""
+    label = html.escape(project_meta_mod.MOCK_LABEL)
+    banner = "<body>\n" + f'<p class="mock-banner" role="note">{label}</p>'
+    return index_html.replace(b"<body>", banner.encode("utf-8"), 1)
 
 
 def _load_static_assets(static_dir: Path) -> _ReviewStaticAssets:
@@ -925,11 +935,12 @@ def create_review_app(
                 return _FORBIDDEN
         return await call_next(request)
 
+    page = _with_mock_banner(assets.index_html) if project_meta_mod.corpus_kind(
+        project, repo_root=repo_root) == project_meta_mod.CORPUS_DEMO else assets.index_html
+
     @app.get("/")
     async def get_page() -> Response:
-        return Response(
-            content=assets.index_html, media_type="text/html", headers={"Cache-Control": "no-store"}
-        )
+        return Response(content=page, media_type="text/html", headers={"Cache-Control": "no-store"})
 
     @app.get("/review.js")
     async def get_js() -> Response:

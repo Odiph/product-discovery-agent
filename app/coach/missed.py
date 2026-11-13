@@ -32,9 +32,14 @@ are the topic's terms, any other question through shared words. Measured on
 the mock interviews, that word rule recognised 52 of 91 guide questions and
 caught no pitch, which is why the model rule exists.
 
-**A detector, not a judge**, bounding the misses from below: a shared word
+With a `follow_judge` (`missed --group model`), the model decides instead,
+from the interviewer's next turns and the topic's label (`follow_judge.py`,
+items from `follow_items`, turns from `follow_turns`) -- never the offer. No
+answer keeps the word detector's outcome.
+
+**The word rule is a detector, not a judge**, bounding the misses from below: a shared word
 counts as a follow-up, so a "followed up in 0" is a strong claim and a
-"followed up in 3" may flatter. Three things never count (measured
+"followed up in 3" may flatter. Under either rule, these never count (measured
 2026-11-11): the next question on the interview guide (`is_scripted`), a word
 the interviewer uses in most of the project's interviews
 (`project_vocabulary`: the product's name), a short Hebrew stem meeting
@@ -49,6 +54,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Callable, Mapping, Optional, Sequence
 
+from app.coach import follow_judge as follow_mod
 from app.coach import interview_summary as summary_mod
 from app.coach import prompt_judge
 from app.coach import themes
@@ -128,6 +134,9 @@ class Occurrence:
     unanswered: bool = False
     """The judge had no answer for the question before it (counted as
     unprompted)."""
+    follow_unanswered: bool = False
+    """The follow-up judge had no answer for it: `outcome` is the word
+    detector's."""
 
     @property
     def followed(self) -> Optional[bool]:
@@ -177,6 +186,7 @@ def find(
     vocabulary: "frozenset[str]" = frozenset(),
     flagged: "Mapping[str, frozenset[int]]" = {},
     judge: "Optional[Callable[[prompt_judge.PromptItem], Optional[bool]]]" = None,
+    follow_judge: "Optional[Callable[[follow_mod.FollowItem], Optional[bool]]]" = None,
 ) -> Report:
     """`turns_by_session`: each session's `walked_past.turns`; a session
     absent from it had no readable transcript. `unconfirmed`: sessions whose
@@ -190,7 +200,10 @@ def find(
     follow-up. `judge`: the model's answer for a `prompt_judge.PromptItem`
     (True, False, or None for no answer); when given, it decides "prompted"
     for every occurrence with an interviewer turn before it, in place of the
-    word match (`_prompted`). No answer counts as unprompted."""
+    word match (`_prompted`). No answer counts as unprompted.
+    `follow_judge`: the model's answer for a `follow_mod.FollowItem`; when
+    given, it decides followed up / walked past wherever the word detector
+    reached one of the two, and no answer keeps the detector's."""
     script_sets = {sid: script_keys(texts) for sid, texts in scripts.items()}
     subjects = {sid: script_subjects(items) for sid, items in script_sets.items()}
     prompt_vocabulary = project_vocabulary(turns_by_session, share=PROMPT_VOCABULARY_SHARE)
@@ -204,7 +217,7 @@ def find(
                                    turns_by_session, unconfirmed, script_sets, vocabulary, flagged, subjects,
                                    prompt_terms=cluster.terms - prompt_vocabulary,
                                    prompt_vocabulary=prompt_vocabulary,
-                                   judge=judge, label=cluster.label)
+                                   judge=judge, label=cluster.label, follow_judge=follow_judge)
         split = summary_mod.split_by_prompt((o.session_id, o.followed, o.prompted) for o in occurrences)
         topic = Topic(label=cluster.label, fact_ids=cluster.fact_ids, occurrences=occurrences,
                       tally=split.unprompted, raised_interviews=split.raised_interviews,
@@ -228,6 +241,44 @@ def prompt_items(claims: "Sequence[CitedClaim]", turns_by_session: "Mapping[str,
 
     find(claims, turns_by_session, **{**kwargs, "judge": record})
     return prompt_judge.unique_items(asked)
+
+
+def follow_items(claims: "Sequence[CitedClaim]", turns_by_session: "Mapping[str, Sequence[Turn]]",
+                 **kwargs: Any) -> "tuple[follow_mod.FollowItem, ...]":
+    """Every item a `follow_judge` passed to `find` with the same arguments
+    would be asked, each once."""
+    asked: "list[follow_mod.FollowItem]" = []
+
+    def record(item: follow_mod.FollowItem) -> None:
+        asked.append(item)
+        return None
+
+    find(claims, turns_by_session, **{**kwargs, "follow_judge": record})
+    return follow_mod.unique_items(asked)
+
+
+def follow_turns(sequence: "Sequence[Turn]", position: int,
+                 scripted: "tuple[tuple[frozenset[str], ...], ...]" = (),
+                 flagged: "frozenset[int]" = frozenset()) -> "tuple[tuple[int, str], ...]":
+    """The interviewer's turns after the offer at `position` that could be a
+    follow-up, as (n, text): the window `_judge` reads (through the
+    `FOLLOW_UP_WINDOW`-th substantive turn; short turns use up none of it),
+    without the guide's own questions and the ones the critic flagged. `n`
+    counts every interviewer turn after the offer, left-out ones included."""
+    found: "list[tuple[int, str]]" = []
+    moves = n = 0
+    for turn in sequence[position + 1:]:
+        if turn.speaker == walked_past.INTERVIEWEE:
+            continue
+        n += 1
+        if not (is_scripted(turn.text, scripted) or flagged & set(turn.seqs)):
+            found.append((n, turn.text))
+        if len(turn.text.split()) < walked_past.MIN_MOVE_WORDS:
+            continue
+        moves += 1
+        if moves >= FOLLOW_UP_WINDOW:
+            break
+    return tuple(found)
 
 
 def topic_name(label: "tuple[str, ...]") -> str:
@@ -348,10 +399,10 @@ def _occurrences(members, terms, turns_by_session, unconfirmed, script_sets=None
                  prompt_terms: "frozenset[str]" = frozenset(),
                  prompt_vocabulary: "frozenset[str]" = frozenset(),
                  judge=None,
-                 label: "tuple[str, ...]" = ()) -> "tuple[Occurrence, ...]":
+                 label: "tuple[str, ...]" = (), follow_judge=None) -> "tuple[Occurrence, ...]":
     seen: "dict[tuple[str, Any], Occurrence]" = {}
     for claim in members:
-        prompted = unanswered = False
+        prompted = unanswered = follow_unanswered = False
         seq = min(claim.seqs)
         sequence = turns_by_session.get(claim.session_id)
         position = _turn_holding(sequence, claim.seqs) if sequence else None
@@ -363,8 +414,12 @@ def _occurrences(members, terms, turns_by_session, unconfirmed, script_sets=None
             key, outcome = (claim.session_id, seq), MISSING_SEQ
         else:
             scripted = (script_sets or {}).get(claim.session_id, ())
+            session_flags = (flagged or {}).get(claim.session_id, frozenset())
             key, outcome = (claim.session_id, ("turn", position)), _judge(
-                sequence, position, terms, scripted, vocabulary, (flagged or {}).get(claim.session_id, frozenset()))
+                sequence, position, terms, scripted, vocabulary, session_flags)
+            if follow_judge is not None and outcome in _JUDGED:
+                outcome, follow_unanswered = _follow_judged(
+                    sequence, position, scripted, session_flags, follow_judge, label, outcome)
             if outcome == NOT_INTERVIEWEE:
                 pass
             elif judge is not None:
@@ -374,8 +429,22 @@ def _occurrences(members, terms, turns_by_session, unconfirmed, script_sets=None
                                      (subjects or {}).get(claim.session_id, ()), prompt_vocabulary)
         if key not in seen or seq < seen[key].seq:
             seen[key] = Occurrence(session_id=claim.session_id, seq=seq, outcome=outcome, prompted=prompted,
-                                   unanswered=unanswered)
+                                   unanswered=unanswered, follow_unanswered=follow_unanswered)
     return tuple(sorted(seen.values(), key=lambda o: (o.session_id, o.seq)))
+
+
+def _follow_judged(sequence, position: int, scripted, flagged: "frozenset[int]", judge,
+                   label: "tuple[str, ...]", lexical: str) -> "tuple[str, bool]":
+    """(outcome, unanswered) by the model's judgment of the interviewer's
+    next turns (`follow_turns`). Nothing eligible to send -- every turn in the
+    window was the guide's or flagged -- is walked past without asking."""
+    candidates = follow_turns(sequence, position, scripted, flagged)
+    if not candidates:
+        return WALKED_PAST, False
+    answer = judge(follow_mod.item(topic_name(label), candidates))
+    if answer is None:
+        return lexical, True
+    return (FOLLOWED if answer else WALKED_PAST), False
 
 
 def _turn_holding(sequence: "Sequence[Turn]", seqs: "tuple[int, ...]") -> Optional[int]:

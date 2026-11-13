@@ -210,12 +210,12 @@ def test_more_than_two_speakers_keeps_every_other_as_interviewee_and_says_so(rep
     assert "3 speakers" in capsys.readouterr().out
 
 
-def test_an_audio_file_is_refused_as_not_built_yet(repo, tmp_path, capsys):
+def test_a_compressed_audio_file_is_refused_with_the_conversion(repo, tmp_path, capsys):
     source = tmp_path / "call.m4a"
     source.write_bytes(b"\x00\x01")
     assert _import(str(source), "--project", "acme", "--me", "Sam", "--yes") == 1
     assert not _sessions(repo).exists()
-    assert "not built yet" in capsys.readouterr().err
+    assert "ffmpeg" in capsys.readouterr().err
 
 
 def test_an_explicit_participant_wins(repo, tmp_path):
@@ -265,7 +265,7 @@ def test_two_interviews_on_one_date_get_distinct_sortable_ids(repo, tmp_path):
 # --- a folder ---------------------------------------------------------------------
 
 
-def test_a_folder_imports_every_supported_file_and_refuses_audio_by_name(repo, tmp_path, capsys):
+def test_a_folder_imports_every_supported_file_and_refuses_bad_audio_by_name(repo, tmp_path, capsys):
     folder = tmp_path / "exports"
     _write(folder, "b-call.txt", PLAIN)
     _write(folder, "a-call.vtt", VTT)
@@ -275,7 +275,7 @@ def test_a_folder_imports_every_supported_file_and_refuses_audio_by_name(repo, t
     sources = sorted(_meta(p)["imported_from"] for p in _sessions(repo).iterdir())
     assert sources == ["a-call.vtt", "b-call.txt"]
     err = capsys.readouterr().err
-    assert "c-call.wav" in err and "not built yet" in err
+    assert "c-call.wav" in err and "not a readable PCM WAV" in err
 
 
 def test_a_folder_refuses_one_participant_for_many_files(repo, tmp_path, capsys):

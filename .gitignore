@@ -16,6 +16,11 @@ venv/
 *.mp3
 *.m4a
 sessions/
+# The ONE exception: the committed demo seed's sessions, 12 SYNTHETIC mock
+# interviews (`corpus: demo`, no real person), so a fresh clone can show the
+# `missed` headline with no API call. Exactly this path; a sibling stays
+# ignored (`app/tests/test_demo_seed.py` pins both halves).
+!demo/claudictive-beta/seed/sessions/
 
 # STT benchmark harness (Phase 1) — real audio, human transcripts and per-error
 # detail must never reach git. See benchmark/README.md.

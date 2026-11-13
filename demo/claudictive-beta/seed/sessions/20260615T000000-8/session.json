@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "09-omer.txt",
+  "import_sha256": "88274119a8bef94f62e5cfa398bce4f8489597a0b94fbfab540763845d9aaa39",
+  "imported_at": "2026-11-11T00:19:52.653+02:00",
+  "started_at": "2026-06-15T00:00:00.000+03:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-06-15T00:16:55.000+03:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Omer": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Omer"
+}

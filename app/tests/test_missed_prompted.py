@@ -217,7 +217,10 @@ class _RoutingClient:
         rows = _rows(request)
         payload = ({"topics": [{"label": DEAD, "claim_ids": [row["id"] for row in rows]}]}
                    if tool == topics_mod.TOOL_NAME else
-                   {"items": [{"id": row["id"], "asked": self.asked} for row in rows]})
+                   {"items": [{"id": row["id"], "asked": self.asked} for row in rows]}
+                   if tool == pj.TOOL_NAME else
+                   # The follow-up judgment (test_missed_followed.py): "not followed" to all.
+                   {"items": [{"id": row["id"], "followed": False} for row in rows]})
         response = tool_use_response(tool, payload)
         return ToolUseResponse(content=response.content, stop_reason="tool_use")
 
@@ -275,7 +278,7 @@ def test_without_yes_the_command_previews_the_judgment_and_calls_nothing(node, c
 def test_with_yes_both_calls_run_once_and_the_judgment_never_carries_the_interviewee(node, capsys):
     assert main_mod.main(["missed", "--group", "model", "--yes"]) == 0
     out = capsys.readouterr().out
-    assert [r["tool_choice"]["name"] for r in node.client.requests] == [topics_mod.TOOL_NAME, pj.TOOL_NAME]
+    assert [r["tool_choice"]["name"] for r in node.client.requests][:2] == [topics_mod.TOOL_NAME, pj.TOOL_NAME]
     sent = json.dumps(node.client.requests[1], ensure_ascii=False)
     assert INTERVIEWEE_SAID not in sent
     for _, _, claim in ROWS:
@@ -287,7 +290,7 @@ def test_with_yes_both_calls_run_once_and_the_judgment_never_carries_the_intervi
 
     assert main_mod.main(["missed", "--group", "model", "--yes"]) == 0
     again = capsys.readouterr().out
-    assert len(node.client.requests) == 2, "both caches are fresh: no further call"
+    assert len(node.client.requests) == 3, "every cache is fresh: no further call"
     assert "cached in context/prompted.json" in again
 
 

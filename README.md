@@ -30,7 +30,14 @@ interviews to run the whole chain on: `import`, `extract --all`,
    copy .env.example .env
    ```
    Put your `SONIOX_API_KEY` (speech-to-text) and `ANTHROPIC_API_KEY` (the
-   coach) in `.env`.
+   coach) in `.env`. To only try it first, skip the keys:
+   `.venv\Scripts\python.exe -m app setup` checks the machine, and
+   `.venv\Scripts\python.exe -m app demo --yes` loads 12 mock interviews,
+   already processed, with no API call. Then
+   `.venv\Scripts\python.exe -m app missed --project claudictive-beta --group model` (reads the saved model judgments; no call without `--yes`), or
+   the same project in `hub`. In Claude Code, the plugin's `/start` does
+   this for you. The mock interviews are synthetic, not real users
+   (`demo/claudictive-beta/`).
 3. Write what the interview is for: `.venv\Scripts\python.exe -m app author`
    opens a local page for the brief, survey and hypotheses. The coach judges
    every question against them.
@@ -72,9 +79,10 @@ tool asks for or records consent on your behalf.
 | Data | Sent to | When |
 |---|---|---|
 | Live audio of both sides | Soniox (speech-to-text) | Throughout every recorded call |
-| Transcript text, your brief, survey, hypotheses, your own rules (`process.md`) and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions`. `missed --group model --yes` (and `themes --group model --yes`) sends the extracted claims once, never quotes; `missed --group model --yes` then sends, once, YOUR OWN turns (the question right before each recurring topic, and up to two of your questions before it) with the topic labels, never the interviewee's words, so under `--group model` it is no longer claims only. `coverage --yes` sends your own turns of imported interviews and the survey, once |
+| Transcript text, your brief, survey, hypotheses, your own rules (`process.md`) and prior claims | Anthropic, or the OpenAI-compatible endpoint you configure (`COACH_BASE_URL`) | Every coaching cycle during a call, and when you run `extract` or `critique-questions`. `missed --group model --yes` (and `themes --group model --yes`) sends the extracted claims once, never quotes; `missed --group model --yes` then sends, once, YOUR OWN turns (the question right before each recurring topic, and up to two of your questions before it) with the topic labels, and then, once more, your next turns after each time a recurring topic came up with the same labels; never the interviewee's words, so under `--group model` it is no longer claims only. `coverage --yes` sends your own turns of imported interviews and the survey, once |
 | Code you added with `kb add`, and research you typed yourself with `kb add --type research` (never interviews, conversations, emails, or anything typed as research by guess) | The same coach endpoint | When you run `kb digest`, once per new or changed document. Its notes then ride in the coach's prompt every cycle |
 | In-person room audio | Soniox, live during `start --in-person`, and again when you run `diarize-after` (the uploaded copy is deleted afterwards) | Every in-person meeting |
+| A recording you import (`import <file>.wav --yes`) | Soniox: the whole file, uploaded for the same file pass `diarize-after` runs (their copy is deleted afterwards) | Once per imported recording, and again only if you re-run `diarize-after` on it. Never without `--yes` |
 | In-person room audio, phone to laptop | Your Tailscale tailnet: encrypted end to end between your own devices, possibly through Tailscale's relay servers | Throughout every in-person meeting |
 | Your laptop's Tailscale machine name | Public certificate-transparency logs, once you turn on HTTPS Certificates | Once, when the certificate is issued |
 | Retained audio (`--retain-audio`, off by default) | Nothing, unless you run the benchmark, which uploads it to the STT vendors it compares | Only when you run `benchmark/` yourself |
@@ -867,8 +875,22 @@ your speaker name as the file spells it: your turns become the interviewer's,
 everyone else's the interviewee's. Without `--yes` it shows the speakers, turn
 counts and roles, and writes nothing. Give `--date` when you know it; without
 it the file's modified time is used and recorded as such. Importing the same
-file twice is refused. Audio files are refused: importing recordings is not
-built yet. Then run `extract --all --project acme`.
+file twice is refused. Then run `extract --all --project acme`.
+
+**A recording instead of a transcript.** Give `import` a `.wav` (16 kHz, mono,
+16-bit) and it takes the road an in-person meeting takes: the session is
+written holding a copy of the audio, the copy is uploaded to Soniox for the
+file pass `diarize-after` runs (paid, needs `SONIOX_API_KEY`; their copy is
+deleted afterwards), and you then say who is who with `confirm-speakers`,
+which deletes the session's copy. `--me` is not used: a recording names
+nobody, so the first voice is taken as the interviewer until you confirm, or
+`--swap`. `extract` refuses the session until then. Without `--yes` it shows
+the file, its length and size and where it would be uploaded, and writes and
+sends nothing. Your own file is never touched. Any other format (mp3, m4a, a
+stereo or 44.1 kHz WAV) is refused before anything is uploaded; convert it
+with `ffmpeg -i call.m4a -ar 16000 -ac 1 -c:a pcm_s16le call.wav`. A file
+over 300 minutes is refused too. If the file pass fails, the session and its
+audio stay: retry with `diarize-after <session>`, or `forget` it.
 
 An imported interview has no live record of which guide questions you asked,
 so `prep` reconstructs it from the transcript: each of your turns is matched
@@ -958,10 +980,18 @@ All take `--project PATH` like the rest, and none calls a model unless noted.
   question counts as asking. That call sends your own words, never the
   interviewee's; without `--yes` it shows how many of your turns and topics it
   would send, a few examples and the cost. Cached in `context/prompted.json`;
-  the output always says which rule decided. The follow-up judgment never
-  calls a model, and is generous: a word a later question shares with the
+  the output always says which rule decided. "Followed up" is decided by word
+  overlap too, and that is generous: a word a later question shares with the
   offer counts as a follow-up, except the next question on your guide and
-  words you use in most interviews (the product's name).
+  words you use in most interviews (the product's name), so a pitch that
+  names the topic counts. With `--group model --yes` a third call instead
+  asks the model, for each time a recurring topic came up, whether your next
+  turns after it (through your second full question) followed up on it. A
+  pitch or leading question does not count; a bare "What do you mean?" counts
+  only as your very next turn. That call also sends your own words and the
+  topic labels, never the interviewee's, and without `--yes` shows what it
+  would send. Cached in `context/followed.json`; an occurrence the model left
+  unanswered keeps the word rule's result and is marked.
 - **`coverage [--yes]`**: which guide questions your imported (or coach-off)
   interviews really asked, read by the model once from your own turns, for
   `prep`. See "Importing past interviews". **This one calls the reasoning

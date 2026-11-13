@@ -90,7 +90,7 @@ def run(args: argparse.Namespace, apply_project, read_corpus_refs) -> int:
     if unconfirmed:
         # `extract` refuses these until their speakers are confirmed, so they
         # must not be in the "run extract" line above.
-        print(f"\n{len(unconfirmed)} in-person interview(s) wait for confirmed speakers before they can be "
+        print(f"\n{len(unconfirmed)} interview(s) on one recording (in-person, or imported as audio) wait for confirmed speakers before they can be "
               f"extracted: python -m app diarize-after <session>, then confirm-speakers  ({', '.join(unconfirmed)})")
     return 0
 
@@ -164,6 +164,7 @@ def _print(plan: prep_mod.Prep, *, has_hypotheses: bool, has_survey: bool, known
         print("\nWhat they keep raising that you did not ask about:")
         print(f"  {raised.grouping}")
         print(f"  {raised.prompted}")
+        print(f"  {raised.followed}")
         if not plan.raised:
             print(f"  Nothing: no topic came up unprompted in {missed_mod.MIN_INTERVIEWS} or more "
                   f"interviews and was walked past more often than followed up.")

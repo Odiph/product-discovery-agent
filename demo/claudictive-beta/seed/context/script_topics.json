@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "model": "google/gemini-2.5-flash",
+  "key": "526018ce3c77fc43c48a7df41a6565b4b4a472764adf1691afcfeb407e8ef0b7",
+  "questions": [
+    {
+      "question": "ספר/י לי קצת על עצמך ועל המשחקים שאת/ה משחק/ת.",
+      "topics": []
+    },
+    {
+      "question": "איך היה תהליך ההתקנה והonboarding של Claudictive?",
+      "topics": [
+        "installation and onboarding issues"
+      ]
+    },
+    {
+      "question": "כמה פעמים בשבוע את/ה משתמש/ת בClaudictive?",
+      "topics": [
+        "use less over time"
+      ]
+    },
+    {
+      "question": "מה את/ה עושה עם Claudictive בדרך כלל?",
+      "topics": [
+        "use during game downtime",
+        "using terminal outside game"
+      ]
+    },
+    {
+      "question": "איזה features היית רוצה שנוסיף?",
+      "topics": [
+        "overlay covers game UI",
+        "want smaller or transparent window",
+        "want voice input",
+        "want specific themes or designs",
+        "want mobile companion app",
+        "want macros or shortcuts",
+        "want shorter answers or summaries",
+        "want to see diffs or images",
+        "want to choose window position",
+        "want reminder to use Claudictive",
+        "font size or style issues",
+        "Claudictive needs to ask less permissions"
+      ]
+    },
+    {
+      "question": "מה דעתך על voice input?",
+      "topics": [
+        "want voice input"
+      ]
+    },
+    {
+      "question": "מאחד עד עשר, כמה את/ה אוהב/ת את הרעיון?",
+      "topics": [
+        "likes the idea"
+      ]
+    },
+    {
+      "question": "היית משלם/ת על Claudictive? כמה?",
+      "topics": [
+        "price point for payment",
+        "not paying because unemployed"
+      ]
+    },
+    {
+      "question": "היית ממליץ/ה על Claudictive לחבר?",
+      "topics": []
+    },
+    {
+      "question": "יש עוד משהו שתרצה/י להוסיף?",
+      "topics": []
+    }
+  ]
+}

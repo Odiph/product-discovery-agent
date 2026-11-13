@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "04-shira.txt",
+  "import_sha256": "57d93933dfbf0ed8127c2d0c91f9d31bad2b05a04c7ef16720f1ec19b5a4ffe3",
+  "imported_at": "2026-11-11T00:19:52.653+02:00",
+  "started_at": "2026-06-15T00:00:00.000+03:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-06-15T00:17:55.000+03:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Shira": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Shira"
+}

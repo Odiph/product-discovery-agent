@@ -45,7 +45,10 @@ Claude Code since. Say that; do not work around it.
   `list_projects` and on each entry of a response's `extraction` list; a fact
   takes the `corpus` of the node named in its `project`. `real` is customer
   evidence. `demo` is hand-authored demonstration material that reads exactly
-  like research: never report it as a finding. `undeclared` means nobody has
+  like research: never report it as a finding. In a walkthrough of a demo
+  node (for example after `/start` loads the mock interviews) you may show
+  its results, provided every answer says they come from mock interviews,
+  not real users. `undeclared` means nobody has
   said, so treat it as not established. With `scope: subtree`, check every
   node: one response can mix them.
 - **Check `unextracted_projects` before reading a zero.** A project whose

@@ -77,6 +77,13 @@ CORPUS_UNDECLARED = "undeclared"
 ALL_CORPUS_KINDS = frozenset({CORPUS_DEMO, CORPUS_REAL, CORPUS_UNDECLARED})
 CORPUS_KEY = "corpus"
 
+MOCK_LABEL = "Mock interviews (synthetic, not real users):"
+"""Printed first by every surface that shows a `demo` node's results."""
+
+
+def is_demo_node(node_dir: Path) -> bool:
+    return corpus_kind_of(Path(node_dir)) == CORPUS_DEMO
+
 
 def is_unfiled(project_path: str) -> bool:
     """Whether a path names the unfiled bucket ITSELF.
@@ -119,6 +126,31 @@ def _declared_string(node_dir: Path, key: str) -> "Optional[str]":
     per-section, for the same reason: one bad file among twenty must not cost
     the operator the other nineteen, and they are most likely reaching for the
     picker BECAUSE something is wrong."""
+    data = _read_meta(node_dir)
+    value = data.get(key) if data is not None else None
+    return value if isinstance(value, str) else None
+
+
+PINNABLE_MODELS = ("extract", "judge")
+
+
+def pinned_models(node_dir: Path) -> "dict[str, str]":
+    """The models a node pins under `project.json`'s "models" object: only
+    "extract" and "judge", only non-empty strings. Anything else is dropped,
+    never raised, and the environment then decides. The committed demo pins
+    the models its cached judgments were made with, so those caches stay
+    fresh whatever this machine configures."""
+    data = _read_meta(Path(node_dir))
+    models = data.get("models") if data is not None else None
+    if not isinstance(models, dict):
+        return {}
+    return {name: value for name, value in models.items()
+            if name in PINNABLE_MODELS and isinstance(value, str) and value.strip()}
+
+
+def _read_meta(node_dir: Path) -> "Optional[dict]":
+    """A node's `project.json` as a dict, or `None` on any failure (see
+    `_declared_string` for why every failure is `None`)."""
     path = node_dir / PROJECT_META_FILENAME
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -134,10 +166,7 @@ def _declared_string(node_dir: Path, key: str) -> "Optional[str]":
             PROJECT_META_FILENAME, type(exc).__name__,
         )
         return None
-    if not isinstance(data, dict):
-        return None
-    value = data.get(key)
-    return value if isinstance(value, str) else None
+    return data if isinstance(data, dict) else None
 
 
 def _declared_status(node_dir: Path) -> "Optional[str]":

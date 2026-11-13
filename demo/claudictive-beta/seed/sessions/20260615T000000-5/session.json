@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "06-noa.txt",
+  "import_sha256": "4a06b5be765341892edc7399fa805d40d1e32887a96b3ed756a6b6d2d5017942",
+  "imported_at": "2026-11-11T00:19:52.653+02:00",
+  "started_at": "2026-06-15T00:00:00.000+03:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-06-15T00:18:54.000+03:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Noa": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Noa"
+}

@@ -18,6 +18,7 @@ from typing import Callable, Optional, Sequence
 
 from app.coach import context as coach_context
 from app.coach import corpus as coach_corpus
+from app.coach.follow_judge import FollowItem
 from app.coach import missed as missed_mod
 from app.coach import mirror_load
 from app.coach import walked_past
@@ -38,13 +39,22 @@ def read_claims(context_dir: Path) -> "tuple[missed_mod.CitedClaim, ...]":
 
 def load(context_dir: Path, sessions_root: Path, *, groups: "Optional[Sequence]" = None,
          claims: "Optional[Sequence[missed_mod.CitedClaim]]" = None,
-         judge: "Optional[Callable[[PromptItem], Optional[bool]]]" = None) -> missed_mod.Report:
+         judge: "Optional[Callable[[PromptItem], Optional[bool]]]" = None,
+         follow_judge: "Optional[Callable[[FollowItem], Optional[bool]]]" = None) -> missed_mod.Report:
     """`groups`: the model's topics, or `None` for the lexical grouping.
     `claims`: `read_claims`' result when the caller already has it.
     `judge`: the model's prompted judgment (`missed.find`), or `None` for
-    the word rule."""
+    the word rule. `follow_judge`: the model's follow-up judgment, likewise."""
     claims, turns_by_session, kwargs = _inputs(context_dir, sessions_root, groups=groups, claims=claims)
-    return missed_mod.find(claims, turns_by_session, judge=judge, **kwargs)
+    return missed_mod.find(claims, turns_by_session, judge=judge, follow_judge=follow_judge, **kwargs)
+
+
+def follow_items(context_dir: Path, sessions_root: Path, *, groups: "Optional[Sequence]" = None,
+                 claims: "Optional[Sequence[missed_mod.CitedClaim]]" = None) -> "tuple[FollowItem, ...]":
+    """What `load(..., follow_judge=...)` would ask: topic labels and the
+    interviewer's turns after each occurrence, never the interviewee's words."""
+    claims, turns_by_session, kwargs = _inputs(context_dir, sessions_root, groups=groups, claims=claims)
+    return missed_mod.follow_items(claims, turns_by_session, **kwargs)
 
 
 def prompt_items(context_dir: Path, sessions_root: Path, *, groups: "Optional[Sequence]" = None,

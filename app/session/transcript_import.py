@@ -39,7 +39,7 @@ import shutil
 from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Callable, Optional
 
 from app.coach.language import LANGUAGE_ENGLISH, LANGUAGE_HEBREW
 from app.kb import spoken
@@ -121,10 +121,9 @@ def plan_file(path: Path, *, me: str) -> FilePlan:
     path = Path(path)
     kind = classify(path)
     if kind == "audio":
-        raise ImportRefused(
-            "is an audio file -- importing recordings (transcribe, then diarize) is not built yet; "
-            "import its transcript export (.vtt, .srt or a `Name: text` .txt) instead"
-        )
+        # The `import` command routes a recording to app/session/audio_import.py
+        # before it gets here; this is the answer for any other caller.
+        raise ImportRefused("is an audio file, not a transcript export")
     if kind != "transcript":
         raise ImportRefused(
             f"unsupported file type {path.suffix or '(none)'}; supported: "
@@ -258,7 +257,7 @@ def find_duplicate(sessions_root: Path, sha256: str) -> Optional[str]:
     return None
 
 
-def _iso(moment: datetime) -> str:
+def iso(moment: datetime) -> str:
     # The live store's `_now_iso` shape: local offset, milliseconds.
     return moment.astimezone().isoformat(timespec="milliseconds")
 
@@ -276,10 +275,10 @@ def session_metadata(
         "source": f"file-import (transcript: {plan.format})",
         "imported_from": plan.file_name,
         HASH_KEY: plan.sha256,
-        "imported_at": _iso(datetime.now()),
-        "started_at": _iso(started),
+        "imported_at": iso(datetime.now()),
+        "started_at": iso(started),
         "started_at_source": started_at_source,
-        "closed_at": _iso(started + timedelta(seconds=duration_s)),
+        "closed_at": iso(started + timedelta(seconds=duration_s)),
         "times_synthetic": plan.times_synthetic,
         "speaker_roles": {
             name: INTERVIEWER if name == plan.me else INTERVIEWEE for name, _ in plan.speaker_turns
@@ -295,37 +294,53 @@ def session_metadata(
 def write_session(sessions_root: Path, plan: FilePlan, metadata: "dict[str, Any]", *, started: datetime) -> Path:
     """Write the session and return its directory. The id is minted from
     `started`, disambiguated like a live one."""
+    written_at = iso(datetime.now())
+    lines = []
+    for seq, turn in enumerate(plan.turns):
+        record = SegmentRecord(
+            kind="segment",
+            seq=seq,
+            speaker=turn.role,
+            text=turn.text,
+            # REAL for a subtitle file (the cue's start), synthetic
+            # otherwise and flagged in session.json -- gate 35 names this
+            # module as a writer for that reason.
+            audio_start_s=turn.start_s,
+            audio_end_s=turn.end_s,
+            # No pipeline ran: ready the moment it ended, zero latency.
+            ready_wall_s=turn.end_s,
+            latency_s=0.0,
+            detected_language=detected_language(turn.text),
+            engine=IMPORT_ENGINE,
+            written_at=written_at,
+        )
+        lines.append(json.dumps(asdict(record), ensure_ascii=False))
+    return write_session_dir(sessions_root, metadata, started=started, transcript="".join(line + "\n" for line in lines))
+
+
+def write_session_dir(
+    sessions_root: Path,
+    metadata: "dict[str, Any]",
+    *,
+    started: datetime,
+    transcript: str,
+    add_files: Optional[Callable[[Path], None]] = None,
+) -> Path:
+    """The whole-session atomic write every import shares: the transcript, the
+    metadata and whatever `add_files` puts beside them go into a hidden
+    temporary directory that is renamed into place."""
     root = Path(sessions_root)
     root.mkdir(parents=True, exist_ok=True)
     final_dir = create_session_dir(root, started)
     temp_dir = root / f"{_TEMP_PREFIX}{final_dir.name}.tmp"
     if temp_dir.exists():
-        # Only ever this module's own leftover from a crash mid-import.
+        # Only ever an import's own leftover from a crash mid-write.
         shutil.rmtree(temp_dir)
     temp_dir.mkdir()
     try:
-        written_at = _iso(datetime.now())
-        lines = []
-        for seq, turn in enumerate(plan.turns):
-            record = SegmentRecord(
-                kind="segment",
-                seq=seq,
-                speaker=turn.role,
-                text=turn.text,
-                # REAL for a subtitle file (the cue's start), synthetic
-                # otherwise and flagged in session.json -- gate 35 names this
-                # module as a writer for that reason.
-                audio_start_s=turn.start_s,
-                audio_end_s=turn.end_s,
-                # No pipeline ran: ready the moment it ended, zero latency.
-                ready_wall_s=turn.end_s,
-                latency_s=0.0,
-                detected_language=detected_language(turn.text),
-                engine=IMPORT_ENGINE,
-                written_at=written_at,
-            )
-            lines.append(json.dumps(asdict(record), ensure_ascii=False))
-        _write_synced(temp_dir / TRANSCRIPT_FILENAME, "".join(line + "\n" for line in lines))
+        if add_files is not None:
+            add_files(temp_dir)
+        _write_synced(temp_dir / TRANSCRIPT_FILENAME, transcript)
         _write_synced(temp_dir / METADATA_FILENAME, json.dumps(metadata, indent=2, ensure_ascii=False))
         os.replace(temp_dir, final_dir)
     except BaseException:

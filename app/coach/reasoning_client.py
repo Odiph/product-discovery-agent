@@ -40,6 +40,8 @@ reads the environment fresh on every call, exactly like
 from __future__ import annotations
 
 import os
+from pathlib import Path
+from typing import Optional
 
 import anthropic
 
@@ -117,7 +119,7 @@ def resolve_model() -> str:
     return os.environ.get("COACH_MODEL") or DEFAULT_MODEL
 
 
-def resolve_extract_model() -> str:
+def resolve_extract_model(context_dir: "Optional[Path]" = None) -> str:
     """The model id the OFFLINE extraction stage should use.
 
     Separate from `resolve_model` for one reason: the live coach must answer
@@ -138,17 +140,47 @@ def resolve_extract_model() -> str:
 
     ⚠️ There is ONE client construction site (`build_client`), so `EXTRACT_
     MODEL` must name a model THE SAME ENDPOINT serves. It selects a model, it
-    does not select a provider."""
-    return os.environ.get("EXTRACT_MODEL") or resolve_model()
+    does not select a provider.
+
+    `context_dir` given: a model the owning node pins (`project.json`
+    "models", see `project_meta.pinned_models`) beats the environment."""
+    return _pin(context_dir, "extract") or os.environ.get("EXTRACT_MODEL") or resolve_model()
 
 
-def resolve_judge_model() -> str:
+def resolve_judge_model(context_dir: "Optional[Path]" = None) -> str:
     """`JUDGE_MODEL`: the model for the two judgments over your own questions
     (`missed --group model`'s prompted judgment, `coverage`). Unset, it is the
     extract model. Measured 2026-11-11 on the mock interviews: gemini-2.5-flash
     swung from 7 to 3 interviews on the planted topic between two runs of the
-    same prompt; claude-sonnet-5.5 matched the answer key."""
-    return os.environ.get("JUDGE_MODEL") or resolve_extract_model()
+    same prompt; claude-sonnet-5.5 matched the answer key. A node's pin
+    beats the environment, as in `resolve_extract_model`."""
+    pinned = _pin(context_dir, "judge")
+    if pinned:
+        return pinned
+    if _pin(context_dir, "extract"):
+        return resolve_extract_model(context_dir)
+    return os.environ.get("JUDGE_MODEL") or resolve_extract_model(context_dir)
+
+
+PIN_NOTE = "pinned by this project's project.json \"models\""
+
+
+def pin_note(context_dir: "Optional[Path]") -> str:
+    """Said wherever a node's pin chose the model: before the user pays, and
+    when the call fails. A demo pin names a router-style id that a direct
+    Anthropic key does not serve."""
+    if context_dir is None or not _pin(context_dir, "extract") and not _pin(context_dir, "judge"):
+        return ""
+    return (f" ({PIN_NOTE}; if your endpoint does not serve it, remove \"models\" from that "
+            f"project.json to use your own)")
+
+
+def _pin(context_dir: "Optional[Path]", name: str) -> "Optional[str]":
+    if context_dir is None:
+        return None
+    from app.project_meta import pinned_models  # lazy: keeps this module's imports light
+
+    return pinned_models(Path(context_dir).parent).get(name)
 
 
 def with_timeout(client: "anthropic.Anthropic", timeout_s: float) -> "anthropic.Anthropic":

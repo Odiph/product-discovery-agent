@@ -1,0 +1,12 @@
+[
+  {"id": "s1", "order": 0, "text": "ספר/י לי קצת על עצמך ועל המשחקים שאת/ה משחק/ת."},
+  {"id": "s2", "order": 1, "text": "איך היה תהליך ההתקנה והonboarding של Claudictive?"},
+  {"id": "s3", "order": 2, "text": "כמה פעמים בשבוע את/ה משתמש/ת בClaudictive?"},
+  {"id": "s4", "order": 3, "text": "מה את/ה עושה עם Claudictive בדרך כלל?"},
+  {"id": "s5", "order": 4, "text": "איזה features היית רוצה שנוסיף?"},
+  {"id": "s6", "order": 5, "text": "מה דעתך על voice input?"},
+  {"id": "s7", "order": 6, "text": "מאחד עד עשר, כמה את/ה אוהב/ת את הרעיון?"},
+  {"id": "s8", "order": 7, "text": "היית משלם/ת על Claudictive? כמה?"},
+  {"id": "s9", "order": 8, "text": "היית ממליץ/ה על Claudictive לחבר?"},
+  {"id": "s10", "order": 9, "text": "יש עוד משהו שתרצה/י להוסיף?"}
+]

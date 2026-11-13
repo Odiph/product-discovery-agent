@@ -1,0 +1,1573 @@
+{
+  "version": 1,
+  "model": "anthropic/claude-sonnet-5.5",
+  "key": "b2e77713143fdf5065bbde59b0d3794ecb62c4ee5ce2b19c6be775778cc5c3b5",
+  "items": [
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "תודה רבה יוני, זה ממש עזר."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ולמה לא עשר?"
+        },
+        {
+          "n": 3,
+          "text": "מעולה, מעולה. היית משלמת על זה?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 4,
+          "text": "מעולה! וכמה מהם משתמשים?"
+        },
+        {
+          "n": 5,
+          "text": "הבנתי. מעולה, מעולה. ומה עם themes?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה! היית משלמת?"
+        },
+        {
+          "n": 2,
+          "text": "הבנתי. ונגיד שני דולר?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "תודה רבה רוני, ובהצלחה בחיפוש עבודה!"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ומה יעלה את זה לעשר?"
+        },
+        {
+          "n": 2,
+          "text": "הבנתי, יציבות. מעולה. היית משלמת?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "What would make the execution a ten?"
+        },
+        {
+          "n": 2,
+          "text": "Got it, latency. Great. Would you pay for it?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Thank you so much Daniel, this was super helpful."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. היית ממליצה?"
+        },
+        {
+          "n": 2,
+          "text": "ואיך היית מתארת את זה להם?"
+        },
+        {
+          "n": 3,
+          "text": "מעולה, מעולה. ומה לגבי העיצוב?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 2,
+          "text": "ומה היה גורם לזה לחסוך לך זמן?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה! אז ספרי לי קצת על עצמך."
+        },
+        {
+          "n": 2,
+          "text": "וואו. ואיך את משתמשת בClaude Code?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה! ולמה את חושבת שאת משתמשת בו רק כמה דקות בשבוע?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 4,
+          "text": "מעולה! ואיך היית מתאר את זה?"
+        },
+        {
+          "n": 5,
+          "text": "מעולה, מעולה. ומה הדבר הכי פחות טוב?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "What would make it a ten?"
+        },
+        {
+          "n": 2,
+          "text": "Ah, focus. Noted. Great. Would you pay for it?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "likes the idea",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Thanks so much Lior!"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. עוד משהו?"
+        },
+        {
+          "n": 3,
+          "text": "רשמתי. חלון קטן, theme. מעולה."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. עוד משהו?"
+        },
+        {
+          "n": 2,
+          "text": "רשמתי. חלון קטן, theme. מעולה."
+        },
+        {
+          "n": 3,
+          "text": "diff, אוקיי. מעולה. עכשיו, שאלה על הטכנולוגיה, השתמשת פעם בoverlay אחר? כמו של Discord?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. ומה עם mobile app?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. ומה עם mobile app?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. ומה את הכי אוהבת בזה?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. רשמתי voice. עוד משהו?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה, מעולה. בוא נעבור הלאה. מה החלק האהוב עליך?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 1,
+          "text": "summary קצר, מעולה. ומה עם themes?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Great. Anything else?"
+        },
+        {
+          "n": 3,
+          "text": "A status line, great, noted. What about themes?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Great. Anything else?"
+        },
+        {
+          "n": 2,
+          "text": "A status line, great, noted. What about themes?"
+        },
+        {
+          "n": 3,
+          "text": "Great. Let's move on. On a scale of one to ten, how much do you like the idea?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. את חושבת שvoice יגרום לך להשתמש בזה יותר?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. ומה הכי פחות?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 2,
+          "text": "הבנתי. ומה דעתך על themes?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה! ולמה את חושבת שאת משתמשת בו רק כמה דקות בשבוע?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Got it. Great. Let's move to the next question. One to ten, how much do you like the idea?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want voice input",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it. Great. Let's move to the next question. One to ten, how much do you like the idea?"
+        },
+        {
+          "n": 2,
+          "text": "What would make it a ten?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. ומה היה גורם לך להשתמש בזה יותר?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 1,
+          "text": "הבנתי. ומה היה גורם לך לשלם יותר?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה! וכמה מהם משתמשים?"
+        },
+        {
+          "n": 3,
+          "text": "הבנתי. מעולה, מעולה. ומה עם themes?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. ואיך היית מתארת את זה?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Great. Would you recommend it to a friend?"
+        },
+        {
+          "n": 2,
+          "text": "Great, great. Do you use the notifications feature?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. היית ממליצה?"
+        },
+        {
+          "n": 3,
+          "text": "ואיך היית מתארת את זה להם?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה! ואם זה היה עשר?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה! ואיך היית מתאר את זה?"
+        },
+        {
+          "n": 3,
+          "text": "מעולה, מעולה. ומה הדבר הכי פחות טוב?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "price point for payment",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha great. Would you recommend it?"
+        },
+        {
+          "n": 2,
+          "text": "Exactly. How would you describe it to them?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want specific themes or designs",
+      "turns": [
+        {
+          "n": 1,
+          "text": "רשמתי. חלון קטן, theme. מעולה."
+        },
+        {
+          "n": 2,
+          "text": "diff, אוקיי. מעולה. עכשיו, שאלה על הטכנולוגיה, השתמשת פעם בoverlay אחר? כמו של Discord?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want specific themes or designs",
+      "turns": [
+        {
+          "n": 1,
+          "text": "themes וטקסט, מעולה. ומה לגבי voice?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want specific themes or designs",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה, מעולה. בוא נעבור הלאה. מה החלק האהוב עליך?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. והחלק הכי פחות אהוב?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want specific themes or designs",
+      "turns": [
+        {
+          "n": 1,
+          "text": "theme בהיר, רשמתי. מעולה. משהו על performance?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. ומה עם mobile app?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want specific themes or designs",
+      "turns": [
+        {
+          "n": 5,
+          "text": "מעולה! ואיך היית מתאר את זה?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want specific themes or designs",
+      "turns": [
+        {
+          "n": 1,
+          "text": "חח מעולה. תודה רבה עומר!"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want specific themes or designs",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Got it. Great. Anything you'd remove?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ובפעמים האלה, מה אתה עושה עם זה?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. איזה features חסרים לך?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ולמה זה ירד?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "הבנתי. מעולה, מעולה. ומה עם themes?"
+        },
+        {
+          "n": 2,
+          "text": "ומה דעתך על mobile companion app?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ובפעמים האלה, מה עשית?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ולמה בהתחלה ניסית הרבה?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ומה את עושה איתו?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. ומה הכי מפריע לך בשימוש?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And what did you do with it those times?"
+        },
+        {
+          "n": 2,
+          "text": "Great. What features would you like to see?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ומה את עושה בדקה-שתיים האלה?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. איך את מרגישה עם המהירות שלו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use less over time",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And what do you do with it?"
+        },
+        {
+          "n": 2,
+          "text": "Great. What features would you like?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. איזה features חסרים לך?"
+        },
+        {
+          "n": 2,
+          "text": "רגע, מה זאת אומרת כיסה? תספרי לי בדיוק מתי זה קרה."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 2,
+          "text": "plugin לUnreal, מעניין, רשמתי. עוד משהו?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. והחלק הכי פחות אהוב?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Great. What features would you like to see?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. ואיזה features את רוצה?"
+        },
+        {
+          "n": 2,
+          "text": "וואו, מעולה. רשמתי. עוד?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 2,
+          "text": "screenshot, מעניין. רשמתי. עוד?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה! ומה אתה שואל?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. משהו שמפריע לך?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. משהו שמפריע לך?"
+        },
+        {
+          "n": 2,
+          "text": "רגע, תראה לי, מה זאת אומרת מכסה? באיזה מצב זה קרה?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "use during game downtime",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Great. What features would you like?"
+        },
+        {
+          "n": 2,
+          "text": "Compact mode, great. What else?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "היה משהו שנתקעת בו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 2,
+          "text": "ובפעמים האלה, מה אתה עושה עם זה?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "הבנתי, רשמתי. מעולה. משהו נוסף?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. בואי נעבור לשאלה הבאה. כמה פעמים את משתמשת?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "הבנתי. ומשהו נוסף בהתקנה?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. בואי נעבור לשאלה הבאה. כמה פעמים את משתמשת בזה?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it. Great. Let's move to the next question. How often do you use it?"
+        },
+        {
+          "n": 2,
+          "text": "And what did you do with it those times?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it. Great. And final question, anything else you want to tell me?"
+        },
+        {
+          "n": 2,
+          "text": "Thank you so much Daniel, this was super helpful."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "משהו ספציפי?"
+        },
+        {
+          "n": 2,
+          "text": "הבנתי. מעולה. בואי נעבור הלאה. כמה פעמים את משתמשת בזה?"
+        },
+        {
+          "n": 3,
+          "text": "ומה את עושה בדקה-שתיים האלה?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "הבנתי. מעולה. בואי נעבור הלאה. כמה פעמים את משתמשת בזה?"
+        },
+        {
+          "n": 2,
+          "text": "ומה את עושה בדקה-שתיים האלה?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "installation and onboarding issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it. Anything else?"
+        },
+        {
+          "n": 2,
+          "text": "Great. Let's move on. How often do you use it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want smaller or transparent window",
+      "turns": [
+        {
+          "n": 1,
+          "text": "רשמתי. חלון קטן, theme. מעולה."
+        },
+        {
+          "n": 2,
+          "text": "diff, אוקיי. מעולה. עכשיו, שאלה על הטכנולוגיה, השתמשת פעם בoverlay אחר? כמו של Discord?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want smaller or transparent window",
+      "turns": [
+        {
+          "n": 1,
+          "text": "רגע, מה זאת אומרת כיסה? תספרי לי בדיוק מתי זה קרה."
+        },
+        {
+          "n": 2,
+          "text": "והחלון נשאר פתוח? או שסגרת אותו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "want smaller or transparent window",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. רשמתי. עוד features?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want smaller or transparent window",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה, רשמתי. עוד features?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want smaller or transparent window",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה, מעולה. בוא נעבור הלאה. מה החלק האהוב עליך?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. והחלק הכי פחות אהוב?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want smaller or transparent window",
+      "turns": [
+        {
+          "n": 1,
+          "text": "A status line, great, noted. What about themes?"
+        },
+        {
+          "n": 2,
+          "text": "Great. Let's move on. On a scale of one to ten, how much do you like the idea?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want smaller or transparent window",
+      "turns": [
+        {
+          "n": 1,
+          "text": "theme בהיר, רשמתי. מעולה. משהו על performance?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. ומה עם mobile app?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want smaller or transparent window",
+      "turns": [
+        {
+          "n": 1,
+          "text": "רשמתי, לשמור גודל. מעולה. משהו על ה-notifications?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. ומה דעתך על mobile companion app?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "performance issues",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. יש משהו שלא אהבת בכלל?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "performance issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "הבנתי, רשמתי FPS. מעולה. אוקיי, שאלה אחרונה כמעט. היית משתמש בזה גם בטורניר?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. משהו אחרון?"
+        },
+        {
+          "n": 3,
+          "text": "תודה רבה איתי!"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "performance issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it, latency. Great. Would you pay for it?"
+        },
+        {
+          "n": 2,
+          "text": "Haha. And how much would you pay?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "performance issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. ומה עם mobile app?"
+        },
+        {
+          "n": 2,
+          "text": "חח הוגן. בואי נעבור לשאלה האחרונה. משהו שלא שאלתי?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "performance issues",
+      "turns": [
+        {
+          "n": 2,
+          "text": "screenshot, מעניין. רשמתי. עוד?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "performance issues",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Ah, focus. Noted. Great. Would you pay for it?"
+        },
+        {
+          "n": 2,
+          "text": "Haha great. Would you recommend it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want mobile companion app",
+      "turns": [
+        {
+          "n": 2,
+          "text": "ולמה לא עשר?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want mobile companion app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. אוקיי, מה הדבר הכי טוב בClaudictive?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. והדבר הכי פחות טוב?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want mobile companion app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. ומה את הכי אוהבת בזה?"
+        },
+        {
+          "n": 2,
+          "text": "חח מעולה. ואיך הFPS? הרגשת משהו?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want mobile companion app",
+      "turns": [
+        {
+          "n": 2,
+          "text": "ומה יעלה את זה לעשר?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want mobile companion app",
+      "turns": [
+        {
+          "n": 2,
+          "text": "הבנתי. ומה דעתך על themes?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want mobile companion app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מעולה. אוקיי, שאלה כמעט אחרונה. מה הכי חשוב שנשפר?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. ומשהו אחרון שאת רוצה להגיד?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "והחלון נשאר פתוח? או שסגרת אותו?"
+        },
+        {
+          "n": 2,
+          "text": "ומה עשית אחרי זה? הזזת אותו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "זה ממש חשוב, תודה. אז המיקום של החלון זה בעיה אמיתית."
+        },
+        {
+          "n": 2,
+          "text": "מעולה. רשמתי. עוד features?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "חח בטוח. תודה רבה מאיה, זה היה ממש עוזר."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "רגע, מה זאת אומרת יושב על הminimap? מתי זה קרה לך? תתאר לי."
+        },
+        {
+          "n": 2,
+          "text": "ומה עשית?"
+        },
+        {
+          "n": 3,
+          "text": "חח. וזה קרה הרבה?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ומה עשית?"
+        },
+        {
+          "n": 2,
+          "text": "חח. וזה קרה הרבה?"
+        },
+        {
+          "n": 3,
+          "text": "ואם היית יכול לבחור איפה הוא נפתח, איפה היית שם אותו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "חח. וזה קרה הרבה?"
+        },
+        {
+          "n": 2,
+          "text": "ואם היית יכול לבחור איפה הוא נפתח, איפה היית שם אותו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ואם היית יכול לבחור איפה הוא נפתח, איפה היית שם אותו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה, רשמתי. עוד features?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "חח קיבלתי. תודה רבה גל!"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "רגע, תסבירי לי. מתי זה קרה בפעם האחרונה? מה בדיוק ראית?"
+        },
+        {
+          "n": 2,
+          "text": "וזה קרה כמה פעמים?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "וזה קרה כמה פעמים?"
+        },
+        {
+          "n": 2,
+          "text": "וניסית להזיז אותו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "וניסית להזיז אותו?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "חח קיבלתי. תודה רבה שירה!"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "חח, רגע, מה זאת אומרת כיסה? איפה בדיוק הוא נפתח?"
+        },
+        {
+          "n": 2,
+          "text": "וכמה זמן הוא נשאר פתוח?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "וכמה זמן הוא נשאר פתוח?"
+        },
+        {
+          "n": 2,
+          "text": "ומה היית רוצה שיקרה במקום?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 2,
+          "text": "יש notifications כבר, ראית?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "חח רשמתי. תודה רבה אבי, ובהצלחה עם האיסוף."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "רגע, תראה לי, מה זאת אומרת מכסה? באיזה מצב זה קרה?"
+        },
+        {
+          "n": 2,
+          "text": "חח אוי. וזה קורה גם בStardew?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "חח אוי. וזה קורה גם בStardew?"
+        },
+        {
+          "n": 2,
+          "text": "והשעון חשוב לך?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "overlay covers game UI",
+      "turns": [
+        {
+          "n": 1,
+          "text": "והשעון חשוב לך?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "typing during game is impossible",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. רשמתי voice. עוד משהו?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "typing during game is impossible",
+      "turns": [
+        {
+          "n": 2,
+          "text": "מעולה. ומה הכי פחות?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "typing during game is impossible",
+      "turns": [
+        {
+          "n": 2,
+          "text": "חח רשמתי. תודה רבה אבי, ובהצלחה עם האיסוף."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "typing during game is impossible",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it. Great. Let's move to the next question. One to ten, how much do you like the idea?"
+        },
+        {
+          "n": 2,
+          "text": "What would make it a ten?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want to see diffs or images",
+      "turns": [
+        {
+          "n": 1,
+          "text": "diff, אוקיי. מעולה. עכשיו, שאלה על הטכנולוגיה, השתמשת פעם בoverlay אחר? כמו של Discord?"
+        },
+        {
+          "n": 2,
+          "text": "ואיך Claudictive בהשוואה?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want to see diffs or images",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Diffs, great. Anything you'd remove?"
+        },
+        {
+          "n": 2,
+          "text": "Got it. Great. And final question, anything else you want to tell me?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "want to see diffs or images",
+      "turns": [
+        {
+          "n": 1,
+          "text": "וואו, מעולה. רשמתי. עוד?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. את חושבת שvoice יגרום לך להשתמש בזה יותר?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "notifications are useful",
+      "turns": [
+        {
+          "n": 1,
+          "text": "מגניב. טוב, מעולה. בוא נעבור לשאלה האחרונה. יש עוד משהו שאתה רוצה להגיד לי?"
+        },
+        {
+          "n": 2,
+          "text": "תודה רבה יוני, זה ממש עזר."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "notifications are useful",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Great. And what did you dislike the most?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "notifications are useful",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Great. And the thing you like least?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "do not care about themes",
+      "turns": [
+        {
+          "n": 1,
+          "text": "ומה דעתך על mobile companion app?"
+        },
+        {
+          "n": 2,
+          "text": "מעולה. אוקיי, מה הדבר הכי טוב בClaudictive?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "do not care about themes",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Great. Let's move on. On a scale of one to ten, how much do you like the idea?"
+        },
+        {
+          "n": 2,
+          "text": "What would make the execution a ten?"
+        }
+      ],
+      "followed": false
+    }
+  ]
+}

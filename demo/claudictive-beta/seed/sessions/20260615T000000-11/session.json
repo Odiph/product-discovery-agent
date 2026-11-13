@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "12-roni.txt",
+  "import_sha256": "59af81c3672c7b432de3dd3f2d95ef415db9c4940a5128300fcff6e5e539c1fd",
+  "imported_at": "2026-11-11T00:19:52.653+02:00",
+  "started_at": "2026-06-15T00:00:00.000+03:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-06-15T00:14:56.000+03:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Roni": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Roni"
+}

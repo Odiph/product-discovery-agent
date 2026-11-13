@@ -222,3 +222,20 @@ def test_the_skill_teaches_the_corpus_distinction():
     skill = (PLUGIN_ROOT / "skills" / "discovery-evidence" / "SKILL.md").read_text(encoding="utf-8")
     for term in ("demo", "undeclared", "unextracted_projects", "is_scorable", "author"):
         assert term in skill, f"the skill no longer mentions {term!r}"
+
+
+def test_start_ends_in_an_answer_or_one_next_step():
+    text = (PLUGIN_ROOT / "commands" / "start.md").read_text(encoding="utf-8")
+    for must in ("`list_projects`", "python -m app demo --yes", "hint", "mock interviews",
+                 "/link-discovery", "/evidence", "/interview-gap"):
+        assert must in text, f"/start no longer teaches {must!r}"
+    assert "never report" in text.lower() or "not real users" in text.lower()
+
+
+def test_the_first_prompts_work_on_the_demo_without_a_link():
+    start = (PLUGIN_ROOT / "commands" / "start.md").read_text(encoding="utf-8")
+    assert "python -m app missed --project claudictive-beta" in start
+    for command in ("evidence.md", "interview-gap.md"):
+        text = (PLUGIN_ROOT / "commands" / command).read_text(encoding="utf-8")
+        assert "corpus: demo" in text and "mock interviews" in text, (
+            f"{command} stops a first-run demo user who has no .discovery-copilot.json")

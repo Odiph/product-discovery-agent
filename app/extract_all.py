@@ -13,9 +13,8 @@ again. That costs one call; inventing a marker would be a second record of the
 same fact that could disagree with the first.
 
 **The estimate is tokens, not money.** The request a session would send is
-assembled exactly (`assemble_extract_request`) and sized at four characters a
-token -- `benchmark/eval/cost_model.py`'s estimator, +/-15%, and low for
-Hebrew. No price is printed: the extraction model is configurable
+assembled exactly (`assemble_extract_request`) and sized by
+`app.coach.token_estimate`, shared with every other preview. No price is printed: the extraction model is configurable
 (`EXTRACT_MODEL`, `COACH_BASE_URL`), and a dollar figure for the wrong model
 would be the most confident wrong number on the screen.
 """
@@ -23,7 +22,6 @@ would be the most confident wrong number on the screen.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 from typing import Callable
@@ -31,14 +29,13 @@ from typing import Callable
 from app.coach import corpus as coach_corpus
 from app.coach import corpus_store as coach_corpus_store
 from app.coach import demotion_store as coach_demotion_store
-from app.coach import reasoning_client
+from app.coach import reasoning_client, token_estimate
 from app.coach import rejection_store as coach_rejection_store
 from app.coach.extract import assemble_extract_request
 from app.session import evidence as evidence_mod
 from app.session.reader import MalformedRecordError, list_session_ids, read_session
 from app.session.store import SegmentRecord
 
-CHARS_PER_TOKEN = 4.0
 OK = "extracted"
 REJECTIONS = "extracted-with-rejections"
 FAILED = "failed"
@@ -87,7 +84,7 @@ def _estimate_tokens(segments, hypotheses, *, max_tokens: int) -> int:
         transcript=segments, hypotheses=hypotheses,
         model=reasoning_client.resolve_extract_model(), max_tokens=max_tokens,
     )
-    return round(len(json.dumps(request, ensure_ascii=False)) / CHARS_PER_TOKEN)
+    return token_estimate.estimate(request)
 
 
 def run(args: argparse.Namespace, cfg, extract_session: Callable[..., str]) -> int:
@@ -122,7 +119,7 @@ def run(args: argparse.Namespace, cfg, extract_session: Callable[..., str]) -> i
     for session_id, tokens in pending:
         print(f"  {session_id}  ~{tokens:,} input tokens")
     print(f"  total ~{total:,} input tokens, plus up to {cfg.coach_extract_max_tokens:,} output tokens each "
-          f"(estimated at {CHARS_PER_TOKEN:.0f} characters a token, +/-15%)")
+          f"({token_estimate.BASIS})")
     if not args.yes:
         print("Nothing called. Re-run with --yes to extract them.")
         return 0

@@ -34,14 +34,13 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Sequence
 
-from app.coach import reasoning_client
+from app.coach import reasoning_client, token_estimate
 
 logger = logging.getLogger(__name__)
 
 TOOL_NAME = "report_guide_questions_asked"
 DEFAULT_MAX_TOKENS = 4096
 DEFAULT_TIMEOUT_S = 180.0
-CHARS_PER_TOKEN = 4.0
 _UNTRUSTED_STOP_REASONS = frozenset({"refusal", "max_tokens", "pause_turn", "model_context_window_exceeded"})
 
 
@@ -181,7 +180,7 @@ def assemble_request(survey_questions: "Sequence[tuple[str, str]]", session_turn
 
 
 def estimate_input_tokens(request: dict) -> int:
-    return round(len(json.dumps(request, ensure_ascii=False)) / CHARS_PER_TOKEN)
+    return token_estimate.estimate(request)
 
 
 def _raw(response: Any) -> "list[tuple[str, list[str]]]":

@@ -1,0 +1,30 @@
+[
+  {
+    "session_id": "20260615T000000-1",
+    "claim": "Once, the Claudictive window covered the kill feed and half of the HUD, preventing me from seeing an enemy approaching from behind.",
+    "reason": "unlocatable-quote",
+    "seqs": [
+      17,
+      19
+    ],
+    "quoted_text": "יש פעם אחת שהחלון פשוט כיסה לי את הkill feed ואת חצי מהHUD, ולא ראיתי שמישהו מגיע מאחורה. ... פתחתי את הoverlay כדי לראות תשובה, והוא נפתח בצד ימין למעלה, בדיוק איפה שהkill feed. ומתתי."
+  },
+  {
+    "session_id": "20260615T000000-2",
+    "claim": "The interviewee likes that Claudictive remembers the project.",
+    "reason": "unlocatable-quote",
+    "seqs": [
+      25
+    ],
+    "quoted_text": "ושוהא זוכר את הproject."
+  },
+  {
+    "session_id": "20260615T000000-3",
+    "claim": "The interviewee expects the Claudictive window to open where there is no HUD, remember its last position, or be more transparent.",
+    "reason": "unlocatable-quote",
+    "seqs": [
+      23
+    ],
+    "quoted_text": "שוא ייפתח איפה שאין HUD. או שיזכור איפה שמתי אותו. או שיהיה יותר שקוף."
+  }
+]

@@ -19,6 +19,7 @@ from app import main as main_mod
 from app.coach import missed as missed_mod
 from app.coach import missed_load
 from app.coach import themes as themes_mod
+from app.coach import follow_judge
 from app.coach import prompt_judge
 from app.coach import topics as topics_mod
 from app.coach import topics_store
@@ -92,6 +93,14 @@ class _FakeClient:
         return self
 
     def create(self, **request):
+        if request["tool_choice"]["name"] == follow_judge.TOOL_NAME:
+            # ... and then the follow-up judgment (test_missed_followed.py):
+            # "not followed" to all.
+            rows = [json.loads(line) for line in request["messages"][0]["content"].splitlines()
+                    if line.startswith("{")]
+            response = tool_use_response(follow_judge.TOOL_NAME,
+                                         {"items": [{"id": row["id"], "followed": False} for row in rows]})
+            return ToolUseResponse(content=response.content, stop_reason="tool_use")
         if request["tool_choice"]["name"] == prompt_judge.TOOL_NAME:
             # `missed --group model --yes` then asks the prompted judgment
             # (test_missed_prompted.py); here it answers "not asked" to all.

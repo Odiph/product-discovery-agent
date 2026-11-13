@@ -339,3 +339,7 @@ a.cite:hover { opacity: 0.9; }
 /* The one coloured segment: a provenance this page has never heard of really
    is a fault, and it is already named in words above the bar. */
 .panel-seg.unknown { background: var(--contrary); }
+
+/* A demo node's page: the mock label, first and impossible to miss. */
+.mock-banner { margin: 0 0 1rem; padding: .6rem .9rem; border: 2px solid var(--contrary);
+  border-radius: 6px; font-weight: 600; }

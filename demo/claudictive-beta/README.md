@@ -105,3 +105,12 @@ middle of a match?" shares "match" with the topic) as a follow-up. The
 followed-up control scored 5 of 5, and the guide's own questions (voice,
 price) dropped out of the headline. `coverage` found all 109 guide questions
 asked, and `prep` lists the dead time as a topic to add to the guide.
+
+## The seed: the same project, already processed
+
+`seed/` is this project after `import`, `extract --all`, `critique`, and
+`missed --group model --yes`: the claims, the topic grouping and the two cached
+judgments. `python -m app demo --yes` copies it into `projects/claudictive-beta`,
+so the headline above shows with no API call and no key. Its `project.json`
+pins the models those caches were made with (`"models"`), so they stay fresh
+whatever your `.env` configures. Like everything here, it is synthetic.

@@ -411,10 +411,12 @@ def test_list_projects_reports_every_node_with_its_shape(repo):
     payload = _payload(_call("list_projects", {}, repo_root=repo))
     assert payload["projects"] == [
         {"path": "acme", "label": "acme", "depth": 1, "has_context": True, "has_sessions": True,
-         "corpus": "undeclared"},
+         "corpus": "undeclared", "hint": None},
         {"path": "acme/onboarding", "label": "onboarding", "depth": 2,
-         "has_context": False, "has_sessions": False, "corpus": "undeclared"},
+         "has_context": False, "has_sessions": False, "corpus": "undeclared",
+         "hint": mcp_tools.HINT_NO_INTERVIEWS.format(path="acme/onboarding")},
     ]
+    assert payload["hint"] is None
 
 
 def test_get_survey_returns_the_items_in_order(repo):

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "b1",
+    "text": "Claudictive is an Overwolf in-game overlay that opens a Claude Code session over the running game at the press of a hotkey, so a gamer-developer can talk to Claude without leaving the game.",
+    "source": "Claudictive product one-pager (synthetic demo)",
+    "citation": null,
+    "provenance": "evidence"
+  },
+  {
+    "id": "b2",
+    "text": "The founder's bet: gamers want to work with Claude in the heat of the match, at the press of a button, without alt-tabbing out.",
+    "source": "founder pitch notes (synthetic demo)",
+    "citation": null,
+    "provenance": "inference"
+  },
+  {
+    "id": "b3",
+    "text": "The closed beta has a few dozen installs from Israeli developer and gamer communities; weekly active usage dropped sharply after the first week.",
+    "source": "beta install and usage dashboard (synthetic demo)",
+    "citation": null,
+    "provenance": "evidence"
+  },
+  {
+    "id": "b4",
+    "text": "Low usage is probably caused by missing features (voice input, themes, a smaller window) rather than by the core use case; this has not been checked with users.",
+    "source": "founder assumption (synthetic demo)",
+    "citation": null,
+    "provenance": "inference"
+  },
+  {
+    "id": "b5",
+    "text": "Twelve beta users agreed to a 15-25 minute interview about their use of Claudictive.",
+    "source": "interview scheduling sheet (synthetic demo)",
+    "citation": null,
+    "provenance": "evidence"
+  }
+]

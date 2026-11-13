@@ -1,0 +1,8 @@
+{
+  "corpus": "demo",
+  "note": "SYNTHETIC: the 12 mock Claudictive beta interviews from demo/claudictive-beta/. No real interview material.",
+  "models": {
+    "extract": "google/gemini-2.5-flash",
+    "judge": "anthropic/claude-sonnet-5.5"
+  }
+}

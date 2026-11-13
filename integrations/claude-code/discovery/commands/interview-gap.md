@@ -6,8 +6,11 @@ argument-hint: [optional focus, e.g. a feature or decision]
 Find the gaps in this product's interview evidence and draft what to learn
 next. Focus, if given: $ARGUMENTS
 
-Follow the `discovery-evidence` skill. Read `.discovery-copilot.json` first; if
-it is missing, stop and suggest `/link-discovery`.
+Follow the `discovery-evidence` skill. Read `.discovery-copilot.json` first. If
+it is missing, call `list_projects`: when every project there has
+`corpus: demo` (a first run after `/start`), use that project, and say on
+every result that it comes from mock interviews, not real users. Otherwise
+stop and suggest `/link-discovery`.
 
 1. Read `get_standing`, `get_hypotheses`, `get_survey` and `list_interviews`
    for the linked project and scope. Also read `get_themes` (claims no

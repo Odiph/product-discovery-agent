@@ -1,0 +1,503 @@
+{
+  "session_id": "20260615T000000-8",
+  "summary": {
+    "turns": 24,
+    "judged": 24,
+    "unjudged": 0,
+    "clean": 12,
+    "clean_rate": 0.5,
+    "uncertain": 6,
+    "marked_questions": 21,
+    "marked_question_clean_rate": 0.42857142857142855,
+    "unmarked_clean_rate": 1.0,
+    "leading": 2,
+    "hypothetical_or_future_tense": 5,
+    "pitch": 4,
+    "opinion_seeking": 5,
+    "confirmation_only": 0,
+    "off_topic": 0,
+    "generic": 0
+  },
+  "turns": [
+    {
+      "index": 0,
+      "seqs": [
+        0
+      ],
+      "at_s": 16.0,
+      "text": "היי עומר, תודה שבאת.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a simple greeting and does not violate any rules."
+      }
+    },
+    {
+      "index": 1,
+      "seqs": [
+        2
+      ],
+      "at_s": 42.0,
+      "text": "אז ספר לי קצת על עצמך.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a standard open-ended introductory question, asking about their life."
+      }
+    },
+    {
+      "index": 2,
+      "seqs": [
+        4
+      ],
+      "at_s": 109.0,
+      "text": "מעולה. ואיך אתה משתמש בClaude Code?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks about their past use of a specific tool, focusing on their actions."
+      }
+    },
+    {
+      "index": 3,
+      "seqs": [
+        6
+      ],
+      "at_s": 163.0,
+      "text": "מעולה, מעולה. איך הגעת לClaudictive?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks about a specific past event related to Claudictive, which is on topic for the survey."
+      }
+    },
+    {
+      "index": 4,
+      "seqs": [
+        8
+      ],
+      "at_s": 194.0,
+      "text": "איך היה ההתקנה?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question directly asks about a past event (installation process) which is part of the survey plan."
+      }
+    },
+    {
+      "index": 5,
+      "seqs": [
+        10
+      ],
+      "at_s": 233.0,
+      "text": "מעולה. בוא נעבור לשאלה הבאה. כמה פעמים אתה משתמש בזה?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This moves to the next survey question about usage frequency, which is acceptable since no utterance was provided to make it generic."
+      }
+    },
+    {
+      "index": 6,
+      "seqs": [
+        12
+      ],
+      "at_s": 283.0,
+      "text": "מעולה! ומה אתה שואל?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This moves to the next survey question about what the user typically does with the product, which is acceptable since no utterance was provided to make it generic."
+      }
+    },
+    {
+      "index": 7,
+      "seqs": [
+        14
+      ],
+      "at_s": 325.0,
+      "text": "מעולה. משהו שמפריע לך?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This implicitly asks about pain points or difficulties, which is a good discovery question and directly relevant to understanding user experience."
+      }
+    },
+    {
+      "index": 8,
+      "seqs": [
+        16
+      ],
+      "at_s": 380.0,
+      "text": "רגע, תראה לי, מה זאת אומרת מכסה? באיזה מצב זה קרה?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question refers to 'מכסה' (cover/lid) which is not in the preceding context. Without context, it's unclear what this refers to."
+      }
+    },
+    {
+      "index": 9,
+      "seqs": [
+        18
+      ],
+      "at_s": 445.0,
+      "text": "חח אוי. וזה קורה גם בStardew?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question starts with 'חח אוי' (lol oh no), which indicates it's a reaction to something the interviewee just said. It then asks about 'Stardew', which is presumably a game mentioned earlier. Without the prior context, it's hard to classify accurately."
+      }
+    },
+    {
+      "index": 10,
+      "seqs": [
+        20
+      ],
+      "at_s": 488.0,
+      "text": "והשעון חשוב לך?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question asks if 'the clock' is important. Without context, it's unclear what clock is being referred to or why its importance is being queried."
+      }
+    },
+    {
+      "index": 11,
+      "seqs": [
+        22
+      ],
+      "at_s": 527.0,
+      "text": "זה ממש עוזר. מה היית רוצה שיקרה?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": true,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question starts with a leading statement 'זה ממש עוזר' (this really helps), presuming a positive impact the interviewee hasn't confirmed. It then asks 'מה היית רוצה שיקרה?' (what would you like to happen?), which is a hypothetical question about future desires."
+      }
+    },
+    {
+      "index": 12,
+      "seqs": [
+        24
+      ],
+      "at_s": 579.0,
+      "text": "לכל משחק בנפרד, רשמתי. מעולה. אוקיי, features. מה עוד?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question is a natural follow-up asking for more features, aligning with the survey plan. Since no utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 13,
+      "seqs": [
+        26
+      ],
+      "at_s": 626.0,
+      "text": "scroll ללוגים. מעולה. ומה לגבי voice?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question moves to a new topic from the survey plan (voice input), which is appropriate after exhausting the previous one. Since no utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 14,
+      "seqs": [
+        28
+      ],
+      "at_s": 673.0,
+      "text": "הבנתי. אבל אתה לא חושב שאחרים יאהבו voice?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": true,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question is leading by suggesting an answer and asks for a hypothetical opinion about other people, which is unreliable. Since no utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 15,
+      "seqs": [
+        30
+      ],
+      "at_s": 701.0,
+      "text": "מעולה. ומה עם themes?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question moves to a new topic from the survey plan (features), which is appropriate. Since no utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 16,
+      "seqs": [
+        32
+      ],
+      "at_s": 759.0,
+      "text": "חח מעולה. בוא נעבור לשאלה הבאה. מאחד עד עשר, כמה אתה אוהב את הרעיון?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": true,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question asks for a rating of the 'idea' (Claudictive), which is a pitch and opinion-seeking. It's not about the interviewee's life."
+      }
+    },
+    {
+      "index": 17,
+      "seqs": [
+        34
+      ],
+      "at_s": 792.0,
+      "text": "מעולה. היית משלם?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": true,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks if the interviewee 'would' pay, making it hypothetical and opinion-seeking about a product (Claudictive), which also makes it a pitch."
+      }
+    },
+    {
+      "index": 18,
+      "seqs": [
+        36
+      ],
+      "at_s": 825.0,
+      "text": "וכמה?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": true,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question implicitly continues the previous hypothetical about paying, asking 'how much' they would pay for the product. It's hypothetical, opinion-seeking, and a pitch."
+      }
+    },
+    {
+      "index": 19,
+      "seqs": [
+        38
+      ],
+      "at_s": 854.0,
+      "text": "מעולה. היית ממליץ?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": true,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks if the interviewee 'would' recommend the product, making it hypothetical, opinion-seeking, and a pitch."
+      }
+    },
+    {
+      "index": 20,
+      "seqs": [
+        40
+      ],
+      "at_s": 890.0,
+      "text": "מעולה! ואיך היית מתאר את זה?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question is too vague and lacks context from a previous utterance to be judged as clean or a clear violation. It's unclear what 'זה' (this) refers to without prior conversation."
+      }
+    },
+    {
+      "index": 21,
+      "seqs": [
+        42
+      ],
+      "at_s": 926.0,
+      "text": "מעולה, מעולה. ומה הדבר הכי פחות טוב?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "Similar to the previous candidate, this question is too general and lacks specific context to evaluate properly. 'הדבר הכי פחות טוב' (the worst thing) needs a referent."
+      }
+    },
+    {
+      "index": 22,
+      "seqs": [
+        44
+      ],
+      "at_s": 981.0,
+      "text": "רשמתי היסטוריה. מעולה. ושאלה אחרונה, משהו להוסיף?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The phrase 'רשמתי היסטוריה' (I noted history) implies a previous discussion, but without it, the question 'משהו להוסיף?' (anything to add?) is too generic to be fully assessed. It's a valid closing question but its quality depends on the preceding conversation."
+      }
+    },
+    {
+      "index": 23,
+      "seqs": [
+        46
+      ],
+      "at_s": 1014.0,
+      "text": "חח מעולה. תודה רבה עומר!",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a polite closing statement and not a question intended to gather new information. It marks the end of the interview or a segment."
+      }
+    }
+  ]
+}

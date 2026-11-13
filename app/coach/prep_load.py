@@ -126,7 +126,7 @@ def model_reading(context_dir, sessions_root, survey: "Sequence[SurveyItem]") ->
     turns = untracked_turns(sessions_root)
     if not questions or not turns:
         return Reading(None)
-    state = coverage_store.load(Path(context_dir), questions, turns, reasoning_client.resolve_judge_model())
+    state = coverage_store.load(Path(context_dir), questions, turns, reasoning_client.resolve_judge_model(context_dir))
     if state.status == coverage_store.FRESH:
         return Reading(state.coverage.as_dict())
     if state.status == coverage_store.ABSENT:

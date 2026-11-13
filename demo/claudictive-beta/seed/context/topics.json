@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "model": "google/gemini-2.5-flash",
+  "claims_key": "39c64d99da3ce3ffe8b291d3fcd73a36be4684e59f952acc3b57e0b648952c62",
+  "topics": [
+    {
+      "label": "overlay covers game UI",
+      "fact_ids": [
+        "3acc694b-49fb-4bed-9328-d1663c243b18",
+        "ca4cf0dd-77b7-4e2a-a796-de16eaf7f1d2",
+        "06b882d8-14f8-4e30-a040-75fc1814cb78",
+        "63b02964-6cf1-4410-8372-b384dcb8fef7",
+        "bef79915-4727-445f-a6f9-445419984b04",
+        "e6df3a87-109b-48e4-b637-fdbb840dad49",
+        "36af759b-fbc3-442b-80aa-37aa77f7a2ac",
+        "7293ba71-ea3e-4148-9d6f-b572acd2c5ef",
+        "057d5f41-944c-4dc5-b56e-25ea4a4408ca",
+        "61d59fc0-6c7a-49b5-bdd2-4f0b81decdc3",
+        "8ff5511b-c2b9-4987-ae12-306e6675f4cb",
+        "1bdc9fea-ef64-439d-882d-c082518615f7",
+        "799b57eb-ab58-4701-b803-fbf8cb319997",
+        "3247b0e8-ebec-4f78-b6a1-e826edbe1e09",
+        "dfabd55e-aa75-4f92-b48e-ad62126f9783",
+        "a30c73ee-9229-4db4-964f-f7458d15a3e5",
+        "4150fc4e-0d50-47aa-aa1a-2f4594ebef73",
+        "cb67a1d6-3077-4dc6-8b0a-0ac4216cc86c",
+        "54b69f58-1c2e-4075-b71f-1741c48d29da",
+        "90d59ab8-e415-406c-83d3-1dfe9553b546",
+        "d4e0a0b3-9de0-4e26-b2c6-f2d8294cf4de",
+        "8c423dd3-f578-4b47-b676-2f0e20c20a5b",
+        "60a29988-c456-4597-9a05-2d12e8633c98"
+      ]
+    },
+    {
+      "label": "want smaller or transparent window",
+      "fact_ids": [
+        "b860725e-127d-4985-ba8e-768cc39edc26",
+        "ea4d7f2c-b1db-45cd-95a6-a4c2dcf8a7a3",
+        "4371e41a-3b19-46a4-b830-e69b45a06e0d",
+        "57d9193a-d284-46ac-a295-bb40a384c5c3",
+        "576e681e-e68c-4fe1-ae00-4f4c74faa04c",
+        "f4993282-a208-45e0-9587-693c0ccc41e2",
+        "7c83ab51-2bd6-4241-9c76-0d489d951765",
+        "8997efa8-4935-40fb-88fe-94bfb9498d1e",
+        "c79c3da7-5cd1-4420-b970-a79087a20e7d",
+        "611efbaf-d19f-4c8e-83f2-02ac18421777"
+      ]
+    },
+    {
+      "label": "want voice input",
+      "fact_ids": [
+        "d0c8967b-22d8-42c3-bfbc-08454e7aabdb",
+        "fd39c2e1-11fe-4810-ba26-ebc32d3d513d",
+        "2483eed2-24cd-4c71-ba89-ba4d622bfb9b",
+        "02f6cd72-77a8-4095-ac57-7d6526316714",
+        "1b7da865-94c4-46cd-97c6-4945c87a2273",
+        "d5373753-3a79-45af-8773-d0bcababf3ed",
+        "ba9ad1bc-7274-43aa-aa18-2e10d71cdc77",
+        "be60c7e1-0b94-405b-907b-3f603038e7b8",
+        "dcbdbaaa-c435-4f67-848e-92d16d591670",
+        "82c3ea7d-47f9-4058-a700-88becd89780d",
+        "73a4e0d9-1784-49f8-9ee6-a642e73b68ec",
+        "5f650214-254b-4252-b114-0be13cf59c3e",
+        "f834bb5d-0760-4258-b06e-dc420176739d",
+        "038ab3bf-8c79-470e-925d-7e7905c2cea0",
+        "f0ce3443-fa76-46fa-ab2a-44ffd09b3d09",
+        "3d595574-ee54-4803-a274-5dad9c95266e",
+        "dac9f334-9426-495a-90ea-53a5fbeddd60",
+        "06b8e270-d6ff-44f9-9eaa-a0a52f0cf5af",
+        "ba13cd62-7603-4543-89ae-034060ac8f0a"
+      ]
+    },
+    {
+      "label": "want specific themes or designs",
+      "fact_ids": [
+        "10e55b3f-fe16-432c-9b24-6e0f3eac4c3e",
+        "33b13392-82e1-4685-8e3a-3987f5844371",
+        "52e34860-5ae4-45f4-81be-d6521a4d76b3",
+        "026b4cf1-d77c-4ca2-a8aa-983ae6841d7c",
+        "ba1ee468-cc93-4b31-afd4-a089c4dc3314",
+        "9b5fb8c6-67f6-49d8-af19-048ac7cb6b2e",
+        "161c498d-cda9-4279-b741-48185276dcd5",
+        "20cadfd1-602e-45e9-9b0e-215b6a418e7b",
+        "5801e3f5-49be-43e0-8c39-cf87c8580c05",
+        "199c88da-8e3f-455a-a40c-66b929b6b453",
+        "f3976c6c-85e0-4ea1-8042-6e134f3af437"
+      ]
+    },
+    {
+      "label": "use during game downtime",
+      "fact_ids": [
+        "93d577f2-fffe-4f3b-adb3-be3b7afd615e",
+        "4644d929-d808-4406-818e-6e82e89d7659",
+        "a29c991b-a00d-418a-b047-a8a00c3e5b0f",
+        "0ec7e66a-3981-4550-a241-95c47d3e1aa5",
+        "ee8ae3b7-1f82-4ef3-ae95-14755a1b48bd",
+        "ea0151da-dedb-4fae-a3b4-7c73f59e4130",
+        "022504d0-5924-4756-9ad7-52b8ba1b9a19",
+        "5fabc69a-18ce-4a84-808b-ff0d53842f47",
+        "8fe8d2f8-abaf-4dd5-9731-17524d502225",
+        "838e0847-153e-45c8-8872-28a91636c36e",
+        "2b4c2315-7ae6-4753-b913-d7775183769f",
+        "0cf366e3-362f-4a69-9419-f49015df9f0c"
+      ]
+    },
+    {
+      "label": "notifications are useful",
+      "fact_ids": [
+        "9309d15b-70f2-41f6-a348-163d48d0122f",
+        "fd5c4282-9845-4de9-bb9a-526bcafdd4a3",
+        "ab08b957-970d-48d0-80fd-d809c22d1948"
+      ]
+    },
+    {
+      "label": "price point for payment",
+      "fact_ids": [
+        "790f28d7-a512-4b44-bfc8-d773e30ddc25",
+        "ba70de75-0b2f-49d8-91b3-93fdd37673ac",
+        "ffe4938d-69da-47c9-a231-3575bba6c8cc",
+        "c2a8068b-8126-4a45-b2d5-795f7d4e5058",
+        "dc5de661-111a-480c-bb12-6241f7681408",
+        "782f673d-8188-416a-8a27-aa40d55e1ee5",
+        "4803ab1b-67e6-4e06-a436-d2d4d972513c",
+        "90d7f495-95da-4bda-a5f4-1cae21b52c0e",
+        "03fceb9d-c077-4eb2-a9d8-14e3bdb272e5",
+        "87a83be2-3f74-4ab3-9173-f6db97242c22",
+        "84704953-ce90-4aed-afac-af134d5cebe1"
+      ]
+    },
+    {
+      "label": "installation and onboarding issues",
+      "fact_ids": [
+        "55ca302f-d77f-4491-9a47-574776344613",
+        "8ada2855-2798-4ad7-a0e5-13e9d0119b9a",
+        "a411f5ca-7a6a-4e99-ba05-18f64a6241cd",
+        "dbcdee51-2c87-4b96-9957-51f75139b75c",
+        "7ddfc9f6-2426-4d1a-9918-a75dc1dab669",
+        "574d6691-7569-4a6a-9157-03e8dceea182",
+        "f306e051-a3cf-417e-a324-3d237f60e8be",
+        "a7a453b2-416d-4aac-8ef6-913ba44ffe74",
+        "5e191a8b-1c58-4b40-ac62-0d131cb206fb",
+        "eaa8dcf5-69e5-497f-8cda-8f12a1f2df7f",
+        "bca51604-86ba-4a87-87f7-dff5064ed48b",
+        "13b2e8ec-bf5f-4ae4-b203-3535c16fd1bb",
+        "2d451bee-a839-4598-a151-374c7f17c861",
+        "ca61daa5-d8ec-4f37-acc9-736a9d130971"
+      ]
+    },
+    {
+      "label": "use less over time",
+      "fact_ids": [
+        "4ab31f58-f939-4062-8f73-69ef3da86ff5",
+        "b28252bf-62e0-45f1-9d5d-10fdd7ceb86a",
+        "40c9461d-8c12-4ec0-8052-8c830d3a7cfd",
+        "c030b518-2130-41d0-b582-b898efce43f1",
+        "1ae210a0-08ca-4744-b0dd-5cfd52b91233",
+        "8c14a94d-2ea2-4148-a722-31b10b0a80c9",
+        "aa090ba3-1094-4788-b6ba-fc932530e999",
+        "06e9311d-6b9a-43e1-8370-9a05ca8f6273",
+        "4ce5ad29-2ea8-41bd-80d3-20271d66bc2a",
+        "20f0ee28-51ea-4bb6-939d-36c3fcce4d55",
+        "417422b9-bb12-4b96-868a-e34ca554fed0",
+        "00c44a31-23ab-4aea-8bd4-c6d49d14e936"
+      ]
+    },
+    {
+      "label": "performance issues",
+      "fact_ids": [
+        "b0432d99-c04b-4f8d-a1f6-fad7287c1078",
+        "7ffb135a-9221-441e-a50a-bf6a6a4ec382",
+        "cad7b49a-05f2-446a-bc90-d2b1ca3e1847",
+        "fdceda9f-603f-4f14-9967-987282f3b04f",
+        "aa539f69-7aea-4639-b585-2a0b79fca63a",
+        "ded61a1b-b69e-4ebe-8837-167d58ddd71d",
+        "216248fd-1e08-4480-82ab-cd04aa758b96"
+      ]
+    },
+    {
+      "label": "typing during game is impossible",
+      "fact_ids": [
+        "3b6f20d5-e365-4d12-96ea-f91dde285931",
+        "84d23ffd-9e10-4f8c-a813-9cfbd3959b61",
+        "bcdc1946-2cdb-4ff2-845e-fcf3e85c823b",
+        "2ea2d455-567e-4539-bff5-5040f3794df4"
+      ]
+    },
+    {
+      "label": "want mobile companion app",
+      "fact_ids": [
+        "2193f8c7-29af-4684-a517-fabb7ecfddf4",
+        "9ad3f29e-1b99-4ec5-91cf-af92c63e2137",
+        "4d85a7da-ce68-4bbe-879b-ed29b9adec0a",
+        "272ef824-85e3-4eaf-8aca-161af3ea3b8d",
+        "760cf89d-ca37-453d-95a9-920765f47842",
+        "6da74394-5c5a-47b8-8941-acbce6367f74"
+      ]
+    },
+    {
+      "label": "want macros or shortcuts",
+      "fact_ids": [
+        "35d6ad73-4781-4d4a-81d6-0afe6c533356",
+        "810a894e-0f00-49a7-b6ca-384ea66a86c8"
+      ]
+    },
+    {
+      "label": "want shorter answers or summaries",
+      "fact_ids": [
+        "a2172404-932c-4fd0-badc-69a315fe9af1",
+        "42adbbf9-5ab3-4318-b650-ce9973b128ba"
+      ]
+    },
+    {
+      "label": "want to see diffs or images",
+      "fact_ids": [
+        "892c2f0a-7312-42f8-bde3-49eac37ee696",
+        "c7d47c25-15f9-4134-a7ce-d88df1a87145",
+        "a6540dbc-874a-4d5c-95cc-6a07c85755af",
+        "e58b3db9-bbeb-4d77-8ca8-0419d0e095bb"
+      ]
+    },
+    {
+      "label": "hotkey conflicts",
+      "fact_ids": [
+        "d2062cc1-d491-4145-9215-ae57883579a4",
+        "fff3ebce-f284-4053-b73a-102895f14432",
+        "5316f728-1dba-469b-858e-aafff0c406bb",
+        "c5355f6b-df80-4847-ba22-6b03738f2854"
+      ]
+    },
+    {
+      "label": "fear of anti-cheat bans",
+      "fact_ids": [
+        "5b03ae80-3de4-4d13-80b7-0b5e9fc863de",
+        "4b1c2933-56d7-41b3-862e-718cfbe77e3d"
+      ]
+    },
+    {
+      "label": "want to choose window position",
+      "fact_ids": [
+        "dd7172a6-a50f-44f1-9bdc-c8e40f0ed2cd",
+        "fc9a1889-de52-4528-83a9-d1fa3b384142"
+      ]
+    },
+    {
+      "label": "notification sound is disruptive",
+      "fact_ids": [
+        "5a825b23-276e-4bab-a00a-055d03f7c398",
+        "778054ac-429e-49c7-bc73-91dbd5b3d0c9",
+        "27841d74-cd16-45c1-8127-516b5f87f07c"
+      ]
+    },
+    {
+      "label": "conversations disappear or lose context",
+      "fact_ids": [
+        "f348502f-1975-4690-bbba-20d142992216",
+        "513ee501-7547-48e6-b59a-70a48e873115"
+      ]
+    },
+    {
+      "label": "want reminder to use Claudictive",
+      "fact_ids": [
+        "2cf3a910-ef50-42bd-896c-46b77d12747d",
+        "a0a01421-bee6-446e-b149-111345f9feae"
+      ]
+    },
+    {
+      "label": "font size or style issues",
+      "fact_ids": [
+        "2fe32686-7b41-4d94-b13d-72556e87b5f0",
+        "8f7af6bd-5546-45cb-85ad-a85c9441bcf3"
+      ]
+    },
+    {
+      "label": "Claudictive needs to ask less permissions",
+      "fact_ids": [
+        "c1d45a09-55c2-41a1-9926-d6dd602ba910",
+        "82009aec-0b78-44fb-a30c-cb0d4e3b0e5f"
+      ]
+    },
+    {
+      "label": "using terminal outside game",
+      "fact_ids": [
+        "9cf145f3-7d33-4800-b095-bea2f72e1d18",
+        "9a701605-415d-433d-a05a-0dd1ef4100aa"
+      ]
+    },
+    {
+      "label": "not paying because unemployed",
+      "fact_ids": [
+        "b837c813-2b76-45c5-a29f-c49e14bc548f",
+        "3540f26b-3d6f-4d6d-8e5b-874cf0a38342"
+      ]
+    },
+    {
+      "label": "don't want mobile app",
+      "fact_ids": [
+        "cad00cb9-46ec-4617-ae5f-91d2997bb704",
+        "ad5d33a2-d532-49d3-bef4-6345a1b06ca2"
+      ]
+    },
+    {
+      "label": "do not care about themes",
+      "fact_ids": [
+        "b5b98407-9e44-462e-9ccd-216931147426",
+        "e8d2fc76-d4be-4485-ad79-7461498ccc10",
+        "bbaa3435-b0e6-49f0-b031-2931ad95692e"
+      ]
+    },
+    {
+      "label": "likes the idea",
+      "fact_ids": [
+        "c89093b0-7ecf-4bf9-9741-cd7ec46b5566",
+        "d5b7d867-e88d-42a1-bdae-65f70c930031",
+        "411510ea-d723-4992-93ce-6a994df3504d",
+        "4eb8f2c6-fa3b-47b0-8bff-65742e6bdd3f",
+        "89c4adb8-7123-461c-8bb0-74621cfeca4f",
+        "ab8a9cc7-fd2f-4917-86a8-1ba15f4b79c3",
+        "47733277-11bc-4ac1-9563-ad79dc0b832b",
+        "c56705cc-4cf7-404c-8a58-1eb73a3bc6d9",
+        "a331f2b7-27ae-4403-aea1-f3e4613e325a",
+        "cce483af-891f-4d29-8b22-fe2576cfa820",
+        "e16736af-9918-4292-a1f4-2fc697c23c4f",
+        "5cabaacd-e5c9-4f2e-aa27-452dfc2fb1bc",
+        "307cac89-1641-48f9-880a-df3dea8a3078",
+        "cdfdda2f-c406-4dba-8faf-5ad8c13d4139",
+        "0b278362-1f03-4135-8a96-2b9cf26e6c96",
+        "80fab304-e991-4ff1-9f10-400f5613f68a",
+        "7b46fc3c-c4f0-4188-9ab5-4626c5597807",
+        "1d56c543-3a1b-4056-bef7-d89dcc0e2bc4",
+        "b814437d-e140-4cbb-9779-a70c914c5856",
+        "292a1b33-e95a-4e15-9bf4-5f0b1c3094f6",
+        "4c57c0ac-02f6-4b3f-b959-afaa3c95e745",
+        "118e3fdb-9aad-4e4e-b07b-27595b28c888",
+        "3c3ccba2-9467-4ddc-a065-ad5bf9c502d5"
+      ]
+    },
+    {
+      "label": "Overwolf is bloatware",
+      "fact_ids": [
+        "ffcf6522-8ba5-41be-8128-3f871d29c169"
+      ]
+    }
+  ]
+}

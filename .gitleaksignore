@@ -1,0 +1,6 @@
+# Demo seed caches: each line 4 is a SHA-256 cache key in a field named "key" (synthetic data), not a credential.
+demo/claudictive-beta/seed/context/coverage.json:generic-api-key:4
+demo/claudictive-beta/seed/context/followed.json:generic-api-key:4
+demo/claudictive-beta/seed/context/prompted.json:generic-api-key:4
+demo/claudictive-beta/seed/context/script_topics.json:generic-api-key:4
+demo/claudictive-beta/seed/context/topics.json:generic-api-key:4

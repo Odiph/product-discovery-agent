@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "03-itay.txt",
+  "import_sha256": "d891680cef235349ef1a77a9f62141da9a9e95fb2fb34d956acb4b9af69965c9",
+  "imported_at": "2026-11-11T00:19:52.652+02:00",
+  "started_at": "2026-06-15T00:00:00.000+03:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-06-15T00:20:49.200+03:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Itay": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Itay"
+}

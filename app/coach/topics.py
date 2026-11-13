@@ -36,7 +36,7 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any, Sequence
 
-from app.coach import reasoning_client
+from app.coach import reasoning_client, token_estimate
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +46,6 @@ TOOL_NAME = "group_claims_into_topics"
 DEFAULT_MAX_TOKENS = 8192
 DEFAULT_TIMEOUT_S = 180.0
 MAX_LABEL_CHARS = 80
-CHARS_PER_TOKEN = 4.0
 NO_LABEL = "(no label)"
 # Same set `extract` refuses: an answer cut short may have lost whole topics.
 _UNTRUSTED_STOP_REASONS = frozenset({"refusal", "max_tokens", "pause_turn", "model_context_window_exceeded"})
@@ -186,8 +185,7 @@ def assemble_request(lines: "Sequence[ClaimLine]", *, model: str, max_tokens: in
 
 
 def estimate_input_tokens(request: dict) -> int:
-    """Four characters a token, as `extract --all` estimates: +/-15%, low for Hebrew."""
-    return round(len(json.dumps(request, ensure_ascii=False)) / CHARS_PER_TOKEN)
+    return token_estimate.estimate(request)
 
 
 def _raw_topics(response: Any) -> "list[tuple[str, list[str]]]":

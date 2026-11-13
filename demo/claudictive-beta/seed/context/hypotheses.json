@@ -1,0 +1,30 @@
+[
+  {
+    "id": "h1",
+    "statement": "Gamer-developers want to talk to Claude Code during active gameplay, in the middle of a match, without leaving the game.",
+    "falsifier": "If most interviewees describe using Claudictive, or wanting to, only outside active play, or say mid-match use is impractical, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 6 of 12 interviewees describe a concrete moment in active play when they used, or would use, Claudictive."
+  },
+  {
+    "id": "h2",
+    "statement": "Voice input is the feature that will drive adoption: typing is the main barrier to using Claudictive in-game.",
+    "falsifier": "If fewer than half of interviewees name typing as a barrier, or those who ask for voice also say it would clash with team voice chat, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 6 of 12 raise voice or typing friction as the reason they use Claudictive less."
+  },
+  {
+    "id": "h3",
+    "statement": "Beta usage is low because features are missing; shipping the most-requested features (themes, a smaller window, voice) will raise weekly usage.",
+    "falsifier": "If interviewees attribute their low usage to something other than missing features, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 6 of 12 tie their low usage to a specific missing feature."
+  },
+  {
+    "id": "h4",
+    "statement": "Gamer-developers will pay about 5 USD a month for Claudictive on top of their Claude subscription.",
+    "falsifier": "If most interviewees name a price below 3 USD, or make paying conditional on an employer, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 6 of 12 name 5 USD a month or more without being prompted with a number."
+  }
+]
