@@ -25,6 +25,7 @@ from typing import Callable, Optional
 
 from app import config as config_mod
 from app import evidence_cli
+from app.session import audio_decode as ad
 from app.session import audio_import as ai
 from app.session import evidence as ev
 from app.session import transcript_import as ti
@@ -45,7 +46,7 @@ def add_parser(subparsers, add_project_argument: Callable[[argparse.ArgumentPars
     parser = subparsers.add_parser(
         "import",
         help="Bring past interviews in from transcript exports (.vtt, .srt, `Name: text` .txt/.md) or "
-             f"recordings (16 kHz mono .wav; uploaded to {FILE_PASS_VENDOR} for transcription, needs "
+             f"recordings (m4a, mp3, wav, opus, flac, ...; uploaded to {FILE_PASS_VENDOR} for transcription, needs "
              f"{FILE_PASS_KEY}), one session per file. Without --yes it only shows what it would do",
     )
     parser.add_argument("source", type=Path, help="a transcript or recording, or a folder of them (not recursive)")
@@ -88,7 +89,8 @@ def _describe_audio(plan: ai.AudioPlan, participant: Optional[str], date_note: s
     print(f"{plan.file_name} (recording): {plan.duration_s / 60:.1f} min, {plan.size_bytes / 1_000_000:.1f} MB")
     print(f"  upload: the whole file goes to {FILE_PASS_VENDOR} (speech-to-text) for the file pass, billed "
           f"by them to your {FILE_PASS_KEY}; their copy is deleted afterwards.")
-    print(f"  kept here: a copy in the session ({ev.ROOM_AUDIO_FILENAME}) until you confirm the speakers; "
+    kept = "decoded to 16 kHz mono WAV" if plan.decode else "a copy"
+    print(f"  kept here: {kept} in the session ({ev.ROOM_AUDIO_FILENAME}) until you confirm the speakers; "
           f"your file is not touched.")
     print("  speakers: the first voice is taken as the interviewer until you check it with "
           "`confirm-speakers` (add --swap if it was the other person). `extract` waits for that.")
@@ -130,7 +132,7 @@ def run(args: argparse.Namespace, apply_project) -> int:
     candidates = _candidates(source)
     if not candidates:
         print(f"ERROR: {source} holds no transcript files ({', '.join(sorted(ti.SUPPORTED_SUFFIXES))}) "
-              f"and no recordings ({ai.WAV_SUFFIX})", file=sys.stderr)
+              f"and no recordings ({', '.join(sorted(ti.AUDIO_SUFFIXES))})", file=sys.stderr)
         return 1
     if participant is not None and len(candidates) > 1:
         print("ERROR: --participant names ONE person and this folder holds several interviews -- "
@@ -216,11 +218,20 @@ def _import_recordings(sessions_root: Path, recordings: list, project: str) -> i
     failed = 0
     for path, plan, metadata, started in recordings:
         try:
-            session_dir = ai.write_session(sessions_root, path, metadata, started=started)
+            session_dir, decoded = ai.write_session(sessions_root, path, metadata, started=started,
+                                                    decode=plan.decode)
+        except ad.DecodeError as exc:
+            print(f"ERROR {plan.file_name}: {exc} -- {ai.CONVERT_HINT}", file=sys.stderr)
+            failed += 1
+            continue
         except OSError as exc:
             print(f"ERROR {plan.file_name}: could not be written ({type(exc).__name__}: {exc})", file=sys.stderr)
             failed += 1
             continue
+        if decoded is not None and decoded.bad_packets:
+            print(f"WARNING {plan.file_name}: {decoded.bad_packets} of {decoded.packets} audio packets "
+                  "would not decode and were skipped -- the file may be damaged, and that part of the "
+                  "interview will be missing from the transcript.")
         print(f"Imported {plan.file_name} as session {session_dir.name}; running the file pass.")
         if evidence_cli.run_diarize_after(session_dir, client_factory=lambda: client) != 0:
             print(f"The file pass did not finish for {plan.file_name}. Its audio is kept in session "

@@ -237,7 +237,7 @@ def _parse_pinned_packages(requirements_path: Path) -> set[str]:
     return pins
 
 
-def test_gate_three_exactly_seven_new_pinned_dependencies_versus_phase_one():
+def test_gate_three_exactly_eight_new_pinned_dependencies_versus_phase_one():
     # Deliberately raised from 4 to 5 in 04-01-PLAN.md §C7, per CONTEXT.md's
     # instruction that this be a conscious, justified change, never a silent one
     # (the gate's own 1 -> 4 bump in 03-01-PLAN.md Task 2 §P8 set this precedent).
@@ -271,6 +271,11 @@ def test_gate_three_exactly_seven_new_pinned_dependencies_versus_phase_one():
     #   - pypdf==6.21.1 -- PDF text for the knowledge base (`kb add`). BSD-3-Clause,
     #     github.com/py-pdf/pypdf, pure Python, no runtime dependencies on 3.11+,
     #     pip-audit clean (every older release has known CVEs).
+    # Importing compressed recordings (2026-11-14, the operator's go-ahead) adds one more:
+    #   - av==18.0.0 -- PyAV, decoding m4a/mp3/opus to the file pass's WAV
+    #     (app/session/audio_decode.py). BSD-3-Clause, github.com/PyAV-Org/PyAV,
+    #     pip-audit clean. It was already installed, transitively, by faster-whisper;
+    #     pinning it is what makes the import not depend on the benchmark.
     # Transitive arrivals (Pillow, colorama, pydantic, sherpa-onnx-core) never count --
     # `_parse_pinned_packages` parses literal requirements-file lines, not a resolved
     # dependency tree.
@@ -281,9 +286,9 @@ def test_gate_three_exactly_seven_new_pinned_dependencies_versus_phase_one():
     assert not missing, f"Phase 1's pinned dependencies must never be removed: {missing}"
 
     added = root_pins - phase1_pins
-    assert len(added) == 7, (
-        f"expected exactly seven new pinned dependencies versus Phase 1 "
-        f"(PyAudioWPatch + fastapi + uvicorn + qrcode[pil] + anthropic + sherpa-onnx + pypdf), got {added}"
+    assert len(added) == 8, (
+        f"expected exactly eight new pinned dependencies versus Phase 1 "
+        f"(PyAudioWPatch + fastapi + uvicorn + qrcode[pil] + anthropic + sherpa-onnx + pypdf + av), got {added}"
     )
 
 

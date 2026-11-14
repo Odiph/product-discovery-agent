@@ -877,20 +877,22 @@ counts and roles, and writes nothing. Give `--date` when you know it; without
 it the file's modified time is used and recorded as such. Importing the same
 file twice is refused. Then run `extract --all --project acme`.
 
-**A recording instead of a transcript.** Give `import` a `.wav` (16 kHz, mono,
-16-bit) and it takes the road an in-person meeting takes: the session is
-written holding a copy of the audio, the copy is uploaded to Soniox for the
-file pass `diarize-after` runs (paid, needs `SONIOX_API_KEY`; their copy is
-deleted afterwards), and you then say who is who with `confirm-speakers`,
-which deletes the session's copy. `--me` is not used: a recording names
-nobody, so the first voice is taken as the interviewer until you confirm, or
-`--swap`. `extract` refuses the session until then. Without `--yes` it shows
-the file, its length and size and where it would be uploaded, and writes and
-sends nothing. Your own file is never touched. Any other format (mp3, m4a, a
-stereo or 44.1 kHz WAV) is refused before anything is uploaded; convert it
-with `ffmpeg -i call.m4a -ar 16000 -ac 1 -c:a pcm_s16le call.wav`. A file
-over 300 minutes is refused too. If the file pass fails, the session and its
-audio stay: retry with `diarize-after <session>`, or `forget` it.
+**A recording instead of a transcript.** Give `import` a recording (m4a, mp3,
+wav, ogg/opus, flac, aac, wma, or the sound track of an mp4, mov or webm) and
+it takes the road an in-person meeting takes. The session is written holding
+the audio as 16 kHz mono WAV (decoded here, no ffmpeg needed), that copy is
+uploaded to Soniox for the file pass `diarize-after` runs (paid, needs
+`SONIOX_API_KEY`; their copy is deleted afterwards), and you then say who is
+who with `confirm-speakers`, which deletes the session's copy. `--me` is not
+used: a recording names nobody, so the first voice is taken as the
+interviewer until you confirm, or `--swap`. `extract` refuses the session
+until then. Without `--yes` it shows the file, its length and size and where
+it would be uploaded, and writes and sends nothing. Your own file is never
+touched. A file that cannot be decoded is refused before anything is
+uploaded, with the ffmpeg command that converts it; a file with a few
+undecodable stretches is imported with a warning saying how much was skipped.
+A file over 300 minutes is refused too. If the file pass fails, the session
+and its audio stay: retry with `diarize-after <session>`, or `forget` it.
 
 An imported interview has no live record of which guide questions you asked,
 so `prep` reconstructs it from the transcript: each of your turns is matched

@@ -66,3 +66,14 @@ sherpa-onnx==1.13.8
 # (pip-audit 2026-11-09: 6.21.1 has five, the last fixed in 6.21.4), and 6.21.4 audits
 # clean. Text extraction only -- no image or crypto extras.
 pypdf==6.21.4
+
+# 2026-11-14 (the operator's go-ahead): decoding a phone or call recording
+# (m4a, mp3, opus, ...) to the 16 kHz mono WAV the file pass reads, for
+# `import` (app/session/audio_decode.py). PyAV: PyPI-resident, BSD-3-Clause,
+# github.com/PyAV-Org/PyAV; its wheels bundle ffmpeg's libraries, so no ffmpeg
+# install is needed. Already installed before this line, pulled in by
+# faster-whisper (benchmark/requirements.txt, `av>=11`); pinned here so the
+# import does not depend on the benchmark keeping that engine. 18.0.0, the
+# version faster-whisper was already resolving to, not 19.x: pip-audit clean
+# on 2026-11-14.
+av==18.0.0

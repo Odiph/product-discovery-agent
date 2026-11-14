@@ -275,7 +275,7 @@ def test_a_folder_imports_every_supported_file_and_refuses_bad_audio_by_name(rep
     sources = sorted(_meta(p)["imported_from"] for p in _sessions(repo).iterdir())
     assert sources == ["a-call.vtt", "b-call.txt"]
     err = capsys.readouterr().err
-    assert "c-call.wav" in err and "not a readable PCM WAV" in err
+    assert "c-call.wav" in err and "not a recording this can read" in err
 
 
 def test_a_folder_refuses_one_participant_for_many_files(repo, tmp_path, capsys):
