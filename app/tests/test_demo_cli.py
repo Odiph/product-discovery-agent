@@ -106,3 +106,44 @@ def test_the_preview_tells_the_truth_once_loaded(repo, capsys):
     out = capsys.readouterr().out
     assert "differs from the seed" in out and "Would copy" not in out
     assert (repo / "projects" / DEMO_PROJECT / "context" / "brief.json").read_text(encoding="utf-8") == "{}"
+
+
+def test_an_extra_file_reads_as_differs_without_reading_it(repo, monkeypatch):
+    _run(repo)
+    extra = repo / "projects" / DEMO_PROJECT / "sessions" / "big.wav"
+    extra.write_bytes(b"\0" * 1024)
+    real_read = demo_cli.Path.read_bytes
+
+    def guarded(path):
+        assert path != extra, "a file only one side has must not be read to know they differ"
+        return real_read(path)
+
+    monkeypatch.setattr(demo_cli.Path, "read_bytes", guarded)
+    assert demo_cli._same_tree(demo_cli.SEED_DIR, repo / "projects" / DEMO_PROJECT) is False
+
+
+def test_a_locked_file_reads_as_differs_never_a_traceback(repo, monkeypatch):
+    _run(repo)
+
+    def locked(*_, **__):
+        raise PermissionError("locked")
+
+    monkeypatch.setattr(demo_cli.filecmp, "cmp", locked)
+    assert demo_cli._same_tree(demo_cli.SEED_DIR, repo / "projects" / DEMO_PROJECT) is False
+
+
+def test_a_briefly_locked_rename_is_retried(repo, monkeypatch):
+    calls = []
+    real_rename = demo_cli.Path.rename
+
+    def flaky(self, target):
+        calls.append(target)
+        if len(calls) < 3:
+            raise PermissionError("[WinError 5] held by the indexer")
+        return real_rename(self, target)
+
+    monkeypatch.setattr(demo_cli.Path, "rename", flaky)
+    monkeypatch.setattr(demo_cli, "RENAME_WAIT_S", 0)
+    assert _run(repo) == 0
+    assert (repo / "projects" / DEMO_PROJECT / "context" / "facts.json").is_file()
+    assert len(calls) == 3

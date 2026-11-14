@@ -113,4 +113,6 @@ asked, and `prep` lists the dead time as a topic to add to the guide.
 judgments. `python -m app demo --yes` copies it into `projects/claudictive-beta`,
 so the headline above shows with no API call and no key. Its `project.json`
 pins the models those caches were made with (`"models"`), so they stay fresh
-whatever your `.env` configures. Like everything here, it is synthetic.
+whatever your `.env` configures. The `extract` pin covers the topic grouping;
+re-running extraction itself still uses your own `EXTRACT_MODEL`. Like
+everything here, it is synthetic.

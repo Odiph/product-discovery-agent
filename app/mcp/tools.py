@@ -371,6 +371,8 @@ HINT_NO_INTERVIEWS = ("No interviews here yet. Record one with `python -m app st
                       "one in with `python -m app import <file> --project {path}`.")
 HINT_OUTSIDE_PROJECTS = ("This node points outside projects/ (a link or junction), so nothing here is read. "
                          "Move the folder into projects/ instead.")
+HINT_FACTS_UNREADABLE = ("context/facts.json in {path} cannot be read (malformed or locked), so its claims are "
+                         "unknown. Fix or move that file; `extract --all` would stop on it too.")
 HINT_NOT_EXTRACTED = ("Interviews but no claims yet. Run `python -m app extract --all --project {path}` "
                       "(it previews the cost first).")
 
@@ -407,15 +409,24 @@ def _next_step(path: str, *, repo_root: "Optional[Path]") -> "Optional[str]":
         sessions = ()
     if not sessions:
         return HINT_NO_INTERVIEWS.format(path=path)
-    return None if _has_claims(paths.context_dir) else HINT_NOT_EXTRACTED.format(path=path)
+    claims = _claims_state(paths.context_dir)
+    if claims == "unreadable":
+        return HINT_FACTS_UNREADABLE.format(path=path)
+    return None if claims == "some" else HINT_NOT_EXTRACTED.format(path=path)
 
 
-def _has_claims(context_dir: Path) -> bool:
+def _claims_state(context_dir: Path) -> str:
+    """"none" (no file, or an empty list), "some", or "unreadable"."""
+    path = context_dir / coach_corpus.FACTS_FILENAME
+    if not path.exists():
+        return "none"
     try:
-        facts = json.loads((context_dir / coach_corpus.FACTS_FILENAME).read_text(encoding="utf-8"))
+        facts = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return False
-    return isinstance(facts, list) and bool(facts)
+        return "unreadable"
+    if not isinstance(facts, list):
+        return "unreadable"
+    return "some" if facts else "none"
 
 
 # --- get_survey -----------------------------------------------------------------------

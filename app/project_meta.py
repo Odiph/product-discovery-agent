@@ -139,7 +139,12 @@ def pinned_models(node_dir: Path) -> "dict[str, str]":
     "extract" and "judge", only non-empty strings. Anything else is dropped,
     never raised, and the environment then decides. The committed demo pins
     the models its cached judgments were made with, so those caches stay
-    fresh whatever this machine configures."""
+    fresh whatever this machine configures.
+
+    "extract" pins the model that READS cached results made by the extract
+    model: the topic grouping, and the judges when "judge" is absent.
+    Extraction itself (`extract`, `extract --all`, `kb`) is never pinned, so
+    re-extracting a demo goes to a model this machine's endpoint serves."""
     data = _read_meta(Path(node_dir))
     models = data.get("models") if data is not None else None
     if not isinstance(models, dict):

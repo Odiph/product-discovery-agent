@@ -13,6 +13,7 @@ import argparse
 import os
 import sys
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Mapping, Optional
 
 from app import config as config_mod
@@ -62,7 +63,7 @@ def render(results: "tuple[Check, ...]") -> "list[str]":
             "  2. Or start your own: python -m app author --project <name>"]
 
 
-def run(args: argparse.Namespace, *, repo_root: "Optional[str]" = None) -> int:
+def run(args: argparse.Namespace, *, repo_root: "Optional[Path]" = None) -> int:
     config_mod.load_config()
     seeded = projects_mod.resolve(DEMO_PROJECT, repo_root=repo_root).node_dir.is_dir()
     results = checks(os.environ, python=sys.version_info[:2], in_venv=sys.prefix != sys.base_prefix,

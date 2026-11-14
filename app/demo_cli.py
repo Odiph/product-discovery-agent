@@ -9,7 +9,9 @@ and pins the models its cached judgments were made with
 from __future__ import annotations
 
 import argparse
+import filecmp
 import shutil
+import time
 from pathlib import Path
 from typing import Callable, Optional
 
@@ -24,6 +26,8 @@ SEED_DIR = REPO_ROOT / "demo" / DEMO_PROJECT / "seed"
 MOCK_LABEL = project_meta.MOCK_LABEL
 LOADING_SUFFIX = ".loading"
 ABSENT, LOADED, DIFFERS = "absent", "loaded", "differs"
+RENAME_ATTEMPTS = 3
+RENAME_WAIT_S = 0.5
 
 
 def add_parser(subparsers) -> None:
@@ -57,7 +61,9 @@ def run(args: argparse.Namespace, *, repo_root: "Optional[Path]" = None,
         try:
             _copy_into(target)
         except OSError as exc:
-            print(f"Could not load the demo into {shown} ({type(exc).__name__}: {exc}). Nothing was left behind.")
+            staging = target.with_name(target.name + LOADING_SUFFIX)
+            left = "" if not staging.exists() else f" A partial copy was left at {staging}; delete it."
+            print(f"Could not load the demo into {shown} ({type(exc).__name__}: {exc}).{left or ' Nothing was left behind.'}")
             return 1
         print(MOCK_LABEL)
     return _show(target, open_hub, open_=args.open)
@@ -70,10 +76,23 @@ def _copy_into(target: Path) -> None:
     shutil.rmtree(staging, ignore_errors=True)
     try:
         shutil.copytree(SEED_DIR, staging)
-        staging.rename(target)
+        _rename_with_retry(staging, target)
     except OSError:
         shutil.rmtree(staging, ignore_errors=True)
         raise
+
+
+def _rename_with_retry(source: Path, target: Path) -> None:
+    """Windows Defender or the indexer often holds a just-written file for a
+    moment, so a rename can fail with PermissionError and then succeed."""
+    for attempt in range(RENAME_ATTEMPTS):
+        try:
+            source.rename(target)
+            return
+        except PermissionError:
+            if attempt == RENAME_ATTEMPTS - 1:
+                raise
+            time.sleep(RENAME_WAIT_S)
 
 
 def _show(target: Path, open_hub: "Callable[[str], int]", *, open_: bool) -> int:
@@ -90,12 +109,23 @@ def _show(target: Path, open_hub: "Callable[[str], int]", *, open_: bool) -> int
     return 0
 
 
-def _files(root: Path) -> "dict[str, bytes]":
-    return {path.relative_to(root).as_posix(): path.read_bytes() for path in root.rglob("*") if path.is_file()}
+def _files(root: Path) -> "dict[str, Path]":
+    return {path.relative_to(root).as_posix(): path for path in root.rglob("*") if path.is_file()}
 
 
 def _same_tree(left: Path, right: Path) -> bool:
-    return _files(left) == _files(right)
+    """Same relative paths, then same sizes, then same bytes, cheapest first:
+    a project someone recorded into has extra files and is never read whole.
+    A file that cannot be read means "differs", never a traceback."""
+    try:
+        ours, theirs = _files(left), _files(right)
+        if ours.keys() != theirs.keys():
+            return False
+        if any(ours[name].stat().st_size != theirs[name].stat().st_size for name in ours):
+            return False
+        return all(filecmp.cmp(ours[name], theirs[name], shallow=False) for name in ours)
+    except OSError:
+        return False
 
 
 def _size_kb(root: Path) -> int:

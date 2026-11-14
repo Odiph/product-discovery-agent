@@ -53,13 +53,6 @@ def test_a_node_with_claims_needs_no_hint(tmp_path):
     assert _by_path(tools.list_projects({}, repo_root=tmp_path))["acme"]["hint"] is None
 
 
-def test_an_unreadable_facts_file_is_a_hint_never_a_crash(tmp_path):
-    node = _node(tmp_path, "acme", sessions=1)
-    (node / "context" / "facts.json").write_text("{not json", encoding="utf-8")
-    assert _by_path(tools.list_projects({}, repo_root=tmp_path))["acme"]["hint"] == \
-        tools.HINT_NOT_EXTRACTED.format(path="acme")
-
-
 def test_the_walkthrough_rule_keeps_the_refusal():
     for description in (_description("get_facts"), _description("get_standing")):
         assert "Never report a demo claim as a finding" in description
@@ -90,3 +83,10 @@ def test_a_junction_out_of_projects_never_breaks_the_listing(tmp_path):
     assert _by_path(result)["acme"]["hint"] is None
     escaped = _by_path(result).get("elsewhere")
     assert escaped is None or escaped["hint"] == tools.HINT_OUTSIDE_PROJECTS
+
+
+def test_an_unreadable_facts_file_says_so_rather_than_send_the_user_to_extract(tmp_path):
+    node = _node(tmp_path, "acme", sessions=1)
+    (node / "context" / "facts.json").write_text("{not json", encoding="utf-8")
+    assert _by_path(tools.list_projects({}, repo_root=tmp_path))["acme"]["hint"] == \
+        tools.HINT_FACTS_UNREADABLE.format(path="acme")
