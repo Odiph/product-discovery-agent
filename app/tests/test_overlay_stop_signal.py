@@ -33,6 +33,8 @@ from pathlib import Path
 
 import pytest
 
+from app.tests._interview_child import ChildOutput
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 pytestmark = pytest.mark.skipif(
@@ -203,9 +205,10 @@ def test_a_real_interview_with_the_server_running_still_writes_closed_at(tmp_pat
         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
     )
     try:
-        time.sleep(8)  # let the server bind and the capture threads settle
+        child = ChildOutput(proc)
+        child.wait_until_running()
         proc.send_signal(signal.CTRL_BREAK_EVENT)
-        output, _ = proc.communicate(timeout=90)
+        output = child.finish(timeout=90)
     except Exception:
         proc.kill()
         raise

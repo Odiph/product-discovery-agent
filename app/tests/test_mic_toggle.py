@@ -41,6 +41,7 @@ from app.control import ALL_COMMANDS, COMMAND_MIC_OFF, COMMAND_MIC_ON, ControlCh
 from app.overlay import model
 from app.overlay.controller import OverlayController
 from app.overlay.session import InterviewSession
+from app.tests._interview_child import ChildOutput
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -382,7 +383,8 @@ def test_a_real_interview_records_the_toggle_and_still_closes_cleanly(tmp_path):
         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
     )
     try:
-        time.sleep(8)
+        child = ChildOutput(proc)
+        child.wait_until_running()
         proc.stdin.write(f"{COMMAND_MIC_OFF}\n")
         proc.stdin.flush()
         time.sleep(3)
@@ -390,7 +392,7 @@ def test_a_real_interview_records_the_toggle_and_still_closes_cleanly(tmp_path):
         proc.stdin.flush()
         time.sleep(3)
         proc.send_signal(signal.CTRL_BREAK_EVENT)
-        output, _ = proc.communicate(timeout=90)
+        output = child.finish(timeout=90)
     except Exception:
         proc.kill()
         raise
@@ -608,12 +610,13 @@ def test_a_one_sided_run_can_take_a_microphone_mid_interview(tmp_path):
         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
     )
     try:
-        time.sleep(8)
+        child = ChildOutput(proc)
+        child.wait_until_running()
         proc.stdin.write(f"{COMMAND_MIC_ON}\n")
         proc.stdin.flush()
         time.sleep(4)
         proc.send_signal(signal.CTRL_BREAK_EVENT)
-        output, _ = proc.communicate(timeout=90)
+        output = child.finish(timeout=90)
     except Exception:
         proc.kill()
         raise
