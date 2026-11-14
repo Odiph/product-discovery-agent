@@ -15,7 +15,7 @@ PyAudioWPatch==0.2.12.8
 # (github.com/fastapi/fastapi, MIT, 317 releases), uvicorn (github.com/Kludex/uvicorn,
 # BSD-3-Clause, 199 releases), qrcode (github.com/lincolnloop/python-qrcode, BSD, 39
 # releases). Plain `uvicorn`, NEVER `uvicorn[standard]` -- this project already pins
-# websockets==17.2 below (via benchmark/requirements.txt), which uvicorn auto-detects
+# websockets==17.4 below (via benchmark/requirements.txt), which uvicorn auto-detects
 # and reuses for its own WebSocket protocol; the `[standard]` extra would additionally
 # pull uvloop (POSIX-only, dead weight on this Windows machine), httptools, watchfiles,
 # python-dotenv and pyyaml for no benefit (03-RESEARCH.md Standard Stack). `qrcode[pil]`

@@ -188,33 +188,33 @@ def test_abrupt_disconnect_removes_connection_and_does_not_stop_a_second_client(
     )
     with _running_server(app) as (base_url, loop):
         ws_url = base_url.replace("http://", "ws://") + f"/s/{token}/ws"
-        first = ws_connect(ws_url, open_timeout=5)
-        first.recv(timeout=5)
-        first.recv(timeout=5)
-        with ws_connect(ws_url, open_timeout=5) as second:
-            second.recv(timeout=5)
-            second.recv(timeout=5)
-            assert hub.connection_count == 2
+        with ws_connect(ws_url, open_timeout=5) as first:
+            first.recv(timeout=5)
+            first.recv(timeout=5)
+            with ws_connect(ws_url, open_timeout=5) as second:
+                second.recv(timeout=5)
+                second.recv(timeout=5)
+                assert hub.connection_count == 2
 
-            first.close()  # abrupt -- no cooperative shutdown message
+                first.close()  # abrupt -- no cooperative shutdown message
 
-            deadline = time.monotonic() + 3.0
-            while hub.connection_count != 1 and time.monotonic() < deadline:
-                time.sleep(0.02)
-            assert hub.connection_count == 1, "an abruptly-closed connection must be removed from the active set"
+                deadline = time.monotonic() + 3.0
+                while hub.connection_count != 1 and time.monotonic() < deadline:
+                    time.sleep(0.02)
+                assert hub.connection_count == 1, "an abruptly-closed connection must be removed from the active set"
 
-            from app.session.store import SegmentRecord
-            import asyncio
+                from app.session.store import SegmentRecord
+                import asyncio
 
-            record = SegmentRecord(
-                kind="segment", seq=0, speaker="interviewee", text="still reaches the survivor",
-                audio_start_s=0.0, audio_end_s=1.0, ready_wall_s=1.0, latency_s=0.1,
-                detected_language="en", engine="fake", written_at="2026-08-05T00:00:00.000+00:00",
-            )
-            future = asyncio.run_coroutine_threadsafe(hub.broadcast(record), loop)
-            future.result(timeout=5)
-            message = json.loads(second.recv(timeout=5))
-            assert message["text"] == "still reaches the survivor"
+                record = SegmentRecord(
+                    kind="segment", seq=0, speaker="interviewee", text="still reaches the survivor",
+                    audio_start_s=0.0, audio_end_s=1.0, ready_wall_s=1.0, latency_s=0.1,
+                    detected_language="en", engine="fake", written_at="2026-08-05T00:00:00.000+00:00",
+                )
+                future = asyncio.run_coroutine_threadsafe(hub.broadcast(record), loop)
+                future.result(timeout=5)
+                message = json.loads(second.recv(timeout=5))
+                assert message["text"] == "still reaches the survivor"
 
 
 def test_three_reconnects_leave_the_connection_count_correct_each_time(tmp_path):
