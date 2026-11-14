@@ -6,7 +6,7 @@
 faster-whisper==1.2.1
 ctranslate2==4.8.4
 jiwer==4.0.0
-assemblyai==0.64.32
+assemblyai==1.9.1
 websockets==17.4
 edge-tts==7.3.1
 pytest==9.2.0
