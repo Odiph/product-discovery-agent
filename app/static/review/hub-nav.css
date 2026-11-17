@@ -1,0 +1,104 @@
+/* The hub's section nav, its "At a glance" block, every section's bottom line
+   and the "Show all" toggles. Same rule as synthesis.css: no colour of its
+   own. Every hue is one of review.css's tokens (tuned for both canvases
+   there), translucent neutral grey carries rules and fills only, and the
+   sticky bar is painted in the UA's own Canvas so it matches the page in
+   light and dark alike. */
+
+/* `hidden` must win over any display a class sets: the collapsed rows and
+   the picker rely on it. */
+[hidden] { display: none !important; }
+
+/* --- skip link: off screen until focused --------------------------------- */
+.skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 30;
+  padding: 0.4rem 0.8rem; border-radius: 4px; background: Canvas; color: inherit;
+  border: 1px solid rgba(127,127,127,0.6); }
+.skip-link:focus { top: 0.75rem; }
+main:focus { outline: none; }
+
+/* --- the nav: a sticky bar by default (narrow screens) -------------------- */
+.hub-nav { position: sticky; top: 0; z-index: 20; background: Canvas;
+  margin: 1rem -1.5rem 0; padding: 0.5rem 1.5rem 0.3rem;
+  border-bottom: 1px solid rgba(127,127,127,0.3); }
+.hub-nav .picker-row { margin: 0 0 0.3rem; gap: 0.25rem 0.6rem; }
+.hub-nav .picker-row select { flex: 1 1 12rem; min-width: 0; }
+.hub-nav .picker-row .note { font-size: 0.8rem; }
+
+.nav-links { position: relative; display: flex; align-items: baseline; gap: 0 1rem;
+  overflow-x: auto; white-space: nowrap; scrollbar-width: thin; padding-bottom: 0.15rem; }
+.nav-group { display: flex; align-items: baseline; gap: 0.6rem; }
+/* The group split is drawn, not only named: a rule before every group after the first. */
+.nav-group + .nav-group { border-left: 1px solid rgba(127,127,127,0.4); padding-left: 1rem; }
+.nav-group-title { margin: 0; font-size: 0.7rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--dim); }
+.nav-list { display: flex; gap: 0 0.85rem; list-style: none; margin: 0; padding: 0; }
+
+.nav-link { display: inline-flex; align-items: baseline; gap: 0.35rem; color: inherit;
+  text-decoration: none; font-size: 0.88rem; padding: 0.25rem 0;
+  border-bottom: 2px solid transparent; }
+.nav-link:hover .nav-label { text-decoration: underline;
+  text-decoration-color: rgba(127,127,127,0.7); text-underline-offset: 0.2em; }
+.nav-link[aria-current] { border-bottom-color: currentColor; font-weight: 600; }
+.nav-link:focus-visible, .glance-row:focus-visible, .show-all:focus-visible, .skip-link:focus-visible {
+  outline: 2px solid currentColor; outline-offset: 2px; border-radius: 3px; }
+.nav-count { font-size: 0.72rem; font-weight: 400; font-variant-numeric: tabular-nums;
+  color: var(--dim); padding: 0 0.35rem; border-radius: 3px; background: rgba(127,127,127,0.16); }
+
+/* Anchored sections clear the sticky bar. */
+main > section { scroll-margin-top: 7.5rem; }
+
+/* --- wide screens: a left rail beside the reading column ------------------ */
+@media (min-width: 72rem) {
+  body { max-width: 72rem; display: grid; grid-template-columns: 12.5rem minmax(0, 1fr);
+    column-gap: 3rem; align-items: start; }
+  body > * { grid-column: 2; }
+  body > .hub-nav { grid-column: 1; grid-row: 1 / span 4; position: sticky; top: 1.5rem;
+    margin: 0; padding: 0 0.25rem 1rem 0; border: 0; background: transparent;
+    max-height: calc(100vh - 3rem); overflow-y: auto; }
+  .hub-nav .picker-row { flex-direction: column; align-items: stretch; margin: 0 0 1.2rem; }
+  .hub-nav .picker-row select { flex: none; width: 100%; }
+  .nav-links { display: block; overflow: visible; white-space: normal; }
+  .nav-group { display: block; margin-top: 1.3rem; }
+  .nav-group + .nav-group { border-left: 0; padding-left: 0; }
+  .nav-group-title { margin-bottom: 0.35rem; }
+  .nav-list { display: block; }
+  .nav-link { display: flex; justify-content: space-between; border-bottom: 0;
+    border-left: 2px solid rgba(127,127,127,0.22); padding: 0.22rem 0 0.22rem 0.75rem; }
+  .nav-link[aria-current] { border-left-color: currentColor; }
+  main > section { scroll-margin-top: 1.5rem; }
+}
+
+/* --- at a glance: one row per section, each a link to it ------------------ */
+.glance { margin-top: 1.4rem; }
+.glance h2 { margin-top: 0; }
+.glance-group { margin: 0 0 1.3rem; }
+.glance-group-title { font-size: 0.95rem; margin: 0 0 0.2rem; }
+.glance-group-line { margin: 0 0 0.45rem; font-size: 0.9rem; color: var(--dim); }
+.glance-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(127,127,127,0.22); }
+.glance-row { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 0.1rem 1rem;
+  padding: 0.5rem 0; border-bottom: 1px solid rgba(127,127,127,0.22); color: inherit; text-decoration: none; }
+.glance-name { font-size: 0.8rem; color: var(--dim); padding-top: 0.12rem; }
+.glance-line { font-size: 0.95rem; overflow-wrap: anywhere; }
+.glance-row:hover .glance-line { text-decoration: underline;
+  text-decoration-color: rgba(127,127,127,0.6); text-underline-offset: 0.2em; }
+
+/* --- the bottom line a section opens with --------------------------------- */
+.bottom-line { font-size: 1.02rem; margin: -0.15rem 0 1rem; padding-left: 0.75rem;
+  border-left: 3px solid rgba(127,127,127,0.55); max-width: 44rem; overflow-wrap: anywhere; }
+
+/* --- "Show all N" ---------------------------------------------------------- */
+.show-all { font: inherit; font-size: 0.85rem; padding: 0.25rem 0.75rem; margin: 0.2rem 0 0.6rem;
+  border-radius: 4px; border: 1px solid rgba(127,127,127,0.5); background: transparent;
+  color: inherit; cursor: pointer; }
+.show-all-row { list-style: none; }
+
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* --- narrow screens -------------------------------------------------------- */
+@media (max-width: 40rem) {
+  .hub-nav { margin-left: -1rem; margin-right: -1rem; padding-left: 1rem; padding-right: 1rem; }
+  /* The interview count gives way to keep the bar short; the sentence that
+     replaces an empty picker ("No interviews recorded...") still shows. */
+  .hub-nav .picker-row select:not([hidden]) ~ .note { display: none; }
+  .glance-row { grid-template-columns: minmax(0, 1fr); }
+}

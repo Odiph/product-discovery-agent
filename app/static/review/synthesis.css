@@ -1,0 +1,295 @@
+/* The synthesis panel: the opportunity solution tree. Built on review.css's
+   tokens and neutrals only: no colour is declared here (test_css_contrast
+   checks this file holds no hex), so every hue on the panel is one the
+   contrast gate already measured on both canvases.
+
+   One bold thing: the tree's rail. The outcome is the root, set off by the
+   panel's one accent; every branch hangs from it on a thin grey rule, so the
+   nesting reads as a tree and not as an indented list. Everything else is
+   quiet: chips are outlines, status is told by line weight and dash (strength
+   of evidence, not a verdict), and only the solution signal borrows the
+   for/against hues the standings bars already use. */
+
+/* --- the root ------------------------------------------------------------- */
+.ost-outcome { border-left: 3px solid var(--unpredicted); padding: 0.15rem 0 0.25rem 0.9rem; margin: 0 0 0.9rem; }
+.ost-outcome-label { margin: 0; font-size: 0.82rem; color: var(--dim); display: flex; gap: 0.6rem;
+                     align-items: baseline; flex-wrap: wrap; }
+.ost-outcome-text { margin: 0.05rem 0 0; font-size: 1.2rem; font-weight: 600; line-height: 1.3;
+                    overflow-wrap: anywhere; }
+.ost-outcome-none { margin: 0.05rem 0 0; color: var(--dim); }
+.ost-proposed { font-size: 0.75rem; color: var(--unpredicted); padding: 0 0.45rem; border-radius: 999px;
+                border: 1px dashed var(--unpredicted); }
+.ost-sub { margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--dim); }
+.ost-sub code, .synth-command { font-family: ui-monospace, Consolas, monospace; }
+.ost-tally { margin: 0 0 0.6rem; font-size: 0.88rem; }
+
+/* --- the controls --------------------------------------------------------- */
+.ost-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.2rem; margin: 0 0 0.4rem; }
+.synth-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+.synth-chip, .ost-action {
+  font: inherit; font-size: 0.82rem; padding: 0.12rem 0.65rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid rgba(127,127,127,0.45); background: transparent; color: inherit;
+}
+.synth-chip[aria-pressed="true"] { background: rgba(127,127,127,0.24); border-color: rgba(127,127,127,0.8);
+                                   font-weight: 600; }
+.ost-chip-n { font-variant-numeric: tabular-nums; color: var(--dim); }
+.ost-search-wrap { display: flex; align-items: center; gap: 0.4rem; flex: 1 1 12rem; min-width: 0; }
+.ost-search-label { font-size: 0.82rem; color: var(--dim); }
+.ost-search {
+  font: inherit; font-size: 0.88rem; flex: 1 1 auto; min-width: 0; padding: 0.18rem 0.5rem; border-radius: 4px;
+  border: 1px solid rgba(127,127,127,0.5); background: transparent; color: inherit;
+}
+.ost-actions { display: flex; gap: 0.35rem; }
+.ost-action { border-radius: 4px; }
+.ost-result { margin: 0.2rem 0 0.5rem; font-size: 0.8rem; color: var(--dim); }
+.ost-none p { margin: 0.4rem 0; font-size: 0.9rem; }
+
+.synth-chip:focus-visible, .synth-toggle:focus-visible, .synth-copy-button:focus-visible, .ost-action:focus-visible,
+.ost-branch:focus-visible, .ost-statement:focus-visible, .ost-search:focus-visible {
+  outline: 2px solid currentColor; outline-offset: 2px;
+}
+
+/* --- the tree ------------------------------------------------------------- */
+.ost-tree, .ost-kids, .ost-assumptions, .ost-warnings, .ost-claim-groups, .ost-claim-list,
+.ost-unplaced-list, .ost-diff-list { list-style: none; margin: 0; padding: 0; }
+.ost-tree { border-left: 1px solid rgba(127,127,127,0.4); margin-left: 0.55rem; }
+.ost-kids { margin-left: 1.25rem; border-left: 1px solid rgba(127,127,127,0.3); }
+.ost-node { position: relative; padding-left: 0.9rem; }
+/* The tick from the rail to the node's marker. */
+.ost-node::before { content: ""; position: absolute; left: 0; top: 1.05rem; width: 0.8rem;
+                    border-top: 1px solid rgba(127,127,127,0.4); }
+
+.ost-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 0.15rem 0.5rem; padding: 0.4rem 0 0.3rem; }
+.ost-branch, .ost-leaf { flex: none; width: 1.4rem; height: 1.4rem; margin-top: 0.1rem; }
+.ost-branch {
+  font: inherit; padding: 0; border: 1px solid rgba(127,127,127,0.45); border-radius: 4px; background: transparent;
+  color: inherit; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+}
+.ost-branch::before { content: "\25B8"; font-size: 0.8rem; display: inline-block; }
+.ost-branch[aria-expanded="true"]::before { transform: rotate(90deg); }
+.ost-leaf { display: inline-block; }
+.ost-bullet { flex: none; width: 0.6rem; height: 0.6rem; margin-top: 0.5rem; border-radius: 50%;
+            background: currentColor; }
+.ost-sol > .ost-row > .ost-bullet { border-radius: 1px; background: transparent; border: 1.5px solid currentColor;
+                                  transform: rotate(45deg); width: 0.5rem; height: 0.5rem; }
+.ost-statement {
+  flex: 1 1 18rem; min-width: 0; font: inherit; font-size: 0.98rem; font-weight: 600; line-height: 1.4;
+  text-align: start; padding: 0.05rem 0; border: 0; background: none; color: inherit; cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.ost-statement:hover { text-decoration: underline; text-decoration-color: rgba(127,127,127,0.6);
+                       text-underline-offset: 3px; }
+.ost-sol .ost-statement { font-weight: 500; }
+.ost-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.5rem; flex: 0 1 auto;
+            margin-left: auto; font-size: 0.8rem; }
+.ost-context > .ost-row .ost-statement { font-weight: 400; color: var(--dim); }
+.ost-context > .ost-row > .ost-bullet { background: transparent; border: 1px solid var(--dim); }
+
+/* Chips. Status is the strength of the evidence: solid for established,
+   outlined for recurring, dashed for a single story. Never a colour, never
+   "validated". */
+.ost-status, .ost-met, .ost-hyp, .ost-warn, .ost-signal, .ost-origin, .ost-atag, .ost-leap {
+  flex: none; font-size: 0.75rem; padding: 0 0.45rem; border-radius: 999px; line-height: 1.5;
+  border: 1px solid rgba(127,127,127,0.45); white-space: nowrap;
+}
+.ost-status.status-established { border: 2px solid currentColor; font-weight: 600; }
+.ost-status.status-single { border-style: dashed; color: var(--dim); }
+.ost-met { color: var(--supports); border-color: var(--supports); }
+.ost-hyp { font-weight: 600; font-variant-numeric: tabular-nums; border-radius: 4px; cursor: help; }
+.ost-warn { color: var(--contrary); border-color: var(--contrary); cursor: help; }
+.ost-signal.signal-leaning-for { color: var(--supports); border-color: var(--supports); font-weight: 600; }
+.ost-signal.signal-leaning-against { color: var(--contrary); border-color: var(--contrary); font-weight: 600; }
+.ost-signal.signal-thin, .ost-signal.signal-no-signal { border-style: dashed; color: var(--dim); }
+.ost-origin { border: 0; padding: 0; color: var(--dim); }
+
+/* Coverage: a fixed-width strip so the strips line up down the tree. */
+.synth-coverage { display: inline-flex; align-items: center; gap: 0.45rem; flex: none; }
+.synth-cells { display: flex; gap: 2px; width: 7rem; height: 0.6rem; }
+.synth-cell { flex: 1 1 0; border-radius: 2px; background: rgba(127,127,127,0.16); }
+.synth-cell.on { background: rgba(127,127,127,0.78); }
+.synth-count { color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* A solution's signal: the standings bar, small, with its own key. */
+.ost-signal-bar { display: inline-flex; align-items: center; gap: 0.4rem; }
+.ost-track.standing-track { width: 4.5rem; height: 7px; }
+.ost-key { color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ost-key .for { color: var(--supports); }
+.ost-key .against { color: var(--contrary); }
+
+/* Assumptions hang under their solution, leap of faith first and heaviest. */
+.ost-assumptions { margin: 0 0 0.35rem 2.3rem; }
+.ost-assumption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.35rem; margin: 0.15rem 0;
+                  font-size: 0.86rem; }
+.ost-atag { color: var(--dim); }
+.ost-leap { border: 2px solid currentColor; font-weight: 600; }
+.ost-atext { flex: 1 1 12rem; min-width: 0; }
+.ost-assumption.leap .ost-atext { font-weight: 600; }
+
+/* Details: opened from the statement, set under it on its own rule. */
+.ost-more { margin: 0 0 0.5rem 2.3rem; padding: 0.1rem 0 0.2rem 0.8rem; border-left: 2px solid rgba(127,127,127,0.35);
+            font-size: 0.9rem; }
+.ost-story { margin: 0.2rem 0 0.4rem; }
+.ost-story-top { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.ost-story-label { font-size: 0.8rem; font-weight: 600; }
+.ost-story-text { margin: 0.1rem 0 0; font-size: 0.95rem; }
+.ost-story-none { margin: 0; color: var(--dim); font-size: 0.85rem; }
+.ost-maps, .ost-reframed { margin: 0.2rem 0; font-size: 0.85rem; }
+.ost-warnings { margin: 0.3rem 0; }
+.ost-warning { margin: 0.1rem 0; font-size: 0.85rem; padding-left: 0.6rem; border-left: 2px solid var(--contrary); }
+.ost-claims .ost-sub { margin: 0.4rem 0 0.15rem; }
+.ost-claim-group { display: flex; gap: 0.6rem; margin: 0.25rem 0; }
+.ost-claim-list li { margin: 0.1rem 0; }
+.ost-bearing { margin-left: 0.4rem; font-size: 0.75rem; color: var(--dim); }
+.synth-sid { flex: 0 0 2.2rem; font-size: 0.78rem; color: var(--dim); font-variant-numeric: tabular-nums;
+             padding-top: 0.1rem; cursor: help; }
+
+/* --- beside the tree ------------------------------------------------------ */
+.ost-aside { margin: 1.6rem 0 0; padding-top: 0.6rem; border-top: 1px solid rgba(127,127,127,0.3); }
+.ost-side { margin: 0 0 1.1rem; }
+.ost-side h3 { margin: 0 0 0.1rem; font-size: 0.95rem; }
+.ost-side-sub { margin: 0 0 0.35rem; font-size: 0.85rem; color: var(--dim); }
+.ost-unplaced-item { margin: 0.35rem 0; }
+.ost-unplaced-head { display: flex; gap: 0.45rem; align-items: baseline; margin: 0; font-size: 0.9rem; }
+.ost-standing.standing-key { margin: 0.1rem 0 0; }
+.ost-total { color: var(--dim); }
+.ost-opinion-list .ost-claim-list li { display: flex; gap: 0.6rem; font-size: 0.88rem; }
+.ost-opinion-note { margin: 0.3rem 0; font-size: 0.8rem; color: var(--dim); }
+.ost-diff-item { margin: 0.1rem 0; font-size: 0.88rem; }
+.ost-drops, .ost-threshold { font-size: 0.8rem; }
+.ost-empty { font-size: 0.9rem; color: var(--dim); }
+
+/* --- the tree view: top-down, Torres's layout ------------------------------
+   Cards are placed by synthesis-layout.js; the connectors are one SVG behind
+   them. The canvas scrolls inside its own box, never the page. A solution
+   card is dashed and tinted, an opportunity card solid, the outcome carries
+   the accent; a selected card is ringed in the accent too. */
+.ost-modes { margin: 0 0 0.5rem; }
+.ost-canvas-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0 0 0.4rem; }
+.ost-zoom-level { font-size: 0.8rem; color: var(--dim); font-variant-numeric: tabular-nums; margin-left: 0.3rem; }
+.ost-frame { position: relative; }
+.ost-hint { font-size: 0.75rem; color: var(--dim); margin-left: auto; }
+.ost-scroller { cursor: grab; touch-action: pan-x pan-y pinch-zoom; user-select: none; overflow: auto; max-height: 72vh; border: 1px solid rgba(127,127,127,0.35); border-radius: 6px;
+                overscroll-behavior: contain; }
+.ost-scroller:active { cursor: grabbing; }
+.ost-minimap { position: absolute; right: 1.1rem; bottom: 1.4rem; box-sizing: border-box; overflow: hidden;
+               background: Canvas; border: 1px solid rgba(127,127,127,0.6); border-radius: 4px; opacity: 0.92;
+               pointer-events: auto; cursor: pointer; }
+.ost-minimap-card { position: absolute; box-sizing: border-box; background: rgba(127,127,127,0.55); border-radius: 1px; }
+.ost-minimap-outcome { background: var(--unpredicted); }
+.ost-minimap-solution { background: rgba(127,127,127,0.3); }
+.ost-minimap-view { position: absolute; box-sizing: border-box; border: 1.5px solid var(--unpredicted);
+                    background: rgba(127,127,127,0.12); }
+.ost-scroller:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.ost-stage { position: relative; margin: 0.8rem; }
+.ost-plane { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+.ost-links { position: absolute; top: 0; left: 0; overflow: visible; }
+.ost-link { fill: none; stroke: rgba(127,127,127,0.6); stroke-width: 1.5; }
+.ost-link-solution { stroke-dasharray: 4 3; }
+.ost-card-wrap { position: absolute; box-sizing: border-box; }
+.ost-card {
+  width: 100%; height: 100%; box-sizing: border-box; display: flex; flex-direction: column;
+  justify-content: space-between; gap: 0.3rem; padding: 0.45rem 0.55rem; font: inherit; text-align: start;
+  color: inherit; background: Canvas; border: 1px solid rgba(127,127,127,0.6); border-radius: 6px; cursor: pointer;
+}
+.ost-card-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+                 font-size: 0.84rem; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.ost-card-solution { border-style: dashed; border-radius: 14px; background: rgba(127,127,127,0.1); }
+.ost-card-solution .ost-card-text { font-weight: 500; -webkit-line-clamp: 2; }
+.ost-card-outcome { border: 2px solid var(--unpredicted); justify-content: center; text-align: center; }
+.ost-card-outcome .ost-card-text { font-size: 0.95rem; -webkit-line-clamp: 2; }
+.ost-card-label { font-size: 0.75rem; color: var(--dim); }
+.ost-card-foot { display: flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; overflow: hidden; }
+.ost-card-foot .ost-status, .ost-card-foot .ost-signal { font-size: 0.7rem; padding: 0 0.35rem; }
+.ost-card-n { color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ost-card { position: relative; }
+.ost-dot { position: absolute; top: 0.4rem; right: 0.4rem; width: 0.55rem; height: 0.55rem; border-radius: 50%;
+           background: var(--contrary); }
+.ost-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.ost-card[aria-pressed="true"] { outline: 3px solid var(--unpredicted); outline-offset: 1px; }
+.ost-card:focus-visible, .ost-fold:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.ost-fold {
+  position: absolute; left: 50%; bottom: -0.7rem; transform: translateX(-50%); z-index: 1; min-width: 1.7rem;
+  height: 1.3rem; padding: 0 0.35rem; font: inherit; font-size: 0.72rem; line-height: 1; border-radius: 999px;
+  border: 1px solid rgba(127,127,127,0.6); background: Canvas; color: inherit; cursor: pointer;
+}
+/* Filters: matches drawn heavier, the rest quieter in tone (never opacity on text). */
+.ost-hit .ost-card { border-width: 2px; border-color: currentColor; }
+.ost-dim .ost-card { color: var(--dim); border-color: rgba(127,127,127,0.3); }
+.ost-dim .ost-card-text { font-weight: 400; }
+.ost-detail { margin: 0.8rem 0 0; padding: 0.6rem 0 0; border-top: 1px solid rgba(127,127,127,0.3); }
+.ost-detail-title { margin: 0 0 0.2rem; font-size: 1rem; overflow-wrap: anywhere; }
+.ost-detail-kind { margin: 0 0 0.3rem; font-size: 0.88rem; }
+.ost-detail .ost-more { margin-left: 0; }
+.ost-detail .ost-assumptions { margin: 0.4rem 0; }
+
+/* --- shared bits ---------------------------------------------------------- */
+.synth-copy { display: inline-flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+.synth-copy-button {
+  font: inherit; font-size: 0.8rem; padding: 0.05rem 0.55rem; border-radius: 4px; cursor: pointer;
+  border: 1px solid rgba(127,127,127,0.5); background: transparent; color: inherit;
+}
+.synth-copied { font-size: 0.8rem; color: var(--dim); }
+.synth-toggle {
+  font: inherit; font-size: 0.9rem; font-weight: 600; padding: 0.1rem 0; border: 0; background: none;
+  color: inherit; cursor: pointer; text-align: start;
+}
+.synth-toggle::before { content: "\25B8"; display: inline-block; margin-right: 0.35rem; }
+.synth-toggle[aria-expanded="true"]::before { transform: rotate(90deg); }
+
+/* States other than fresh: the command is meant to be typed. */
+.synth-state { margin: 0.2rem 0 0; }
+.synth-lead { margin: 0 0 0.3rem; font-size: 0.9rem; }
+.synth-command-line { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.synth-command { font-size: 0.85rem; padding: 0.2rem 0.5rem; border-radius: 4px; user-select: all;
+                 background: rgba(127,127,127,0.12); overflow-wrap: anywhere; }
+.synth-mock { display: inline-block; margin: 0 0 0.8rem; font-size: 0.8rem; color: var(--dim);
+              padding: 0 0.5rem; border: 1px dashed rgba(127,127,127,0.55); border-radius: 999px; }
+
+/* Narrow screens: the rail tightens, the chips drop under the statement. */
+@media (max-width: 40rem) {
+  .ost-kids { margin-left: 0.7rem; }
+  .ost-node { padding-left: 0.6rem; }
+  .ost-node::before { width: 0.5rem; }
+  .ost-meta { margin-left: 0; padding-left: 2.2rem; flex-basis: 100%; box-sizing: border-box; min-width: 0; }
+  .synth-coverage { flex: 0 1 auto; flex-wrap: wrap; min-width: 0; }
+  .synth-count { white-space: normal; }
+  .ost-tree-holder { overflow-x: auto; }
+  .ost-signal-bar { flex-wrap: wrap; }
+  .ost-key { white-space: normal; }
+  .ost-more, .ost-assumptions { margin-left: 0.4rem; }
+  .synth-cells { width: 5rem; }
+  .ost-search-wrap { flex-basis: 100%; }
+}
+
+/* The only motion: a marker turning when the reader opens or closes something. */
+@media (prefers-reduced-motion: no-preference) {
+  .ost-branch::before, .synth-toggle::before { transition: transform 120ms ease-out; }
+}
+
+/* What one interview did to a node. The symbol carries the meaning, so the
+   colour only reinforces it (and survives colour-blindness and dark mode). */
+.ost-mark { display: inline-block; flex: none; font-size: 0.8rem; line-height: 1.2; margin-inline-end: 0.3rem;
+            font-weight: 700; cursor: help; }
+.ost-mark-stronger { color: var(--supports); }
+.ost-mark-weaker { color: var(--contrary); }
+.ost-mark-mixed { color: var(--unpredicted); }
+.ost-mark-new { display: inline-block; flex: none; font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+                letter-spacing: 0.04em; padding: 0 0.3rem; margin-inline-end: 0.3rem; border: 1px solid currentColor;
+                border-radius: 3px; color: var(--dim); }
+.ost-card .ost-mark, .ost-card .ost-mark-new { vertical-align: middle; }
+.ost-detail-mark { margin: 0.2rem 0 0.4rem; font-weight: 600; }
+.ost-detail-mark-stronger { color: var(--supports); }
+.ost-detail-mark-weaker { color: var(--contrary); }
+.ost-detail-mark-mixed { color: var(--unpredicted); }
+.ost-filter-changed { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.9rem; }
+.ost-filter-changed[hidden] { display: none; }
+.ost-marks-note:empty { display: none; }
+.ost-marks-note { margin: 0.3rem 0; }
+
+/* A stale cache: the last tree stays on screen, greyed, under a banner. It is
+   dimmed and desaturated only; it still pans, folds and opens details. */
+.ost-stale-banner { margin: 0 0 0.8rem; padding: 0.6rem 0.8rem; border: 1px solid rgba(127,127,127,0.4);
+                    border-left: 4px solid var(--unpredicted); border-radius: 4px; background: rgba(127,127,127,0.1); }
+.ost-stale-copies { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 0 0 0.4rem; }
+.ost-stale-how { margin-top: 0.4rem; }
+.ost-out-of-date { opacity: 0.6; filter: grayscale(1); }

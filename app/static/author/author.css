@@ -1,0 +1,318 @@
+/* app/static/author/author.css -- deliberately plain and fast to use under
+   time pressure (04-03-PLAN.md §E4): this gets filled in shortly before a
+   call, and a fussy editor is one the user will skip. No CDN, no web font. */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #0b0d12;
+  color: #eaeaea;
+}
+
+body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 20px 48px;
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin: 0 0 4px 0;
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin: 24px 0 4px 0;
+  border-bottom: 1px solid #2a2e37;
+  padding-bottom: 4px;
+}
+
+.hint {
+  color: #9099a8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+code {
+  background: #12151c;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.item-row {
+  border: 1px solid #2a2e37;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 0 0 10px 0;
+  background: #12151c;
+}
+
+.field {
+  display: block;
+  font-size: 0.8rem;
+  color: #9099a8;
+  margin: 0 0 8px 0;
+}
+
+.field input,
+.field textarea,
+.field select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 2px;
+  padding: 6px 8px;
+  background: #0b0d12;
+  color: #eaeaea;
+  border: 1px solid #2a2e37;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.field textarea {
+  min-height: 3.5em;
+  resize: vertical;
+}
+
+.provenance-group {
+  display: flex;
+  gap: 16px;
+  margin: 6px 0 10px 0;
+  font-size: 0.85rem;
+}
+
+.provenance-option {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+button {
+  background: #1c2128;
+  color: #eaeaea;
+  border: 1px solid #2a2e37;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-right: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+button:hover:not(:disabled) {
+  background: #262c35;
+}
+
+.status {
+  font-size: 0.85rem;
+  color: #9099a8;
+}
+
+/* The damaged-file banner. Red, not amber: unlike the hub's un-extracted
+   notice this is not an unfinished step, it is a file that will refuse to be
+   overwritten, and the form beneath it is actively misleading until it is
+   dealt with. Left border rather than a fill, matching the hub's convention.
+
+   `user-select: all` on the path for the same reason the hub's remedy line
+   has it -- it is meant to be copied into a terminal. */
+.damage {
+  border-left: 4px solid #c2413f;
+  background: rgba(194, 65, 63, 0.06);
+  padding: 0.7rem 0.9rem;
+  margin: 0 0 1rem;
+  border-radius: 3px;
+}
+.damage-headline { font-size: 0.95rem; }
+.damage-path {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.85rem;
+  margin-top: 0.45rem;
+  opacity: 0.85;
+  user-select: all;
+}
+
+/* prep's proposals: above the survey they would change. A left border,
+   like .damage, in blue: a suggestion, not a fault. */
+.prep {
+  border-left: 4px solid #4a7fd4;
+  background: rgba(74, 127, 212, 0.07);
+  padding: 0.7rem 0.9rem;
+  margin: 0 0 1rem;
+  border-radius: 3px;
+}
+.prep-headline { font-size: 0.95rem; margin-bottom: 0.4rem; }
+.prep-row { padding: 0.5rem 0; border-top: 1px solid #2a2e37; }
+.prep-question { font-weight: 600; }
+.prep-reason, .prep-change { color: #9099a8; font-size: 0.9rem; margin: 0.15rem 0; }
+.prep-row button { margin: 0.3rem 0.4rem 0 0; }
+
+/* --- the drafted questions (drafts.js) -------------------------------------
+   The same blue left border as .prep: a suggestion, not a fault. Solid
+   surfaces only, so app/tests/test_css_contrast.py can compute every ratio.
+   #0f1520 is .prep's translucent tint composited onto the page. */
+.drafts {
+  border-left: 4px solid #4a7fd4;
+  background: #0f1520;
+  padding: 0.8rem 0.9rem 0.4rem;
+  margin: 0 0 1rem;
+  border-radius: 3px;
+}
+.drafts-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 1rem;
+}
+.drafts-title { font-size: 1rem; margin: 0; }
+.drafts-count { margin: 0; font-size: 0.85rem; color: #9099a8; font-variant-numeric: tabular-nums; }
+.drafts-mock { margin: 0.3rem 0 0; font-size: 0.8rem; color: #9099a8; font-style: italic; }
+.drafts-hint, .drafts-line { margin: 0.35rem 0 0.6rem; font-size: 0.88rem; color: #9099a8; line-height: 1.5; }
+.drafts-command {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.6rem;
+}
+.drafts-command code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  user-select: all;
+  overflow-wrap: anywhere;
+}
+.drafts-command button { margin: 0; }
+.drafts-note { font-size: 0.85rem; color: #9099a8; }
+
+/* One gap: its id, its statement clamped to one line, its status chip. */
+.draft-gap { padding: 0.6rem 0 0.2rem; border-top: 1px solid #2a2e37; }
+.gap-head { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.gap-id { font-weight: 600; font-size: 0.85rem; color: #9cb8e6; font-variant-numeric: tabular-nums; }
+.gap-statement {
+  flex: 1 1 12rem;
+  min-width: 0;
+  margin: 0;
+  padding: 2px 4px;
+  background: none;
+  border: none;
+  color: #eaeaea;
+  font-size: 0.92rem;
+  text-align: start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gap-statement:hover:not(:disabled) { background: none; text-decoration: underline; }
+.gap-statement.is-open { white-space: normal; }
+.gap-chip {
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  padding: 1px 8px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: #9099a8;
+  font-variant-numeric: tabular-nums;
+}
+.chip-contested { color: #d6b16f; }
+.chip-no-criterion { color: #e8a0a0; }
+.chip-thin { color: #9cb8e6; }
+.gap-detail { margin: 0.2rem 0 0.3rem 0.25rem; font-size: 0.88rem; color: #9099a8; }
+.gap-detail p { margin: 0.2rem 0; }
+.gap-falsifier-text { color: #eaeaea; }
+.gap-batch { margin: 0.35rem 0 0; font-size: 0.85rem; color: #9099a8; }
+.gap-batch span { margin-right: 0.5rem; }
+
+/* One question. */
+.draft-cards { list-style: none; margin: 0.4rem 0; padding: 0; }
+.draft-card {
+  background: #12151c;
+  border: 1px solid #2a2e37;
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  margin: 0 0 0.5rem;
+}
+.draft-q { margin: 0; font-size: 1rem; line-height: 1.45; }
+.draft-why { margin: 0.25rem 0 0; font-size: 0.86rem; line-height: 1.45; color: #9099a8; }
+.draft-actions { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.draft-actions button { margin: 0; }
+.draft-card .field { margin-bottom: 0.25rem; }
+.draft-edit { min-height: 4.5em; }
+
+/* Added or dismissed: collapsed in place, with its Undo. */
+.draft-card.is-added, .draft-card.is-dismissed { padding: 0.4rem 0.75rem; }
+.draft-card.is-added { border-left: 3px solid #4fa877; }
+.draft-q.is-quiet {
+  font-size: 0.88rem;
+  color: #9099a8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.draft-settled { margin: 0.2rem 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+.draft-settled button { margin: 0; }
+.draft-settled-text { font-size: 0.88rem; color: #9099a8; }
+.is-added .draft-settled-text { color: #8fd0a8; }
+
+/* Buttons: one primary action per card; "quiet" ones carry no fill. */
+button.primary { background: #24406b; border: 1px solid #4a7fd4; }
+button.primary:hover:not(:disabled) { background: #2c4d80; }
+button.quiet { background: none; }
+button:focus-visible { outline: 2px solid #9cb8e6; outline-offset: 2px; }
+
+/* A survey question that is on the page but not yet on disk. */
+.new-tag {
+  display: inline-block;
+  margin: 0 0 0 0.4rem;
+  padding: 0 6px;
+  font-size: 0.72rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: #8fd0a8;
+}
+
+/* Sticky at the bottom of the window while the survey differs from disk. */
+.unsaved {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0;
+  padding: 0.5rem 0.75rem;
+  background: #171c26;
+  border-top: 1px solid #4a7fd4;
+  border-radius: 4px 4px 0 0;
+  font-size: 0.9rem;
+}
+.unsaved button { margin: 0; }
+/* So a control reached by Tab is never left behind the sticky bar. */
+html { scroll-padding-bottom: 4rem; }
+.drafts-reason { margin: 0 0 0.35rem; font-size: 0.85rem; overflow-wrap: anywhere; }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.drafts[hidden], .unsaved[hidden] { display: none; }
+
+@media (max-width: 480px) {
+  body { padding: 12px 16px 48px; }
+  .gap-statement { flex-basis: 100%; order: 3; }
+  .draft-actions button { flex: 1 1 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

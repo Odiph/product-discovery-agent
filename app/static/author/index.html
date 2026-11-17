@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  04-03-PLAN.md §E4: served ONLY by app/web/author.py's own separate app
+  instance, bound to the loopback address, with no token -- never reachable
+  from the phone surface's route table. No third-party origin is ever
+  loaded here either (gate 6 scans this file): no CDN, no web font, no
+  analytics -- there is no third party in this architecture that has any
+  business seeing this page load.
+-->
+<title>Author</title>
+<link rel="stylesheet" href="/author.css">
+</head>
+<body>
+  <h1>Interview brief, survey &amp; hypotheses</h1>
+  <p class="hint">
+    Write this shortly before the call. Saves to <code>context/brief.json</code>,
+    <code>context/survey.json</code>, <code>context/outcome.json</code> and
+    <code>context/hypotheses.json</code> on this machine only -- all four are
+    git-ignored and never committed.
+  </p>
+
+  <section id="brief-section">
+    <h2>Brief</h2>
+    <p class="hint">
+      What you know or suspect about the interviewee. Every item needs an
+      explicit evidence/inference choice below -- there is no default, on
+      purpose (CTX-02): a guess must never be presented to the coach as fact.
+    </p>
+    <!-- Filled by /api/state. Empty and hidden unless the file on disk
+         exists and cannot be read -- in which case an empty form below is
+         NOT an un-authored node, and typing into it is wasted work. -->
+    <div id="brief-damage" class="damage" hidden></div>
+    <div id="brief-items"></div>
+    <p>
+      <button type="button" id="add-brief-item">+ Add brief item</button>
+      <button type="button" id="save-brief">Save brief</button>
+      <span id="brief-status" class="status" role="status"></span>
+    </p>
+  </section>
+
+  <section id="survey-section">
+    <h2>Survey</h2>
+    <p class="hint">
+      The ordered list of questions you plan to ask. The coach tracks which
+      ones you actually asked, from your own microphone -- never from a
+      suggestion shown, whether or not you followed it.
+    </p>
+    <!-- Filled by /api/state. Empty and hidden unless the file on disk
+         exists and cannot be read -- in which case an empty form below is
+         NOT an un-authored node, and typing into it is wasted work. -->
+    <div id="survey-damage" class="damage" hidden></div>
+    <!-- Filled by /api/prep: the questions `prep` would change, each with its
+         reason. Applying one changes the survey below; only Save survey
+         writes it. Hidden when there is nothing to propose. -->
+    <div id="survey-prep" class="prep" hidden></div>
+    <!-- Filled by drafts.js from /api/prep's `draft`: questions worded for the
+         gaps by `prep --draft`, grouped by gap. Adding one changes the survey
+         below; only Save survey writes it. -->
+    <div id="survey-drafts" class="drafts" hidden></div>
+    <!-- Persistent, so a screen reader hears what each draft action did. -->
+    <p id="survey-drafts-live" class="visually-hidden" role="status"></p>
+    <div id="survey-items"></div>
+    <p>
+      <button type="button" id="add-survey-item">+ Add survey question</button>
+      <button type="button" id="save-survey">Save survey</button>
+      <span id="survey-status" class="status" role="status"></span>
+    </p>
+  </section>
+
+  <section id="tree-section">
+    <h2>Opportunity solution tree</h2>
+    <p class="hint">
+      The outcome this work serves sits at the root; each hypothesis below can be
+      classified as an opportunity (a need or pain you heard) or a solution under
+      one. Evidence counts update after every extraction; the structure changes
+      only when you press Save hypotheses. See it with <code>python -m app tree</code>.
+    </p>
+    <div id="outcome-damage" class="damage" hidden></div>
+    <label class="field">Outcome
+      <input type="text" id="outcome-input" dir="auto">
+    </label>
+    <p>
+      <button type="button" id="save-outcome">Save outcome</button>
+      <span id="outcome-status" class="status" role="status"></span>
+    </p>
+    <!-- Filled by /api/candidates: recurring themes no hypothesis predicted.
+         Promote adds an EMPTY opportunity below for you to write; it saves
+         nothing. Hidden when there are none. -->
+    <div id="tree-candidates" class="prep" hidden></div>
+  </section>
+
+  <section id="hypotheses-section">
+    <h2>Hypotheses</h2>
+    <p class="hint">
+      What you believe about this customer, stated so it can be proven
+      wrong. Every hypothesis needs an explicit falsification condition --
+      what evidence would make it FALSE -- and this page will not save one
+      without it, on purpose: a hypothesis nobody could ever disprove is not
+      one the coach reading it next can act on.
+    </p>
+    <!-- Filled by /api/state. Empty and hidden unless the file on disk
+         exists and cannot be read -- in which case an empty form below is
+         NOT an un-authored node, and typing into it is wasted work. -->
+    <div id="hypotheses-damage" class="damage" hidden></div>
+    <div id="hypotheses-items"></div>
+    <p>
+      <button type="button" id="add-hypothesis-item">+ Add hypothesis</button>
+      <button type="button" id="save-hypotheses">Save hypotheses</button>
+      <span id="hypotheses-status" class="status" role="status"></span>
+    </p>
+  </section>
+
+  <!-- Sticky at the bottom of the window whenever the survey on this page
+       differs from the one on disk. Its button is Save survey itself. -->
+  <div id="survey-unsaved" class="unsaved" hidden>
+    <span>Unsaved survey changes <span id="survey-unsaved-status" role="status"></span></span>
+    <button type="button" id="survey-unsaved-save" class="primary">Save survey</button>
+  </div>
+
+  <script src="/drafts-states.js"></script>
+  <script src="/drafts.js"></script>
+  <script src="/author.js"></script>
+</body>
+</html>
