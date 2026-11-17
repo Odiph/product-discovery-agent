@@ -1,6 +1,6 @@
-"""The after-meeting evidence pass for an in-person session.
+"""The after-meeting evidence pass for an imported recording.
 
-Re-transcribes the retained room audio with a FILE (async) diarized pass --
+Transcribes the retained audio with a FILE (async) diarized pass --
 the more accurate kind -- and cross-checks every turn with the voiceprint:
 
 - each turn's role comes from the after-meeting label, first voice =
@@ -31,6 +31,10 @@ from app.stt.roles import SAMPLE_RATE, Embedder, RoleResolver
 # a monologue before it ends -- evidence reads better in whole turns.
 EVIDENCE_TURN_GAP_S = 0.8
 EVIDENCE_TURN_MAX_S = 30.0
+# The voiceprint check: enrol both voices from the opening two minutes, then
+# the voiceprint decides each turn of at least a second (measured: 96% of words).
+ENROL_S = 120.0
+MIN_TURN_S = 1.0
 BYTES_PER_SAMPLE = 2
 
 Transcribe = Callable[[Path], "list[dict]"]
@@ -46,8 +50,8 @@ def run_evidence_pass(
     transcribe: Transcribe,
     embedder: Optional[Embedder],
     engine: str,
-    enrol_s: float,
-    min_turn_s: float = 1.0,
+    enrol_s: float = ENROL_S,
+    min_turn_s: float = MIN_TURN_S,
 ) -> dict:
     """Returns the `evidence_summary` written to session.json."""
     session_dir = Path(session_dir)
@@ -110,8 +114,8 @@ def run_evidence_pass(
 
 
 def _check_eligible(meta: dict, room: Path) -> None:
-    if meta.get("capture") != "in-person":
-        raise EvidencePassError("not an in-person session: its roles come from two separate streams already")
+    if not ev.is_one_recording(meta):
+        raise EvidencePassError("not a one-recording session: its roles come from two separate streams already")
     if "closed_at" not in meta:
         raise EvidencePassError("the session is still recording (or was never closed)")
     if meta.get(ev.EVIDENCE_KEY) == ev.EVIDENCE_CONFIRMED:

@@ -13,7 +13,7 @@ Follow the `discovery-evidence` skill throughout.
 2. If the response has a top-level `hint`, there is no project yet. If the
    hint names `python -m app demo --yes`, run it from the interview tool's
    checkout. You may do this without asking: it makes no API call, needs no
-   key, and writes only its own `projects/claudictive-beta` folder. Anything
+   key, and writes only its own `projects/shmuber-eats-demo` folder. Anything
    that costs money still asks first. Then call `list_projects` again. If the
    hint does not name it, this copy has no mock interviews: give the hint as
    the single next step, word for word.
@@ -21,7 +21,7 @@ Follow the `discovery-evidence` skill throughout.
    with: "These are 12 mock interviews, not real users." Then show what the
    tool finds: where the hypotheses stand (`get_standing`, through the
    evidence skill), and the topics interviewees kept raising that were not
-   followed up, by running `python -m app missed --project claudictive-beta --group model`
+   followed up, by running `python -m app missed --project shmuber-eats-demo --group model`
    from the checkout (free: it reads cached results and calls no model; no
    MCP tool returns it). Say on every result that it comes from mock
    interviews.

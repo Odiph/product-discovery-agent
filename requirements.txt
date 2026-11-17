@@ -15,20 +15,16 @@ websockets==17.4
 
 PyAudioWPatch==0.2.12.8
 
-# Phase 3 (03-01-PLAN.md Task 1, approved): the phone surface. Legitimacy verified
+# Phase 3 (03-01-PLAN.md Task 1, approved): the live view. Legitimacy verified
 # against PyPI + each source repo at the blocking human checkpoint -- fastapi
 # (github.com/fastapi/fastapi, MIT, 317 releases), uvicorn (github.com/Kludex/uvicorn,
-# BSD-3-Clause, 199 releases), qrcode (github.com/lincolnloop/python-qrcode, BSD, 39
-# releases). Plain `uvicorn`, NEVER `uvicorn[standard]` -- this project already pins
+# BSD-3-Clause, 199 releases). Plain `uvicorn`, NEVER `uvicorn[standard]` -- this project already pins
 # websockets==17.4 below (via benchmark/requirements.txt), which uvicorn auto-detects
 # and reuses for its own WebSocket protocol; the `[standard]` extra would additionally
 # pull uvloop (POSIX-only, dead weight on this Windows machine), httptools, watchfiles,
-# python-dotenv and pyyaml for no benefit (03-RESEARCH.md Standard Stack). `qrcode[pil]`
-# pulls Pillow transitively for the square-pixel PNG QR fallback -- not separately
-# pinned, so it does not count against test_gate_three's literal-line dependency count.
+# python-dotenv and pyyaml for no benefit (03-RESEARCH.md Standard Stack).
 fastapi==0.142.2
 uvicorn==0.54.0
-qrcode[pil]==8.2
 
 # Phase 4 (04-01-PLAN.md §C7, 04-RESEARCH.md §7): the official Python SDK for
 # Anthropic's Messages API -- the coverage detector's one LLM call, and the
@@ -52,9 +48,8 @@ qrcode[pil]==8.2
 # API version 2026-10-21.
 anthropic==1.17.0
 
-# In-person mode (2026-09-24): the voiceprint check
-# that assigns each turn of a one-microphone meeting to interviewer or
-# interviewee. Legitimacy: PyPI-resident, Apache-2.0, github.com/k2-fsa/sherpa-onnx
+# The voiceprint check (2026-09-24) that assigns each turn of an imported
+# recording (one audio file, both voices) to interviewer or interviewee. Legitimacy: PyPI-resident, Apache-2.0, github.com/k2-fsa/sherpa-onnx
 # (15k stars, released 2026-09-10), prebuilt cp312 win_amd64 wheels, offline and
 # CPU-only (no PyTorch), pip-audit clean at 1.13.8. It declares its own
 # `sherpa-onnx-core` (same project) as a dependency: that arrival is not pinned
@@ -72,7 +67,7 @@ sherpa-onnx==1.13.8
 # clean. Text extraction only -- no image or crypto extras.
 pypdf==6.21.4
 
-# 2026-11-14 (the operator's go-ahead): decoding a phone or call recording
+# 2026-11-14 (the operator's go-ahead): decoding a recording
 # (m4a, mp3, opus, ...) to the 16 kHz mono WAV the file pass reads, for
 # `import` (app/session/audio_decode.py). PyAV: PyPI-resident, BSD-3-Clause,
 # github.com/PyAV-Org/PyAV; its wheels bundle ffmpeg's libraries, so no ffmpeg

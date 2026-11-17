@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "01-priya.txt",
+  "import_sha256": "777e40da23188d1a969dcfb6ad0318116635884a8e4eb3746aa0bddb4f159a77",
+  "imported_at": "2026-11-02T00:17:01.800+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:17:01.800+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Priya": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Priya"
+}

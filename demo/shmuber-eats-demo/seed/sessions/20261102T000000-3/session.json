@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "04-tomasz.txt",
+  "import_sha256": "09a50635b4439afbe6f9ff3b504b1b37414dd14e743cb608255a13c0c9f8a87f",
+  "imported_at": "2026-11-02T00:20:26.200+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:20:26.200+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Tomasz": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Tomasz"
+}

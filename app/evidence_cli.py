@@ -1,7 +1,7 @@
-"""`diarize-after` and `confirm-speakers`: the after-meeting steps of an
-in-person session, between `start --in-person` and `extract`.
+"""`diarize-after` and `confirm-speakers`: the steps between importing a
+recording (one audio file, both voices) and `extract`.
 
-    start --in-person   live roles, coaching only; room.wav kept
+    import <audio>      the audio is kept as room.wav; evidence pending
     diarize-after       file pass + voiceprint cross-check -> evidence.jsonl
     confirm-speakers    the operator says who is who; room.wav deleted
     extract             refuses until confirmed, then reads evidence.jsonl
@@ -26,8 +26,8 @@ def add_parsers(subparsers, add_project_argument: Callable[[argparse.ArgumentPar
     diarize = subparsers.add_parser(
         "diarize-after",
         help=(
-            "In-person sessions: re-transcribe the kept room audio with the slower, more "
-            "accurate file pass and cross-check every turn with the voiceprint (needs "
+            "Imported recordings: transcribe the kept audio with the diarizing file "
+            "pass and cross-check every turn with the voiceprint (needs "
             "SONIOX_API_KEY; the uploaded copy is deleted from the vendor afterwards)"
         ),
     )
@@ -37,17 +37,14 @@ def add_parsers(subparsers, add_project_argument: Callable[[argparse.ArgumentPar
     confirm = subparsers.add_parser(
         "confirm-speakers",
         help=(
-            "In-person sessions: show who said what after `diarize-after`, and confirm it "
-            "(deletes the room audio). Without --confirm it only shows."
+            "Imported recordings: show who said what after `diarize-after`, and confirm it "
+            "(deletes the kept audio). Without --confirm it only shows."
         ),
     )
     confirm.add_argument("session", help="Session id or a full path to a session directory")
     confirm.add_argument("--confirm", action="store_true", help="record the confirmation (otherwise only show)")
     confirm.add_argument("--swap", action="store_true",
                          help="the first voice was NOT you: exchange interviewer and interviewee everywhere")
-    confirm.add_argument("--accept-live-roles", action="store_true",
-                         help="no after-meeting pass is possible (an older, crashed, or audio-less session): "
-                              "build evidence from the LIVE roles (about 96%% of words right) and delete any room audio")
     confirm.add_argument("--disputed", choices=(ev.DISPUTED_KEEP_LABEL, ev.DISPUTED_VOICEPRINT),
                          help="for turns the voiceprint disputed: keep the file pass's label, or side with the voiceprint")
     add_project_argument(confirm)
@@ -55,7 +52,6 @@ def add_parsers(subparsers, add_project_argument: Callable[[argparse.ArgumentPar
 
 def run_diarize_after(session_dir: Path, *, client_factory=None, embedder_loader=None, enrol_s=None) -> int:
     from app.stt import evidence_pass, voiceprint
-    from app.main import IN_PERSON_ENROL_S, IN_PERSON_MIN_TURN_S
     from benchmark.engines import soniox_async
 
     client_factory = client_factory or soniox_async.SonioxAsyncClient.from_env
@@ -69,11 +65,13 @@ def run_diarize_after(session_dir: Path, *, client_factory=None, embedder_loader
     if embedder is None:
         print(f"WARNING: voiceprint check off ({reason}); no turn can be flagged as disputed.", file=sys.stderr)
 
-    print("Uploading the room audio for the file pass (the vendor copy is deleted afterwards)...")
+    print("Uploading the recording for the file pass (the vendor copy is deleted afterwards)...")
     try:
         summary = evidence_pass.run_evidence_pass(
             session_dir, transcribe=client.transcribe_file, embedder=embedder,
-            engine=ASYNC_ENGINE_NAME, enrol_s=enrol_s if enrol_s is not None else IN_PERSON_ENROL_S, min_turn_s=IN_PERSON_MIN_TURN_S,
+            engine=ASYNC_ENGINE_NAME,
+            enrol_s=enrol_s if enrol_s is not None else evidence_pass.ENROL_S,
+            min_turn_s=evidence_pass.MIN_TURN_S,
         )
     except (evidence_pass.EvidencePassError, soniox_async.SonioxAsyncError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
@@ -100,18 +98,6 @@ def run_diarize_after(session_dir: Path, *, client_factory=None, embedder_loader
 
 
 def run_confirm_speakers(session_dir: Path, args: argparse.Namespace) -> int:
-    if args.accept_live_roles:
-        if not args.confirm:
-            print("ERROR: --accept-live-roles changes the session; add --confirm to do it.", file=sys.stderr)
-            return 1
-        try:
-            ev.accept_live_roles(session_dir)
-        except ev.EvidenceStateError as exc:
-            print(f"ERROR: {exc}", file=sys.stderr)
-            return 1
-        print("Live roles accepted as evidence (about 96% of words right). Any room audio was deleted.")
-        print(f"Next: python -m app extract {session_dir.name}")
-        return 0
     try:
         preview = ev.speaker_preview(session_dir, per_role=PREVIEW_PER_ROLE)
     except ev.EvidenceStateError as exc:
@@ -130,12 +116,12 @@ def run_confirm_speakers(session_dir: Path, args: argparse.Namespace) -> int:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
     if decision.get("finished_cleanup"):
-        print("Speakers were already confirmed; the room audio left by an interrupted run is now deleted.")
+        print("Speakers were already confirmed; the audio left by an interrupted run is now deleted.")
         return 0
     print(
         f"Speakers confirmed (swapped: {'yes' if decision['swapped'] else 'no'}; "
         f"{decision['disputed_turns']} disputed turn(s) went to the {decision['disputed']} side). "
-        f"Room audio deleted."
+        f"Kept audio deleted."
     )
     print(f"Next: python -m app extract {session_dir.name}")
     return 0

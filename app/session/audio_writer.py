@@ -44,12 +44,10 @@ class AudioWriter:
 
     def __init__(
         self, session_dir: Path, *, speaker: str, sample_rate: int, store: SessionStore,
-        stem: Optional[str] = None,
     ) -> None:
         self._speaker = speaker
         self._store = store
-        # `stem` names a stream that is not one role's audio (in-person: the room).
-        self._path = session_dir / f"{stem or speaker}.wav"
+        self._path = session_dir / f"{speaker}.wav"
         self._enabled = True
         self._wav: Optional["wave.Wave_write"] = None
         try:

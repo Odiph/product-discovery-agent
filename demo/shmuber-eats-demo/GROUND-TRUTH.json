@@ -1,0 +1,1812 @@
+{
+  "synthetic": true,
+  "note": "Invented for a demo. Nothing here is real customer speech, and Shmuber Eats is a fictional product. Turn numbers are 1-based and match app.kb.spoken.from_speaker_text's 'turn N' locations. Each planted topic is recorded at the line that first raises it; for Control A the interviewee's answers to the follow-up elaborate that same occurrence and are not counted again. Control A lines are recorded only under their control, not under substitutions.",
+  "topics": {
+    "first_order_trigger_aside": "THE HIDDEN SIGNAL. The interviewee mentions, in passing, that their FIRST order was set off by a one-off situation (a sick child, a car in the garage, a house move, a work deadline, a sprained ankle, a newborn, a snowstorm, guests arriving that night), not a wish to change how they shop, and that once it passed they went back to their usual store. No hypothesis predicts it, and it undercuts the substitution bet. Never followed up: the next interviewer turn moves to a guide question.",
+    "control_a_odd_swap_for_recipe": "CONTROL A (followed up). The interviewee volunteers that the picker's replacement was wrong for the dish they were cooking (a coconut drink for curry coconut milk, cake flour for pizza dough, spicy tortillas for small children, margarine for buttercream, smoked salmon slices for a baked fillet). Every time, the interviewer asks a follow-up that engages it. A correct 'missed' detector must NOT flag this topic.",
+    "control_b_logged_out_at_checkout": "CONTROL B (below the noise floor). The app logged the interviewee out at the moment of paying. Raised in only 2 interviews, not followed up; a detector with a 3-interview floor must NOT surface it.",
+    "substitutions": "PROMPTED guide topic: substituted items in general (guide question s5, its follow-on questions and one pitch).",
+    "delivery_window": "PROMPTED guide topic: the two-hour delivery window (guide question s7 and its follow-on questions). Volunteered twice.",
+    "pass_price": "PROMPTED guide topic: a monthly delivery pass and its price (guide question s8, price anchors and follow-on questions).",
+    "carrying_heavy_shopping": "NOT PLANTED, found by the first model run (2026-11-17) and then keyed by hand: the interviewee names not having to carry heavy shopping (water, rice, bags on the bus, stairs) as a reason to order or as what they value. Always volunteered, never followed up. Two of its lines (02 t4, 07 t8) are also planted first-order asides, told as 'I could not carry it home'. Driver-courtesy remarks (01 t32, 07 t28) are not counted."
+  },
+  "summary": {
+    "interviews": 12,
+    "first_order_trigger_aside": {
+      "raised_in": 8,
+      "followed_up_in": 0,
+      "occurrences": 8,
+      "prompted": 0,
+      "volunteered": 8,
+      "volunteered_in": 8
+    },
+    "control_a_odd_swap_for_recipe": {
+      "raised_in": 5,
+      "followed_up_in": 5,
+      "occurrences": 5,
+      "prompted": 0,
+      "volunteered": 5,
+      "volunteered_in": 5
+    },
+    "control_b_logged_out_at_checkout": {
+      "raised_in": 2,
+      "followed_up_in": 0,
+      "occurrences": 2,
+      "prompted": 0,
+      "volunteered": 2,
+      "volunteered_in": 2
+    },
+    "substitutions": {
+      "occurrences": 24,
+      "prompted": 24,
+      "volunteered": 0,
+      "raised_in": 12,
+      "volunteered_in": 0
+    },
+    "delivery_window": {
+      "occurrences": 22,
+      "prompted": 20,
+      "volunteered": 2,
+      "raised_in": 12,
+      "volunteered_in": 2
+    },
+    "pass_price": {
+      "occurrences": 23,
+      "prompted": 23,
+      "volunteered": 0,
+      "raised_in": 12,
+      "volunteered_in": 0
+    },
+    "guide_questions_asked": 115,
+    "pitches": 11,
+    "carrying_heavy_shopping": {
+      "raised_in": 6,
+      "followed_up_in": 0,
+      "occurrences": 9,
+      "prompted": 0,
+      "volunteered": 9,
+      "volunteered_in": 6
+    }
+  },
+  "interviews": [
+    {
+      "file": "transcripts/01-priya.txt",
+      "interviewee": "Priya",
+      "persona": "Nurse, married with two boys (7 and 10); her husband works hospital shifts, she does a Saturday big shop",
+      "turns": 44,
+      "first_order_trigger_aside": {
+        "present": true,
+        "turn": 10,
+        "timestamp": "00:03:43",
+        "aside_text": "My little one had a proper fever that week and I could not drag him round a supermarket, so I sat on the sofa with him and did the whole thing on my phone. Once he was better we were straight back to Saturdays at the big shop, to be honest.",
+        "full_line": "Priya 00:03:43: So that was a few weeks back. My little one had a proper fever that week and I could not drag him round a supermarket, so I sat on the sofa with him and did the whole thing on my phone. Bananas, crackers, those electrolyte drinks, soup. Then the normal stuff too, milk, bread, cereal. It took maybe twenty minutes, the search was a bit slow. Once he was better we were straight back to Saturdays at the big shop, to be honest.",
+        "interviewer_next_turn": 11,
+        "interviewer_next_line": "Interviewer 00:05:12: Great. Let's move on. How often do you order groceries online?",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 9,
+        "answers_line": "Interviewer 00:03:19: Nice. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+        "why_not_prompted": "s3 asks HOW the order went, not WHY they ordered"
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": false
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:17:12",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 11
+        },
+        {
+          "id": "s5",
+          "turn": 15
+        },
+        {
+          "id": "s6",
+          "turn": 19
+        },
+        {
+          "id": "s7",
+          "turn": 23
+        },
+        {
+          "id": "s8",
+          "turn": 27
+        },
+        {
+          "id": "s9",
+          "turn": 31
+        },
+        {
+          "id": "s10",
+          "turn": 41
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 29,
+          "about": [
+            "pass_price"
+          ],
+          "line": "Interviewer 00:12:23: What if it was 9.99 a month with free delivery on everything?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 17,
+          "about": "substitutions",
+          "line": "Interviewer 00:07:45: And did you know about the swaps before the bags arrived?"
+        },
+        {
+          "turn": 25,
+          "about": "delivery_window",
+          "line": "Interviewer 00:10:52: And was that easy to find in the app?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 16,
+            "prompted": true,
+            "answers_turn": 15,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": []
+    },
+    {
+      "file": "transcripts/02-marcus.txt",
+      "interviewee": "Marcus",
+      "persona": "Warehouse shift supervisor, lives with his partner and her 15-year-old daughter; shops at a discount store on the drive home",
+      "turns": 42,
+      "first_order_trigger_aside": {
+        "present": true,
+        "turn": 4,
+        "timestamp": "00:00:59",
+        "aside_text": "The only reason your app was even on my phone is the clutch went on the car and it sat in the garage for a week waiting on parts, and I wasn't carrying six bags home on the bus. Got the car back and that was that, discount place on the way home again.",
+        "full_line": "Marcus 00:00:59: It's me, my partner Dana and her daughter, she's fifteen. I do the shopping mostly, I stop at the discount place on my way home from the warehouse. The only reason your app was even on my phone is the clutch went on the car and it sat in the garage for a week waiting on parts, and I wasn't carrying six bags home on the bus. Got the car back and that was that, discount place on the way home again.",
+        "interviewer_next_turn": 5,
+        "interviewer_next_line": "Interviewer 00:02:27: Great, great. And how did you hear about Shmuber Eats?",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 3,
+        "answers_line": "Interviewer 00:00:39: Great. Tell me a bit about your household and who does the food shopping.",
+        "why_not_prompted": "s1 asks who does the shopping, not why they first ordered"
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": false
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:16:08",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 3
+        },
+        {
+          "id": "s2",
+          "turn": 5
+        },
+        {
+          "id": "s3",
+          "turn": 7
+        },
+        {
+          "id": "s4",
+          "turn": 13
+        },
+        {
+          "id": "s5",
+          "turn": 15
+        },
+        {
+          "id": "s6",
+          "turn": 19
+        },
+        {
+          "id": "s7",
+          "turn": 23
+        },
+        {
+          "id": "s8",
+          "turn": 25
+        },
+        {
+          "id": "s9",
+          "turn": 31
+        },
+        {
+          "id": "s10",
+          "turn": 39
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 21,
+          "about": [
+            "shared_list"
+          ],
+          "line": "Interviewer 00:09:10: Would a shared list in the app be useful for you three?"
+        },
+        {
+          "turn": 27,
+          "about": [
+            "pass_price"
+          ],
+          "line": "Interviewer 00:11:29: What about 9.99 a month, with free delivery on every order?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 17,
+          "about": "substitutions",
+          "line": "Interviewer 00:07:32: And did you know about it before the bags came?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 16,
+            "prompted": true,
+            "answers_turn": 15,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 34,
+            "prompted": false,
+            "answers_turn": 33,
+            "why": "'what would make you use it more?' names nothing"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": [
+        {
+          "turn": 4,
+          "timestamp": "00:00:59",
+          "full_line": "Marcus 00:00:59: It's me, my partner Dana and her daughter, she's fifteen. I do the shopping mostly, I stop at the discount place on my way home from the warehouse. The only reason your app was even on my phone is the clutch went on the car and it sat in the garage for a week waiting on parts, and I wasn't carrying six bags home on the bus. Got the car back and that was that, discount place on the way home again.",
+          "interviewer_next_turn": 5,
+          "interviewer_next_line": "Interviewer 00:02:27: Great, great. And how did you hear about Shmuber Eats?",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 3,
+          "answers_line": "Interviewer 00:00:39: Great. Tell me a bit about your household and who does the food shopping.",
+          "why_not_prompted": "s1 'tell me about your household' names nothing about carrying",
+          "also": "first_order_trigger_aside: the same line carries the planted aside"
+        }
+      ]
+    },
+    {
+      "file": "transcripts/03-elena.txt",
+      "interviewee": "Elena",
+      "persona": "Chemistry master's student sharing a fourth-floor flat with three flatmates; cooks one big curry a week",
+      "turns": 44,
+      "first_order_trigger_aside": {
+        "present": false
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": true,
+        "turn": 10,
+        "timestamp": "00:04:13",
+        "raised_text": "instead of the coconut milk in a tin they'd given me a carton of the coconut drink, the thin one you put in cereal, which for a curry is just water, it splits.",
+        "full_line": "Elena 00:04:13: So I'd planned the week. I do a big curry on Sunday and eat it till Wednesday. I put in rice, onions, the spices, chickpeas, spinach, coconut milk. And putting things away I noticed instead of the coconut milk in a tin they'd given me a carton of the coconut drink, the thin one you put in cereal, which for a curry is just water, it splits.",
+        "interviewer_next_turn": 11,
+        "interviewer_next_line": "Interviewer 00:05:39: Wait, the drink instead of the tin? What did you do with the curry?",
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 9,
+        "answers_line": "Interviewer 00:03:48: Great. Walk me through your last order, from opening the app to putting things away.",
+        "why_not_prompted": "s3 asks how the order went, not about swaps"
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:19:21",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 19
+        },
+        {
+          "id": "s6",
+          "turn": 23
+        },
+        {
+          "id": "s7",
+          "turn": 25
+        },
+        {
+          "id": "s8",
+          "turn": 29
+        },
+        {
+          "id": "s9",
+          "turn": 33
+        },
+        {
+          "id": "s10",
+          "turn": 41
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [],
+      "off_script_topic_questions": [
+        {
+          "turn": 21,
+          "about": "substitutions",
+          "line": "Interviewer 00:09:58: Did the app tell you before the delivery?"
+        },
+        {
+          "turn": 27,
+          "about": "delivery_window",
+          "line": "Interviewer 00:12:40: And is the two hours okay for you, or too long?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "s8 delivery pass"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": [
+        {
+          "turn": 8,
+          "timestamp": "00:02:57",
+          "full_line": "Elena 00:02:57: It was on the student discount site. A big first-order discount, so I thought, okay, let's actually try it properly. We're on the fourth floor, no lift, and I'm tired of hauling water bottles up the stairs.",
+          "interviewer_next_turn": 9,
+          "interviewer_next_line": "Interviewer 00:03:48: Great. Walk me through your last order, from opening the app to putting things away.",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 7,
+          "answers_line": "Interviewer 00:02:38: Haha, classic. And how did you hear about Shmuber Eats?",
+          "why_not_prompted": "s2 'how did you hear about us' asks HOW, not why"
+        },
+        {
+          "turn": 36,
+          "timestamp": "00:16:08",
+          "full_line": "Elena 00:16:08: Not carrying the water up. That's the whole thing for me.",
+          "interviewer_next_turn": 37,
+          "interviewer_next_line": "Interviewer 00:16:28: Haha. And what did you like least?",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 35,
+          "answers_line": "Interviewer 00:15:53: Amazing. What did you like most?",
+          "why_not_prompted": "'what did you like most' names nothing"
+        }
+      ]
+    },
+    {
+      "file": "transcripts/04-tomasz.txt",
+      "interviewee": "Tomasz",
+      "persona": "Keen home cook, lives with his wife and her brother; recently moved flats",
+      "turns": 44,
+      "first_order_trigger_aside": {
+        "present": true,
+        "turn": 10,
+        "timestamp": "00:04:10",
+        "aside_text": "this was the week we got the keys to the new flat, boxes up to the ceiling, I had no idea where the nearest shop even was, and our car was still parked at Ana's parents'. Now we've unpacked, I know there's a really decent market ten minutes' walk away, so that's where I go.",
+        "full_line": "Tomasz 00:04:10: Okay. So this was the week we got the keys to the new flat, boxes up to the ceiling, I had no idea where the nearest shop even was, and our car was still parked at Ana's parents'. So I ordered the basics and some things to cook properly. Pasta, tomatoes, cheese, and flour, because I wanted to make pizza on the first night, it's a little tradition of ours. Now we've unpacked, I know there's a really decent market ten minutes' walk away, so that's where I go.",
+        "interviewer_next_turn": 11,
+        "interviewer_next_line": "Interviewer 00:06:09: Okay. Let's move on. How often do you order groceries online?",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 9,
+        "answers_line": "Interviewer 00:03:42: Great, great. Walk me through your last order, from opening the app to putting things away.",
+        "why_not_prompted": "s3 asks HOW the order went, not WHY they ordered"
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": true,
+        "turn": 32,
+        "timestamp": "00:15:06",
+        "raised_text": "I'd asked for strong bread flour for the pizza dough, and they swapped it for a bag of self-raising cake flour, which, for pizza, it puffs up like a sponge.",
+        "full_line": "Tomasz 00:15:06: The flour. I'd asked for strong bread flour for the pizza dough, and they swapped it for a bag of self-raising cake flour, which, for pizza, it puffs up like a sponge.",
+        "interviewer_next_turn": 33,
+        "interviewer_next_line": "Interviewer 00:15:54: Oh no. Self-raising for pizza dough? What happened with the pizza?",
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 31,
+        "answers_line": "Interviewer 00:14:51: And what did you like least?",
+        "why_not_prompted": "'what did you like least?' names nothing"
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:20:37",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 11
+        },
+        {
+          "id": "s5",
+          "turn": 15
+        },
+        {
+          "id": "s6",
+          "turn": 19
+        },
+        {
+          "id": "s7",
+          "turn": 23
+        },
+        {
+          "id": "s8",
+          "turn": 25
+        },
+        {
+          "id": "s9",
+          "turn": 39
+        },
+        {
+          "id": "s10",
+          "turn": 41
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [],
+      "off_script_topic_questions": [
+        {
+          "turn": 17,
+          "about": "substitutions",
+          "line": "Interviewer 00:08:47: Did you get a message about those before the delivery?"
+        },
+        {
+          "turn": 27,
+          "about": "pass_price",
+          "line": "Interviewer 00:13:14: And what would make a pass worth it for you?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 16,
+            "prompted": true,
+            "answers_turn": 15,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "s7 delivery window"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "off-script follow-on question"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": []
+    },
+    {
+      "file": "transcripts/05-aisha.txt",
+      "interviewee": "Aisha",
+      "persona": "Management consultant living alone, travels half the month; shops at a small store under her office",
+      "turns": 42,
+      "first_order_trigger_aside": {
+        "present": true,
+        "turn": 14,
+        "timestamp": "00:05:53",
+        "aside_text": "It was the week before a big client deadline, I was at my desk from seven till midnight, I genuinely could not leave the flat. When the project shipped I went straight back to grabbing things at lunch from the little shop under the office.",
+        "full_line": "Aisha 00:05:53: Only that once, really. It was the week before a big client deadline, I was at my desk from seven till midnight, I genuinely could not leave the flat. When the project shipped I went straight back to grabbing things at lunch from the little shop under the office.",
+        "interviewer_next_turn": 15,
+        "interviewer_next_line": "Interviewer 00:07:02: Great. Tell me about the last time an item in your order was substituted.",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 13,
+        "answers_line": "Interviewer 00:05:31: Okay. Let's move on. How often do you order groceries online?",
+        "why_not_prompted": "s4 asks HOW OFTEN, not WHY they ordered"
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": false
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": true,
+        "turn": 12,
+        "timestamp": "00:04:42",
+        "raised_text": "at checkout it logged me out, right when I pressed pay, and I had to log in again and the basket was half empty.",
+        "full_line": "Aisha 00:04:42: Well, at checkout it logged me out, right when I pressed pay, and I had to log in again and the basket was half empty. So I did it again. Twenty minutes, roughly.",
+        "interviewer_next_turn": 13,
+        "interviewer_next_line": "Interviewer 00:05:31: Okay. Let's move on. How often do you order groceries online?",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 11,
+        "answers_line": "Interviewer 00:04:29: And was anything confusing?",
+        "why_not_prompted": "'was anything confusing?' names nothing"
+      },
+      "duration": "00:18:04",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 13
+        },
+        {
+          "id": "s5",
+          "turn": 15
+        },
+        {
+          "id": "s6",
+          "turn": 19
+        },
+        {
+          "id": "s7",
+          "turn": 21
+        },
+        {
+          "id": "s8",
+          "turn": 25
+        },
+        {
+          "id": "s9",
+          "turn": 29
+        },
+        {
+          "id": "s10",
+          "turn": 39
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 27,
+          "about": [
+            "pass_price"
+          ],
+          "line": "Interviewer 00:12:24: So would 9.99 a month feel like too much?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 17,
+          "about": "substitutions",
+          "line": "Interviewer 00:08:03: When did you find out about it?"
+        },
+        {
+          "turn": 23,
+          "about": "delivery_window",
+          "line": "Interviewer 00:10:35: And did it fit your day okay?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 16,
+            "prompted": true,
+            "answers_turn": 15,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": []
+    },
+    {
+      "file": "transcripts/06-kenji.txt",
+      "interviewee": "Kenji",
+      "persona": "Architect, both parents work full time, four-year-old twins; orders every week and shares the in-app list",
+      "turns": 44,
+      "first_order_trigger_aside": {
+        "present": false
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": true,
+        "turn": 36,
+        "timestamp": "00:18:03",
+        "raised_text": "I'd asked for plain flour tortillas, and the picker swapped them for chili-lime ones, the spicy red kind, for taco night with two four-year-olds.",
+        "full_line": "Kenji 00:18:03: No, never. I nearly did once, for taco night. I'd asked for plain flour tortillas, and the picker swapped them for chili-lime ones, the spicy red kind, for taco night with two four-year-olds.",
+        "interviewer_next_turn": 37,
+        "interviewer_next_line": "Interviewer 00:19:00: Chili-lime for the twins? How did that go?",
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 35,
+        "answers_line": "Interviewer 00:17:40: Noted, repeat order. Great. Have you ever contacted support?",
+        "why_not_prompted": "'have you ever contacted support?' asks about support, not swaps"
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:22:31",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s3",
+          "turn": 7
+        },
+        {
+          "id": "s4",
+          "turn": 9
+        },
+        {
+          "id": "s6",
+          "turn": 13
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s7",
+          "turn": 21
+        },
+        {
+          "id": "s8",
+          "turn": 25
+        },
+        {
+          "id": "s9",
+          "turn": 29
+        },
+        {
+          "id": "s10",
+          "turn": 41
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s2"
+      ],
+      "pitches": [
+        {
+          "turn": 19,
+          "about": [
+            "substitutions"
+          ],
+          "line": "Interviewer 00:10:13: Wouldn't it be great if we texted you before swapping anything, so you could say yes or no?"
+        },
+        {
+          "turn": 27,
+          "about": [
+            "pass_price"
+          ],
+          "line": "Interviewer 00:14:32: And 9.99?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 23,
+          "about": "delivery_window",
+          "line": "Interviewer 00:12:27: And do you ever miss it?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "pitch (leading)"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": []
+    },
+    {
+      "file": "transcripts/07-rosa.txt",
+      "interviewee": "Rosa",
+      "persona": "Retired, lives with her retired husband and minds two grandchildren after school; shops at a weekly market",
+      "turns": 42,
+      "first_order_trigger_aside": {
+        "present": true,
+        "turn": 8,
+        "timestamp": "00:02:53",
+        "aside_text": "I'd turned my ankle stepping off the bus and I was on crutches for nearly three weeks, I couldn't carry a thing. Now I'm walking properly again I'm at the market on Tuesdays like always.",
+        "full_line": "Rosa 00:02:53: My granddaughter put it on my phone. I'd turned my ankle stepping off the bus and I was on crutches for nearly three weeks, I couldn't carry a thing. So she said, Grandma, just press here. Now I'm walking properly again I'm at the market on Tuesdays like always.",
+        "interviewer_next_turn": 9,
+        "interviewer_next_line": "Interviewer 00:03:53: Great, great. Walk me through your last order, from opening the app to putting things away.",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 7,
+        "answers_line": "Interviewer 00:02:37: Wonderful. And how did you hear about Shmuber Eats?",
+        "why_not_prompted": "s2 asks how they heard of it, not why they ordered"
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": false
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:15:42",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 17
+        },
+        {
+          "id": "s7",
+          "turn": 21
+        },
+        {
+          "id": "s8",
+          "turn": 23
+        },
+        {
+          "id": "s10",
+          "turn": 39
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6",
+        "s9"
+      ],
+      "pitches": [],
+      "off_script_topic_questions": [
+        {
+          "turn": 19,
+          "about": "substitutions",
+          "line": "Interviewer 00:08:03: Did you know before the delivery came?"
+        },
+        {
+          "turn": 25,
+          "about": "pass_price",
+          "line": "Interviewer 00:10:16: Even if it saved on the delivery fee each time?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "s7 delivery window"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "off-script follow-on question"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": [
+        {
+          "turn": 8,
+          "timestamp": "00:02:53",
+          "full_line": "Rosa 00:02:53: My granddaughter put it on my phone. I'd turned my ankle stepping off the bus and I was on crutches for nearly three weeks, I couldn't carry a thing. So she said, Grandma, just press here. Now I'm walking properly again I'm at the market on Tuesdays like always.",
+          "interviewer_next_turn": 9,
+          "interviewer_next_line": "Interviewer 00:03:53: Great, great. Walk me through your last order, from opening the app to putting things away.",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 7,
+          "answers_line": "Interviewer 00:02:37: Wonderful. And how did you hear about Shmuber Eats?",
+          "why_not_prompted": "s2 'how did you hear about us' asks HOW, not why",
+          "also": "first_order_trigger_aside: the same line carries the planted aside"
+        }
+      ]
+    },
+    {
+      "file": "transcripts/08-dev.txt",
+      "interviewee": "Dev",
+      "persona": "New father (ten-week-old son), lives with his partner; they used to do one big Sunday shop together",
+      "turns": 44,
+      "first_order_trigger_aside": {
+        "present": true,
+        "turn": 6,
+        "timestamp": "00:02:10",
+        "aside_text": "When we brought him home from the hospital neither of us was leaving the flat, we were basically zombies for a couple of weeks, so that's when the app came out. These days Mira takes him out in the pram to the shops in the afternoon, it gets her out of the house, so we just do that.",
+        "full_line": "Dev 00:02:10: So it's me, Mira, and now Leo. Before, we'd do one big shop together on a Sunday. When we brought him home from the hospital neither of us was leaving the flat, we were basically zombies for a couple of weeks, so that's when the app came out. These days Mira takes him out in the pram to the shops in the afternoon, it gets her out of the house, so we just do that.",
+        "interviewer_next_turn": 7,
+        "interviewer_next_line": "Interviewer 00:04:00: Great, great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 5,
+        "answers_line": "Interviewer 00:01:42: Great. Tell me a bit about your household and who does the food shopping.",
+        "why_not_prompted": "s1 asks who does the shopping, not why they first ordered"
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": false
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:20:16",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s3",
+          "turn": 7
+        },
+        {
+          "id": "s4",
+          "turn": 11
+        },
+        {
+          "id": "s5",
+          "turn": 13
+        },
+        {
+          "id": "s6",
+          "turn": 17
+        },
+        {
+          "id": "s7",
+          "turn": 21
+        },
+        {
+          "id": "s8",
+          "turn": 25
+        },
+        {
+          "id": "s2",
+          "turn": 29
+        },
+        {
+          "id": "s9",
+          "turn": 31
+        },
+        {
+          "id": "s10",
+          "turn": 41
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 27,
+          "about": [
+            "pass_price"
+          ],
+          "line": "Interviewer 00:13:38: What if it was 9.99?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 15,
+          "about": "substitutions",
+          "line": "Interviewer 00:08:07: Did you get a heads-up before the bags came?"
+        },
+        {
+          "turn": 23,
+          "about": "delivery_window",
+          "line": "Interviewer 00:11:33: And now that Mira's out more, would the window be harder?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 14,
+            "prompted": true,
+            "answers_turn": 13,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 16,
+            "prompted": true,
+            "answers_turn": 15,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": []
+    },
+    {
+      "file": "transcripts/09-fatima.txt",
+      "interviewee": "Fatima",
+      "persona": "Runs a household of six on a tight budget; monthly wholesale trip plus a weekly supermarket shop",
+      "turns": 42,
+      "first_order_trigger_aside": {
+        "present": false
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:08:07",
+        "raised_text": "I'd written unsalted butter for the buttercream, and the picker sent a tub of margarine instead, the soft one for toast, and the icing just slid off the cake.",
+        "full_line": "Fatima 00:08:07: I plan by recipe, for the week. I write the dish and what it needs. Last time it was my daughter's birthday cake, and I'd written unsalted butter for the buttercream, and the picker sent a tub of margarine instead, the soft one for toast, and the icing just slid off the cake.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:09:28: Oh no, margarine for buttercream? What did you do?",
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:07:42: Okay. How do you keep track of what you need between orders?",
+        "why_not_prompted": "s6 asks how they track needs, not about swaps"
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:21:49",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 13
+        },
+        {
+          "id": "s6",
+          "turn": 15
+        },
+        {
+          "id": "s5",
+          "turn": 21
+        },
+        {
+          "id": "s7",
+          "turn": 25
+        },
+        {
+          "id": "s8",
+          "turn": 27
+        },
+        {
+          "id": "s9",
+          "turn": 31
+        },
+        {
+          "id": "s10",
+          "turn": 39
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 29,
+          "about": [
+            "pass_price"
+          ],
+          "line": "Interviewer 00:15:59: What about 9.99 with free delivery?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 23,
+          "about": "substitutions",
+          "line": "Interviewer 00:12:55: Would you have answered if they'd asked?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 40,
+            "prompted": false,
+            "answers_turn": 39,
+            "why": "s10 'anything I didn't ask about?' names nothing"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": [
+        {
+          "turn": 14,
+          "timestamp": "00:07:17",
+          "full_line": "Fatima 00:07:17: Maybe once a month now. For the heavy things. Rice, oil, water.",
+          "interviewer_next_turn": 15,
+          "interviewer_next_line": "Interviewer 00:07:42: Okay. How do you keep track of what you need between orders?",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 13,
+          "answers_line": "Interviewer 00:06:57: Great. How often do you order groceries online?",
+          "why_not_prompted": "s4 'how often' asks HOW OFTEN, not what for"
+        },
+        {
+          "turn": 32,
+          "timestamp": "00:17:05",
+          "full_line": "Fatima 00:17:05: For the heavy things, yes. For fresh, I still like to choose myself.",
+          "interviewer_next_turn": 33,
+          "interviewer_next_line": "Interviewer 00:17:31: Great. What did you like most?",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 31,
+          "answers_line": "Interviewer 00:16:44: Okay. Would you recommend Shmuber Eats to a friend?",
+          "why_not_prompted": "s9 'would you recommend' names nothing about carrying"
+        },
+        {
+          "turn": 34,
+          "timestamp": "00:17:48",
+          "full_line": "Fatima 00:17:48: Not carrying the rice. Twenty kilos, with four children, that is a job.",
+          "interviewer_next_turn": 35,
+          "interviewer_next_line": "Interviewer 00:18:15: And what did you like least?",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 33,
+          "answers_line": "Interviewer 00:17:31: Great. What did you like most?",
+          "why_not_prompted": "'what did you like most' names nothing"
+        }
+      ]
+    },
+    {
+      "file": "transcripts/10-liam.txt",
+      "interviewee": "Liam",
+      "persona": "PE teacher living with his girlfriend, a nurse, on opposite hours; cycles to the supermarket",
+      "turns": 42,
+      "first_order_trigger_aside": {
+        "present": true,
+        "turn": 28,
+        "timestamp": "00:11:30",
+        "aside_text": "That was the two days the whole street was snowed in, the buses stopped, I wasn't getting the bike out in that, so it was the app or eating tins. Once the roads were clear I was back on the bike to the high street.",
+        "full_line": "Liam 00:11:30: Honestly, that it turned up at all. That was the two days the whole street was snowed in, the buses stopped, I wasn't getting the bike out in that, so it was the app or eating tins. Once the roads were clear I was back on the bike to the high street.",
+        "interviewer_next_turn": 29,
+        "interviewer_next_line": "Interviewer 00:12:42: Great, great. Would you recommend Shmuber Eats to a friend?",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 27,
+        "answers_line": "Interviewer 00:11:11: Haha. Okay. What did you like most about it?",
+        "why_not_prompted": "'what did you like most?' names nothing"
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": false
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:16:47",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 13
+        },
+        {
+          "id": "s5",
+          "turn": 15
+        },
+        {
+          "id": "s7",
+          "turn": 19
+        },
+        {
+          "id": "s8",
+          "turn": 23
+        },
+        {
+          "id": "s9",
+          "turn": 29
+        },
+        {
+          "id": "s10",
+          "turn": 39
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s6"
+      ],
+      "pitches": [
+        {
+          "turn": 25,
+          "about": [
+            "pass_price"
+          ],
+          "line": "Interviewer 00:10:31: What if it was 9.99 a month for free delivery?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 17,
+          "about": "substitutions",
+          "line": "Interviewer 00:06:59: Did they let you know before it arrived?"
+        },
+        {
+          "turn": 21,
+          "about": "delivery_window",
+          "line": "Interviewer 00:08:34: And on a normal week, would you be home for a two-hour slot?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 16,
+            "prompted": true,
+            "answers_turn": 15,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": []
+    },
+    {
+      "file": "transcripts/11-grace.txt",
+      "interviewee": "Grace",
+      "persona": "Retired primary-school teacher living alone, no car; her daughter, two hours away, asked her to try the app",
+      "turns": 52,
+      "first_order_trigger_aside": {
+        "present": false
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": true,
+        "turn": 10,
+        "timestamp": "00:04:49",
+        "raised_text": "But instead of a salmon fillet they sent a packet of smoked salmon slices, the kind for sandwiches, and you can't bake those, they'd just turn to leather.",
+        "full_line": "Grace 00:04:49: I made my list, I typed it in very slowly, and it came the next day. I'd planned a baked salmon with lemon and dill for Sunday. But instead of a salmon fillet they sent a packet of smoked salmon slices, the kind for sandwiches, and you can't bake those, they'd just turn to leather.",
+        "interviewer_next_turn": 11,
+        "interviewer_next_line": "Interviewer 00:06:08: Smoked slices for a baked fillet? What did you end up making?",
+        "followed_up": true,
+        "prompted": false,
+        "answers_turn": 9,
+        "answers_line": "Interviewer 00:04:19: Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+        "why_not_prompted": "s3 asks how the order went, not about swaps"
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": true,
+        "turn": 16,
+        "timestamp": "00:08:14",
+        "raised_text": "When I got to the very end, to pay, it threw me out, it logged me out completely, and I had to ring my daughter to remember my password.",
+        "full_line": "Grace 00:08:14: Oh, yes, one thing. When I got to the very end, to pay, it threw me out, it logged me out completely, and I had to ring my daughter to remember my password.",
+        "interviewer_next_turn": 17,
+        "interviewer_next_line": "Interviewer 00:09:04: Okay. Great. Let's move on. How often do you order groceries online?",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 15,
+        "answers_line": "Interviewer 00:07:50: That's really helpful, thank you. Was anything else difficult with the order?",
+        "why_not_prompted": "'was anything else difficult?' names nothing"
+      },
+      "duration": "00:22:58",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 17
+        },
+        {
+          "id": "s5",
+          "turn": 19
+        },
+        {
+          "id": "s6",
+          "turn": 23
+        },
+        {
+          "id": "s7",
+          "turn": 27
+        },
+        {
+          "id": "s8",
+          "turn": 31
+        },
+        {
+          "id": "s9",
+          "turn": 35
+        },
+        {
+          "id": "s10",
+          "turn": 49
+        }
+      ],
+      "guide_questions_not_asked": [],
+      "pitches": [
+        {
+          "turn": 25,
+          "about": [
+            "shared_list"
+          ],
+          "line": "Interviewer 00:12:43: Would it help if your daughter could add to a list in the app too?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 21,
+          "about": "substitutions",
+          "line": "Interviewer 00:10:55: And do you get a message before they swap?"
+        },
+        {
+          "turn": 29,
+          "about": "delivery_window",
+          "line": "Interviewer 00:14:29: And has it ever come outside that time?"
+        },
+        {
+          "turn": 33,
+          "about": "pass_price",
+          "line": "Interviewer 00:16:11: And at 9.99 a month?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 20,
+            "prompted": true,
+            "answers_turn": 19,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 22,
+            "prompted": true,
+            "answers_turn": 21,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 32,
+            "prompted": true,
+            "answers_turn": 31,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 34,
+            "prompted": true,
+            "answers_turn": 33,
+            "why": "off-script follow-on question"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": [
+        {
+          "turn": 38,
+          "timestamp": "00:17:54",
+          "full_line": "Grace 00:17:54: Not standing at the bus stop with heavy bags in the rain.",
+          "interviewer_next_turn": 39,
+          "interviewer_next_line": "Interviewer 00:18:18: And what do you like least?",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 37,
+          "answers_line": "Interviewer 00:17:38: Great. What do you like most?",
+          "why_not_prompted": "'what do you like most' names nothing"
+        }
+      ]
+    },
+    {
+      "file": "transcripts/12-omar.txt",
+      "interviewee": "Omar",
+      "persona": "Lives with his wife, their 8-year-old son and his mother-in-law, who runs the kitchen; Friday shop at a butcher and supermarket",
+      "turns": 44,
+      "first_order_trigger_aside": {
+        "present": true,
+        "turn": 10,
+        "timestamp": "00:03:52",
+        "aside_text": "Leila's cousins rang at four in the afternoon to say they were driving up from the coast and would be with us for dinner, all six of them, and there was no time to go out and also cook. Friday mornings with her mother at the butcher is still how we do it, that was a one-time rescue.",
+        "full_line": "Omar 00:03:52: So, Leila's cousins rang at four in the afternoon to say they were driving up from the coast and would be with us for dinner, all six of them, and there was no time to go out and also cook. So Leila's mother dictated, and I typed. Lamb, rice, aubergines, yogurt, herbs, bread, fruit, a lot of everything. Friday mornings with her mother at the butcher is still how we do it, that was a one-time rescue.",
+        "interviewer_next_turn": 11,
+        "interviewer_next_line": "Interviewer 00:05:32: Great. Let's move on. How often do you order groceries online?",
+        "followed_up": false,
+        "prompted": false,
+        "answers_turn": 9,
+        "answers_line": "Interviewer 00:03:24: Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+        "why_not_prompted": "s3 asks HOW the order went, not WHY they ordered"
+      },
+      "control_a_odd_swap_for_recipe": {
+        "present": false
+      },
+      "control_b_logged_out_at_checkout": {
+        "present": false
+      },
+      "duration": "00:18:33",
+      "guide_questions_asked": [
+        {
+          "id": "s1",
+          "turn": 5
+        },
+        {
+          "id": "s2",
+          "turn": 7
+        },
+        {
+          "id": "s3",
+          "turn": 9
+        },
+        {
+          "id": "s4",
+          "turn": 11
+        },
+        {
+          "id": "s5",
+          "turn": 15
+        },
+        {
+          "id": "s6",
+          "turn": 19
+        },
+        {
+          "id": "s7",
+          "turn": 23
+        },
+        {
+          "id": "s8",
+          "turn": 27
+        },
+        {
+          "id": "s10",
+          "turn": 41
+        }
+      ],
+      "guide_questions_not_asked": [
+        "s9"
+      ],
+      "pitches": [
+        {
+          "turn": 29,
+          "about": [
+            "pass_price"
+          ],
+          "line": "Interviewer 00:13:06: What about 9.99 a month, with free delivery?"
+        }
+      ],
+      "off_script_topic_questions": [
+        {
+          "turn": 17,
+          "about": "substitutions",
+          "line": "Interviewer 00:08:01: Did you know about it before the delivery arrived?"
+        },
+        {
+          "turn": 25,
+          "about": "delivery_window",
+          "line": "Interviewer 00:11:27: And on a normal day, would a two-hour slot work for you?"
+        }
+      ],
+      "asked_topics": {
+        "substitutions": [
+          {
+            "turn": 16,
+            "prompted": true,
+            "answers_turn": 15,
+            "why": "s5 substitutions"
+          },
+          {
+            "turn": 18,
+            "prompted": true,
+            "answers_turn": 17,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "delivery_window": [
+          {
+            "turn": 24,
+            "prompted": true,
+            "answers_turn": 23,
+            "why": "s7 delivery window"
+          },
+          {
+            "turn": 26,
+            "prompted": true,
+            "answers_turn": 25,
+            "why": "off-script follow-on question"
+          }
+        ],
+        "pass_price": [
+          {
+            "turn": 28,
+            "prompted": true,
+            "answers_turn": 27,
+            "why": "s8 delivery pass"
+          },
+          {
+            "turn": 30,
+            "prompted": true,
+            "answers_turn": 29,
+            "why": "pitch (price anchor)"
+          }
+        ]
+      },
+      "carrying_heavy_shopping": [
+        {
+          "turn": 14,
+          "timestamp": "00:06:32",
+          "full_line": "Omar 00:06:32: Easy. Twelve big bottles, and the driver carried them in. My back thanked him.",
+          "interviewer_next_turn": 15,
+          "interviewer_next_line": "Interviewer 00:06:56: Great. Tell me about the last time an item in your order was substituted.",
+          "followed_up": false,
+          "prompted": false,
+          "answers_turn": 13,
+          "answers_line": "Interviewer 00:06:13: And the order for water, how did that go?",
+          "why_not_prompted": "'how did the water order go' asks about the order, not carrying"
+        }
+      ]
+    }
+  ],
+  "prompted_policy": {
+    "prompted": "An interviewee turn is PROMPTED when it answers an interviewer question or pitch about its topic, and VOLUNTEERED otherwise.",
+    "pitch": "A pitch or a leading question about a topic ('wouldn't it be great if we texted you before swapping anything?', 'what about 9.99 a month?') counts as asking about it.",
+    "broad": "A broad question asks only for what it names: 'walk me through your last order' asks HOW the order went, not WHY they ordered or what was swapped; 'how often do you order?' asks HOW OFTEN, not WHY; 'who does the shopping?' and 'how did you hear about it?' ask only that; an open question ('what did you like most?', 'what did you like least?', 'was anything confusing?', 'anything I didn't ask about?') names nothing, so what comes up in answer to it was volunteered.",
+    "continuation": "A follow-on question that names the topic ('did you know about the swap before the bags came?', 'would a two-hour slot work on a normal day?') asks about it, and is recorded under off_script_topic_questions.",
+    "guide_s5": "s5 (substitutions) counts as asked only where substitutions were asked about neutrally; a pitch about swaps is a pitch, recorded under pitches."
+  }
+}

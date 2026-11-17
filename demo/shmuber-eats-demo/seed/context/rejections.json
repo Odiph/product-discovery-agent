@@ -1,0 +1,20 @@
+[
+  {
+    "session_id": "20261102T000000-4",
+    "claim": "I am a management consultant and I travel a lot.",
+    "reason": "unlocatable-quote",
+    "seqs": [
+      5
+    ],
+    "quoted_text": "I'm a management consultant, I travel a lot."
+  },
+  {
+    "session_id": "20261102T000000-7",
+    "claim": "The interviewee lives with Mira and Leo, who is ten weeks old.",
+    "reason": "unlocatable-quote",
+    "seqs": [
+      5
+    ],
+    "quoted_text": "So it's me, Mira, and now Leo. He's ten weeks."
+  }
+]

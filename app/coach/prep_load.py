@@ -94,7 +94,7 @@ def _interviews(sessions_root):
             # Coverage events live in the LIVE transcript; an in-person
             # evidence transcript carries segments only. Read inside the same
             # guard: a bad live file costs this session, never the command.
-            live = read_session(session_dir).records if ev.is_in_person(meta) else records
+            live = read_session(session_dir).records if ev.is_one_recording(meta) else records
         except (MalformedRecordError, ValueError, OSError):
             continue
         asked = [t.text for t in walked_past.turns(records) if t.speaker == walked_past.INTERVIEWER]

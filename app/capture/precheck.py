@@ -15,14 +15,10 @@ every FAIL path are testable without hardware or credentials.
 
 from __future__ import annotations
 
-import asyncio
 import queue
-import tempfile
 import threading
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
-from pathlib import Path
 from typing import Callable, Optional
 
 from app import config as config_mod
@@ -34,40 +30,20 @@ from app.capture.devices import (
 )
 from app.capture.levels import BAND_CLIPPING, LevelMeasurement, measure_level
 from app.capture.stream import CaptureStream
-from app.session.store import SessionStore
 from app.stt.live import get_engine
-from app.web import join as join_mod
 from app.web import server as web_server
-from app.web.hub import ConnectionHub
 from benchmark.engines.base import StreamingEngine
 
 RESULT_PASS = "PASS"
 RESULT_FAIL = "FAIL"
 RESULT_SKIPPED = "SKIPPED"
 
-# app/capture/precheck.py -> parent is app/capture, parent.parent is app/ -- same static
-# assets `app/main.py`'s embedded server serves, reused here so the reachability row
-# exercises the REAL page/asset routes, never a parallel code path.
-STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
-
 PREFLIGHT_RULES = (
     'Fix your call output device BEFORE pressing start -- do NOT change it mid-call.',
     'Disable sleep / set the power plan to "never sleep" for the duration of the call.',
     "Loopback captures EVERYTHING the machine plays -- close other audio sources first.",
-    "Confirm the printed LAN address matches your Wi-Fi adapter -- not a VPN or virtual "
-    "adapter -- before trusting the QR (compare leading octets with your phone's own Wi-Fi IP).",
     'If a second monitor is in use, set your screen-share selection to that single window '
     'or display NOW -- never "entire desktop" or "all displays".',
-)
-
-# §R3's one-line triage rule, verbatim -- the remedy for a phone that never connects within
-# the reachability window. Memorable under pressure is the whole point (03-RESEARCH §7).
-_PHONE_TRIAGE_REMEDY = (
-    "No phone connected within the window. Triage: slow or no response at all -> assume Wi-Fi "
-    "client isolation, try the phone's personal hotspot first; fast refusal -> Windows Firewall "
-    "blocked the port, accept the prompt or add an allow rule; loads but the printed IP looks "
-    "wrong -> a VPN or virtual adapter owns the route, disconnect it and re-run precheck; loads "
-    "fine but frozen -> not a network problem, look at the laptop's own status banner instead."
 )
 
 _LIVENESS_REMEDY = (
@@ -305,125 +281,6 @@ def _port_row(port: int, *, port_checker: Callable[[int], None]) -> PrecheckRow:
     return PrecheckRow(name=name, result=RESULT_PASS, measured=f"port {port} is free")
 
 
-def _lan_address_row(*, lan_ip_resolver: Callable[[], str]) -> PrecheckRow:
-    """PASSES carrying the measured address plus the confirm-your-adapter
-    instruction (03-RESEARCH assumption A3, MEDIUM confidence -- mitigated by
-    a human-readable line, not eliminated). FAILS, rather than reporting a
-    wrong answer confidently, when resolution raises."""
-    name = "LAN address"
-    try:
-        lan_ip = lan_ip_resolver()
-    except OSError as exc:
-        return PrecheckRow(
-            name=name, result=RESULT_FAIL,
-            remedy=(
-                f"Could not resolve a LAN IP ({exc}). Check ipconfig for your Wi-Fi adapter's "
-                "IPv4 address and share the join URL manually."
-            ),
-        )
-    return PrecheckRow(
-        name=name, result=RESULT_PASS,
-        measured=(
-            f"{lan_ip} -- confirm this matches your Wi-Fi adapter's address (compare leading "
-            "octets with your phone's own Wi-Fi IP over ipconfig), not a VPN or virtual adapter"
-        ),
-    )
-
-
-def _start_phone_reachability_server(
-    *, port: int, session_dir: Path, store: SessionStore, emit_qr: bool, host: str = "0.0.0.0",
-):
-    """Starts the real embedded server -- the same `create_app`/
-    `build_uvicorn_server` factory `app/main.py` uses -- on its own background
-    thread driving its own event loop, exactly like
-    `app/tests/test_web_serving.py`'s own `_running_server` fixture. Prints the
-    real join URL -- and, when `emit_qr`, both QR forms -- via `create_join`
-    so a real phone can actually attempt to connect. Returns `(hub, actual_port, join_info, stop)`;
-    callers MUST call `stop()` exactly once, in a `finally` block."""
-    hub = ConnectionHub()
-    join_info = join_mod.create_join(
-        port=port, session_dir=session_dir, store=store, emit_qr=emit_qr
-    )
-    server_started_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="milliseconds")
-    app = web_server.create_app(
-        token=join_info.token, hub=hub, static_dir=STATIC_DIR, store=store,
-        session_id=session_dir.name, server_started_at=server_started_at,
-    )
-    loop = asyncio.new_event_loop()
-    server = web_server.build_uvicorn_server(app, host=host, port=port)
-
-    def _run() -> None:
-        asyncio.set_event_loop(loop)
-        loop.run_until_complete(server.serve())
-
-    thread = threading.Thread(target=_run, daemon=True)
-    thread.start()
-    start_deadline = time.monotonic() + 10.0
-    while not server.started and time.monotonic() < start_deadline:
-        time.sleep(0.02)
-
-    def _stop() -> None:
-        server.should_exit = True
-        thread.join(timeout=10.0)
-
-    if not server.started:
-        _stop()
-        raise RuntimeError("the embedded server failed to start for the reachability check")
-
-    actual_port = server.servers[0].sockets[0].getsockname()[1]
-    return hub, actual_port, join_info, _stop
-
-
-def _wait_for_a_connection(hub: ConnectionHub, *, timeout_s: float, poll_interval_s: float = 0.1) -> bool:
-    """Polls `hub.connection_count` for a bounded window -- never longer than
-    `timeout_s` -- returning as soon as a connection appears. A pre-call check
-    that hangs one minute before an interview is worse than one that fails
-    (T-03-27)."""
-    deadline = time.monotonic() + timeout_s
-    while time.monotonic() < deadline:
-        if hub.connection_count > 0:
-            return True
-        time.sleep(poll_interval_s)
-    return hub.connection_count > 0
-
-
-def run_phone_reachability_check(
-    *,
-    port: int,
-    session_dir: Path,
-    store: SessionStore,
-    timeout_s: float,
-    emit_qr: bool,
-    host: str = "0.0.0.0",
-    on_ready: Optional[Callable[[int, str], None]] = None,
-) -> PrecheckRow:
-    """§R4 row 3, opt-in via `--phone`: starts the real server, shows the join
-    URL (and the QR forms when `emit_qr`), waits up to `timeout_s` for a real client to
-    connect, then stops the server cleanly whether or not one arrived. FAILs
-    with the one-line triage rule (§R3) rather than hanging. `on_ready`, if
-    given, is called once with `(actual_port, token)` the moment the server is
-    up -- the seam a test uses to connect a real (non-phone) client inside the
-    window, with no hardware and no credentials involved."""
-    name = "Phone reachability"
-    try:
-        hub, actual_port, join_info, stop = _start_phone_reachability_server(
-            port=port, session_dir=session_dir, store=store, host=host, emit_qr=emit_qr,
-        )
-    except RuntimeError as exc:
-        return PrecheckRow(name=name, result=RESULT_FAIL, remedy=str(exc))
-
-    try:
-        if on_ready is not None:
-            on_ready(actual_port, join_info.token)
-        connected = _wait_for_a_connection(hub, timeout_s=timeout_s)
-    finally:
-        stop()
-
-    if connected:
-        return PrecheckRow(name=name, result=RESULT_PASS, measured="a client connected within the window")
-    return PrecheckRow(name=name, result=RESULT_FAIL, remedy=_PHONE_TRIAGE_REMEDY)
-
-
 def build_precheck_report(
     *,
     pa,
@@ -433,22 +290,16 @@ def build_precheck_report(
     skip_stt: bool = False,
     side_defs: tuple = _SIDE_DEFS,
     engine_factory: Optional[Callable[[], StreamingEngine]] = None,
-    phone: bool = False,
     port_checker: Optional[Callable[[int], None]] = None,
-    lan_ip_resolver: Optional[Callable[[], str]] = None,
-    phone_check: Optional[Callable[[], PrecheckRow]] = None,
 ) -> PrecheckReport:
-    """Assembles the full report: the port and LAN-address rows (§R4),
-    device-resolution rows, a concurrent liveness window across every resolved
-    side, the engine-reachability row (or a SKIPPED row if `skip_stt`), and --
-    only with `phone=True` -- the bounded real-phone reachability row. Every
-    dependency (`side_defs`, `engine_factory`, `port_checker`,
-    `lan_ip_resolver`, `phone_check`) is injectable so this whole function is
-    testable without hardware, credentials or a phone."""
+    """Assembles the full report: the port row (§R4), device-resolution rows,
+    a concurrent liveness window across every resolved side, and the
+    engine-reachability row (or a SKIPPED row if `skip_stt`). Every dependency
+    (`side_defs`, `engine_factory`, `port_checker`) is injectable so this whole
+    function is testable without hardware or credentials."""
     window_seconds = seconds if seconds is not None else cfg.precheck_seconds
     rows: list[PrecheckRow] = []
     rows.append(_port_row(cfg.app_port, port_checker=port_checker or web_server.check_port_available))
-    rows.append(_lan_address_row(lan_ip_resolver=lan_ip_resolver or join_mod.get_lan_ip))
     devices: dict[str, DeviceInfo] = {}
 
     for key, label, resolver in side_defs:
@@ -487,30 +338,6 @@ def build_precheck_report(
             engine_factory=factory, sample_rate=cfg.sample_rate, pcm16=probe_pcm16,
             timeout_s=cfg.precheck_engine_timeout_s,
         ))
-
-    # Opt-in, off by default (§R4 row 3) -- the everyday precheck stays fast;
-    # only `--phone` pays the cost of a bounded wait for a real connection.
-    if phone:
-        if phone_check is not None:
-            rows.append(phone_check())
-        else:
-            with tempfile.TemporaryDirectory(prefix="precheck-phone-") as tmp_dir_name:
-                tmp_dir = Path(tmp_dir_name)
-                phone_store = SessionStore(tmp_dir)
-                try:
-                    phone_store.write_metadata({"purpose": "precheck-phone-reachability-check"})
-                    rows.append(run_phone_reachability_check(
-                        emit_qr=cfg.emit_qr,
-                        port=cfg.app_port, session_dir=tmp_dir, store=phone_store,
-                        timeout_s=cfg.precheck_phone_wait_s,
-                    ))
-                finally:
-                    # Windows refuses to delete a file that is still open, so the
-                    # temp dir's own cleanup raises PermissionError and takes the
-                    # whole report down with it -- after every row has passed.
-                    # The store owns an append handle on transcript.jsonl; close
-                    # it here, before TemporaryDirectory.__exit__ tries to unlink.
-                    phone_store.close()
 
     return PrecheckReport(rows=tuple(rows))
 

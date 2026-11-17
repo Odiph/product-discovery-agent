@@ -22,22 +22,11 @@ to another program, to a third party, or to git.
 - **Secrets** (`SONIOX_API_KEY`, `ANTHROPIC_API_KEY`, `COACH_API_KEY`) are
   read from the environment or a git-ignored `.env`. Tests fail if the
   committed MCP configs ever hold a key-shaped value.
-- **The phone page** is served on all network interfaces during a call, so a
-  phone on the same Wi-Fi can join. Every route requires a per-run random
-  token, compared in constant time; a wrong token gets a generic 404. It is
-  **plain HTTP**: anyone who can observe traffic on that network can read the
-  token and the page. Use it only on a network you trust, or not at all.
-  Every response carries a strict Content-Security-Policy, `nosniff` and
-  `no-referrer`, and the WebSockets refuse a browser Origin that is not the
-  page's own host.
-- **In-person mode** listens on `127.0.0.1` only, behind `tailscale serve`
-  (HTTPS). It is reachable by every device on your tailnet that has the token,
-  including machines shared into it, so keep the tailnet to your own devices
-  or restrict it with an access rule. `precheck --in-person` fails while
-  Tailscale Funnel is on for the name, because Funnel would expose it to the
-  public internet. Room audio crosses the tailnet encrypted, possibly through
-  Tailscale's relays. The microphone socket accepts one phone at a time; a new
-  connection replaces the old one, so a stray client cannot hold it.
+- **The live view** is served on `127.0.0.1` only during a call. Every route
+  requires a per-run random token, compared in constant time; a wrong token
+  gets a generic 404. Every response carries a strict
+  Content-Security-Policy, `nosniff` and `no-referrer`, and the WebSocket
+  refuses a browser Origin that is not the page's own host.
 - **The console, authoring page and hub** bind to `127.0.0.1` only, and check
   the `Host` header and the request `Content-Type`, so another website in your
   own browser cannot drive them.

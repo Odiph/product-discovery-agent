@@ -58,28 +58,13 @@ DEFAULT_PRECHECK_ENGINE_TIMEOUT_S = 20.0  # bounded deadline for the engine-reac
 # talking someone through setting one up.
 DEFAULT_SELF_TEST_SECONDS = 2.0
 
-# --- plan 03-01: the phone surface (D-05, OPS-01) --------------------------------------
+# --- plan 03-01: the live view (D-05, OPS-01) ------------------------------------------
 # Pinned, never auto-chosen -- a silently-different bound port would desynchronize the
-# printed/QR'd join URL from what is actually listening (03-RESEARCH §4, OPS-05).
+# printed join URL from what is actually listening (03-RESEARCH §4, OPS-05).
 DEFAULT_APP_PORT = 8765
 # Auto-open the local join URL in a browser window at `start` time so the second-monitor
 # path (SURF-03) costs the user nothing (03-RESEARCH §5). Off in tests/CI via env override.
 DEFAULT_OPEN_BROWSER = True
-
-# The phone join QR, OFF by default (user decision, 2026-08-10: "stop
-# generating QR code for now"). A toggle rather than a deletion: the phone
-# surface itself is untouched and still reachable -- `create_join` prints the
-# join URL and the resolved LAN IP exactly as before -- so re-enabling is
-# `APP_EMIT_QR=1` and nothing else. Deleting the renderers would also have
-# stranded `qrcode[pil]`, a pinned dependency the gate-3 count is calibrated
-# against.
-DEFAULT_EMIT_QR = False
-
-# --- plan 03-03: precheck's phone-reachability row (OPS-05, T-03-27) -----------------
-# Bounded wait for a real client to connect during `precheck --phone`, BEFORE reporting
-# FAIL. A pre-call check that hangs one minute before an interview is worse than one that
-# fails -- this is what keeps it bounded rather than an indefinite wait.
-DEFAULT_PRECHECK_PHONE_WAIT_S = 30.0
 
 # --- plan 04-01: the coach's coverage detector (04-CONTEXT.md §C3/§C4/§C5) -----------
 # The coverage-match call sits off the ~1.5-2s coaching critical path (COACH-05) --
@@ -98,9 +83,9 @@ DEFAULT_CONTEXT_DIR = "context"
 
 # --- plan 04-03: the authoring page (04-CONTEXT.md D-07, §E4) ------------------------
 # A SEPARATE port from DEFAULT_APP_PORT -- the authoring server is a genuinely
-# separate app instance, bound to the loopback address only (never the phone
-# surface's wildcard bind). Not printed on a QR and never shared -- pinned
-# only so re-running `python -m app author` prints a stable, memorable URL.
+# separate app instance, bound to the loopback address only, like the live view.
+# Never shared -- pinned only so re-running `python -m app author` prints a
+# stable, memorable URL.
 DEFAULT_AUTHOR_PORT = 8766
 
 # --- plan 04-02: the generate/critic pipeline (D1-D9) --------------------------------
@@ -192,7 +177,7 @@ DEFAULT_COACH_MAX_RETRIEVED_FACTS = 5
 # --- independent review finding B: uvicorn's websocket keepalive, pinned explicitly ------
 # `app/web/hub.py::_broadcast_payload` fans out SEQUENTIALLY with only a per-connection
 # try/except -- that protects against a send that RAISES, not one that never returns (a
-# half-open phone whose write buffer is full parks `send_json()` on backpressure and
+# half-open browser whose write buffer is full parks `send_json()` on backpressure and
 # starves every other connected client, e.g. a second monitor). The only thing that
 # bounds that today is `websockets`' own ping/pong timeout, applied by uvicorn's
 # `ws_ping_interval`/`ws_ping_timeout` -- which `uvicorn.Config(...)` never set, so it
@@ -247,7 +232,6 @@ class AppConfig:
     precheck_level_dbfs_min: float
     self_test_seconds: float
     precheck_engine_timeout_s: float
-    precheck_phone_wait_s: float
     coach_coverage_timeout_s: float
     coach_queue_maxsize: int
     context_dir: Path
@@ -269,7 +253,6 @@ class AppConfig:
     author_port: int
     app_port: int
     open_browser: bool
-    emit_qr: bool
     heartbeat_interval_ms: int
     heartbeat_timeout_ms: int
     reconnect_backoff_base_ms: int
@@ -321,9 +304,6 @@ def load_config(*, engine_override: Optional[str] = None) -> AppConfig:
         ),
         precheck_engine_timeout_s=float(
             os.environ.get("APP_PRECHECK_ENGINE_TIMEOUT_S", DEFAULT_PRECHECK_ENGINE_TIMEOUT_S)
-        ),
-        precheck_phone_wait_s=float(
-            os.environ.get("APP_PRECHECK_PHONE_WAIT_S", DEFAULT_PRECHECK_PHONE_WAIT_S)
         ),
         coach_coverage_timeout_s=float(
             os.environ.get("APP_COACH_COVERAGE_TIMEOUT_S", DEFAULT_COACH_COVERAGE_TIMEOUT_S)
@@ -380,7 +360,6 @@ def load_config(*, engine_override: Optional[str] = None) -> AppConfig:
         author_port=int(os.environ.get("APP_AUTHOR_PORT", DEFAULT_AUTHOR_PORT)),
         app_port=int(os.environ.get("APP_PORT", DEFAULT_APP_PORT)),
         open_browser=_bool_env("APP_OPEN_BROWSER", DEFAULT_OPEN_BROWSER),
-        emit_qr=_bool_env("APP_EMIT_QR", DEFAULT_EMIT_QR),
         heartbeat_interval_ms=int(
             os.environ.get("APP_HEARTBEAT_INTERVAL_MS", DEFAULT_HEARTBEAT_INTERVAL_MS)
         ),

@@ -75,10 +75,7 @@ tool asks for or records consent on your behalf.
 | Every extracted claim in the project (claim text, interview id, which hypotheses it bears on), your hypothesis statements with their kind and parent, your outcome, and the previous synthesized tree's node labels and structure; never a quote, never a transcript, never a falsifier or criterion | The same coach endpoint, to the judge model | Once, when you run `synthesize --yes`; again only after the claims, the hypotheses, the outcome, the model or the prompt change |
 | What `prep` already shows you: each gap (the hypothesis, its kind, why it is a gap), the survey's questions, your brief items (from `brief.json` only, never the claims the coach's brief adds), the hypothesis statements, the mirror's habit labels and `missed`'s topic labels. Never anything an interviewee said | The same coach endpoint, on `JUDGE_MODEL` | When you run `prep --draft --yes`, once per change to any of them; never without `--yes` |
 | Code you added with `kb add`, and research you typed yourself with `kb add --type research` (never interviews, conversations, emails, or anything typed as research by guess) | The same coach endpoint | When you run `kb digest`, once per new or changed document. Its notes then ride in the coach's prompt every cycle |
-| In-person room audio | Soniox, live during `start --in-person`, and again when you run `diarize-after` (the uploaded copy is deleted afterwards) | Every in-person meeting |
 | A recording you import (`import <file>.wav --yes`) | Soniox: the whole file, uploaded for the same file pass `diarize-after` runs (their copy is deleted afterwards) | Once per imported recording, and again only if you re-run `diarize-after` on it. Never without `--yes` |
-| In-person room audio, phone to laptop | Your Tailscale tailnet: encrypted end to end between your own devices, possibly through Tailscale's relay servers | Throughout every in-person meeting |
-| Your laptop's Tailscale machine name | Public certificate-transparency logs, once you turn on HTTPS Certificates | Once, when the certificate is issued |
 | Retained audio (`--retain-audio`, off by default) | Nothing: the WAV files stay on this machine | Never |
 
 Each vendor's own policy governs retention and training use, and they change,
@@ -93,11 +90,11 @@ anywhere else: no telemetry, no analytics. The one other outbound request is
 `fetch-voiceprint-model`, a one-time download from GitHub that sends nothing
 of yours.
 
-**Voiceprints (in-person mode only).** To tell the two people in the room
-apart, the app computes a voiceprint (a speaker embedding) for each voice from
-the first two minutes of the meeting. Voiceprints are kept in memory only,
-never written to disk, never sent anywhere, and are gone when the run ends;
-`diarize-after` recomputes them from the room audio. Some laws treat a
+**Voiceprints (imported recordings only).** To tell the two people on one
+recording apart, `diarize-after` computes a voiceprint (a speaker embedding)
+for each voice from the first two minutes of the recording. Voiceprints are
+kept in memory only, never written to disk, never sent anywhere, and are gone
+when the command ends. Some laws treat a
 voiceprint as biometric data: Illinois's BIPA requires written consent before
 one is collected, even briefly, and GDPR Article 9 and Israel's Privacy
 Protection Law (Amendment 13) may count it as specially protected data. Name
@@ -111,7 +108,7 @@ confidential and delete sessions you no longer need. If someone asks you to eras
 `.venv\Scripts\python.exe -m app forget <session_id> --project <node>` (leave
 out `--project` for a root session). It lists what it would delete, as counts
 and paths with no transcript text, and deletes only when you add `--yes`. It
-removes the session directory (transcript, room audio, renders, critiques),
+removes the session directory (transcript, kept recording, renders, critiques),
 that interview's rows in `context/facts.json`, `rejections.json`,
 `demotions.json` and `declined_proposals.json`, and any knowledge-base copy
 made with `kb add --sessions`. A file it cannot read is left untouched and
@@ -126,17 +123,10 @@ terms.
 Those are the maintainer's private planning records and are not published;
 the comments around each citation carry the reasoning that matters.
 
-**Who can reach the running app:** during a call, a small page is served on
-your local network (port 8765) so a phone on the same Wi-Fi can follow along.
-Every route on it requires a random token generated fresh for that run, and it
-is plain HTTP: anyone who can watch traffic on that Wi-Fi can read the token
-from the URL and, with it, the live transcript and suggestions. Use it only on
-a network you trust (your own, or your phone's hotspot). In-person mode does
-not use this page: it listens on `127.0.0.1` behind `tailscale serve`, which is
-HTTPS and reachable by any device on your tailnet that has the token, never by
-the Wi-Fi you are on. Tailscale Funnel would put it on the public internet, so
-`precheck --in-person` fails while Funnel is on for that name. The console, the
-authoring page and the hub listen on `127.0.0.1` only. The MCP server is
+**Who can reach the running app:** nothing outside this laptop. During a call
+the live view is served on `127.0.0.1` only (port 8765), and every route on it
+requires a random token generated fresh for that run. The console, the
+authoring page and the hub listen on `127.0.0.1` only too. The MCP server is
 read-only and never returns quotes, transcripts, audio or interviewee names. See `SECURITY.md`.
 
 ## Setup (first run on a new machine)
@@ -199,21 +189,6 @@ Skip the engine-reachability row (e.g. to check audio only, with no network
 call) with `--skip-stt`. Shorten or lengthen the listening window with
 `--seconds N` (default 3).
 
-**Before a REAL interview, add `--phone`:**
-
-```
-.venv\Scripts\python.exe -m app precheck --phone
-```
-
-This adds two more rows on top of the audio/engine checks above — the pinned
-web port is free, and this machine's LAN address resolves — plus a third,
-bounded row: it starts the server, shows the join URL, and waits (up
-to 30s by default) for a real phone to actually connect. PASS means a phone
-connected in time; FAIL means none did, and the row's remedy is the one-line
-triage rule from the hostile-Wi-Fi runbook below. It never hangs past its
-window. This is the one command that answers "will the phone actually work
-tonight" — run it, get everything green, *then* start the call.
-
 ## Starting a call
 
 ```
@@ -224,15 +199,12 @@ Captures and transcribes both sides at once until you press Ctrl+C, or for a
 fixed duration with `--seconds N`. To run only one side (debugging one half of
 a broken setup), add `--only interviewee` or `--only interviewer`.
 
-`start` also serves the live transcript to your phone from inside this same
-process — one command, one process, no deployed service. It prints a join URL;
-open that on the phone for the live view. (The QR is off by default — see "The join QR is off"
-below.) The web port is pinned (`8765` by
+`start` also serves the live transcript from inside this same process — one
+command, one process, no deployed service. It prints the live view's URL
+(`http://127.0.0.1:8765/s/<token>`) and opens it in a browser on this laptop;
+the server listens on `127.0.0.1` only. The web port is pinned (`8765` by
 default — change it with `APP_PORT` if it's ever taken) so the printed URL
-always matches what's actually listening. The first time you run `start` on this
-machine, Windows Firewall may prompt to allow inbound connections for this
-interpreter — **accept it once, now, during a rehearsal, never live during a
-real call.**
+always matches what's actually listening.
 
 > **One process per interview, with one exception.** The overlay is a second
 > process: it spawns `python -m app start` as a child
@@ -260,9 +232,6 @@ default; `--no-serve` is the one flag that opts back out.
 - Disable sleep / set the power plan to "never sleep" for the call's duration.
 - Loopback captures **everything the machine plays**, not just the call app —
   close other audio sources (music, notifications) before starting.
-- Confirm the printed LAN address matches your Wi-Fi adapter — not a VPN or
-  virtual adapter — before trusting the join URL (compare leading octets with
-  your phone's own Wi-Fi IP).
 - If a second monitor is in use, set your screen-share selection to that
   single window or display *now* — never "entire desktop" or "all displays".
 
@@ -278,139 +247,24 @@ Run this down in order, every time, before a real call — not during one:
    always has an empty `context/facts.json`** (nothing has been extracted
    yet) — with no facts extracted, the coach simply has no past interviews to
    draw on, which is not a fault.
-1. Run `precheck --phone` and get **every row green**, including the phone
-   actually connecting during the reachability window.
-2. Confirm the printed LAN address matches your phone's own Wi-Fi address
-   (not a VPN or virtual adapter — see the LAN-address row's own reminder).
-3. Open the printed join URL on the phone and confirm the live page loads
-   *now*, before the call, not during it.
-4. If using a second monitor, set your screen-share selection to that single
+1. Run `precheck` and get **every row green**.
+2. If using a second monitor, set your screen-share selection to that single
    window or display now.
-5. Disable notifications (browser and OS) for the surface's origin — a
+3. Disable notifications (browser and OS) for the surface's origin — a
    notification banner can leak the surface even when nothing else is shared.
-6. Confirm the coach is live *before* the call, not during it: `start`'s own
+4. Confirm the coach is live *before* the call, not during it: `start`'s own
    startup line reads `Coach enabled: brief has N item(s), survey has M
    item(s).` when `ANTHROPIC_API_KEY` is set and both files loaded. If it
    instead prints `Coach disabled: ...`, that is a decision to make now —
    capture and transcription still work either way, but a mid-call surprise
    about missing suggestions is what this step exists to prevent.
-7. Start the session (`start`), then start the call.
-
-## When the phone won't connect: the hostile-Wi-Fi runbook
-
-**The one-line rule — the part to remember under pressure:** slow or no
-response at all → assume isolation, hotspot first; fast refusal → firewall;
-loads but the IP looks wrong → adapter or VPN; loads fine but frozen → not a
-network problem at all, look at the laptop.
-
-| Symptom | Likely cause | Fast diagnostic | Fix |
-|---|---|---|---|
-| Join URL opens, phone shows nothing, times out entirely, no error page | AP/client isolation — hotel, conference, co-working Wi-Fi blocking device-to-device traffic | This is the DEFAULT assumption on unfamiliar Wi-Fi. Do not debug further | Phone personal hotspot; the laptop joins the phone's hotspot |
-| Join URL gives "connection refused", `ERR_CONNECTION_ABORTED`, or any red error FAST, not a long timeout | Windows Firewall blocking the port | `Get-NetConnectionProfile` — **if `NetworkCategory` is `Public`, that is the answer.** Do NOT go looking for a firewall prompt; on a Public network Windows blocks inbound silently and never prompts | Make the network Private and add the allow rule — see below |
-| Page never loads and the printed LAN IP looks wrong — e.g. a different subnet from the phone's own Wi-Fi address | Wrong adapter: a VPN or virtual adapter owns the default route | Compare the printed IP's leading octets with the phone's own Wi-Fi IP | Disconnect the VPN and re-run `precheck` |
-| Phone connects and shows the page, but the transcript never updates | NOT a networking problem — capture or STT failure | Look at the laptop's terminal and the on-screen status banner, not the network | Follow the server-status banner, not this table |
-
-**The Public-network trap (the most common failure):**
-
-Windows classifies unfamiliar Wi-Fi as **Public** and then blocks inbound
-connections *silently* — no prompt, ever. The laptop looks completely healthy
-from the laptop: the server answers 200 on both `127.0.0.1` and its own LAN
-address. Only the phone sees the failure, and it looks like a fast red error.
-
-Diagnose and fix, from an **Administrator** PowerShell:
-
-```powershell
-Get-NetConnectionProfile                  # NetworkCategory: Public  <- the tell
-
-Set-NetConnectionProfile -InterfaceAlias 'Wi-Fi' -NetworkCategory Private
-New-NetFirewallRule -DisplayName 'Product Discovery Agent phone surface (8765)' `
-  -Direction Inbound -Protocol TCP -LocalPort 8765 `
-  -Profile Private -Action Allow
-```
-
-**The rule is scoped to `Private` on purpose.** On a hotel, conference or
-co-working network — exactly the networks Windows marks Public — the port
-should stay shut and the hotspot procedure below is the intended answer. Do
-not widen this to `Public` to make a venue work; use the hotspot.
-
-**The hotspot procedure (the default fix for the default problem):**
-
-1. Turn on the phone's personal hotspot.
-2. Join the **laptop** to the phone's hotspot (not the other way around).
-3. Re-run `start`.
-4. Use the **new** join URL — the address changes because the network
-   changed; that is exactly why the join surface is regenerated every run.
-
-A tunnel is a manual last resort only, never part of the normal path — reach
-for the hotspot first, always.
-
-## In-person meetings: the phone is the microphone
-
-For a meeting across a table rather than a call, run the engine on the laptop
-and use your phone as the one microphone in the room. A phone browser grants
-the microphone only over HTTPS. Tailscale gives the laptop a real HTTPS name
-that only devices on your tailnet can reach, from any network; the app itself
-listens on `127.0.0.1` only, so the Wi-Fi you are on never sees it. Anyone you
-have shared a machine or the tailnet with can reach the name too, so keep the
-tailnet to your own devices (or restrict it with a Tailscale access rule), and
-never turn on Funnel for it: `precheck --in-person` fails if you do.
-
-**Once per machine:**
-
-1. Install Tailscale on the laptop and the phone ([tailscale.com/download](https://tailscale.com/download))
-   and sign both in to the same account (`tailscale up` on the laptop).
-2. In the Tailscale admin console, on the **DNS** page, turn on **MagicDNS**
-   and **HTTPS Certificates**.
-3. `python -m app fetch-voiceprint-model` downloads the speaker-embedding
-   model (about 25 MB, SHA-256 verified) that tells the two voices apart.
-
-**Before the meeting:**
-
-```
-tailscale serve --bg 8765
-python -m app precheck --in-person
-```
-
-`tailscale serve --bg <port>` (the app port, 8765 unless you changed
-`APP_PORT`) puts `https://<laptop>.<tailnet>.ts.net/` in front of the app and
-keeps running in the background. `precheck --in-person` opens no laptop audio
-device. It checks that the port is free, that Tailscale is up, that `serve`
-forwards to this app's port (a `serve` started without `--bg` passes with a
-warning: it stops when its terminal closes), that the name completes a
-certificate-verified TLS handshake, and that the diarizing engine answers
-(`--skip-stt` skips that last row). It does not test the phone itself; open
-the phone URL once before the meeting for that.
-
-**During:** `python -m app start --in-person` prints the phone URL
-(`https://<laptop>.<tailnet>.ts.net/s/<token>?mic`). Open it on the phone,
-say the consent line, then press Start. **Speak first:** the first voice heard
-is taken to be the interviewer, and both voiceprints are enrolled from the
-first two minutes. These live roles drive the coaching only.
-
-**After:** the evidence transcript comes from a slower, more accurate pass,
-not from the live roles.
-
-```
-python -m app diarize-after <session>      # uploads room.wav to Soniox (paid), voiceprint cross-check
-python -m app confirm-speakers <session>   # shows who said what; add --confirm (or --swap) to record it
-python -m app extract <session>            # refuses until the speakers are confirmed
-```
-
-`confirm-speakers --confirm` deletes the kept room audio. `--disputed
-label|voiceprint` settles turns the voiceprint disagreed with;
-`--accept-live-roles` confirms a session that has no audio to re-pass.
-
-Opening the phone page on a second device takes the microphone over; reload
-the first page to take it back.
+5. Start the session (`start`), then start the call.
 
 ## Screen-sharing during the call
 
 - Share **only the video-call application window**. If full-screen sharing is
   unavoidable, pick the single monitor that does **not** have the surface
   open — never "entire desktop" or "all displays".
-- Prefer the phone. Nothing on a phone screen can leak into a laptop
-  screen-share by construction — that's why the phone is the design here, not
-  a fallback.
 - If you're using the second monitor instead, picking the correct single
   display share target is a checklist item, not something the app solves for
   you.
@@ -506,10 +360,10 @@ Two caveats that keep those numbers honest. Both `$/interview` figures assume
 parse errors and band flips in that row may belong to the translation rather
 than to the model.
 
-The join token embedded in the URL is **not** a secret to manage — it's
+The token embedded in the live view's URL is **not** a secret to manage — it's
 generated fresh in memory every run, never written anywhere, and dies the
 moment that run ends. There's nothing to store or protect about it beyond not
-leaving old join URLs lying around.
+leaving old live-view URLs lying around.
 
 ## Projects: running several lines of enquiry at once
 
@@ -614,16 +468,6 @@ One limitation, stated rather than discovered: `DEFAULT_APP_PORT` (8765) and
 cannot run at once. That is acceptable given the one-PyAudio-instance rule,
 which already forbids two concurrent interviews on one machine.
 
-### The join QR is off
-
-By default `create_join` does not draw the terminal QR or write
-`join-qr.png`. The rest of the join surface is unaffected: the token is still
-fresh per run, the LAN IP is still resolved, and the join URL is still printed,
-so a phone can still join by typing it.
-
-Re-enable with `APP_EMIT_QR=1`. The renderers were left in place rather than
-deleted, so that is the only change needed.
-
 ### Keeping test sessions apart
 
 Keep rehearsals and test recordings in their own project, for example
@@ -718,11 +562,10 @@ confirmed with `git check-ignore`, never by reading `.gitignore`) containing:
 - `transcript.md` — only after `python -m app render` is run (see below).
 - `interviewee.wav` / `interviewer.wav` — only if `--retain-audio` was passed
   (see below). Already covered by the existing `*.wav` ignore rule.
-- In-person runs only: `room.wav`, the room audio of the meeting, kept
-  **without** any flag so `diarize-after` can re-pass it, and deleted by
-  `confirm-speakers --confirm` (or `--accept-live-roles`). Until you run one of
-  those it is a full recording of a real person; `start --in-person` reminds
-  you when it ends. Also `evidence.jsonl`, the slower evidence pass's turns.
+- Imported recordings only: `room.wav`, the session's copy of the imported
+  audio, kept **without** any flag so `diarize-after` can re-pass it, and
+  deleted by `confirm-speakers --confirm`. Until then it is a full recording
+  of a real person. Also `evidence.jsonl`, the slower evidence pass's turns.
 
 ## Reading the transcript after the call
 
@@ -750,7 +593,7 @@ still running; it says so in the output rather than failing.
   A `grounded in:` line under a suggestion prints the fact's claim and its
   **verbatim quote from that earlier interview** -- this document is the
   ONLY place in the whole tool a past interview's exact words are ever
-  shown; they never reach the phone or the live call itself. If a
+  shown; they never reach the live view or the live call itself. If a
   suggestion cites an id that resolves to nothing, that's normal, not
   corruption: fact ids are re-minted every time you re-run `extract`, so an
   id from before your last re-extraction won't match anymore.
@@ -853,7 +696,7 @@ file twice is refused. Then run `extract --all --project acme`.
 
 **A recording instead of a transcript.** Give `import` a recording (m4a, mp3,
 wav, ogg/opus, flac, aac, wma, or the sound track of an mp4, mov or webm) and
-it takes the road an in-person meeting takes. The session is written holding
+it becomes a one-recording session: both voices on one file. The session is written holding
 the audio as 16 kHz mono WAV (decoded here, no ffmpeg needed), that copy is
 uploaded to Soniox for the file pass `diarize-after` runs (paid, needs
 `SONIOX_API_KEY`; their copy is deleted afterwards), and you then say who is
@@ -867,6 +710,20 @@ uploaded, with the ffmpeg command that converts it; a file with a few
 undecodable stretches is imported with a warning saying how much was skipped.
 A file over 300 minutes is refused too. If the file pass fails, the session
 and its audio stay: retry with `diarize-after <session>`, or `forget` it.
+
+The after-import steps, when the file pass needs re-running or the speakers
+still need confirming:
+
+```
+python -m app fetch-voiceprint-model      # once per machine: the speaker-embedding model (about 25 MB, SHA-256 verified)
+python -m app diarize-after <session>      # uploads room.wav to Soniox (paid), voiceprint cross-check
+python -m app confirm-speakers <session>   # shows who said what; add --confirm (or --swap) to record it
+python -m app extract <session>            # refuses until the speakers are confirmed
+```
+
+`room.wav` is the session's kept copy of the imported audio.
+`confirm-speakers --confirm` deletes it. `--disputed label|voiceprint`
+settles turns the voiceprint disagreed with.
 
 An imported interview has no live record of which guide questions you asked,
 so `prep` reconstructs it from the transcript: each of your turns is matched
@@ -997,9 +854,9 @@ All take `--project PATH` like the rest, and none calls a model unless noted.
   same tree; both show the cached result and never call a model. **This one
   calls the reasoning vendor** (with `--yes`).
 - **`missed`**: the topics interviewees raised unprompted in 3 or more
-  interviews, and in how many you followed up ("In 8 of 12 interviews,
-  interviewees raised dead time between matches without being asked. You
-  followed up in 0."). Topics that came up mostly right after you asked about
+  interviews, and in how many you followed up ("In 7 of 12 interviews,
+  interviewees raised can't carry heavy groceries without being asked. You
+  followed up in 0.", from the Shmuber Eats demo). Topics that came up mostly right after you asked about
   them are listed, with counts, under "Raised when you asked". Claims are grouped by shared
   words, which misses a topic worded differently each time; `--group model`
   shows what one call to the extract model would send, and `--group model
@@ -1114,7 +971,7 @@ python -m app kb digest --show --project acme       # the notes the coach can dr
 
 | Source | Read as |
 | --- | --- |
-| a session folder, or `--sessions` | an interview, by role. An in-person session only after `confirm-speakers` |
+| a session folder, or `--sessions` | an interview, by role. An imported recording only after `confirm-speakers` |
 | `.vtt`, `.srt`, or `.txt`/`.md` made of `Name: text` lines (Zoom, Meet, Otter, Granola exports) | a conversation, by speaker |
 | `.eml`, `.mbox` (one document per message; quoted reply history dropped) | email |
 | `.md`, `.txt`, `.html`, `.docx`, `.pdf` (one section per page) | research |
@@ -1172,9 +1029,8 @@ with the reason given.
 | --- | --- | --- |
 | The night before | what you still don't know, and what to change in the guide | `prep` |
 | | everything you already know, from every source | `kb search "..."` |
-| During | the whisper | `start` (coach on the console, overlay or phone) |
-| Before an in-person meeting | the phone can reach the laptop over HTTPS | `precheck --in-person` |
-| After an in-person meeting | the evidence transcript, speakers confirmed | `diarize-after`, `confirm-speakers` |
+| During | the whisper | `start` (coach on the console, overlay or live view) |
+| After importing a recording | the evidence transcript, speakers confirmed | `diarize-after`, `confirm-speakers` |
 | After one interview | its claims, and what it moved | `extract`, `summary`, `standing <session>` |
 | After several | where every hypothesis stands, counted per interview | `standing` |
 | | what keeps coming up that no hypothesis predicted | `themes` |
@@ -1244,15 +1100,15 @@ Every health/trap condition is a named `event` record in `transcript.jsonl`
 | `coverage-asked` | The coach decided your own words asked a survey question — carries which one, never the words themselves | Informational — the full history (matches AND near-misses) is what `coverage-considered` below is for |
 | `coverage-considered` | A finalized interviewer segment was checked against the survey and matched nothing | Informational — normal for most of what you say |
 | `coverage-queue-drop` | The coach's coverage queue was full (a sustained vendor slowdown) and the oldest pending check was dropped | Not fatal — a fresh check happens on your very next sentence |
-| `reasoning-timeout` | A coach vendor call (`stage`: `coverage`, `generate` or `critique`) timed out or errored | Suggestions may be briefly missing; the transcript is completely unaffected. A single one is normal degradation — a SUSTAINED run of them (three or more in a row) is what raises the phone's own "suggestions unavailable" banner |
+| `reasoning-timeout` | A coach vendor call (`stage`: `coverage`, `generate` or `critique`) timed out or errored | Suggestions may be briefly missing; the transcript is completely unaffected. A single one is normal degradation — a SUSTAINED run of them (three or more in a row) is what raises the live view's own "suggestions unavailable" banner |
 | `coach-cycle-skipped` | The interviewee kept talking before the previous suggestion cycle finished, so the queued-but-not-yet-started cycle was replaced by the newer one | Informational — this is "one cycle at a time, replace never queue" working as designed, not data loss |
 
 ### What a quiet suggestion region means (three different things that look identical)
 
-"The suggestion region on the phone is quiet" is not one
+"The suggestion region on the live view is quiet" is not one
 condition — it is three, and only one of them is a problem:
 
-| What you see on the phone | What it means | What to do |
+| What you see on the live view | What it means | What to do |
 |---|---|---|
 | A calm banner reading **"Suggestions unavailable — transcript continues"** | The coach's reasoning layer failed a SUSTAINED run of cycles | The transcript is unaffected. Check your network and `ANTHROPIC_API_KEY`; this is never the "Transcription stopped on the laptop" banner, which is a different, more urgent condition |
 | The region is quiet, **no banner at all**, everything else looks healthy | The coach had nothing worth suggesting this cycle | Nothing to do — this is a normal state, not a fault |

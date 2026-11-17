@@ -1,0 +1,42 @@
+Interviewer 00:00:03: Hi Aisha, thanks for making the time. Is the connection okay?
+Aisha 00:00:25: Yes, it's fine. I'm at home today, it's a remote day.
+Interviewer 00:00:46: Great. So this is just about your grocery orders, nothing to prepare.
+Aisha 00:01:09: Good, because I didn't.
+Interviewer 00:01:23: Haha. Great. Tell me a bit about your household and who does the food shopping.
+Aisha 00:01:49: It's just me. I'm a management consultant, I travel a lot, so honestly my fridge is mostly sparkling water and condiments. I shop when I'm in town, usually the small shop under my office.
+Interviewer 00:02:40: Great. And how did you hear about Shmuber Eats?
+Aisha 00:02:59: A colleague mentioned it in a meeting, he was ordering lunch stuff with it.
+Interviewer 00:03:24: Great, great. Walk me through your last order, from opening the app to putting things away.
+Aisha 00:03:52: I downloaded it, made an account, filled a basket really fast. Fruit, yogurt, frozen dumplings, coffee, the essentials. Then I went to pay.
+Interviewer 00:04:29: And was anything confusing?
+Aisha 00:04:42: Well, at checkout it logged me out, right when I pressed pay, and I had to log in again and the basket was half empty. So I did it again. Twenty minutes, roughly.
+Interviewer 00:05:31: Okay. Let's move on. How often do you order groceries online?
+Aisha 00:05:53: Only that once, really. It was the week before a big client deadline, I was at my desk from seven till midnight, I genuinely could not leave the flat. When the project shipped I went straight back to grabbing things at lunch from the little shop under the office.
+Interviewer 00:07:02: Great. Tell me about the last time an item in your order was substituted.
+Aisha 00:07:27: The coffee. I wanted beans and I got ground. That one I minded a bit, I have a grinder for a reason.
+Interviewer 00:08:03: When did you find out about it?
+Aisha 00:08:19: When I opened the bag. There was a notification, I think, but I was on a call. I don't read anything during calls.
+Interviewer 00:08:56: Got it. How do you keep track of what you need between orders?
+Aisha 00:09:20: I don't, really. I look in the fridge and I see what's missing. Usually everything.
+Interviewer 00:09:47: Haha. Great. How did you pick the delivery window last time?
+Aisha 00:10:09: I picked the earliest one the next morning, eight to ten, before my first call.
+Interviewer 00:10:35: And did it fit your day okay?
+Aisha 00:10:52: Yes, it came at eight thirty. Perfect, actually. I was in my pyjamas.
+Interviewer 00:11:16: Great, great. What would you think of a monthly delivery pass, and what would you pay for it?
+Aisha 00:11:47: In theory I'd pay, money isn't really the issue. But I'm away half the month. I'd forget to cancel it and resent it.
+Interviewer 00:12:24: So would 9.99 a month feel like too much?
+Aisha 00:12:43: For me it's not the price, it's that I'm never home. If I were here every week, sure, ten is fine.
+Interviewer 00:13:17: Got it. Would you recommend Shmuber Eats to a friend?
+Aisha 00:13:37: Yes, why not. To people who work from home. It's handy.
+Interviewer 00:13:59: Great. What did you like the most?
+Aisha 00:14:16: That it was fast. I ordered at eleven at night and had food at eight thirty.
+Interviewer 00:14:44: And what did you like least?
+Aisha 00:14:59: The app itself feels a bit clunky. Too many screens before you can pay.
+Interviewer 00:15:25: Noted. Great. Have you looked at the recipes section?
+Aisha 00:15:44: There's a recipes section? No, I didn't see that.
+Interviewer 00:16:03: It's quite new. Great. Did you use your phone or a laptop for the order?
+Aisha 00:16:30: The laptop, because I was at my desk anyway.
+Interviewer 00:16:49: Great. Last question, is there anything about your orders I didn't ask about?
+Aisha 00:17:14: No, I think that's all. It was fine.
+Interviewer 00:17:32: Thank you so much, Aisha, this was really useful.
+Aisha 00:17:51: Of course. Good luck.

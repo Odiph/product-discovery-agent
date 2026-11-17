@@ -1,0 +1,543 @@
+{
+  "session_id": "20261102T000000-10",
+  "summary": {
+    "turns": 26,
+    "judged": 26,
+    "unjudged": 0,
+    "clean": 13,
+    "clean_rate": 0.5,
+    "uncertain": 1,
+    "marked_questions": 21,
+    "marked_question_clean_rate": 0.42857142857142855,
+    "unmarked_clean_rate": 0.8,
+    "leading": 1,
+    "hypothetical_or_future_tense": 1,
+    "pitch": 2,
+    "opinion_seeking": 6,
+    "confirmation_only": 1,
+    "off_topic": 4,
+    "generic": 2
+  },
+  "turns": [
+    {
+      "index": 0,
+      "seqs": [
+        0
+      ],
+      "at_s": 28.0,
+      "text": "Hello Grace, thank you for joining. Can you see and hear me alright?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a standard interview opening and not a Mom Test question. It serves to establish a connection and check technical setup."
+      }
+    },
+    {
+      "index": 1,
+      "seqs": [
+        2
+      ],
+      "at_s": 88.0,
+      "text": "Haha, wonderful. So this is just about your grocery orders, there are no wrong answers.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is also a standard interview opening, setting expectations and not a Mom Test question."
+      }
+    },
+    {
+      "index": 2,
+      "seqs": [
+        4
+      ],
+      "at_s": 139.0,
+      "text": "Haha. Great. Tell me a bit about your household and who does the food shopping.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a clean, open-ended question that asks about the interviewee's past and current life concerning food shopping, aligning with the survey plan."
+      }
+    },
+    {
+      "index": 3,
+      "seqs": [
+        6
+      ],
+      "at_s": 208.0,
+      "text": "Great, great. And how did you hear about Shmuber Eats?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a clean, specific question about a past event, aligning with the survey plan."
+      }
+    },
+    {
+      "index": 4,
+      "seqs": [
+        8
+      ],
+      "at_s": 289.0,
+      "text": "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This aligns with the survey plan to walk through the last order and is specific and past-tense. Since no utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 5,
+      "seqs": [
+        10
+      ],
+      "at_s": 391.0,
+      "text": "Smoked slices for a baked fillet? What did you end up making?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "Without context from the interviewee's previous statement, it's impossible to tell if this question is relevant or makes sense. Since no utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 6,
+      "seqs": [
+        12
+      ],
+      "at_s": 445.0,
+      "text": "Do you think the picker saw them as the same thing?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks for an opinion about what a third party (the picker) might have thought, which is speculative and unanswerable by the interviewee. Since no utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 7,
+      "seqs": [
+        14
+      ],
+      "at_s": 494.0,
+      "text": "That's really helpful, thank you. Was anything else difficult with the order?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a general follow-up question that could lead to further specific details about the order. Since no utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 8,
+      "seqs": [
+        16
+      ],
+      "at_s": 568.0,
+      "text": "Okay. Great. Let's move on. How often do you order groceries online?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question advances the survey to a new topic which is appropriate since no prior utterance was provided. It is a direct question from the survey plan."
+      }
+    },
+    {
+      "index": 9,
+      "seqs": [
+        18
+      ],
+      "at_s": 621.0,
+      "text": "Great. Tell me about the last time an item in your order was substituted.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question directly addresses a topic from the survey plan (item substitution). It asks about a specific past event."
+      }
+    },
+    {
+      "index": 10,
+      "seqs": [
+        20
+      ],
+      "at_s": 675.0,
+      "text": "And do you get a message before they swap?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks for a specific past fact related to item substitution, following up on the previous question. Although it is a yes/no question, it concerns a specific event and does not presume an answer."
+      }
+    },
+    {
+      "index": 11,
+      "seqs": [
+        22
+      ],
+      "at_s": 728.0,
+      "text": "Haha. Great. How do you keep track of what you need between orders?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question advances the survey to a new topic. It asks about a specific past behavior related to keeping track of groceries."
+      }
+    },
+    {
+      "index": 12,
+      "seqs": [
+        24
+      ],
+      "at_s": 790.0,
+      "text": "Would it help if your daughter could add to a list in the app too?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": true,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": true,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question describes a hypothetical feature ('if your daughter could add to a list in the app') and asks if it 'would help', making it hypothetical, a pitch, and leading."
+      }
+    },
+    {
+      "index": 13,
+      "seqs": [
+        26
+      ],
+      "at_s": 834.0,
+      "text": "Haha. Great. How did you pick the delivery window last time?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": true,
+        "is_off_topic": false,
+        "rationale": "This is a clean question, directly from the survey plan and asking about a specific past event. It's generic as there's no prior utterance to build upon."
+      }
+    },
+    {
+      "index": 14,
+      "seqs": [
+        28
+      ],
+      "at_s": 887.0,
+      "text": "And has it ever come outside that time?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a good follow-up question, asking about a specific past occurrence related to the previous question. Since there was no prior utterance, is_generic is false."
+      }
+    },
+    {
+      "index": 15,
+      "seqs": [
+        30
+      ],
+      "at_s": 942.0,
+      "text": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": true,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": true,
+        "is_off_topic": false,
+        "rationale": "This question describes a potential product ('a monthly delivery pass') and asks for the interviewee's opinion ('What would you think of...'), making it a pitch and opinion-seeking."
+      }
+    },
+    {
+      "index": 16,
+      "seqs": [
+        32
+      ],
+      "at_s": 986.0,
+      "text": "And at 9.99 a month?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": true,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question is confirmation-only against hypothesis h5, because it only asks for a price point, rather than asking if the interviewee would use a delivery pass at all. There is no way to falsify the hypothesis here."
+      }
+    },
+    {
+      "index": 17,
+      "seqs": [
+        34
+      ],
+      "at_s": 1033.0,
+      "text": "Great, great. Would you recommend Shmuber Eats to a friend?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks for a recommendation, which is an opinion, not a specific past event."
+      }
+    },
+    {
+      "index": 18,
+      "seqs": [
+        36
+      ],
+      "at_s": 1074.0,
+      "text": "Great. What do you like most?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks for a general opinion about what they like most, rather than a specific past instance."
+      }
+    },
+    {
+      "index": 19,
+      "seqs": [
+        38
+      ],
+      "at_s": 1114.0,
+      "text": "And what do you like least?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks for a general opinion about what they like least, rather than a specific past instance."
+      }
+    },
+    {
+      "index": 20,
+      "seqs": [
+        40
+      ],
+      "at_s": 1165.0,
+      "text": "Noted. Great. Have you tried the recipes section?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": true,
+        "rationale": "The question introduces a new topic (recipes section) not covered by the survey plan or any hypothesis. [automatic note, not the critic's words: the band was set to clear_violation because is_off_topic is true: the question served no survey item and no hypothesis. Any band wording above is the critic's own and is left exactly as written.]"
+      }
+    },
+    {
+      "index": 21,
+      "seqs": [
+        42
+      ],
+      "at_s": 1203.0,
+      "text": "Haha, fair. Great. On a scale of one to ten?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": true,
+        "rationale": "The question asks for a rating/opinion without context, and it's unclear what it refers to. It's also off-topic from the survey plan. [automatic note, not the critic's words: the band was set to clear_violation because is_off_topic is true: the question served no survey item and no hypothesis. Any band wording above is the critic's own and is left exactly as written.]"
+      }
+    },
+    {
+      "index": 22,
+      "seqs": [
+        44
+      ],
+      "at_s": 1242.0,
+      "text": "Haha. And how did your daughter feel about it?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": true,
+        "rationale": "The question asks about a third party's feelings, which is not relevant to the survey plan or hypotheses. It's also unclear what 'it' refers to. [automatic note, not the critic's words: the band was set to clear_violation because is_off_topic is true: the question served no survey item and no hypothesis. Any band wording above is the critic's own and is left exactly as written.]"
+      }
+    },
+    {
+      "index": 23,
+      "seqs": [
+        46
+      ],
+      "at_s": 1288.0,
+      "text": "That's lovely. Did you leave a review in the app?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": true,
+        "rationale": "The question about leaving a review is off-topic from the survey plan and hypotheses, which are about shopping habits, substitutions, delivery windows, and lists. [automatic note, not the critic's words: the band was set to clear_violation because is_off_topic is true: the question served no survey item and no hypothesis. Any band wording above is the critic's own and is left exactly as written.]"
+      }
+    },
+    {
+      "index": 24,
+      "seqs": [
+        48
+      ],
+      "at_s": 1327.0,
+      "text": "Great. Last question, is there anything about your orders I didn't ask about?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a clean closing question from the survey plan. Since no utterance was supplied, is_generic is set to false."
+      }
+    },
+    {
+      "index": 25,
+      "seqs": [
+        50
+      ],
+      "at_s": 1366.0,
+      "text": "Thank you so much, Grace, this was really helpful.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a statement, not a question. Since no utterance was supplied, is_generic is set to false."
+      }
+    }
+  ]
+}

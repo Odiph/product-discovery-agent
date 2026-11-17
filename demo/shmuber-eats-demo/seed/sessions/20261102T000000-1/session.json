@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "02-marcus.txt",
+  "import_sha256": "e703cdfbd3dab82772c2d97854236a0fc45ce92b3485e21049d684d51dbf32d3",
+  "imported_at": "2026-11-02T00:15:59.600+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:15:59.600+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Marcus": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Marcus"
+}

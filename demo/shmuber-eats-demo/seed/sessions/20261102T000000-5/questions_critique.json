@@ -1,0 +1,463 @@
+{
+  "session_id": "20261102T000000-5",
+  "summary": {
+    "turns": 22,
+    "judged": 22,
+    "unjudged": 0,
+    "clean": 10,
+    "clean_rate": 0.45454545454545453,
+    "uncertain": 2,
+    "marked_questions": 17,
+    "marked_question_clean_rate": 0.4117647058823529,
+    "unmarked_clean_rate": 0.6,
+    "leading": 2,
+    "hypothetical_or_future_tense": 4,
+    "pitch": 2,
+    "opinion_seeking": 4,
+    "confirmation_only": 0,
+    "off_topic": 2,
+    "generic": 1
+  },
+  "turns": [
+    {
+      "index": 0,
+      "seqs": [
+        0
+      ],
+      "at_s": 26.0,
+      "text": "Hi Kenji, thanks for joining. Are the kids around?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": true,
+        "rationale": "This question is a social nicety, not related to the interview plan or hypotheses. It's off-topic for a user interview about a grocery delivery service. [automatic note, not the critic's words: the band was set to clear_violation because is_off_topic is true: the question served no survey item and no hypothesis. Any band wording above is the critic's own and is left exactly as written.]"
+      }
+    },
+    {
+      "index": 1,
+      "seqs": [
+        2
+      ],
+      "at_s": 82.0,
+      "text": "Haha, great. So there are no wrong answers, this is about your orders.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": true,
+        "rationale": "This is an interview preamble, not a question related to the interview plan or hypotheses. It's off-topic for a user interview about a grocery delivery service. [automatic note, not the critic's words: the band was set to clear_violation because is_off_topic is true: the question served no survey item and no hypothesis. Any band wording above is the critic's own and is left exactly as written.]"
+      }
+    },
+    {
+      "index": 2,
+      "seqs": [
+        4
+      ],
+      "at_s": 123.0,
+      "text": "Great. Tell me a bit about your household and who does the food shopping.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This aligns with the first item in the survey plan."
+      }
+    },
+    {
+      "index": 3,
+      "seqs": [
+        6
+      ],
+      "at_s": 225.0,
+      "text": "Great, great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This aligns with the third item in the survey plan."
+      }
+    },
+    {
+      "index": 4,
+      "seqs": [
+        8
+      ],
+      "at_s": 313.0,
+      "text": "Great. How often do you order groceries online?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question directly aligns with a survey item and asks for a factual frequency, not an opinion or hypothetical. Since no interviewee utterance was supplied, is_generic is set to False."
+      }
+    },
+    {
+      "index": 5,
+      "seqs": [
+        10
+      ],
+      "at_s": 377.0,
+      "text": "And what made you start every week?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": true,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question assumes the interviewee orders 'every week,' which has not been established and is a leading assumption. Since no interviewee utterance was supplied, is_generic is set to False."
+      }
+    },
+    {
+      "index": 6,
+      "seqs": [
+        12
+      ],
+      "at_s": 441.0,
+      "text": "Got it. How do you keep track of what you need between orders?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question directly aligns with a survey item and asks about a past behavior. Since no interviewee utterance was supplied, is_generic is set to False."
+      }
+    },
+    {
+      "index": 7,
+      "seqs": [
+        14
+      ],
+      "at_s": 509.0,
+      "text": "Haha. Does anyone else add?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question is a natural follow-up to how the interviewee tracks items, asking for more specific details about their process. Since no interviewee utterance was supplied, is_generic is set to False."
+      }
+    },
+    {
+      "index": 8,
+      "seqs": [
+        16
+      ],
+      "at_s": 569.0,
+      "text": "Great. Tell me about the last time an item in your order was substituted.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks about a specific past event related to a core survey item. It is not leading, hypothetical, a pitch, or opinion-seeking."
+      }
+    },
+    {
+      "index": 9,
+      "seqs": [
+        18
+      ],
+      "at_s": 649.0,
+      "text": "Wouldn't it be great if we texted you before swapping anything, so you could say yes or no?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": true,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": true,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a clear pitch, describing a potential feature and asking for a hypothetical reaction, which is inherently leading."
+      }
+    },
+    {
+      "index": 10,
+      "seqs": [
+        20
+      ],
+      "at_s": 715.0,
+      "text": "Great, great. How did you pick the delivery window last time?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks about a specific past action relevant to the survey plan. It avoids leading or hypothetical language."
+      }
+    },
+    {
+      "index": 11,
+      "seqs": [
+        22
+      ],
+      "at_s": 765.0,
+      "text": "And do you ever miss it?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "Without context from the interviewee's last utterance, it's hard to tell what 'it' refers to, making its clarity uncertain. However, it's not inherently leading, hypothetical, a pitch, or opinion-seeking on its own."
+      }
+    },
+    {
+      "index": 12,
+      "seqs": [
+        24
+      ],
+      "at_s": 833.0,
+      "text": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": true,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is a pitch for a product feature (monthly delivery pass) and asks for a hypothetical opinion on it, including what they would pay, which is not reliable evidence."
+      }
+    },
+    {
+      "index": 13,
+      "seqs": [
+        26
+      ],
+      "at_s": 884.0,
+      "text": "And 9.99?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "uncertain",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question is too short to be understood without context from the previous turn, which is not provided. It could be a reasonable follow-up or completely out of context."
+      }
+    },
+    {
+      "index": 14,
+      "seqs": [
+        28
+      ],
+      "at_s": 939.0,
+      "text": "Great, great. Would you recommend Shmuber Eats to a friend?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This question asks for a hypothetical recommendation, which is an unreliable opinion about future behavior rather than a specific past action."
+      }
+    },
+    {
+      "index": 15,
+      "seqs": [
+        30
+      ],
+      "at_s": 980.0,
+      "text": "Amazing. What do you like most?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This asks for a general opinion or preference about what the interviewee 'likes most' without tying it to a specific past event or action."
+      }
+    },
+    {
+      "index": 16,
+      "seqs": [
+        32
+      ],
+      "at_s": 1022.0,
+      "text": "Haha. And what do you like least?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": true,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question asks for a general opinion or preference rather than a concrete, specific past instance."
+      }
+    },
+    {
+      "index": 17,
+      "seqs": [
+        34
+      ],
+      "at_s": 1083.0,
+      "text": "Noted, repeat order. Great. Have you ever contacted support?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question asks about a specific past action (contacting support)."
+      }
+    },
+    {
+      "index": 18,
+      "seqs": [
+        36
+      ],
+      "at_s": 1161.0,
+      "text": "Chili-lime for the twins? How did that go?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question refers to specific items and asks about a past outcome. Since no interviewee utterance was supplied, is_generic is false."
+      }
+    },
+    {
+      "index": 19,
+      "seqs": [
+        38
+      ],
+      "at_s": 1221.0,
+      "text": "What would you have wanted the picker to do instead?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": true,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "The question asks the interviewee to imagine or predict a hypothetical action in the future ('what would you have wanted')."
+      }
+    },
+    {
+      "index": 20,
+      "seqs": [
+        40
+      ],
+      "at_s": 1285.0,
+      "text": "Great. Last question, is there anything about your orders I didn't ask about?",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clean",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": true,
+        "is_off_topic": false,
+        "rationale": "This is a standard wrap-up question that can be asked in any interview and doesn't engage with specific content from this interview, making it generic. However, it is a clean and useful question to ask at the end of an interview."
+      }
+    },
+    {
+      "index": 21,
+      "seqs": [
+        42
+      ],
+      "at_s": 1337.0,
+      "text": "Haha, noted. Thank you so much, Kenji.",
+      "failure_reason": null,
+      "judgment": {
+        "band": "clear_violation",
+        "is_leading": false,
+        "is_hypothetical_or_future_tense": false,
+        "is_pitch": false,
+        "is_opinion_seeking": false,
+        "is_confirmation_only": false,
+        "is_generic": false,
+        "is_off_topic": false,
+        "rationale": "This is not a question, it is a statement and a thank you. The survey explicitly says not to ask a question right now, but to wrap up."
+      }
+    }
+  ]
+}

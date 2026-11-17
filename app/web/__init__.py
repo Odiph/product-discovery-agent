@@ -1,5 +1,5 @@
 """The phone surface (phase_specification 03-01, D-05). Everything the live
-transcript needs to reach a browser lives under this package: the join/token/QR
+transcript needs to reach a browser lives under this package: the join/token
 helper (`join.py`), the connection fan-out (`hub.py`), and the ASGI app +
 uvicorn embedding (`server.py`).
 

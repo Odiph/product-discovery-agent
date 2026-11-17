@@ -1,0 +1,42 @@
+[
+  {
+    "id": "h1",
+    "kind": "opportunity",
+    "statement": "First-time customers do not place a second order because substitutions surprise them at the door.",
+    "falsifier": "If most interviewees describe no substitution problem, or say a swap would not stop them reordering, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 5 of 12 describe a recent substitution they only found out about at delivery and say it put them off ordering again."
+  },
+  {
+    "id": "h2",
+    "kind": "solution",
+    "parent": "h1",
+    "statement": "Asking customers to approve substitutions by push notification before the driver leaves will raise second orders.",
+    "falsifier": "If interviewees who had a surprise swap say they could not or would not answer a notification in time, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 4 of 12 describe a moment when they would have answered a swap request in time."
+  },
+  {
+    "id": "h3",
+    "kind": "opportunity",
+    "statement": "Two-hour delivery windows do not fit working households' days.",
+    "falsifier": "If most working interviewees picked a window without trouble on their last order, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 4 of 12 describe rearranging their day, or missing a delivery, because of the window."
+  },
+  {
+    "id": "h4",
+    "kind": "solution",
+    "statement": "A shared household list that anyone at home can add to will raise basket size and repeat orders.",
+    "falsifier": "If interviewees say one person keeps the whole list and nobody else adds to it, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 3 of 12 describe someone else in the household adding items before an order."
+  },
+  {
+    "id": "h5",
+    "statement": "Households will pay 9.99 a month for a delivery pass with free delivery on every order.",
+    "falsifier": "If most interviewees name a price below 5 a month, or say they order too rarely for a pass, this hypothesis is false.",
+    "state": "untested",
+    "criterion": "We are right if at least 5 of 12 name 9.99 a month or more for a pass before being offered that number."
+  }
+]

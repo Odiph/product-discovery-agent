@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "12-omar.txt",
+  "import_sha256": "ac34ea28841a57fb53f78244d6dcaf5a57607eeec7b0d24856a26cd29cb2448c",
+  "imported_at": "2026-11-02T00:18:23.200+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:18:23.200+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Omar": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Omar"
+}

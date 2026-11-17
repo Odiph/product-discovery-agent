@@ -80,7 +80,7 @@ CORPUS_KEY = "corpus"
 MOCK_LABEL = "Mock interviews (synthetic, not real users):"
 """Printed first by every surface that shows a `demo` node's results."""
 
-DEMO_SEED_DIR = projects_mod.REPO_ROOT / "demo" / "claudictive-beta" / "seed"
+DEMO_SEED_DIR = projects_mod.REPO_ROOT / "demo" / "shmuber-eats-demo" / "seed"
 
 
 def demo_shipped(seed_dir: Optional[Path] = None) -> bool:

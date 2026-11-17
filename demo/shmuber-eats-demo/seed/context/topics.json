@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "model": "google/gemini-2.5-flash",
+  "claims_key": "af2829f8aab5f6ef662f78251c65d7c9cd2b7b8633183cda870613cf48b457ad",
+  "topics": [
+    {
+      "label": "don't order groceries often",
+      "fact_ids": [
+        "ded8f586-c6ce-4201-ab0a-e6a1185e4416",
+        "f6f5a17a-902b-4a99-ac0b-f65d68f4f842",
+        "f1c853ac-bf9e-4bc1-9493-381b2c98cece",
+        "9362e900-ea82-465c-a6dd-67f6dc01632f",
+        "dfff664a-8f63-4a21-b024-35561170d2cb",
+        "72746d43-84ce-4d38-aa5f-18c96ae20d60",
+        "3447f913-f232-4c5d-8d2b-da8459178485",
+        "eafd8d2c-abb6-4398-bdc0-4013db869c83",
+        "032c9d1a-7237-48f6-aaf5-a0553823e09f",
+        "c07b3297-0781-4468-ad33-609d120cb10b",
+        "10d1f62e-1304-425b-9547-34eb619000d6",
+        "fccd5588-2684-4593-8da4-13281c002f7f"
+      ]
+    },
+    {
+      "label": "can't carry heavy groceries",
+      "fact_ids": [
+        "5c174c69-6991-4c5c-b62e-b8a4659ca0f8",
+        "3767e225-2605-4ebe-9674-c0c52fcb4437",
+        "c0ac89e1-e457-4741-9551-3d0d22042415",
+        "9620d8fb-4bed-4b85-b61d-13d9695b1b9e",
+        "923e68eb-1bf0-4bbd-bf7e-ccddfa4d44ae",
+        "73f47743-59e1-49ca-8b66-435b75590779",
+        "08d7ad45-7d83-459a-bc0f-4ffad5a6f0ee",
+        "0e8da27b-0346-4461-9622-a7e546cc97fd",
+        "83ee7611-67c0-47a2-a63e-e8e1b76fe72f"
+      ]
+    },
+    {
+      "label": "inaccurate substitutions",
+      "fact_ids": [
+        "13e7a828-3692-4049-b8e5-3f4379cf31ad",
+        "b6b8b7f3-f564-41bb-b5a1-7be9e39c9be0",
+        "7b643b35-fdf8-4ace-aa3b-f8c4f92cfe6f",
+        "2fa07d0c-6b45-4958-b23d-2947d193839d",
+        "155ecc08-2004-4a88-9198-5b15bd2b9b9a",
+        "48f9cf23-bcbc-4a4a-b1cd-0193f2fcd0cb"
+      ]
+    },
+    {
+      "label": "substitutions without choice",
+      "fact_ids": [
+        "2145bcfd-8466-4cb7-8047-2454f118f556",
+        "4612a137-15d4-4dc4-9eb1-365501475fda",
+        "8a64e7d3-051a-479b-9ecc-bf5cdeef199c",
+        "71d9058a-5a23-4551-ae93-47aa55b415ac",
+        "78a753ac-b627-46a7-bf97-7fac219c0f22",
+        "377f7678-6725-42ff-be0f-b31fb45d9aeb"
+      ]
+    },
+    {
+      "label": "notifications for substitutions too late",
+      "fact_ids": [
+        "b7e7dfc0-cce5-4f16-9dd8-55b048cae371",
+        "8f22f192-9d0e-471d-a3d9-b5e844e5292a",
+        "4b770ca1-fbf3-4cd0-ad8e-0253fb1a660f",
+        "113eb742-edee-4f82-bbb0-dbb899e44059",
+        "4ac0f963-2abd-4f0c-863d-0d33255e298e",
+        "a5b7b335-cfad-44ea-a77d-64eae20e52de",
+        "819ac1ce-3579-4559-93fc-2e8e0eefc41b",
+        "d6691730-a93a-4375-b952-019cf0dcd764",
+        "6ccb1cf7-f986-4d7c-a352-6f9374bb8a6e"
+      ]
+    },
+    {
+      "label": "delivery pass not worth it",
+      "fact_ids": [
+        "de84bd2e-4041-43d5-b860-9c205a7594cf",
+        "94d7bc57-b1c9-477e-a00a-168af7a67c2e",
+        "d5416bb0-22c1-4c74-9ff5-cbf4706c5657",
+        "835ff80f-d1f0-401d-8a6c-3b9e8ffd8019",
+        "8f3e5253-865d-4a90-892d-0ea89c586e66",
+        "eef3330e-d612-435a-9738-326c84e4f787",
+        "64691c53-0fba-4377-9ee7-73209d7b15a4",
+        "fde13cba-2423-4e0e-b814-82b49a0c88c7",
+        "8cce661d-ea10-46da-9b5a-c8d96e691115",
+        "a470ed83-c20c-4f74-b6f0-7d6b124d70f4",
+        "8def4a55-e286-4f61-9d65-b909b9567a1e"
+      ]
+    },
+    {
+      "label": "prefers shopping in person",
+      "fact_ids": [
+        "36faa92a-73e8-424f-8bb7-ad9a87b6e420",
+        "1372e755-7e5b-4667-a991-041ae17b5185",
+        "c3948eb2-91ca-4f3f-92f8-94af6b4fd165",
+        "48e9b8d8-3c89-466c-828c-878bdddf4346",
+        "ee617bfe-18e5-44c9-b99d-d229e91d4e7f"
+      ]
+    },
+    {
+      "label": "difficulty using the app",
+      "fact_ids": [
+        "146fd07a-523e-4b4b-ae7e-ff80316df1fb",
+        "b3cf332e-e277-4608-bcc0-bdd4b40f992c",
+        "293c8ff2-1543-40ff-b694-843ed5160e71",
+        "9daacf1f-6103-4f7b-ab69-6c70f3bcccb7",
+        "4f66d653-9259-4780-b94b-61e66296bc1c",
+        "9ee5bca1-e91a-4ae1-be9e-e0e82fb4650b",
+        "c764ba4c-a14c-4d30-8702-c68bf927ec31",
+        "c3111915-defc-4ea1-81e3-49569a0eae38",
+        "518f5038-9e3a-48a6-91b9-26db4bbc9bdf",
+        "9d12df63-3b0e-4cba-a78c-a52606304234"
+      ]
+    },
+    {
+      "label": "family uses shared list",
+      "fact_ids": [
+        "a48fc433-4543-47f7-a074-c2b4106efcff",
+        "4bda6dc2-ad89-42b7-83d7-81365c418d11",
+        "3e1a0396-1e1f-4e93-9eee-5788506783c0",
+        "cf31ce23-6082-4df3-889c-773974ec7ed5",
+        "7b8c11f0-dd0f-4cfc-b4d6-a748b7e071ba",
+        "4fa886fd-3c46-4703-bba1-995204b4fdf6",
+        "660c4631-1c89-42a7-867a-4a770846748f"
+      ]
+    },
+    {
+      "label": "delivery window inconvenient",
+      "fact_ids": [
+        "e08df258-ef01-44a3-9cca-6ef3fca7d3f0",
+        "718b6273-bbed-49ce-8b45-15a0c5d7f4cd",
+        "6c56fcd9-acaf-43ba-94b7-09e98c8b50b3",
+        "0d5f6278-95d1-42b3-9969-3d5cd6f6179b",
+        "8a3fa055-fcd9-477a-893b-d70a6c92e26a",
+        "04019944-131a-46ae-b85a-e3ee017af4b5",
+        "5f37f32a-8667-47cd-9b0b-ee189b40002a",
+        "a94c379d-7780-46ea-b533-5d7e84d452b3",
+        "bcf1985c-3e75-4752-bfca-739af9b8e307"
+      ]
+    },
+    {
+      "label": "app logs out during order",
+      "fact_ids": [
+        "7223d4e4-304c-411c-8324-0dbe75dec4a1",
+        "e6061824-cb2c-4b33-a978-05014e4f8626",
+        "d7875dbf-25cf-4b91-902b-c87dab82412e"
+      ]
+    },
+    {
+      "label": "orders during emergencies",
+      "fact_ids": [
+        "884daba0-d50a-4015-8617-3a60accc1b8c",
+        "f05920bd-0358-41a8-a984-94408cdc6f7b",
+        "d3c9a33a-e9d7-4a2f-a652-3b347ce3de69",
+        "2e06368f-6718-4663-99d1-5d5f18dbcc53",
+        "cab936be-c6ee-4a12-b8ff-369968fcf4d3",
+        "a9f092e7-bb61-41ed-93a5-ddb1e6887a74"
+      ]
+    },
+    {
+      "label": "shared list with duplicates/wrong items",
+      "fact_ids": [
+        "9270a87b-294e-45f0-8d87-b4a8147b650c",
+        "2365fbca-7d62-460a-81f1-a8792a44bf2e",
+        "8990b143-5522-424b-b80b-72f8aabc3000",
+        "9bbc42bf-7d18-46ea-bea1-5f8f5836f5df"
+      ]
+    },
+    {
+      "label": "needs a faster ordering process",
+      "fact_ids": [
+        "b060f8c4-2fe0-4a9a-82b0-386f2418f301",
+        "cf8b0022-16e2-456f-aa3f-d4d1ad7e71df",
+        "71c693c1-6f34-4354-a9a3-04a840dc83e9"
+      ]
+    },
+    {
+      "label": "delivery driver helpful",
+      "fact_ids": [
+        "30642eff-c370-491f-a604-b005260ada15",
+        "80a68dcf-d336-4d39-b8af-3916af76596b",
+        "584b338c-858b-4ec5-a743-d4a7a9ef8972"
+      ]
+    },
+    {
+      "label": "tracking delivery progress",
+      "fact_ids": [
+        "80c77cb6-4279-4724-9183-634677b90796",
+        "563736c7-da2d-4c73-84e7-e5e7c5c64623"
+      ]
+    },
+    {
+      "label": "dislikes substitutions for specific items",
+      "fact_ids": [
+        "11dc434f-fc59-4807-af44-5aa5e45c3090",
+        "4a1c55f8-d6dd-48d9-92d6-e78fb3e2c7d9"
+      ]
+    },
+    {
+      "label": "concerned about prices",
+      "fact_ids": [
+        "57b61fb3-6aad-49f0-a88a-602bef72efe1",
+        "21dad3f5-b361-4be7-a2ab-31c59c31f310",
+        "b6a4db71-ac27-4a84-85fe-b415cc9d2514",
+        "44f0b38b-2c10-4dca-91b9-b444c7175a5d"
+      ]
+    },
+    {
+      "label": "would pay more for delivery pass",
+      "fact_ids": [
+        "25b3a495-457c-43e8-8029-6dfa35ca95e4",
+        "5f030356-9078-40d7-9b6f-ce662d81f371",
+        "1f685ac1-ee9d-4c51-b766-93ca1a498922",
+        "dc027200-41bb-4710-be5a-1371c1b15d24",
+        "fca33cdf-438e-4199-95cf-05f0b4afbe80",
+        "7bdfcf08-e09a-45d7-85ca-088cd51530f9",
+        "6f6db03f-69db-43c8-b443-9cd1519eaf36",
+        "22851f72-004f-4e19-a71e-d5e16a9781d3",
+        "dedd0743-4940-434a-aa8c-1e6c919fe0b0",
+        "5b92b6bb-4281-4506-bdbc-3372a16727c1"
+      ]
+    },
+    {
+      "label": "orders for convenience",
+      "fact_ids": [
+        "a6b7b887-2a81-4908-9230-d27e2e553943",
+        "9d924dac-5f03-4e2f-a09c-bcb21109e459",
+        "8f613b80-3874-4ecd-b825-5af4ccde418c"
+      ]
+    },
+    {
+      "label": "heavy use of bags",
+      "fact_ids": [
+        "282d7534-ee13-4294-8905-c3d38cdb871a",
+        "f4a563ea-5d3e-4f8e-894f-3f0eee0d0f16",
+        "a72de65e-41a4-4239-88b0-7ba8c388ee2c",
+        "7c90f40a-1766-4ad7-8af2-85dbf576ef79"
+      ]
+    },
+    {
+      "label": "early morning ordering",
+      "fact_ids": [
+        "bfdb2e7a-dc88-4640-8e11-bb49012b8564",
+        "e503a49d-cb42-490f-9bc3-73fcfafdc7d6"
+      ]
+    },
+    {
+      "label": "only orders specific items online",
+      "fact_ids": [
+        "2cd34c0f-49ff-4afb-be06-32ee6dcaaa52"
+      ]
+    }
+  ]
+}

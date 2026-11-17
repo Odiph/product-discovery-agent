@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "09-fatima.txt",
+  "import_sha256": "9a7a51cb50c8dbb0e130227b2cf6d6bdc9b58203dc253787569562338b13fb84",
+  "imported_at": "2026-11-02T00:21:36.600+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:21:36.600+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Fatima": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Fatima"
+}

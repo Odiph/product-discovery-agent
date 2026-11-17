@@ -1,0 +1,29 @@
+[
+  {
+    "session_id": "20261102T000000-3",
+    "claim": "They didn't have the particular sausage I was looking for.",
+    "reason": "contentless-quote",
+    "seqs": [
+      13
+    ],
+    "quoted_text": "They didn't have it."
+  },
+  {
+    "session_id": "20261102T000000-4",
+    "claim": "I didn't prepare anything for this interview.",
+    "reason": "contentless-quote",
+    "seqs": [
+      3
+    ],
+    "quoted_text": "I didn't."
+  },
+  {
+    "session_id": "20261102T000000-5",
+    "claim": "The interviewee has never contacted support.",
+    "reason": "contentless-quote",
+    "seqs": [
+      35
+    ],
+    "quoted_text": "No, never."
+  }
+]

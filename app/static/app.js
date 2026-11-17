@@ -8,7 +8,7 @@
 //
 // Receive-only by construction: this file never references any browser
 // media-capture API of any kind, which is what keeps a plain, non-TLS
-// WebSocket connection (never "wss") legal on a bare LAN IP
+// WebSocket connection (never "wss") enough on the loopback address
 // (app/tests/test_phase_gates.py Gate 2).
 //
 // Rendering rule, inherited verbatim from app/session/render.py: order BLOCKS

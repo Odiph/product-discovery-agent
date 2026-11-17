@@ -10,9 +10,9 @@ the only paid step, and it never happens without `--yes`. It never prints a
 word anyone said: names and counts only.
 
 A recording is not transcribed here. It is written as a session holding a
-copy of the audio and handed to the SAME file pass an in-person meeting uses
-(app/evidence_cli.py `diarize-after`); who spoke is then confirmed with the
-same `confirm-speakers`, not by a rule of this command's own.
+copy of the audio and handed to the file pass (app/evidence_cli.py
+`diarize-after`); who spoke is then confirmed with `confirm-speakers`, not by
+a rule of this command's own.
 """
 
 from __future__ import annotations

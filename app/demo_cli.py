@@ -1,7 +1,7 @@
 """`python -m app demo`: load the 12 mock interviews, already extracted,
 grouped and judged, so the first result costs no API call and needs no key.
 
-The seed under `demo/claudictive-beta/seed/` is synthetic (`corpus: demo`)
+The seed under `demo/shmuber-eats-demo/seed/` is synthetic (`corpus: demo`)
 and pins the models its cached judgments were made with
 (`project_meta.pinned_models`), so the caches stay fresh on any machine.
 """
@@ -19,7 +19,7 @@ from app import config as config_mod
 from app import missed_cli, project_meta
 from app import projects as projects_mod
 
-DEMO_PROJECT = "claudictive-beta"
+DEMO_PROJECT = "shmuber-eats-demo"
 SEED_DIR = project_meta.DEMO_SEED_DIR
 NOT_SHIPPED = ("This copy has no mock interviews: the demo is not part of the public distribution. "
                "Start your own project with: python -m app author --project <name>")

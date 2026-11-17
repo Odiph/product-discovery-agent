@@ -1,0 +1,1077 @@
+{
+  "version": 1,
+  "model": "anthropic/claude-sonnet-5.5",
+  "key": "80343033005ed783c168dcf2ec2fc59cc2aa2f0b965e032402e08f110885b28d",
+  "items": [
+    {
+      "question": "Great. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Great, great. And how did you hear about Shmuber Eats?",
+        "Nice. Walk me through your last Shmuber Eats order, from opening the app to putting things away."
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Haha. Great. How often do you order groceries online?",
+      "earlier": [
+        "Great. Was anything confusing along the way?",
+        "Okay, noted. And putting things away, anything there?"
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Okay. Great. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Do you think the picker saw them as the same thing?",
+        "That's really helpful, thank you. Was anything else difficult with the order?"
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Great. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Great, great. And how did you hear about Shmuber Eats?",
+        "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away."
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Got it, that's really useful. Great. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Wait, the drink instead of the tin? What did you do with the curry?",
+        "And did you tell anyone, or contact us about it?"
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Okay. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Great. And how did you hear about Shmuber Eats?",
+        "Great, great. Walk me through your last order, from opening the app to putting things away."
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Okay. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Great, great. Walk me through your last order, from opening the app to putting things away.",
+        "And was anything confusing?"
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Great. How often do you order groceries online?",
+      "earlier": [
+        "Great. Tell me a bit about your household and who does the food shopping.",
+        "Great, great. Walk me through your last Shmuber Eats order, from opening the app to putting things away."
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Haha, lovely. Great. How often do you order groceries online?",
+      "earlier": [
+        "That's lovely. Was anything difficult in the app?",
+        "Noted, text size. And how did you pay for it?"
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Great. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Great, great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+        "Haha. And when it came?"
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Great. How often do you order groceries online?",
+      "earlier": [
+        "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+        "And putting things away, anything notable?"
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Haha. Great. How often do you order groceries online?",
+      "earlier": [
+        "Great. Walk me through your last order, from opening the app to putting things away.",
+        "And was anything confusing?"
+      ],
+      "topic": "don't order groceries often",
+      "asked": true
+    },
+    {
+      "question": "Great. Let's move on to the next one. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Great, great. How did you pick the delivery window last time?",
+        "And was that easy to find in the app?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Would a shared list in the app be useful for you three?",
+        "Okay. How did you pick the delivery window last time?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "And at 9.99 a month?",
+      "earlier": [
+        "And has it ever come outside that time?",
+        "Great. What would you think of a monthly delivery pass, and what would you pay for it?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Great, great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Great. How did you pick the delivery window last time?",
+        "And on a normal day, would a two-hour slot work for you?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Haha. Great. How did you pick the delivery window last time?",
+        "And is the two hours okay for you, or too long?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Haha. Does anyone else add to Ana's list?",
+        "Great, great. How did you pick the delivery window last time?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Great, great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Haha. Great. How did you pick the delivery window last time?",
+        "And did it fit your day okay?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Even if it saved on the delivery fee each time?",
+      "earlier": [
+        "Haha. Great. How did you pick the delivery window last time?",
+        "Great. What would you think of a monthly delivery pass, and what would you pay for it?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Great, great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Great. How did you pick the delivery window last time?",
+        "And now that Mira's out more, would the window be harder?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Haha. Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Would you have answered if they'd asked?",
+        "Great, great. How did you pick the delivery window last time?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Okay. How did you pick the delivery window last time?",
+        "And on a normal week, would you be home for a two-hour slot?"
+      ],
+      "topic": "delivery pass not worth it",
+      "asked": true
+    },
+    {
+      "question": "And did you know about it before the bags came?",
+      "earlier": [
+        "Haha. Great. How often do you order groceries online?",
+        "Great. Let's move on to the next one. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "And do you get a message before they swap?",
+      "earlier": [
+        "Okay. Great. Let's move on. How often do you order groceries online?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "Did you know about it before the delivery arrived?",
+      "earlier": [
+        "And the order for water, how did that go?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "Did the app tell you before the delivery?",
+      "earlier": [
+        "And on what day, usually?",
+        "Great, great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "When did you find out about it?",
+      "earlier": [
+        "Okay. Let's move on. How often do you order groceries online?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "Wouldn't it be great if we texted you before swapping anything, so you could say yes or no?",
+      "earlier": [
+        "Haha. Does anyone else add?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "Did you get a heads-up before the bags came?",
+      "earlier": [
+        "Great. Let's move on. How often do you order groceries online?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "Would you have answered if they'd asked?",
+      "earlier": [
+        "Did you get a choice about that swap, or did it just arrive?",
+        "That's really helpful, thank you. Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "Did they let you know before it arrived?",
+      "earlier": [
+        "Haha. Great. How often do you order groceries online?",
+        "Great. Let's move on. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "notifications for substitutions too late",
+      "asked": true
+    },
+    {
+      "question": "Great. And anything you didn't like?",
+      "earlier": [
+        "Okay. Would you recommend Shmuber Eats to a friend?",
+        "That's great to hear. What did you like most about it?"
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "Great. Was anything confusing along the way?",
+      "earlier": [
+        "Great, great. And how did you hear about Shmuber Eats?",
+        "Got it. Walk me through your last order, from opening the app to putting things away."
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "Haha. Fair enough. Great. On a scale of one to ten, how was the experience overall?",
+      "earlier": [
+        "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+        "What about 9.99 a month, with free delivery on every order?"
+      ],
+      "topic": "difficulty using the app",
+      "asked": false
+    },
+    {
+      "question": "And what do you like least?",
+      "earlier": [
+        "Great, great. Would you recommend Shmuber Eats to a friend?",
+        "Great. What do you like most?"
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "And what did you like least?",
+      "earlier": [
+        "What about 9.99 a month, with free delivery?",
+        "Haha. Great. What did you like most about it?"
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "Haha. And what did you like least?",
+      "earlier": [
+        "Great. Would you recommend it to a friend?",
+        "Amazing. What did you like most?"
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "And what did you like least?",
+      "earlier": [
+        "Got it. Would you recommend Shmuber Eats to a friend?",
+        "Great. What did you like the most?"
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "That's lovely. Was anything difficult in the app?",
+      "earlier": [
+        "Wonderful. And how did you hear about Shmuber Eats?",
+        "Great, great. Walk me through your last order, from opening the app to putting things away."
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "And what did you like least?",
+      "earlier": [
+        "Even if it saved on the delivery fee each time?",
+        "Okay. Great. What did you like most about it?"
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "And was anything confusing?",
+      "earlier": [
+        "Great, great. And how did you hear about Shmuber Eats?",
+        "Great. Walk me through your last order, from opening the app to putting things away."
+      ],
+      "topic": "difficulty using the app",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Great, great. How did you pick the delivery window last time?",
+        "And do you ever miss it?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "And 9.99?",
+      "earlier": [
+        "And do you ever miss it?",
+        "Great. What would you think of a monthly delivery pass, and what would you pay for it?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Haha. Does anyone else add to Ana's list?",
+        "Great, great. How did you pick the delivery window last time?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Haha. Great. How did you pick the delivery window last time?",
+        "And has it ever come outside that time?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "Great, great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Great. How did you pick the delivery window last time?",
+        "And now that Mira's out more, would the window be harder?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "Haha. Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Would you have answered if they'd asked?",
+        "Great, great. How did you pick the delivery window last time?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Would a shared list in the app be useful for you three?",
+        "Okay. How did you pick the delivery window last time?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "And what would make a pass worth it for you?",
+      "earlier": [
+        "Great, great. How did you pick the delivery window last time?",
+        "Great. What would you think of a monthly delivery pass, and what would you pay for it?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "Great, great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Great. How did you pick the delivery window last time?",
+        "And on a normal day, would a two-hour slot work for you?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+      "earlier": [
+        "Okay. How did you pick the delivery window last time?",
+        "And on a normal week, would you be home for a two-hour slot?"
+      ],
+      "topic": "would pay more for delivery pass",
+      "asked": true
+    },
+    {
+      "question": "Great. Tell me a bit about your household and who does the food shopping.",
+      "earlier": [
+        "Hey Marcus, thanks for jumping on. Is now still a good time?"
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "Great. What do you like most?",
+      "earlier": [
+        "And at 9.99 a month?",
+        "Great, great. Would you recommend Shmuber Eats to a friend?"
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "And the order for water, how did that go?",
+      "earlier": [
+        "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+        "Great. Let's move on. How often do you order groceries online?"
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "Haha, classic. And how did you hear about Shmuber Eats?",
+      "earlier": [
+        "Perfect. So, no wrong answers, this is just about how you shop for food.",
+        "Great. Tell me a bit about your household and who does the food shopping."
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "Amazing. What did you like most?",
+      "earlier": [
+        "Okay. Great. On a scale of one to ten, how much do you like Shmuber Eats?",
+        "Great. Would you recommend it to a friend?"
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "Wonderful. And how did you hear about Shmuber Eats?",
+      "earlier": [
+        "Haha, it sounds great. This is just about your grocery orders, no wrong answers.",
+        "Great. Tell me a bit about your household and who does the food shopping."
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "Okay. Great. What did you like most about it?",
+      "earlier": [
+        "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+        "Even if it saved on the delivery fee each time?"
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "Great. What did you like most?",
+      "earlier": [
+        "What about 9.99 with free delivery?",
+        "Okay. Would you recommend Shmuber Eats to a friend?"
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "Haha. Okay. What did you like most about it?",
+      "earlier": [
+        "Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+        "What if it was 9.99 a month for free delivery?"
+      ],
+      "topic": "can't carry heavy groceries",
+      "asked": false
+    },
+    {
+      "question": "Totally. What would make you use it more?",
+      "earlier": [
+        "Haha. Fair enough. Great. On a scale of one to ten, how was the experience overall?",
+        "Great, great. Would you recommend it to a friend?"
+      ],
+      "topic": "delivery window inconvenient",
+      "asked": false
+    },
+    {
+      "question": "And has it ever come outside that time?",
+      "earlier": [
+        "Would it help if your daughter could add to a list in the app too?",
+        "Haha. Great. How did you pick the delivery window last time?"
+      ],
+      "topic": "delivery window inconvenient",
+      "asked": true
+    },
+    {
+      "question": "And is the two hours okay for you, or too long?",
+      "earlier": [
+        "Okay. How do you keep track of what you need between orders?",
+        "Haha. Great. How did you pick the delivery window last time?"
+      ],
+      "topic": "delivery window inconvenient",
+      "asked": true
+    },
+    {
+      "question": "Haha. Great. How did you pick the delivery window last time?",
+      "earlier": [
+        "When did you find out about it?",
+        "Got it. How do you keep track of what you need between orders?"
+      ],
+      "topic": "delivery window inconvenient",
+      "asked": false
+    },
+    {
+      "question": "And now that Mira's out more, would the window be harder?",
+      "earlier": [
+        "Haha. Do you both add to it?",
+        "Great. How did you pick the delivery window last time?"
+      ],
+      "topic": "delivery window inconvenient",
+      "asked": true
+    },
+    {
+      "question": "Great, great. How did you pick the delivery window last time?",
+      "earlier": [
+        "That's really helpful, thank you. Great. Tell me about the last time an item in your order was substituted.",
+        "Would you have answered if they'd asked?"
+      ],
+      "topic": "delivery window inconvenient",
+      "asked": false
+    },
+    {
+      "question": "Great. Last question, is there anything about your orders I didn't ask about?",
+      "earlier": [
+        "And what did you like least?",
+        "Noted. Great. On a scale of one to ten, how was it overall?"
+      ],
+      "topic": "delivery window inconvenient",
+      "asked": false
+    },
+    {
+      "question": "And on a normal week, would you be home for a two-hour slot?",
+      "earlier": [
+        "Did they let you know before it arrived?",
+        "Okay. How did you pick the delivery window last time?"
+      ],
+      "topic": "delivery window inconvenient",
+      "asked": true
+    },
+    {
+      "question": "Got it. How do you keep track of what you need between orders?",
+      "earlier": [
+        "Great. Tell me about the last time an item in your order was substituted.",
+        "And did you know about the swaps before the bags arrived?"
+      ],
+      "topic": "family uses shared list",
+      "asked": true
+    },
+    {
+      "question": "Would a shared list in the app be useful for you three?",
+      "earlier": [
+        "And did you know about it before the bags came?",
+        "Great, great. How do you keep track of what you need between orders?"
+      ],
+      "topic": "family uses shared list",
+      "asked": true
+    },
+    {
+      "question": "Would it help if your daughter could add to a list in the app too?",
+      "earlier": [
+        "And do you get a message before they swap?",
+        "Haha. Great. How do you keep track of what you need between orders?"
+      ],
+      "topic": "family uses shared list",
+      "asked": true
+    },
+    {
+      "question": "Haha. Great. How do you keep track of what you need between orders?",
+      "earlier": [
+        "Great. Tell me about the last time an item in your order was substituted.",
+        "Did you know about it before the delivery arrived?"
+      ],
+      "topic": "family uses shared list",
+      "asked": true
+    },
+    {
+      "question": "Great. How do you keep track of what you need between orders?",
+      "earlier": [
+        "Got it. Tell me about the last time an item in your order was substituted.",
+        "Did you get a message about those before the delivery?"
+      ],
+      "topic": "family uses shared list",
+      "asked": true
+    },
+    {
+      "question": "Got it. How do you keep track of what you need between orders?",
+      "earlier": [
+        "Great. How often do you order groceries online?",
+        "And what made you start every week?"
+      ],
+      "topic": "family uses shared list",
+      "asked": true
+    },
+    {
+      "question": "Got it. How do you keep track of what you need between orders?",
+      "earlier": [
+        "Great. Tell me about the last time an item in your order was substituted.",
+        "Did you get a heads-up before the bags came?"
+      ],
+      "topic": "family uses shared list",
+      "asked": true
+    },
+    {
+      "question": "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+      "earlier": [
+        "Haha. Great. Tell me a bit about your household and who does the food shopping.",
+        "Great, great. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "inaccurate substitutions",
+      "asked": false
+    },
+    {
+      "question": "Great. Tell me about the last time an item in your order was substituted.",
+      "earlier": [
+        "Great. Let's move on. How often do you order groceries online?",
+        "And the order for water, how did that go?"
+      ],
+      "topic": "inaccurate substitutions",
+      "asked": false
+    },
+    {
+      "question": "Great. Walk me through your last order, from opening the app to putting things away.",
+      "earlier": [
+        "Great. Tell me a bit about your household and who does the food shopping.",
+        "Haha, classic. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "inaccurate substitutions",
+      "asked": false
+    },
+    {
+      "question": "And what did you like least?",
+      "earlier": [
+        "And what would make a pass worth it for you?",
+        "Okay. Great. What did you like most about the order?"
+      ],
+      "topic": "inaccurate substitutions",
+      "asked": false
+    },
+    {
+      "question": "Noted, repeat order. Great. Have you ever contacted support?",
+      "earlier": [
+        "Amazing. What do you like most?",
+        "Haha. And what do you like least?"
+      ],
+      "topic": "inaccurate substitutions",
+      "asked": false
+    },
+    {
+      "question": "Okay. How do you keep track of what you need between orders?",
+      "earlier": [
+        "And putting things away, anything notable?",
+        "Great. How often do you order groceries online?"
+      ],
+      "topic": "inaccurate substitutions",
+      "asked": false
+    },
+    {
+      "question": "And did you know about the swaps before the bags arrived?",
+      "earlier": [
+        "Okay. And when you do, is it the weekend or during the week?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "substitutions without choice",
+      "asked": true
+    },
+    {
+      "question": "Did you know about it before the delivery arrived?",
+      "earlier": [
+        "And the order for water, how did that go?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "substitutions without choice",
+      "asked": true
+    },
+    {
+      "question": "Did the picker get in touch about that one, or was it just in the bag?",
+      "earlier": [
+        "And what did you like least?",
+        "Oh no. Self-raising for pizza dough? What happened with the pizza?"
+      ],
+      "topic": "substitutions without choice",
+      "asked": true
+    },
+    {
+      "question": "When did you find out about it?",
+      "earlier": [
+        "Okay. Let's move on. How often do you order groceries online?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "substitutions without choice",
+      "asked": false
+    },
+    {
+      "question": "Did you know before the delivery came?",
+      "earlier": [
+        "Haha, lovely. Great. How often do you order groceries online?",
+        "Great. Tell me about the last time an item in your order was substituted."
+      ],
+      "topic": "substitutions without choice",
+      "asked": true
+    },
+    {
+      "question": "Did you get a choice about that swap, or did it just arrive?",
+      "earlier": [
+        "Okay. How do you keep track of what you need between orders?",
+        "Oh no, margarine for buttercream? What did you do?"
+      ],
+      "topic": "substitutions without choice",
+      "asked": true
+    },
+    {
+      "question": "Nice. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+      "earlier": [
+        "Great. Tell me a bit about your household and who does the food shopping.",
+        "Great, great. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "orders during emergencies",
+      "asked": false
+    },
+    {
+      "question": "Great, great. And how did you hear about Shmuber Eats?",
+      "earlier": [
+        "Haha, wonderful. So this is just about your grocery orders, there are no wrong answers.",
+        "Haha. Great. Tell me a bit about your household and who does the food shopping."
+      ],
+      "topic": "orders during emergencies",
+      "asked": false
+    },
+    {
+      "question": "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+      "earlier": [
+        "Great. Tell me a bit about your household and who does the food shopping.",
+        "Great, great. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "orders during emergencies",
+      "asked": false
+    },
+    {
+      "question": "Great, great. Walk me through your last order, from opening the app to putting things away.",
+      "earlier": [
+        "Great. Tell me a bit about your household and who does the food shopping.",
+        "Great. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "orders during emergencies",
+      "asked": false
+    },
+    {
+      "question": "Okay. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Great, great. Walk me through your last order, from opening the app to putting things away.",
+        "And was anything confusing?"
+      ],
+      "topic": "orders during emergencies",
+      "asked": false
+    },
+    {
+      "question": "Great. Tell me a bit about your household and who does the food shopping.",
+      "earlier": [
+        "Hi Dev, thanks for joining. I hear a little one in the background?",
+        "Haha, no problem at all. Congratulations! So this is just about your grocery orders."
+      ],
+      "topic": "orders during emergencies",
+      "asked": false
+    },
+    {
+      "question": "Great. Let's move on. How often do you order groceries online?",
+      "earlier": [
+        "Great, great. And how did you hear about Shmuber Eats?",
+        "Nice. Walk me through your last Shmuber Eats order, from opening the app to putting things away."
+      ],
+      "topic": "prefers shopping in person",
+      "asked": false
+    },
+    {
+      "question": "Haha. Great. How often do you order groceries online?",
+      "earlier": [
+        "Great. Was anything confusing along the way?",
+        "Okay, noted. And putting things away, anything there?"
+      ],
+      "topic": "prefers shopping in person",
+      "asked": false
+    },
+    {
+      "question": "What about 9.99 a month, with free delivery?",
+      "earlier": [
+        "And on a normal day, would a two-hour slot work for you?",
+        "Great, great. What would you think of a monthly delivery pass, and what would you pay for it?"
+      ],
+      "topic": "prefers shopping in person",
+      "asked": false
+    },
+    {
+      "question": "Great, great. Walk me through your last order, from opening the app to putting things away.",
+      "earlier": [
+        "Great. Tell me a bit about your household and who does the food shopping.",
+        "Great. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "prefers shopping in person",
+      "asked": false
+    },
+    {
+      "question": "Okay. Would you recommend Shmuber Eats to a friend?",
+      "earlier": [
+        "Haha. Great. What would you think of a monthly delivery pass, and what would you pay for it?",
+        "What about 9.99 with free delivery?"
+      ],
+      "topic": "prefers shopping in person",
+      "asked": false
+    },
+    {
+      "question": "Okay, noted. And putting things away, anything there?",
+      "earlier": [
+        "Got it. Walk me through your last order, from opening the app to putting things away.",
+        "Great. Was anything confusing along the way?"
+      ],
+      "topic": "heavy use of bags",
+      "asked": false
+    },
+    {
+      "question": "Got it. Last question, is there anything about your orders I didn't ask about?",
+      "earlier": [
+        "Haha. And what did you like least?",
+        "Noted, search. Great. Do you use any other grocery apps?"
+      ],
+      "topic": "heavy use of bags",
+      "asked": false
+    },
+    {
+      "question": "Great. Last question, is there anything about your orders I didn't ask about?",
+      "earlier": [
+        "Chili-lime for the twins? How did that go?",
+        "What would you have wanted the picker to do instead?"
+      ],
+      "topic": "heavy use of bags",
+      "asked": false
+    },
+    {
+      "question": "And putting things away, anything notable?",
+      "earlier": [
+        "Great, great. And how did you hear about Shmuber Eats?",
+        "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away."
+      ],
+      "topic": "heavy use of bags",
+      "asked": false
+    },
+    {
+      "question": "Got it. How do you keep track of what you need between orders?",
+      "earlier": [
+        "Great. Tell me about the last time an item in your order was substituted.",
+        "And did you know about the swaps before the bags arrived?"
+      ],
+      "topic": "shared list with duplicates/wrong items",
+      "asked": true
+    },
+    {
+      "question": "Would it help if your daughter could add to a list in the app too?",
+      "earlier": [
+        "And do you get a message before they swap?",
+        "Haha. Great. How do you keep track of what you need between orders?"
+      ],
+      "topic": "shared list with duplicates/wrong items",
+      "asked": true
+    },
+    {
+      "question": "Got it. How do you keep track of what you need between orders?",
+      "earlier": [
+        "Great. How often do you order groceries online?",
+        "And what made you start every week?"
+      ],
+      "topic": "shared list with duplicates/wrong items",
+      "asked": true
+    },
+    {
+      "question": "Got it. How do you keep track of what you need between orders?",
+      "earlier": [
+        "Great. Tell me about the last time an item in your order was substituted.",
+        "Did you get a heads-up before the bags came?"
+      ],
+      "topic": "shared list with duplicates/wrong items",
+      "asked": true
+    },
+    {
+      "question": "Okay. Would you recommend Shmuber Eats to a friend?",
+      "earlier": [
+        "Great. Let's move on to the next one. What would you think of a monthly delivery pass, and what would you pay for it?",
+        "What if it was 9.99 a month with free delivery on everything?"
+      ],
+      "topic": "delivery driver helpful",
+      "asked": false
+    },
+    {
+      "question": "Great, great. Walk me through your last order, from opening the app to putting things away.",
+      "earlier": [
+        "Great. Tell me a bit about your household and who does the food shopping.",
+        "Wonderful. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "delivery driver helpful",
+      "asked": false
+    },
+    {
+      "question": "And putting things away, anything notable?",
+      "earlier": [
+        "Great, great. And how did you hear about Shmuber Eats?",
+        "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away."
+      ],
+      "topic": "delivery driver helpful",
+      "asked": false
+    },
+    {
+      "question": "That's really helpful, thank you. Was anything else difficult with the order?",
+      "earlier": [
+        "Smoked slices for a baked fillet? What did you end up making?",
+        "Do you think the picker saw them as the same thing?"
+      ],
+      "topic": "app logs out during order",
+      "asked": false
+    },
+    {
+      "question": "And was anything confusing?",
+      "earlier": [
+        "Great. And how did you hear about Shmuber Eats?",
+        "Great, great. Walk me through your last order, from opening the app to putting things away."
+      ],
+      "topic": "app logs out during order",
+      "asked": false
+    },
+    {
+      "question": "And what did you like least?",
+      "earlier": [
+        "Great. Would you recommend it to a friend?",
+        "Great. What did you like most?"
+      ],
+      "topic": "app logs out during order",
+      "asked": false
+    },
+    {
+      "question": "Okay. Great. On a scale of one to ten, how much do you like Shmuber Eats?",
+      "earlier": [
+        "And is the two hours okay for you, or too long?",
+        "Great. What would you think of a monthly delivery pass, and what would you pay for it?"
+      ],
+      "topic": "orders for convenience",
+      "asked": false
+    },
+    {
+      "question": "Great. What did you like the most?",
+      "earlier": [
+        "So would 9.99 a month feel like too much?",
+        "Got it. Would you recommend Shmuber Eats to a friend?"
+      ],
+      "topic": "orders for convenience",
+      "asked": false
+    },
+    {
+      "question": "Haha. Great. What did you like most about it?",
+      "earlier": [
+        "Great, great. What would you think of a monthly delivery pass, and what would you pay for it?",
+        "What about 9.99 a month, with free delivery?"
+      ],
+      "topic": "orders for convenience",
+      "asked": false
+    },
+    {
+      "question": "Nice. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+      "earlier": [
+        "Great. Tell me a bit about your household and who does the food shopping.",
+        "Great, great. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "needs a faster ordering process",
+      "asked": false
+    },
+    {
+      "question": "Great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.",
+      "earlier": [
+        "Haha. Great. Tell me a bit about your household and who does the food shopping.",
+        "Great, great. And how did you hear about Shmuber Eats?"
+      ],
+      "topic": "needs a faster ordering process",
+      "asked": false
+    },
+    {
+      "question": "And was anything confusing?",
+      "earlier": [
+        "Great. And how did you hear about Shmuber Eats?",
+        "Great, great. Walk me through your last order, from opening the app to putting things away."
+      ],
+      "topic": "needs a faster ordering process",
+      "asked": false
+    }
+  ]
+}

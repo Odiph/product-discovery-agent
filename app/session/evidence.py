@@ -1,12 +1,11 @@
-"""The after-meeting evidence side of an in-person session: file names, the
+"""The after-meeting evidence side of an imported recording: file names, the
 `evidence` state machine in session.json, speaker confirmation, and the gate
 `extract` reads. Layout and bookkeeping only -- no vendor, no model.
 
-A one-microphone meeting's LIVE speaker roles drive coaching only (measured:
-~96% of words right with the voiceprint). Evidence needs better than that, so
-the room audio is kept on this laptop until an after-meeting pass has
-re-diarized it (`diarize-after`) and the operator has confirmed who is who
-(`confirm-speakers`); then it is deleted.
+One audio file carries both voices, so who said what has to be worked out
+before anything said in it can become evidence: the audio is kept on this
+laptop until the file pass has diarized it (`diarize-after`) and the operator
+has confirmed who is who (`confirm-speakers`); then it is deleted.
 
     pending -> transcribed -> confirmed
                   (the room audio is deleted on `confirmed`)
@@ -35,8 +34,10 @@ EVIDENCE_PENDING = "pending"
 EVIDENCE_TRANSCRIBED = "transcribed"
 EVIDENCE_CONFIRMED = "confirmed"
 
-# Set only by `accept_live_roles`: evidence is the live transcript, by the
-# operator's explicit choice.
+# Sessions recorded live on one microphone (a mode since removed) could be
+# confirmed from their live roles; such a session's evidence IS its live
+# transcript. Nothing writes this any more -- it is read so those sessions
+# keep reading the transcript they were confirmed from.
 EVIDENCE_SOURCE_KEY = "evidence_source"
 EVIDENCE_SOURCE_LIVE = "live-accepted"
 
@@ -52,42 +53,44 @@ class EvidenceStateError(Exception):
     """The session is not in a state where this step can run."""
 
 
-def is_in_person(meta: "dict[str, Any]") -> bool:
-    return meta.get("capture") == "in-person"
+# session.json's `capture` for a session whose one recording carries both
+# voices. `import` writes the first; the second is what sessions recorded live
+# on one microphone wrote before that mode was removed (2026-11-17), still read
+# so their `extract` gate holds.
+CAPTURE_ONE_RECORDING = "one-recording"
+_ONE_RECORDING_CAPTURES = frozenset({CAPTURE_ONE_RECORDING, "in-person"})
 
 
-def is_imported_recording(meta: "dict[str, Any]") -> bool:
-    """A recording brought in with `import` (app/session/audio_import.py): it
-    takes the in-person road but was never a live meeting, so it has no live
-    roles to fall back on."""
-    return is_in_person(meta) and bool(meta.get("imported_from"))
+def is_one_recording(meta: "dict[str, Any]") -> bool:
+    """Both voices on one recording: roles come from the file pass, not from
+    two separate streams."""
+    return meta.get("capture") in _ONE_RECORDING_CAPTURES
 
 
 def extract_refusal(meta: "dict[str, Any]") -> Optional[str]:
     """Why `extract` must not run on this session yet, or None."""
-    if not is_in_person(meta) or meta.get(EVIDENCE_KEY) == EVIDENCE_CONFIRMED:
+    if not is_one_recording(meta) or meta.get(EVIDENCE_KEY) == EVIDENCE_CONFIRMED:
         return None
     state = meta.get(EVIDENCE_KEY) or "unknown"
-    if is_imported_recording(meta):
+    if meta.get("capture") != CAPTURE_ONE_RECORDING:
         return (
-            f"this is an imported recording (one audio file, both voices) and its speakers are not "
-            f"confirmed (evidence: {state}). Run `confirm-speakers` on it first (after `diarize-after`, "
-            f"if the file pass did not finish at import)."
+            f"this session was recorded live on one microphone (a mode since removed) and its "
+            f"speakers are not confirmed (evidence: {state}). Run `diarize-after` and then "
+            f"`confirm-speakers` on it; if its room audio is gone it can no longer be confirmed, "
+            f"and `forget` is the way to remove it."
         )
     return (
-        f"this is an in-person session (one microphone) and its speakers are not confirmed "
-        f"(evidence: {state}). Live roles are for coaching only; run `diarize-after` and then "
-        f"`confirm-speakers` on it first (or, when no after-meeting pass is possible, "
-        f"`confirm-speakers --confirm --accept-live-roles`)."
+        f"this is an imported recording (one audio file, both voices) and its speakers are not "
+        f"confirmed (evidence: {state}). Run `confirm-speakers` on it first (after `diarize-after`, "
+        f"if the file pass did not finish at import)."
     )
 
 
 def transcript_filename_for(meta: "dict[str, Any]") -> str:
     """The transcript evidence is built from: the confirmed after-meeting one
-    for an in-person session, the live one otherwise (including an in-person
-    session whose operator accepted the live roles)."""
+    for a one-recording session, the live one otherwise."""
     if (
-        is_in_person(meta)
+        is_one_recording(meta)
         and meta.get(EVIDENCE_KEY) == EVIDENCE_CONFIRMED
         and meta.get(EVIDENCE_SOURCE_KEY) != EVIDENCE_SOURCE_LIVE
     ):
@@ -155,25 +158,6 @@ def confirm_speakers(session_dir: Path, *, swap: bool, disputed: Optional[str]) 
     })
     _delete_room_audio(session_dir)
     return decision
-
-
-def accept_live_roles(session_dir: Path) -> None:
-    """The escape hatch, and an explicit operator act: build evidence from the
-    LIVE roles (~96% of words right, measured) for an in-person session that
-    cannot go through `diarize-after` -- one recorded before the room audio
-    was kept, one that crashed, or one whose audio writer failed."""
-    session_dir = Path(session_dir)
-    meta = read_meta(session_dir)
-    if not is_in_person(meta):
-        raise EvidenceStateError("not an in-person session: nothing to accept")
-    if meta.get(EVIDENCE_KEY) == EVIDENCE_CONFIRMED:
-        raise EvidenceStateError("speakers are already confirmed")
-    update_meta(session_dir, {
-        EVIDENCE_KEY: EVIDENCE_CONFIRMED,
-        EVIDENCE_SOURCE_KEY: EVIDENCE_SOURCE_LIVE,
-        "speakers_confirmed_at": _now(),
-    })
-    _delete_room_audio(session_dir)
 
 
 def _delete_room_audio(session_dir: Path) -> bool:

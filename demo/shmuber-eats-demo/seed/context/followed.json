@@ -1,0 +1,1033 @@
+{
+  "version": 1,
+  "model": "anthropic/claude-sonnet-5.5",
+  "key": "427ac46c5230aa21b9afb9883e08c41a1ef26c9e971316bd7befd4b8374675a7",
+  "items": [
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Okay. And when you do, is it the weekend or during the week?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And did you know about it before the bags came?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And do you get a message before they swap?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And the order for water, how did that go?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And on what day, usually?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And when you opened it again, what were you looking for?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 2,
+          "text": "When did you find out about it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Did you know before the delivery came?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Did you get a heads-up before the bags came?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Oh no, margarine for buttercream? What did you do?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "don't order groceries often",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Did they let you know before it arrived?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "delivery pass not worth it",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. Fair enough. Great. On a scale of one to ten, how was the experience overall?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "delivery pass not worth it",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Great. What do you like most?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "delivery pass not worth it",
+      "turns": [
+        {
+          "n": 1,
+          "text": "What about 9.99 a month, with free delivery?"
+        },
+        {
+          "n": 2,
+          "text": "Haha. Great. What did you like most about it?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "delivery pass not worth it",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Okay. Great. What did you like most about the order?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "delivery pass not worth it",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Okay. Great. What did you like most about it?"
+        },
+        {
+          "n": 2,
+          "text": "And what did you like least?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "delivery pass not worth it",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. Okay. What did you like most about it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "notifications for substitutions too late",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. Does Leila ever add things to an order?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "notifications for substitutions too late",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And do you ever miss it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "notifications for substitutions too late",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. Do you both add to it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "notifications for substitutions too late",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And on a normal week, would you be home for a two-hour slot?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha, noted, search. Great. Did you use the app on your phone or on a computer?"
+        },
+        {
+          "n": 2,
+          "text": "Great. And did you get any emails from us after the order?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Okay, noted. And putting things away, anything there?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Totally. What would make you use it more?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Noted. Great. Have you tried the recipes section?"
+        },
+        {
+          "n": 2,
+          "text": "Haha, fair. Great. On a scale of one to ten?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Noted, offers. Great. Did you pay with a card in the app?"
+        },
+        {
+          "n": 2,
+          "text": "Noted. Great. On a scale of one to ten, how was it overall?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Noted, search. Great. Do you use any other grocery apps?"
+        },
+        {
+          "n": 2,
+          "text": "Got it. Last question, is there anything about your orders I didn't ask about?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Noted. Great. Have you looked at the recipes section?"
+        },
+        {
+          "n": 2,
+          "text": "It's quite new. Great. Did you use your phone or a laptop for the order?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Noted, text size. And how did you pay for it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "difficulty using the app",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Did the children help you unpack?"
+        },
+        {
+          "n": 2,
+          "text": "Haha. Great. On a scale of one to ten, how was it overall?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "would pay more for delivery pass",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And 9.99?"
+        },
+        {
+          "n": 3,
+          "text": "Amazing. What do you like most?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "would pay more for delivery pass",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Amazing. What do you like most?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "would pay more for delivery pass",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Okay. Great. What did you like most about the order?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "would pay more for delivery pass",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And at 9.99 a month?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "would pay more for delivery pass",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. Fair enough. Great. On a scale of one to ten, how was the experience overall?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "would pay more for delivery pass",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Okay. Great. What did you like most about the order?"
+        },
+        {
+          "n": 2,
+          "text": "And what did you like least?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "would pay more for delivery pass",
+      "turns": [
+        {
+          "n": 1,
+          "text": "What about 9.99 a month, with free delivery?"
+        },
+        {
+          "n": 2,
+          "text": "Haha. Great. What did you like most about it?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "would pay more for delivery pass",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. Okay. What did you like most about it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "can't carry heavy groceries",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And what do you like least?"
+        },
+        {
+          "n": 2,
+          "text": "Noted. Great. Have you tried the recipes section?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "can't carry heavy groceries",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Did you know about it before the delivery arrived?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "can't carry heavy groceries",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Wait, the drink instead of the tin? What did you do with the curry?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "can't carry heavy groceries",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. And what did you like least?"
+        },
+        {
+          "n": 2,
+          "text": "Noted, search. Great. Do you use any other grocery apps?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "can't carry heavy groceries",
+      "turns": [
+        {
+          "n": 2,
+          "text": "That's lovely. Was anything difficult in the app?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "can't carry heavy groceries",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And what did you like least?"
+        },
+        {
+          "n": 2,
+          "text": "Haha. Did the children help you unpack?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "can't carry heavy groceries",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And what did you like least?"
+        },
+        {
+          "n": 2,
+          "text": "Noted. Great. On a scale of one to ten, how was it overall?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "can't carry heavy groceries",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Great. And what did you like least?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "delivery window inconvenient",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it, later slots. Great. Did you use the app or the website?"
+        },
+        {
+          "n": 2,
+          "text": "And did the payment go through okay?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "delivery window inconvenient",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And at 9.99 a month?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "delivery window inconvenient",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And did it fit your day okay?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "delivery window inconvenient",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it, noted. Thank you so much, Fatima, this was very helpful."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "family uses shared list",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Does your husband add things?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "family uses shared list",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And has it ever come outside that time?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "family uses shared list",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Does Leila ever add things to an order?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "family uses shared list",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Does anyone else add to Ana's list?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "family uses shared list",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Does anyone else add?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "family uses shared list",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Do you both add to it?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "inaccurate substitutions",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Smoked slices for a baked fillet? What did you end up making?"
+        },
+        {
+          "n": 2,
+          "text": "Do you think the picker saw them as the same thing?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "inaccurate substitutions",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Did you know about it before the delivery arrived?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "inaccurate substitutions",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Wait, the drink instead of the tin? What did you do with the curry?"
+        },
+        {
+          "n": 2,
+          "text": "And did you tell anyone, or contact us about it?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "inaccurate substitutions",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Oh no. Self-raising for pizza dough? What happened with the pizza?"
+        },
+        {
+          "n": 2,
+          "text": "Did the picker get in touch about that one, or was it just in the bag?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "inaccurate substitutions",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Chili-lime for the twins? How did that go?"
+        },
+        {
+          "n": 2,
+          "text": "What would you have wanted the picker to do instead?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "inaccurate substitutions",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Oh no, margarine for buttercream? What did you do?"
+        },
+        {
+          "n": 2,
+          "text": "Did you get a choice about that swap, or did it just arrive?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "substitutions without choice",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. Does your husband add things?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "substitutions without choice",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. Does Leila ever add things to an order?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "substitutions without choice",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Got it, that's really helpful, thank you. Great. On a scale of one to ten, how was it overall?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "substitutions without choice",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Would you have answered if they'd asked?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "orders during emergencies",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Okay. And when you do, is it the weekend or during the week?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "orders during emergencies",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Smoked slices for a baked fillet? What did you end up making?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "orders during emergencies",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And the order for water, how did that go?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "orders during emergencies",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And when you opened it again, what were you looking for?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "orders during emergencies",
+      "turns": [
+        {
+          "n": 2,
+          "text": "When did you find out about it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "orders during emergencies",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Haha. And when it came?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "prefers shopping in person",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Okay. And when you do, is it the weekend or during the week?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "prefers shopping in person",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And did you know about it before the bags came?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "prefers shopping in person",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Great. What did you like most about it?"
+        },
+        {
+          "n": 2,
+          "text": "And what did you like least?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "prefers shopping in person",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And when you opened it again, what were you looking for?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "prefers shopping in person",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Great. What did you like most?"
+        },
+        {
+          "n": 2,
+          "text": "And what did you like least?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "heavy use of bags",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha, noted. Thank you so much Elena, this was super helpful."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "heavy use of bags",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha, noted. Thank you so much, Kenji."
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "shared list with duplicates/wrong items",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Does your husband add things?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "shared list with duplicates/wrong items",
+      "turns": [
+        {
+          "n": 2,
+          "text": "And has it ever come outside that time?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "shared list with duplicates/wrong items",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Does anyone else add?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "shared list with duplicates/wrong items",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Haha. Do you both add to it?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "delivery driver helpful",
+      "turns": [
+        {
+          "n": 1,
+          "text": "That's great to hear. What did you like most about it?"
+        },
+        {
+          "n": 2,
+          "text": "Great. And anything you didn't like?"
+        }
+      ],
+      "followed": true
+    },
+    {
+      "topic": "delivery driver helpful",
+      "turns": [
+        {
+          "n": 1,
+          "text": "That's lovely. Was anything difficult in the app?"
+        },
+        {
+          "n": 2,
+          "text": "Noted, text size. And how did you pay for it?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "app logs out during order",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Noted. Great. Did you leave a rating after any of the orders?"
+        },
+        {
+          "n": 2,
+          "text": "Great. Have you tried the recipes section?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "orders for convenience",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Amazing. What did you like most?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "orders for convenience",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And what did you like least?"
+        },
+        {
+          "n": 2,
+          "text": "Noted. Great. Have you looked at the recipes section?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "orders for convenience",
+      "turns": [
+        {
+          "n": 1,
+          "text": "And what did you like least?"
+        },
+        {
+          "n": 2,
+          "text": "Noted, offers. Great. Did you pay with a card in the app?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "needs a faster ordering process",
+      "turns": [
+        {
+          "n": 2,
+          "text": "Okay. And when you do, is it the weekend or during the week?"
+        }
+      ],
+      "followed": false
+    },
+    {
+      "topic": "needs a faster ordering process",
+      "turns": [
+        {
+          "n": 1,
+          "text": "Smoked slices for a baked fillet? What did you end up making?"
+        },
+        {
+          "n": 2,
+          "text": "Do you think the picker saw them as the same thing?"
+        }
+      ],
+      "followed": false
+    }
+  ]
+}

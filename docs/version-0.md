@@ -94,7 +94,7 @@ Be blunt. I want to learn, not to feel good about the interview.
 | Version 0 (this page) | The tool in this repository |
 |---|---|
 | `PREP` | `python -m app prep --project <node>` and the author page |
-| `FOLLOW-UP`, typed by you mid-call | The live coach and its critic, on your phone or a second screen |
+| `FOLLOW-UP`, typed by you mid-call | The live coach and its critic, in the overlay or on a second screen |
 | `SYNTHESIS` 1-2 | `python -m app extract <session>` then `standing` |
 | `SYNTHESIS` 3 | `python -m app themes` |
 | `SYNTHESIS` 4-5 | `python -m app critique-questions --all` then `mirror` |

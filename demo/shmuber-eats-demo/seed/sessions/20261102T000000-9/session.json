@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "10-liam.txt",
+  "import_sha256": "bccf50d15d562d4503a3cf1ebf6c42c326d2da29edf3ad177706dba343613ea5",
+  "imported_at": "2026-11-02T00:16:35.600+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:16:35.600+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Liam": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Liam"
+}

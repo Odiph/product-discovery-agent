@@ -1,0 +1,5110 @@
+[
+  {
+    "id": "6fddf1ed-f378-4267-98e1-606d9f357f3f",
+    "session_id": "20261102T000000",
+    "seqs": [
+      5
+    ],
+    "claim": "Priya's household consists of herself, her husband Raj, and their two sons, aged seven and ten.",
+    "provenance": "evidence",
+    "quoted_text": "So it's me, my husband Raj, and our two boys, they're seven and ten.",
+    "bearings": []
+  },
+  {
+    "id": "890e5712-6244-475f-a05d-cf251f21de98",
+    "session_id": "20261102T000000",
+    "seqs": [
+      5
+    ],
+    "claim": "Priya does most of the food shopping for her household.",
+    "provenance": "evidence",
+    "quoted_text": "I do most of the shopping.",
+    "bearings": []
+  },
+  {
+    "id": "df5b4632-c0d3-479d-9ceb-b8488bb518b9",
+    "session_id": "20261102T000000",
+    "seqs": [
+      5
+    ],
+    "claim": "Priya's husband Raj works shifts at the hospital, so his week is unpredictable.",
+    "provenance": "evidence",
+    "quoted_text": "Raj works shifts at the hospital, so his week is all over the place.",
+    "bearings": []
+  },
+  {
+    "id": "c55f94af-3f4d-41b1-8c89-28711c3b9634",
+    "session_id": "20261102T000000",
+    "seqs": [
+      5
+    ],
+    "claim": "Priya usually goes to the big supermarket by the ring road on Saturday mornings.",
+    "provenance": "evidence",
+    "quoted_text": "I usually go Saturday mornings to the big supermarket by the ring road.",
+    "bearings": []
+  },
+  {
+    "id": "85d63577-f339-4c3e-9c87-6aeb93ef884d",
+    "session_id": "20261102T000000",
+    "seqs": [
+      7
+    ],
+    "claim": "Priya heard about Shmuber Eats from a mum at school who posted a referral code in the class group chat.",
+    "provenance": "evidence",
+    "quoted_text": "A mum from school had a referral code, she posted it in the class group chat. Ten off your first order or something like that.",
+    "bearings": []
+  },
+  {
+    "id": "884daba0-d50a-4015-8617-3a60accc1b8c",
+    "session_id": "20261102T000000",
+    "seqs": [
+      9
+    ],
+    "claim": "Priya's last Shmuber Eats order was a few weeks ago because her child had a fever, preventing her from going to the supermarket.",
+    "provenance": "evidence",
+    "quoted_text": "So that was a few weeks back. My little one had a proper fever that week and I could not drag him round a supermarket, so I sat on the sofa with him and did the whole thing on my phone.",
+    "bearings": []
+  },
+  {
+    "id": "17343524-6dcb-4372-a20b-d1ab17c086aa",
+    "session_id": "20261102T000000",
+    "seqs": [
+      9
+    ],
+    "claim": "Priya ordered bananas, crackers, electrolyte drinks, soup, milk, bread, and cereal on her last Shmuber Eats order.",
+    "provenance": "evidence",
+    "quoted_text": "Bananas, crackers, those electrolyte drinks, soup. Then the normal stuff too, milk, bread, cereal.",
+    "bearings": []
+  },
+  {
+    "id": "b060f8c4-2fe0-4a9a-82b0-386f2418f301",
+    "session_id": "20261102T000000",
+    "seqs": [
+      9
+    ],
+    "claim": "Her last Shmuber Eats order took about twenty minutes to place.",
+    "provenance": "evidence",
+    "quoted_text": "It took maybe twenty minutes, the search was a bit slow.",
+    "bearings": []
+  },
+  {
+    "id": "51a21bc0-20fe-4b7b-b270-f3a720d09ca7",
+    "session_id": "20261102T000000",
+    "seqs": [
+      9
+    ],
+    "claim": "After her child recovered from the fever, Priya resumed her Saturday shopping trips to the big supermarket.",
+    "provenance": "evidence",
+    "quoted_text": "Once he was better we were straight back to Saturdays at the big shop, to be honest.",
+    "bearings": []
+  },
+  {
+    "id": "ded8f586-c6ce-4201-ab0a-e6a1185e4416",
+    "session_id": "20261102T000000",
+    "seqs": [
+      11
+    ],
+    "claim": "Priya does not order groceries online often.",
+    "provenance": "evidence",
+    "quoted_text": "Not often.",
+    "bearings": []
+  },
+  {
+    "id": "b3194579-0cf5-4bb9-976a-0ad892129a40",
+    "session_id": "20261102T000000",
+    "seqs": [
+      11
+    ],
+    "claim": "Priya has tried a couple of other grocery apps over the years.",
+    "provenance": "evidence",
+    "quoted_text": "I've tried a couple of the other apps over the years, but mostly I like to see the stuff myself, especially fruit.",
+    "bearings": []
+  },
+  {
+    "id": "36faa92a-73e8-424f-8bb7-ad9a87b6e420",
+    "session_id": "20261102T000000",
+    "seqs": [
+      11
+    ],
+    "claim": "Priya prefers to see groceries in person, especially fruit.",
+    "provenance": "evidence",
+    "quoted_text": "I've tried a couple of the other apps over the years, but mostly I like to see the stuff myself, especially fruit.",
+    "bearings": []
+  },
+  {
+    "id": "706916f4-2ea3-42bc-9896-f5017d0a1208",
+    "session_id": "20261102T000000",
+    "seqs": [
+      13
+    ],
+    "claim": "Priya orders groceries online, if at all, during the week.",
+    "provenance": "evidence",
+    "quoted_text": "During the week, if at all. Weekends I'm in the shop anyway with the boys.",
+    "bearings": []
+  },
+  {
+    "id": "ca178872-f982-4234-ad11-e8110e6d7c77",
+    "session_id": "20261102T000000",
+    "seqs": [
+      15
+    ],
+    "claim": "During her last order, the crackers were substituted because they were out of the preferred brand.",
+    "provenance": "evidence",
+    "quoted_text": "On that order, the crackers. They were out of the ones he likes, so I got some other brand.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "3d2e29b7-275f-40b4-a0f3-802d9832ad7b",
+    "session_id": "20261102T000000",
+    "seqs": [
+      15
+    ],
+    "claim": "Her son complained about the substituted crackers but still ate them.",
+    "provenance": "evidence",
+    "quoted_text": "He complained but he ate them.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "0d0c9378-f8f8-4645-a5b5-e070adf68c8d",
+    "session_id": "20261102T000000",
+    "seqs": [
+      15
+    ],
+    "claim": "The milk in her last order was a different brand, which Priya considered acceptable.",
+    "provenance": "evidence",
+    "quoted_text": "And the milk was a different brand, which, fine, milk is milk.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "2145bcfd-8466-4cb7-8047-2454f118f556",
+    "session_id": "20261102T000000",
+    "seqs": [
+      17
+    ],
+    "claim": "Priya did not know about the substitutions before the delivery arrived.",
+    "provenance": "evidence",
+    "quoted_text": "No, I saw it when the bags came in. There was a little paper slip on top.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "eb6a01fb-5eb0-492b-80e8-580f9b1ff99e",
+    "session_id": "20261102T000000",
+    "seqs": [
+      17
+    ],
+    "claim": "Priya did not mind the substitutions on her last order.",
+    "provenance": "evidence",
+    "quoted_text": "I didn't really mind honestly, I had other things on my mind.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "a48fc433-4543-47f7-a074-c2b4106efcff",
+    "session_id": "20261102T000000",
+    "seqs": [
+      19
+    ],
+    "claim": "Priya uses a whiteboard on the fridge to keep track of what groceries are needed.",
+    "provenance": "evidence",
+    "quoted_text": "There's a whiteboard on the fridge.",
+    "bearings": []
+  },
+  {
+    "id": "abe97539-47ef-44da-a314-09aba39ca1a4",
+    "session_id": "20261102T000000",
+    "seqs": [
+      19
+    ],
+    "claim": "In theory, everyone in the household writes on the whiteboard.",
+    "provenance": "evidence",
+    "quoted_text": "In theory everyone writes on it.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "9270a87b-294e-45f0-8d87-b4a8147b650c",
+    "session_id": "20261102T000000",
+    "seqs": [
+      19
+    ],
+    "claim": "In practice, Priya is usually the one who writes on the whiteboard, and sometimes her ten-year-old son writes 'chocolate' on it.",
+    "provenance": "evidence",
+    "quoted_text": "In practice it's me, and sometimes the ten-year-old writes chocolate in big letters.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "500edadf-42a9-4521-b286-6f8a4d07271c",
+    "session_id": "20261102T000000",
+    "seqs": [
+      21
+    ],
+    "claim": "Priya's husband rarely adds items to the whiteboard.",
+    "provenance": "evidence",
+    "quoted_text": "Rarely. He texts me if he notices we're out of coffee. That's about it.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "6fc35ae3-ac39-4a62-b633-0e88a0afae99",
+    "session_id": "20261102T000000",
+    "seqs": [
+      21
+    ],
+    "claim": "Priya's husband texts her if they are out of coffee.",
+    "provenance": "evidence",
+    "quoted_text": "He texts me if he notices we're out of coffee.",
+    "bearings": []
+  },
+  {
+    "id": "17b29db2-3ebc-45f9-8f9c-d5c64c182dad",
+    "session_id": "20261102T000000",
+    "seqs": [
+      23
+    ],
+    "claim": "Priya chose the first available same-day delivery window, which she thinks was four to six.",
+    "provenance": "evidence",
+    "quoted_text": "I just took the first one that was the same day, I think it was four to six.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "a9f63b8c-ce2c-4cd4-a808-83e9426c48f0",
+    "session_id": "20261102T000000",
+    "seqs": [
+      23
+    ],
+    "claim": "Priya was home during the delivery window, so the specific time did not matter.",
+    "provenance": "evidence",
+    "quoted_text": "I was home anyway, so it didn't really matter.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "72983197-f308-4b97-9350-3a5dd6c17c46",
+    "session_id": "20261102T000000",
+    "seqs": [
+      25
+    ],
+    "claim": "Same-day delivery windows were easy to find in the app, located at the top.",
+    "provenance": "evidence",
+    "quoted_text": "Yes, the same-day ones were right at the top. Easy.",
+    "bearings": []
+  },
+  {
+    "id": "de84bd2e-4041-43d5-b860-9c205a7594cf",
+    "session_id": "20261102T000000",
+    "seqs": [
+      27
+    ],
+    "claim": "Priya does not think a monthly delivery pass would make sense for her, as she does not order every week.",
+    "provenance": "evidence",
+    "quoted_text": "A pass? For me, I don't think so. I'd have to order every week for it to make sense, and I don't.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "6d57570b-0630-4d42-961b-91ca62b6f327",
+    "session_id": "20261102T000000",
+    "seqs": [
+      29
+    ],
+    "claim": "Priya would still not be interested in a 9.99 a month delivery pass with free delivery on everything.",
+    "provenance": "evidence",
+    "quoted_text": "Still no, I think. Maybe for someone who does a big weekly order. Not us.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "baa7a29d-009a-476f-85d8-e212c29d6b26",
+    "session_id": "20261102T000000",
+    "seqs": [
+      31
+    ],
+    "claim": "Priya would probably recommend Shmuber Eats to a friend.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, probably.",
+    "bearings": []
+  },
+  {
+    "id": "30642eff-c370-491f-a604-b005260ada15",
+    "session_id": "20261102T000000",
+    "seqs": [
+      31
+    ],
+    "claim": "The Shmuber Eats driver was polite and carried the bags into the kitchen.",
+    "provenance": "evidence",
+    "quoted_text": "The driver was really polite, he carried the bags right into the kitchen.",
+    "bearings": []
+  },
+  {
+    "id": "80c77cb6-4279-4724-9183-634677b90796",
+    "session_id": "20261102T000000",
+    "seqs": [
+      33
+    ],
+    "claim": "Priya liked the tracking feature of Shmuber Eats because she could see the driver on the map and did not have to wait by the front door.",
+    "provenance": "evidence",
+    "quoted_text": "The tracking. I could see him on the map, so I wasn't hovering by the front door.",
+    "bearings": []
+  },
+  {
+    "id": "146fd07a-523e-4b4b-ae7e-ff80316df1fb",
+    "session_id": "20261102T000000",
+    "seqs": [
+      35
+    ],
+    "claim": "Priya disliked the search function in the app, as typing 'crackers' yielded many irrelevant results.",
+    "provenance": "evidence",
+    "quoted_text": "The search. If you type crackers you get two hundred things and half of them aren't crackers.",
+    "bearings": []
+  },
+  {
+    "id": "4a9066e7-1f58-4847-bfeb-5f34ff8b3f8a",
+    "session_id": "20261102T000000",
+    "seqs": [
+      37
+    ],
+    "claim": "Priya always uses her phone to place Shmuber Eats orders.",
+    "provenance": "evidence",
+    "quoted_text": "Phone. Always the phone.",
+    "bearings": []
+  },
+  {
+    "id": "cc1d28e0-8900-48a9-91ee-5b86c1ae7f1e",
+    "session_id": "20261102T000000",
+    "seqs": [
+      39
+    ],
+    "claim": "Priya thinks she received an email, possibly a survey, after her order but does not open them.",
+    "provenance": "evidence",
+    "quoted_text": "I think so? A survey maybe. I don't really open those, sorry.",
+    "bearings": []
+  },
+  {
+    "id": "f1acfd9c-7bcc-407d-ae2d-42fc41e3627f",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      1
+    ],
+    "claim": "Marcus is on his break and has a good half hour to talk.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, I'm on my break, I've got a good half hour.",
+    "bearings": []
+  },
+  {
+    "id": "013426ec-6910-4fd7-bf8a-e50169c0cea6",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      3
+    ],
+    "claim": "Marcus's household consists of himself, his partner Dana, and her fifteen-year-old daughter.",
+    "provenance": "evidence",
+    "quoted_text": "It's me, my partner Dana and her daughter, she's fifteen.",
+    "bearings": []
+  },
+  {
+    "id": "0521f2d0-42de-4c3e-b4fb-a0c92ef5b7c6",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      3
+    ],
+    "claim": "Marcus mostly does the food shopping.",
+    "provenance": "evidence",
+    "quoted_text": "I do the shopping mostly",
+    "bearings": []
+  },
+  {
+    "id": "7ddf6f42-ffe9-4f90-8d52-6acb5e3e43a3",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      3
+    ],
+    "claim": "Marcus usually shops at a discount place on his way home from the warehouse.",
+    "provenance": "evidence",
+    "quoted_text": "I stop at the discount place on my way home from the warehouse.",
+    "bearings": []
+  },
+  {
+    "id": "5c174c69-6991-4c5c-b62e-b8a4659ca0f8",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      3
+    ],
+    "claim": "Marcus only used the app because his car's clutch went out, and he didn't want to carry bags home on the bus.",
+    "provenance": "evidence",
+    "quoted_text": "The only reason your app was even on my phone is the clutch went on the car and it sat in the garage for a week waiting on parts, and I wasn't carrying six bags home on the bus.",
+    "bearings": []
+  },
+  {
+    "id": "230d65e9-3c01-43bb-b833-5007c72390cb",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      3
+    ],
+    "claim": "Marcus stopped using the app once his car was fixed and he could return to the discount place.",
+    "provenance": "evidence",
+    "quoted_text": "Got the car back and that was that, discount place on the way home again.",
+    "bearings": []
+  },
+  {
+    "id": "27356901-addf-4ae9-b89d-ac53247974b7",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      5
+    ],
+    "claim": "Marcus thinks he heard about Shmuber Eats from a flyer in the mailbox or an ad on the bus.",
+    "provenance": "inference",
+    "quoted_text": "There was a flyer in the mailbox, I think. Or an ad on the bus. One of those.",
+    "bearings": []
+  },
+  {
+    "id": "f500df40-31c0-4bba-b335-79ea29d33f4a",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      7
+    ],
+    "claim": "Marcus's last order included chicken, rice, eggs, frozen vegetables, and yogurt for Dana.",
+    "provenance": "evidence",
+    "quoted_text": "Chicken, rice, eggs, frozen veg, the yogurt Dana likes.",
+    "bearings": []
+  },
+  {
+    "id": "2bb4369c-7c4d-4f64-b815-5f87febe5d20",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      7
+    ],
+    "claim": "Marcus paid for his last order with his card.",
+    "provenance": "evidence",
+    "quoted_text": "Paid with my card.",
+    "bearings": []
+  },
+  {
+    "id": "563736c7-da2d-4c73-84e7-e5e7c5c64623",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      7
+    ],
+    "claim": "Marcus saw a picker name and a driver on the map during his last order.",
+    "provenance": "evidence",
+    "quoted_text": "Then it showed me a picker name, and later a driver on the map.",
+    "bearings": []
+  },
+  {
+    "id": "b3cf332e-e277-4608-bcc0-bdd4b40f992c",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      9
+    ],
+    "claim": "The first screen of the app was confusing because it required picking a store before seeing products.",
+    "provenance": "evidence",
+    "quoted_text": "The first screen. It wanted me to pick a store before I could see anything, and I didn't know which store was which.",
+    "bearings": []
+  },
+  {
+    "id": "282d7534-ee13-4294-8905-c3d38cdb871a",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      11
+    ],
+    "claim": "One of the thin bags ripped on the stairs when he was unpacking, but the eggs survived.",
+    "provenance": "evidence",
+    "quoted_text": "One of the bags was the thin kind and it ripped on the stairs. The eggs survived though, so, a win.",
+    "bearings": []
+  },
+  {
+    "id": "f6f5a17a-902b-4a99-ac0b-f65d68f4f842",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      13
+    ],
+    "claim": "Marcus hardly ever orders groceries online.",
+    "provenance": "evidence",
+    "quoted_text": "Hardly ever.",
+    "bearings": []
+  },
+  {
+    "id": "1372e755-7e5b-4667-a991-041ae17b5185",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      13
+    ],
+    "claim": "Marcus prefers to shop in person because he can get in and out of the store quickly and knows where everything is.",
+    "provenance": "evidence",
+    "quoted_text": "I like to be in and out of the shop in fifteen minutes, I know where everything is.",
+    "bearings": []
+  },
+  {
+    "id": "785a4fc5-1b6d-421b-8f3b-f4ab4bfca903",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      15
+    ],
+    "claim": "Chicken thighs were substituted for drumsticks in his order.",
+    "provenance": "evidence",
+    "quoted_text": "They swapped the chicken thighs for drumsticks.",
+    "bearings": []
+  },
+  {
+    "id": "11dc434f-fc59-4807-af44-5aa5e45c3090",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      15
+    ],
+    "claim": "The substitution of drumsticks for chicken thighs was annoying because drumsticks have more bone, but it was the same price per pack.",
+    "provenance": "evidence",
+    "quoted_text": "That was a bit annoying because drumsticks are more bone, but it was the same price per pack, so whatever.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "b7e7dfc0-cce5-4f16-9dd8-55b048cae371",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      17
+    ],
+    "claim": "Marcus thinks there was a notification about the substitution, but he was at work and couldn't check his phone.",
+    "provenance": "inference",
+    "quoted_text": "There was a notification, I think, but I was at work. I don't look at my phone on the floor, you can't. So I found out at the door, basically.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "f35254f0-70e9-438f-a5fd-25979cca96b6",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      19
+    ],
+    "claim": "Marcus keeps track of what he needs for groceries in his head.",
+    "provenance": "evidence",
+    "quoted_text": "In my head.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "875948c3-8be3-4f14-9fba-b642311a1726",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      19
+    ],
+    "claim": "Dana texts Marcus if she wants something specific from the store.",
+    "provenance": "evidence",
+    "quoted_text": "Dana sends me a text if she wants something specific.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "905be88c-c959-4bd8-aba8-48643984bdf0",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      19
+    ],
+    "claim": "The kid in the household eats whatever is available.",
+    "provenance": "evidence",
+    "quoted_text": "The kid just eats whatever's there.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "4bda6dc2-ad89-42b7-83d7-81365c418d11",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      21
+    ],
+    "claim": "A shared list in the app might be useful for Dana, but Marcus would probably forget to look at it.",
+    "provenance": "inference",
+    "quoted_text": "Maybe for Dana. I'd probably forget to look at it.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "55e3e214-91c8-4506-a193-fa9f77e00e3e",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      23
+    ],
+    "claim": "Marcus picked the latest delivery window, 8 to 10 PM, so he would be home from work.",
+    "provenance": "evidence",
+    "quoted_text": "I picked the latest one, eight to ten in the evening, so I'd be back from work.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "75a1786d-99fc-4c81-a604-34df7bc88b3a",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      23
+    ],
+    "claim": "His last order arrived around 9:40 PM, which was acceptable.",
+    "provenance": "evidence",
+    "quoted_text": "It came at like nine forty, which was fine.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "94d7bc57-b1c9-477e-a00a-168af7a67c2e",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      25
+    ],
+    "claim": "Marcus is not interested in a monthly delivery pass because he uses the service very rarely.",
+    "provenance": "evidence",
+    "quoted_text": "Nah. I'm not paying monthly for something I use once in a blue moon.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "6f6db03f-69db-43c8-b443-9cd1519eaf36",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      25
+    ],
+    "claim": "Marcus might pay three or four a month for a delivery pass if it were like a streaming service.",
+    "provenance": "inference",
+    "quoted_text": "Maybe three, four a month, if it was like a streaming thing.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "5e151e60-7b8d-451c-926e-27fc36730477",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      27
+    ],
+    "claim": "Marcus would not pay 9.99 a month for a delivery pass.",
+    "provenance": "evidence",
+    "quoted_text": "No way, not for me. That's a lot of chicken.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "cfc29077-39b3-4107-b3bf-0ba80fcd3650",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      29
+    ],
+    "claim": "Marcus rated his overall experience a seven out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "Seven.",
+    "bearings": []
+  },
+  {
+    "id": "d583fcbd-87d0-43b1-9d53-192a21da81fe",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      29
+    ],
+    "claim": "The app worked and nothing really went wrong during his order.",
+    "provenance": "evidence",
+    "quoted_text": "It worked, nothing really went wrong.",
+    "bearings": []
+  },
+  {
+    "id": "293c8ff2-1543-40ff-b694-843ed5160e71",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      29
+    ],
+    "claim": "The app is a bit slow to open.",
+    "provenance": "evidence",
+    "quoted_text": "The app is a bit slow to open.",
+    "bearings": []
+  },
+  {
+    "id": "953193ef-0ccc-4e7a-861a-1f4b74a9d262",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      31
+    ],
+    "claim": "Marcus would recommend the app to a friend if asked, but he doesn't typically recommend apps.",
+    "provenance": "inference",
+    "quoted_text": "Sure, if someone asked. I don't really go around recommending apps though.",
+    "bearings": []
+  },
+  {
+    "id": "e08df258-ef01-44a3-9cca-6ef3fca7d3f0",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      33
+    ],
+    "claim": "Marcus would use the app more if the evening delivery slots went later than 8-10 PM.",
+    "provenance": "evidence",
+    "quoted_text": "Honestly, if the evening slots went later. Eight to ten is the last one, and some weeks I'm on lates and I'm not home till eleven.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "487bd628-273f-432f-930d-a467ffd09833",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      35
+    ],
+    "claim": "Marcus used the app on his phone.",
+    "provenance": "evidence",
+    "quoted_text": "App. On my phone.",
+    "bearings": []
+  },
+  {
+    "id": "2643e36d-1639-477d-88d1-fc9917abe8b4",
+    "session_id": "20261102T000000-1",
+    "seqs": [
+      37
+    ],
+    "claim": "Payment went through on the first try, and his card was already saved.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, first time. Card was already saved from something else, I think.",
+    "bearings": []
+  },
+  {
+    "id": "e66b9c5f-ad16-4675-a0ba-6d3d43d69aee",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      1
+    ],
+    "claim": "I'm an expert at using this video thing because my daughter showed me how to use it last Christmas.",
+    "provenance": "evidence",
+    "quoted_text": "Yes, perfectly. My daughter showed me how to use this video thing last Christmas, so I'm an expert now.",
+    "bearings": []
+  },
+  {
+    "id": "8a332a5d-5a2a-4716-b49f-06bda673b7e6",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      5
+    ],
+    "claim": "I taught primary school for thirty-five years and retired four years ago.",
+    "provenance": "evidence",
+    "quoted_text": "I taught primary school for thirty-five years and I retired four years ago.",
+    "bearings": []
+  },
+  {
+    "id": "1817adec-3bd5-4912-9a76-9e3337cfef85",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      5
+    ],
+    "claim": "It's just me in my household now.",
+    "provenance": "evidence",
+    "quoted_text": "It's just me now.",
+    "bearings": []
+  },
+  {
+    "id": "e342010f-3b7a-4bf1-9f2d-5567ba70a35d",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      5
+    ],
+    "claim": "I do my own shopping, and I like to cook properly, even for one.",
+    "provenance": "evidence",
+    "quoted_text": "I do my own shopping, and I like to cook properly, even for one.",
+    "bearings": []
+  },
+  {
+    "id": "f05920bd-0358-41a8-a984-94408cdc6f7b",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      7
+    ],
+    "claim": "My daughter, who lives two hours away, worries about me and told me to try Shmuber Eats for a couple of months to see if I like it better than the bus.",
+    "provenance": "evidence",
+    "quoted_text": "My daughter. She lives two hours away and she worries. She said, Mum, try it for a couple of months, see if you like it better than the bus. So I'm trying it.",
+    "bearings": []
+  },
+  {
+    "id": "cf8b0022-16e2-456f-aa3f-d4d1ad7e71df",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      9
+    ],
+    "claim": "For my last Shmuber Eats order, I made a list and typed it in very slowly.",
+    "provenance": "evidence",
+    "quoted_text": "I made my list, I typed it in very slowly, and it came the next day.",
+    "bearings": []
+  },
+  {
+    "id": "15392682-0510-482d-a6c6-fae293d47f60",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      9
+    ],
+    "claim": "The Shmuber Eats order came the next day.",
+    "provenance": "evidence",
+    "quoted_text": "it came the next day.",
+    "bearings": []
+  },
+  {
+    "id": "13e7a828-3692-4049-b8e5-3f4379cf31ad",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      9
+    ],
+    "claim": "I had planned a baked salmon with lemon and dill for Sunday, but they sent a packet of smoked salmon slices instead of a salmon fillet.",
+    "provenance": "evidence",
+    "quoted_text": "I'd planned a baked salmon with lemon and dill for Sunday. But instead of a salmon fillet they sent a packet of smoked salmon slices, the kind for sandwiches, and you can't bake those, they'd just turn to leather.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "80511b30-7772-4695-a16f-85c0f1c56db4",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      9
+    ],
+    "claim": "You can't bake smoked salmon slices because they would turn to leather.",
+    "provenance": "evidence",
+    "quoted_text": "you can't bake those, they'd just turn to leather.",
+    "bearings": []
+  },
+  {
+    "id": "544f544b-aa5c-43a4-b195-e683978add01",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      11
+    ],
+    "claim": "I ended up making scrambled eggs with smoked salmon, which was nice but not what I had planned, and I had bought dill specially for the salmon fillet.",
+    "provenance": "evidence",
+    "quoted_text": "Scrambled eggs with smoked salmon. Very nice, but not what I'd planned, and I'd bought the dill specially.",
+    "bearings": []
+  },
+  {
+    "id": "803d649d-c039-4cb3-9d01-ceaa1dc97254",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      13
+    ],
+    "claim": "The picker likely only saw the word 'salmon' and didn't distinguish between a fillet and smoked slices.",
+    "provenance": "inference",
+    "quoted_text": "I think the picker saw the word salmon. A fishmonger would have laughed.",
+    "bearings": []
+  },
+  {
+    "id": "7223d4e4-304c-411c-8324-0dbe75dec4a1",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      15
+    ],
+    "claim": "When I got to the very end of the order to pay, the app logged me out completely, and I had to ring my daughter to remember my password.",
+    "provenance": "evidence",
+    "quoted_text": "When I got to the very end, to pay, it threw me out, it logged me out completely, and I had to ring my daughter to remember my password.",
+    "bearings": []
+  },
+  {
+    "id": "f1c853ac-bf9e-4bc1-9493-381b2c98cece",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      17
+    ],
+    "claim": "I order groceries online about once every two weeks since the spring.",
+    "provenance": "evidence",
+    "quoted_text": "About once every two weeks, since the spring.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "50062751-c0d8-4265-8334-56c6153d6039",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      17
+    ],
+    "claim": "My daughter checks that I am still ordering groceries online.",
+    "provenance": "evidence",
+    "quoted_text": "My daughter checks I'm still doing it.",
+    "bearings": []
+  },
+  {
+    "id": "1b82058d-f845-4e1f-b565-ff4b6880e6cd",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      19
+    ],
+    "claim": "Apart from the salmon, bread is often substituted in my orders, but I don't mind because 'bread is bread'.",
+    "provenance": "evidence",
+    "quoted_text": "Apart from the salmon? The bread, quite often. They send a different loaf. That I don't mind, bread is bread.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "8f22f192-9d0e-471d-a3d9-b5e844e5292a",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      21
+    ],
+    "claim": "Sometimes my phone buzzes with a message before they swap an item, but by the time I find my glasses, the decision has already been made.",
+    "provenance": "evidence",
+    "quoted_text": "Sometimes my phone buzzes, but by the time I've found my glasses, it's already decided.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "298618ab-32ae-4f61-a48b-b759a2842f5f",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      23
+    ],
+    "claim": "I keep track of what I need between orders in a notebook by the kettle.",
+    "provenance": "evidence",
+    "quoted_text": "A notebook by the kettle.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "801183e3-f8b2-476f-b479-92cb1eb696f7",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      23
+    ],
+    "claim": "My daughter wants me to use the list in the app, but I prefer the notebook.",
+    "provenance": "evidence",
+    "quoted_text": "My daughter wants me to use the list in the app, but I like the notebook.",
+    "bearings": []
+  },
+  {
+    "id": "3e1a0396-1e1f-4e93-9eee-5788506783c0",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      25
+    ],
+    "claim": "My daughter would love it if she could add to a list in the app.",
+    "provenance": "evidence",
+    "quoted_text": "Oh, she'd love that.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2365fbca-7d62-460a-81f1-a8792a44bf2e",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      25
+    ],
+    "claim": "If my daughter could add to a list in the app, she would add vegetables, and I would delete them.",
+    "provenance": "inference",
+    "quoted_text": "She'd add vegetables. I'd delete them.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "4fb45a82-09c7-4a69-b89e-3973f4f45ea7",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      27
+    ],
+    "claim": "Last time, I chose the morning delivery window of nine to eleven.",
+    "provenance": "evidence",
+    "quoted_text": "I chose the morning, nine to eleven.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "57b76ac0-3770-41e4-92e8-3a1c2bc93cb5",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      27
+    ],
+    "claim": "I am always up early.",
+    "provenance": "evidence",
+    "quoted_text": "I'm always up early",
+    "bearings": []
+  },
+  {
+    "id": "eebf168c-e8ca-4837-ab5d-19b4089297cb",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      27
+    ],
+    "claim": "I have my choir on Wednesdays in the afternoon.",
+    "provenance": "evidence",
+    "quoted_text": "in the afternoon I have my choir on Wednesdays.",
+    "bearings": []
+  },
+  {
+    "id": "718b6273-bbed-49ce-8b45-15a0c5d7f4cd",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      29
+    ],
+    "claim": "Once, an order came at twelve, which was a bit late, but they sent a message.",
+    "provenance": "evidence",
+    "quoted_text": "Once, it came at twelve. A bit late, but they sent a message.",
+    "bearings": []
+  },
+  {
+    "id": "aee9d54c-5140-43ae-ba8b-60db6c2a96cc",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      31
+    ],
+    "claim": "Since I am on a pension, I would have to think about a monthly delivery pass.",
+    "provenance": "evidence",
+    "quoted_text": "I'm on a pension, so I'd have to think.",
+    "bearings": []
+  },
+  {
+    "id": "dc027200-41bb-4710-be5a-1371c1b15d24",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      31
+    ],
+    "claim": "If a monthly delivery pass really saved money, I might pay perhaps five.",
+    "provenance": "inference",
+    "quoted_text": "If it really saved money, perhaps five.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "d5416bb0-22c1-4c74-9ff5-cbf4706c5657",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      33
+    ],
+    "claim": "9.99 a month for a delivery pass is too much for twice a month ordering.",
+    "provenance": "evidence",
+    "quoted_text": "No, that's too much for twice a month.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "d0fa3a95-b508-4f12-ba20-4694253b5de1",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      33
+    ],
+    "claim": "I would rather pay for each delivery than a monthly pass.",
+    "provenance": "evidence",
+    "quoted_text": "I'd rather pay for each delivery.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "cd3f60d5-0dc4-4e80-885d-9d75b5d558c8",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      35
+    ],
+    "claim": "I would recommend Shmuber Eats to my friends from choir who don't drive anymore.",
+    "provenance": "evidence",
+    "quoted_text": "To my friends from choir, maybe, the ones who don't drive anymore. Yes.",
+    "bearings": []
+  },
+  {
+    "id": "3767e225-2605-4ebe-9674-c0c52fcb4437",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      37
+    ],
+    "claim": "The thing I like most about Shmuber Eats is not standing at the bus stop with heavy bags in the rain.",
+    "provenance": "evidence",
+    "quoted_text": "Not standing at the bus stop with heavy bags in the rain.",
+    "bearings": []
+  },
+  {
+    "id": "9daacf1f-6103-4f7b-ab69-6c70f3bcccb7",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      39
+    ],
+    "claim": "The writing in the app is small, and there are too many pictures of things I didn't ask for.",
+    "provenance": "evidence",
+    "quoted_text": "The writing in the app is small, and there are too many pictures of things I didn't ask for.",
+    "bearings": []
+  },
+  {
+    "id": "7bd3dbfd-5c8d-4af4-9d7b-a0d514141b0b",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      41
+    ],
+    "claim": "I have my own recipes and haven't tried the recipes section in the app.",
+    "provenance": "evidence",
+    "quoted_text": "I have my own recipes, thank you.",
+    "bearings": []
+  },
+  {
+    "id": "5057577d-b492-4acd-883c-956d9b8d9ee8",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      43
+    ],
+    "claim": "On a scale of one to ten, I would rate Shmuber Eats a seven.",
+    "provenance": "evidence",
+    "quoted_text": "Seven.",
+    "bearings": []
+  },
+  {
+    "id": "87dfc08b-a23f-4c0c-a340-45fbe6847738",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      43
+    ],
+    "claim": "I would rate Shmuber Eats an eight if the salmon had been salmon.",
+    "provenance": "inference",
+    "quoted_text": "Eight if the salmon had been salmon.",
+    "bearings": []
+  },
+  {
+    "id": "9d9277ea-ff5f-44b3-8fff-5c5bb232131e",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      45
+    ],
+    "claim": "My daughter is pleased with Shmuber Eats because she says I sound less tired on the phone on Mondays.",
+    "provenance": "evidence",
+    "quoted_text": "She's pleased. She says I sound less tired on the phone on Mondays.",
+    "bearings": []
+  },
+  {
+    "id": "d386aaa8-f67e-4bd4-a68f-fd5c7bbc7d4f",
+    "session_id": "20261102T000000-10",
+    "seqs": [
+      47
+    ],
+    "claim": "I did not leave a review in the app because I would not know where.",
+    "provenance": "evidence",
+    "quoted_text": "No. I wouldn't know where.",
+    "bearings": []
+  },
+  {
+    "id": "bbf8a34a-1565-4d79-81d6-065713853288",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      1
+    ],
+    "claim": "The interviewee has twenty minutes before collecting his son.",
+    "provenance": "evidence",
+    "quoted_text": "I have twenty minutes before I collect my son.",
+    "bearings": []
+  },
+  {
+    "id": "b767c6ac-8d0d-460f-9017-fb74e777391b",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee's household consists of himself, his wife Leila, their eight-year-old son, and Leila's mother.",
+    "provenance": "evidence",
+    "quoted_text": "We are me, my wife Leila, our son, he's eight, and Leila's mother lives with us.",
+    "bearings": []
+  },
+  {
+    "id": "075259d1-9fed-452d-8291-adcd8d0dbfac",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      5
+    ],
+    "claim": "Leila's mother manages the kitchen.",
+    "provenance": "evidence",
+    "quoted_text": "Leila's mother runs the kitchen, honestly.",
+    "bearings": []
+  },
+  {
+    "id": "8ac08378-b230-42ac-a4ea-0979f007f73f",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee drives Leila's mother to the butcher and a big supermarket on Fridays.",
+    "provenance": "evidence",
+    "quoted_text": "I drive her to the shops on Friday, the butcher and the big supermarket next to it.",
+    "bearings": []
+  },
+  {
+    "id": "82b52adb-4a1e-41c2-b129-5be411c3c647",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee learned about Shmuber Eats through a phone advertisement while reading the news.",
+    "provenance": "evidence",
+    "quoted_text": "An advert, on my phone, while I was reading the news.",
+    "bearings": []
+  },
+  {
+    "id": "d3c9a33a-e9d7-4a2f-a652-3b347ce3de69",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      9
+    ],
+    "claim": "Leila's cousins called at 4 PM to announce they were coming for dinner, prompting a Shmuber Eats order.",
+    "provenance": "evidence",
+    "quoted_text": "So, Leila's cousins rang at four in the afternoon to say they were driving up from the coast and would be with us for dinner, all six of them, and there was no time to go out and also cook.",
+    "bearings": []
+  },
+  {
+    "id": "03afad3b-31bc-4cec-a8f9-e510f9305125",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      9
+    ],
+    "claim": "Leila's mother dictated the grocery list for the Shmuber Eats order, and the interviewee typed it.",
+    "provenance": "evidence",
+    "quoted_text": "So Leila's mother dictated, and I typed. Lamb, rice, aubergines, yogurt, herbs, bread, fruit, a lot of everything.",
+    "bearings": []
+  },
+  {
+    "id": "704dd47f-5aaf-413d-a2b5-8e7bd167ebdb",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      9
+    ],
+    "claim": "Shopping at the butcher with Leila's mother on Friday mornings is their usual routine.",
+    "provenance": "evidence",
+    "quoted_text": "Friday mornings with her mother at the butcher is still how we do it, that was a one-time rescue.",
+    "bearings": []
+  },
+  {
+    "id": "090cfcd6-18b2-413d-ad26-70e792b95e56",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      11
+    ],
+    "claim": "The emergency Shmuber Eats order for dinner guests was the first time they ordered groceries online.",
+    "provenance": "evidence",
+    "quoted_text": "That was the first time.",
+    "bearings": []
+  },
+  {
+    "id": "9362e900-ea82-465c-a6dd-67f6dc01632f",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee has ordered groceries online only once since, for water.",
+    "provenance": "evidence",
+    "quoted_text": "Maybe once since, for water.",
+    "bearings": []
+  },
+  {
+    "id": "c0ac89e1-e457-4741-9551-3d0d22042415",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      13
+    ],
+    "claim": "The water order was easy, and the driver carried the twelve large bottles in.",
+    "provenance": "evidence",
+    "quoted_text": "Easy. Twelve big bottles, and the driver carried them in. My back thanked him.",
+    "bearings": []
+  },
+  {
+    "id": "b6b8b7f3-f564-41bb-b5a1-7be9e39c9be0",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      15
+    ],
+    "claim": "Fresh coriander was substituted with parsley in a Shmuber Eats order.",
+    "provenance": "evidence",
+    "quoted_text": "The herbs. We asked for fresh coriander and got parsley.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "6dbbd4b7-cba6-49a8-abd2-acd9dea11ee8",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      15
+    ],
+    "claim": "Leila's mother immediately noticed the herb substitution.",
+    "provenance": "evidence",
+    "quoted_text": "Leila's mother noticed immediately, of course.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2f2835d5-c355-4e71-b756-91c301ee8917",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      15
+    ],
+    "claim": "Leila's mother was able to fix the herb substitution because she has something in the garden.",
+    "provenance": "evidence",
+    "quoted_text": "But she fixed it, she always has something in the garden.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "4612a137-15d4-4dc4-9eb1-365501475fda",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee did not know about the substitution before the delivery arrived.",
+    "provenance": "evidence",
+    "quoted_text": "No, I only knew when she started shouting at the bag.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "4b770ca1-fbf3-4cd0-ad8e-0253fb1a660f",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee believes there was a message about the substitution, but he was cleaning the house.",
+    "provenance": "inference",
+    "quoted_text": "I think there was a message, but I was cleaning the house.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "8fabbd99-270f-484f-9d9d-a610b89d6f8b",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      19
+    ],
+    "claim": "Leila's mother keeps track of needed groceries in her head; she is the 'list'.",
+    "provenance": "evidence",
+    "quoted_text": "Leila's mother keeps it in her head. She is the list.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "cf31ce23-6082-4df3-889c-773974ec7ed5",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      19
+    ],
+    "claim": "Leila writes some things on her phone for the pharmacy.",
+    "provenance": "evidence",
+    "quoted_text": "Leila writes some things on her phone for the pharmacy.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "52325379-ea61-451f-8e0e-adfebb6402f2",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      21
+    ],
+    "claim": "Leila communicates items to add to an order by sending a photo of an empty box.",
+    "provenance": "evidence",
+    "quoted_text": "She sends me a photo of the empty box. That's her list.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "1e65c98e-079e-45f7-bdf9-b762d771255e",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      23
+    ],
+    "claim": "The last delivery window picked was 6 PM to 8 PM, the last one available that day.",
+    "provenance": "evidence",
+    "quoted_text": "It was the six to eight that evening, the last one that day.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "29e182d7-ec6f-402c-ba3e-b9473abafb36",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      23
+    ],
+    "claim": "The delivery arrived at 6:40 PM, which was acceptable.",
+    "provenance": "evidence",
+    "quoted_text": "It came at six forty, which was fine.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "1fb631eb-7aba-453a-9b95-8954d5c3cc0a",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      25
+    ],
+    "claim": "A two-hour delivery slot works for them on a normal day because someone is always home.",
+    "provenance": "evidence",
+    "quoted_text": "Somebody is always home, so yes. That's not a problem for us.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "835ff80f-d1f0-401d-8a6c-3b9e8ffd8019",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      27
+    ],
+    "claim": "A monthly delivery pass is not suitable for them because they do not order enough.",
+    "provenance": "evidence",
+    "quoted_text": "For us, no. We don't order enough.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "dedd0743-4940-434a-aa8c-1e6c919fe0b0",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      27
+    ],
+    "claim": "They might consider a monthly delivery pass if it cost two or three a month.",
+    "provenance": "inference",
+    "quoted_text": "Maybe if it was two, three a month.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "c3948eb2-91ca-4f3f-92f8-94af6b4fd165",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      29
+    ],
+    "claim": "Leila's mother would never agree to a 9.99 a month delivery pass because she likes to see the meat.",
+    "provenance": "evidence",
+    "quoted_text": "No, no. Leila's mother would never agree. She likes to see the meat.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "8f613b80-3874-4ecd-b825-5af4ccde418c",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee liked that Shmuber Eats was fast, with delivery two hours after ordering.",
+    "provenance": "evidence",
+    "quoted_text": "That it was fast. I ordered, and two hours later it was at the door.",
+    "bearings": []
+  },
+  {
+    "id": "a98f6f8b-9980-4579-929e-7e692e237c9d",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee liked the coriander substitution least about the service.",
+    "provenance": "evidence",
+    "quoted_text": "The coriander.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "4f66d653-9259-4780-b94b-61e66296bc1c",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee disliked that the app showed many offers before he could search.",
+    "provenance": "evidence",
+    "quoted_text": "And the app showed me a lot of offers before I could search.",
+    "bearings": []
+  },
+  {
+    "id": "f62875c4-dd7f-408c-8456-f2e6a55e4a32",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee paid with his card in the app, and it was quick.",
+    "provenance": "evidence",
+    "quoted_text": "Yes, my card. It was quick.",
+    "bearings": []
+  },
+  {
+    "id": "6019b99d-085a-47c1-ab8c-ca617256721a",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      37
+    ],
+    "claim": "The overall experience with Shmuber Eats was an eight out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "Eight.",
+    "bearings": []
+  },
+  {
+    "id": "caaec075-52e9-4a6d-979d-700db93799b0",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee found the overall experience quick and easy.",
+    "provenance": "evidence",
+    "quoted_text": "It was quick and easy.",
+    "bearings": []
+  },
+  {
+    "id": "6f7333d7-8fbc-453b-b55d-5d0761fea6f3",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      39
+    ],
+    "claim": "Only the interviewee used the Shmuber Eats app.",
+    "provenance": "evidence",
+    "quoted_text": "No, only me.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "6ba3c067-5153-4bc4-a98b-df2c54473149",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      39
+    ],
+    "claim": "Leila's mother does not trust the app but trusts the interviewee with the phone.",
+    "provenance": "evidence",
+    "quoted_text": "Leila's mother doesn't trust it. She trusts me with the phone.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "7922baee-6b99-4a54-a62b-3a0d8d0ee0fb",
+    "session_id": "20261102T000000-11",
+    "seqs": [
+      41
+    ],
+    "claim": "The interviewee believes all questions about his orders have been answered.",
+    "provenance": "inference",
+    "quoted_text": "No, I think that's it.",
+    "bearings": []
+  },
+  {
+    "id": "427f6f7b-0fcc-47d8-8449-99f41324dd27",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      1
+    ],
+    "claim": "I'm in the library, in one of the little booths. It's fine.",
+    "provenance": "evidence",
+    "quoted_text": "I'm in the library, in one of the little booths. It's fine.",
+    "bearings": []
+  },
+  {
+    "id": "01572e87-6915-4633-bb74-a52639f55574",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      5
+    ],
+    "claim": "I am doing a master's in chemistry and I share a flat with three other people.",
+    "provenance": "evidence",
+    "quoted_text": "I'm doing a master's in chemistry and I share a flat with three other people.",
+    "bearings": []
+  },
+  {
+    "id": "94685192-9fea-4579-a821-6c53e8d3af50",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      5
+    ],
+    "claim": "We each buy our own food, mostly, and then there's a shared shelf for oil and salt and stuff that nobody ever refills.",
+    "provenance": "evidence",
+    "quoted_text": "We each buy our own food, mostly, and then there's a shared shelf for oil and salt and stuff that nobody ever refills.",
+    "bearings": []
+  },
+  {
+    "id": "00ce359b-810d-4508-a9dd-1381908995d5",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      7
+    ],
+    "claim": "Shmuber Eats was on the student discount site.",
+    "provenance": "evidence",
+    "quoted_text": "It was on the student discount site.",
+    "bearings": []
+  },
+  {
+    "id": "0578ff0c-310c-43aa-b47a-d00e8f80a8b6",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      7
+    ],
+    "claim": "There was a big first-order discount, so I thought, okay, let's actually try it properly.",
+    "provenance": "evidence",
+    "quoted_text": "A big first-order discount, so I thought, okay, let's actually try it properly.",
+    "bearings": []
+  },
+  {
+    "id": "9620d8fb-4bed-4b85-b61d-13d9695b1b9e",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      7
+    ],
+    "claim": "We're on the fourth floor, no lift, and I'm tired of hauling water bottles up the stairs.",
+    "provenance": "evidence",
+    "quoted_text": "We're on the fourth floor, no lift, and I'm tired of hauling water bottles up the stairs.",
+    "bearings": []
+  },
+  {
+    "id": "c0ba8227-ecfc-48eb-a035-496e9ba54a98",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      9
+    ],
+    "claim": "I had planned the week.",
+    "provenance": "evidence",
+    "quoted_text": "I'd planned the week.",
+    "bearings": []
+  },
+  {
+    "id": "4afa24d4-86e1-4c6f-9c18-9ed14bca8596",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      9
+    ],
+    "claim": "I do a big curry on Sunday and eat it till Wednesday.",
+    "provenance": "evidence",
+    "quoted_text": "I do a big curry on Sunday and eat it till Wednesday.",
+    "bearings": []
+  },
+  {
+    "id": "1ae8af2a-a33b-4ed0-a564-54ec758b1b58",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      9
+    ],
+    "claim": "I put in rice, onions, the spices, chickpeas, spinach, coconut milk.",
+    "provenance": "evidence",
+    "quoted_text": "I put in rice, onions, the spices, chickpeas, spinach, coconut milk.",
+    "bearings": []
+  },
+  {
+    "id": "7b643b35-fdf8-4ace-aa3b-f8c4f92cfe6f",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      9
+    ],
+    "claim": "Instead of the coconut milk in a tin they'd given me a carton of the coconut drink, the thin one you put in cereal.",
+    "provenance": "evidence",
+    "quoted_text": "instead of the coconut milk in a tin they'd given me a carton of the coconut drink, the thin one you put in cereal",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "38f24a52-9e7f-483f-94cf-d64172e4d553",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      9
+    ],
+    "claim": "For a curry, the coconut drink is just water, it splits.",
+    "provenance": "evidence",
+    "quoted_text": "which for a curry is just water, it splits.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "02dda868-0e6f-49da-b9a8-2f8656e68ee8",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      11
+    ],
+    "claim": "I used the coconut drink anyway because I had nothing else.",
+    "provenance": "evidence",
+    "quoted_text": "I used it anyway because I had nothing else.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "d5c62978-d12f-453c-b034-a104b584cc39",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      11
+    ],
+    "claim": "The curry was sad and very thin.",
+    "provenance": "evidence",
+    "quoted_text": "It was sad. Very thin.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "41342082-14c8-4acf-b784-b5517b83e66c",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      11
+    ],
+    "claim": "The picker just searched coconut and took the first thing.",
+    "provenance": "inference",
+    "quoted_text": "I think the picker just searched coconut and took the first thing.",
+    "bearings": []
+  },
+  {
+    "id": "3084f134-84d8-4910-b444-b7beab86be5b",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      13
+    ],
+    "claim": "I did not tell anyone, or contact Shmuber Eats about the coconut milk substitution.",
+    "provenance": "evidence",
+    "quoted_text": "No. I mean, who would I tell?",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      },
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "ff009185-5ee6-40f9-9b65-7b2a0688deb5",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      13
+    ],
+    "claim": "There was no button for 'wrong for the recipe', only 'missing' or 'damaged' in the app.",
+    "provenance": "evidence",
+    "quoted_text": "There was no button for wrong for the recipe, only missing or damaged.",
+    "bearings": []
+  },
+  {
+    "id": "dfff664a-8f63-4a21-b024-35561170d2cb",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      15
+    ],
+    "claim": "I order groceries online every two weeks, more or less, since the discount.",
+    "provenance": "evidence",
+    "quoted_text": "Every two weeks, more or less, since the discount.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "019fbffe-5410-4026-ad98-f6c69f6cfc09",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      15
+    ],
+    "claim": "Before the discount, I never ordered groceries online.",
+    "provenance": "evidence",
+    "quoted_text": "Before that, never.",
+    "bearings": []
+  },
+  {
+    "id": "53b9a020-cddc-4034-a2ac-1a0c3b97ec80",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      17
+    ],
+    "claim": "I usually order on Saturday morning.",
+    "provenance": "evidence",
+    "quoted_text": "Saturday morning.",
+    "bearings": []
+  },
+  {
+    "id": "e1fb329a-9ae2-4188-a496-e442bac99b65",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      17
+    ],
+    "claim": "I order Friday night when I'm too tired to go out.",
+    "provenance": "evidence",
+    "quoted_text": "I order Friday night when I'm too tired to go out.",
+    "bearings": []
+  },
+  {
+    "id": "060badd1-443b-4e67-a33f-d12c9d3a67cc",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      19
+    ],
+    "claim": "Apart from the coconut thing, the spinach was once substituted with frozen instead of fresh.",
+    "provenance": "evidence",
+    "quoted_text": "Apart from the coconut thing? The spinach once, they gave me frozen instead of fresh.",
+    "bearings": []
+  },
+  {
+    "id": "176d9aed-7b2a-4077-abd2-4d620b8e1832",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      19
+    ],
+    "claim": "The frozen spinach substitution was okay because it was going in a curry anyway.",
+    "provenance": "evidence",
+    "quoted_text": "That one was okay, it was going in a curry anyway.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "113eb742-edee-4f82-bbb0-dbb899e44059",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      21
+    ],
+    "claim": "The app sent a message about the spinach substitution, but it was after I'd already gone to bed.",
+    "provenance": "evidence",
+    "quoted_text": "It sent a message, yes, but it was after I'd already gone to bed, so I only saw it in the morning when the bags were on the doorstep.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "cb322eab-8598-4622-8d66-d1d53ce259cf",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      21
+    ],
+    "claim": "I only saw the substitution message in the morning when the bags were on the doorstep.",
+    "provenance": "evidence",
+    "quoted_text": "so I only saw it in the morning when the bags were on the doorstep.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "77849fac-290b-4b0c-bba5-9b277839165c",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      23
+    ],
+    "claim": "I have a note on my phone to keep track of what I need.",
+    "provenance": "evidence",
+    "quoted_text": "I have a note on my phone.",
+    "bearings": []
+  },
+  {
+    "id": "dcfacc19-8f0e-4519-ba5a-d1952d89704f",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      23
+    ],
+    "claim": "The flatmates have their own notes for groceries.",
+    "provenance": "evidence",
+    "quoted_text": "The flatmates have their own.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "30f52140-ca3c-4b81-90f7-cc468eaa5b5b",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      23
+    ],
+    "claim": "We tried a shared note for the shared shelf, it lasted about four days.",
+    "provenance": "evidence",
+    "quoted_text": "We tried a shared one for the shelf, it lasted about four days.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "7c71f29d-5a5f-46b4-91ce-72261604ac1c",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      25
+    ],
+    "claim": "I picked nine to eleven on Saturday for my delivery window.",
+    "provenance": "evidence",
+    "quoted_text": "I picked nine to eleven on Saturday.",
+    "bearings": []
+  },
+  {
+    "id": "d7ba51e1-f31f-4935-b2d1-01e8ce348830",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      25
+    ],
+    "claim": "I'm always home Saturday morning, I'm basically asleep.",
+    "provenance": "evidence",
+    "quoted_text": "I'm always home Saturday morning, I'm basically asleep.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "c7841cae-fd6c-430f-9dba-9698bf864653",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      27
+    ],
+    "claim": "For Saturday, the two-hour delivery window is fine.",
+    "provenance": "evidence",
+    "quoted_text": "For Saturday it's fine.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "6c56fcd9-acaf-43ba-94b7-09e98c8b50b3",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      27
+    ],
+    "claim": "On a weekday I'd be in the lab, so I just don't do weekdays.",
+    "provenance": "evidence",
+    "quoted_text": "On a weekday I'd be in the lab, so I just don't do weekdays.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8f3e5253-865d-4a90-892d-0ea89c586e66",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      29
+    ],
+    "claim": "As a student, I would pay maybe five, but not more, for a monthly delivery pass.",
+    "provenance": "evidence",
+    "quoted_text": "As a student, honestly, five maybe. Not more.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "3c92dbda-2c01-41c4-973e-99fe894bfc04",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      29
+    ],
+    "claim": "I already pay for two streaming things I should cancel.",
+    "provenance": "evidence",
+    "quoted_text": "I already pay for two streaming things I should cancel.",
+    "bearings": []
+  },
+  {
+    "id": "aaddd9c6-5138-4fe6-8c97-1f61ed567bf3",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      31
+    ],
+    "claim": "I rate Shmuber Eats an eight out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "Eight.",
+    "bearings": []
+  },
+  {
+    "id": "a6b7b887-2a81-4908-9230-d27e2e553943",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      31
+    ],
+    "claim": "Shmuber Eats is very convenient.",
+    "provenance": "evidence",
+    "quoted_text": "It's very convenient.",
+    "bearings": []
+  },
+  {
+    "id": "b4bf9677-4b69-4890-bfc1-bcd4b0dd3fa4",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      31
+    ],
+    "claim": "Shmuber Eats just needs smarter pickers, or smarter, I don't know, rules.",
+    "provenance": "inference",
+    "quoted_text": "It just needs smarter pickers, or smarter, I don't know, rules.",
+    "bearings": []
+  },
+  {
+    "id": "f70c3a03-866f-4466-ae8e-43b00d3e4c90",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      33
+    ],
+    "claim": "I would recommend Shmuber Eats to a friend.",
+    "provenance": "evidence",
+    "quoted_text": "Yes, I already did, to my flatmate.",
+    "bearings": []
+  },
+  {
+    "id": "36390690-559d-411f-b4f2-4833662f6270",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      33
+    ],
+    "claim": "My flatmate used my code.",
+    "provenance": "evidence",
+    "quoted_text": "She used my code.",
+    "bearings": []
+  },
+  {
+    "id": "923e68eb-1bf0-4bbd-bf7e-ccddfa4d44ae",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      35
+    ],
+    "claim": "Not carrying the water up is the whole thing for me.",
+    "provenance": "evidence",
+    "quoted_text": "Not carrying the water up. That's the whole thing for me.",
+    "bearings": []
+  },
+  {
+    "id": "9ee5bca1-e91a-4ae1-be9e-e0e82fb4650b",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      37
+    ],
+    "claim": "The search on the app is weird.",
+    "provenance": "evidence",
+    "quoted_text": "The search on the app is weird.",
+    "bearings": []
+  },
+  {
+    "id": "41dc9e29-63ca-4816-b89f-838b1d87d2d3",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      37
+    ],
+    "claim": "When I search for chickpeas, it shows me hummus first.",
+    "provenance": "evidence",
+    "quoted_text": "I search for chickpeas and it shows me hummus first.",
+    "bearings": []
+  },
+  {
+    "id": "8910b055-f6ba-4791-a1d3-4f6043efbff5",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      39
+    ],
+    "claim": "I had one grocery app for meal kits once, but it was too expensive for me.",
+    "provenance": "evidence",
+    "quoted_text": "I had one for meal kits once, but it was too expensive for me.",
+    "bearings": []
+  },
+  {
+    "id": "f4a563ea-5d3e-4f8e-894f-3f0eee0d0f16",
+    "session_id": "20261102T000000-2",
+    "seqs": [
+      41
+    ],
+    "claim": "The bags are a lot; I have a mountain of paper bags now.",
+    "provenance": "evidence",
+    "quoted_text": "Maybe just that the bags are a lot. I have a mountain of paper bags now.",
+    "bearings": []
+  },
+  {
+    "id": "c4358129-a8ad-4f88-91be-fc91356d6f71",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      1
+    ],
+    "claim": "I've got a call at the top of the hour, so we're good till then.",
+    "provenance": "evidence",
+    "quoted_text": "I've got a call at the top of the hour, so we're good till then.",
+    "bearings": []
+  },
+  {
+    "id": "5bf0e254-56cf-4895-994a-ffc7eadb6877",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      5
+    ],
+    "claim": "My household consists of myself, my wife Ana, and her brother who is staying with us.",
+    "provenance": "evidence",
+    "quoted_text": "It's me and my wife Ana, and her brother is staying with us for a while.",
+    "bearings": []
+  },
+  {
+    "id": "0a5caac9-567f-4d3a-94f8-07d44e65a168",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      5
+    ],
+    "claim": "I do most of the cooking and most of the shopping.",
+    "provenance": "evidence",
+    "quoted_text": "I do most of the cooking, so I do most of the shopping.",
+    "bearings": []
+  },
+  {
+    "id": "54789ca1-7dfb-4cbe-9583-c4e004c9a8ea",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      5
+    ],
+    "claim": "Weekends we used to go to the market by the old station.",
+    "provenance": "evidence",
+    "quoted_text": "Weekends we used to go to the market by the old station.",
+    "bearings": []
+  },
+  {
+    "id": "00313401-6baa-497b-afc3-b83bbcdbe223",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      7
+    ],
+    "claim": "I heard about Shmuber Eats from an ad on a podcast, one of those read-out ads in the middle.",
+    "provenance": "evidence",
+    "quoted_text": "An ad on a podcast, I think. One of those read-out ads in the middle.",
+    "bearings": []
+  },
+  {
+    "id": "2e06368f-6718-4663-99d1-5d5f18dbcc53",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      9
+    ],
+    "claim": "My last order was placed when we got the keys to the new flat, boxes were up to the ceiling, I didn't know where the nearest shop was, and our car was still at Ana's parents'.",
+    "provenance": "evidence",
+    "quoted_text": "So this was the week we got the keys to the new flat, boxes up to the ceiling, I had no idea where the nearest shop even was, and our car was still parked at Ana's parents'.",
+    "bearings": []
+  },
+  {
+    "id": "6ad3803a-f8aa-408f-ad16-66eed0fc0885",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      9
+    ],
+    "claim": "I ordered basics and ingredients to cook properly, specifically pasta, tomatoes, cheese, and flour to make pizza on the first night as a tradition.",
+    "provenance": "evidence",
+    "quoted_text": "So I ordered the basics and some things to cook properly. Pasta, tomatoes, cheese, and flour, because I wanted to make pizza on the first night, it's a little tradition of ours.",
+    "bearings": []
+  },
+  {
+    "id": "48e9b8d8-3c89-466c-828c-878bdddf4346",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      9
+    ],
+    "claim": "Now that we've unpacked, I know there's a good market ten minutes' walk away, so that's where I go for groceries.",
+    "provenance": "evidence",
+    "quoted_text": "Now we've unpacked, I know there's a really decent market ten minutes' walk away, so that's where I go.",
+    "bearings": []
+  },
+  {
+    "id": "72746d43-84ce-4d38-aa5f-18c96ae20d60",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      11
+    ],
+    "claim": "I have only ordered groceries online one time.",
+    "provenance": "evidence",
+    "quoted_text": "That was the one time, really.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "a32278a3-f6ea-4fd7-9f47-ce0d70474e28",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      11
+    ],
+    "claim": "I opened the app again once but I didn't order.",
+    "provenance": "evidence",
+    "quoted_text": "I opened the app again once but I didn't order.",
+    "bearings": []
+  },
+  {
+    "id": "95a13535-37da-44f2-b8f5-0c868d5ed034",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      13
+    ],
+    "claim": "When I opened the app again, I was looking for a particular smoked sausage from home.",
+    "provenance": "evidence",
+    "quoted_text": "A particular sausage, the smoked one from home.",
+    "bearings": []
+  },
+  {
+    "id": "6bcf46d2-47b9-4cee-9474-bcbbc34c407b",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      13
+    ],
+    "claim": "They didn't have the particular sausage I was looking for.",
+    "provenance": "inference",
+    "quoted_text": "They didn't have it.",
+    "bearings": []
+  },
+  {
+    "id": "09753066-785a-4f9c-804d-27a360902bd7",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      15
+    ],
+    "claim": "The tomatoes in my last order were a different brand, which was fine.",
+    "provenance": "evidence",
+    "quoted_text": "The tomatoes were a different brand, that's fine.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "713de2c3-0bbd-45d2-81a4-91cfe6c0e58a",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      15
+    ],
+    "claim": "The cheese in my last order came as two small packs instead of one big one, which was also fine.",
+    "provenance": "evidence",
+    "quoted_text": "The cheese came as two small packs instead of one big one. Also fine.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "f64fe4cf-2901-41a3-a87b-637ba805fb66",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      17
+    ],
+    "claim": "I might have received a message about substitutions before delivery, but I was busy all afternoon and didn't look at my phone.",
+    "provenance": "evidence",
+    "quoted_text": "Maybe? I was busy all afternoon, I didn't look at my phone. I saw it on the receipt.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "cc2d8b8c-5130-46a3-b6ee-52784e3df7b2",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      19
+    ],
+    "claim": "I keep track of what I need by looking at the fridge.",
+    "provenance": "evidence",
+    "quoted_text": "I just look at the fridge.",
+    "bearings": []
+  },
+  {
+    "id": "7b8c11f0-dd0f-4cfc-b4d6-a748b7e071ba",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      19
+    ],
+    "claim": "Ana uses a list app to keep track of what we need.",
+    "provenance": "evidence",
+    "quoted_text": "Ana has a list app",
+    "bearings": []
+  },
+  {
+    "id": "f2dfcd21-b480-4211-928c-1ad2bf36b0f4",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      19
+    ],
+    "claim": "Ana's brother doesn't buy food, he just eats it.",
+    "provenance": "evidence",
+    "quoted_text": "Her brother doesn't buy food, he just eats it.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "10409cad-1988-49be-bb79-6e95583ac5d8",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      21
+    ],
+    "claim": "I sometimes add to Ana's list when she reminds me to.",
+    "provenance": "evidence",
+    "quoted_text": "I do, sometimes, when she reminds me to.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "d1b62e91-be49-4084-93d5-e785323db3f3",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      21
+    ],
+    "claim": "Ana's list is mostly hers.",
+    "provenance": "evidence",
+    "quoted_text": "Mostly it's hers.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "daea6370-3ab2-45fc-91f0-49f27527f5ea",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      23
+    ],
+    "claim": "I picked the 6 to 8 PM delivery window last time because I knew we'd be home.",
+    "provenance": "evidence",
+    "quoted_text": "I took six to eight, because I knew we'd be home.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "b2dbff50-1b0f-4244-ac23-d70d6fe786e3",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      23
+    ],
+    "claim": "The delivery came right at the start of the window, around 6:10.",
+    "provenance": "evidence",
+    "quoted_text": "It came right at the start, six ten or so.",
+    "bearings": []
+  },
+  {
+    "id": "eef3330e-d612-435a-9738-326c84e4f787",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      25
+    ],
+    "claim": "A monthly delivery pass is not for us because I like to choose my own things in the market.",
+    "provenance": "evidence",
+    "quoted_text": "For us, no. I like to choose my own things in the market.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "1f685ac1-ee9d-4c51-b766-93ca1a498922",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      25
+    ],
+    "claim": "If I ordered every week, I might pay five or six for a monthly delivery pass.",
+    "provenance": "evidence",
+    "quoted_text": "If I ordered every week, maybe five, six.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "22851f72-004f-4e19-a71e-d5e16a9781d3",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      27
+    ],
+    "claim": "A delivery pass would be worth it if it was cheaper than the bus fare to the big supermarket.",
+    "provenance": "evidence",
+    "quoted_text": "If it was cheaper than the bus fare to the big supermarket, I suppose.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "91d8ed28-5052-457e-9307-57c70dafed78",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      27
+    ],
+    "claim": "I don't take the bus to the big supermarket anyway.",
+    "provenance": "evidence",
+    "quoted_text": "But I don't take the bus there anyway.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "d400bdf7-3de9-4ea2-a00d-5afd92dbcb51",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      29
+    ],
+    "claim": "The driver was friendly and the delivery was on time.",
+    "provenance": "evidence",
+    "quoted_text": "The driver was friendly, and it was on time.",
+    "bearings": []
+  },
+  {
+    "id": "2fa07d0c-6b45-4958-b23d-2947d193839d",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      31
+    ],
+    "claim": "I liked the flour the least because I'd asked for strong bread flour for pizza dough, and they swapped it for self-raising cake flour.",
+    "provenance": "evidence",
+    "quoted_text": "The flour. I'd asked for strong bread flour for the pizza dough, and they swapped it for a bag of self-raising cake flour, which, for pizza, it puffs up like a sponge.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "75539a08-5e32-41dd-8671-1405e2b692a8",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      33
+    ],
+    "claim": "The pizza made with self-raising cake flour was like a focaccia that had a bad day.",
+    "provenance": "evidence",
+    "quoted_text": "It was like a focaccia that had a bad day. We ate it, we laughed, but it wasn't pizza.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8a64e7d3-051a-479b-9ecc-bf5cdeef199c",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      35
+    ],
+    "claim": "The picker did not get in touch about the flour substitution; it was just in the bag.",
+    "provenance": "evidence",
+    "quoted_text": "Just in the bag.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "7fba6c0e-a2eb-414c-a441-6b24bc4e6d4a",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      35
+    ],
+    "claim": "The flour substitution likely happened because 'flour' looked like a match on the screen.",
+    "provenance": "inference",
+    "quoted_text": "Same word, flour, so I guess on the screen it looked like a match.",
+    "bearings": []
+  },
+  {
+    "id": "3f43774f-b42c-4254-89d4-949ea02917f4",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      37
+    ],
+    "claim": "Overall, the order was a six out of ten, fine but not special.",
+    "provenance": "evidence",
+    "quoted_text": "Six. Fine, but not special.",
+    "bearings": []
+  },
+  {
+    "id": "8782c611-1647-4590-8d52-07e84878f162",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      39
+    ],
+    "claim": "I might recommend Shmuber Eats to someone who doesn't cook much, but for a cook, the swaps are a risk.",
+    "provenance": "evidence",
+    "quoted_text": "Maybe to someone who doesn't cook much. For a cook, the swaps are a risk.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "ba093964-842f-4471-8425-6092392e9a4b",
+    "session_id": "20261102T000000-3",
+    "seqs": [
+      41
+    ],
+    "claim": "I think we covered everything about my orders.",
+    "provenance": "evidence",
+    "quoted_text": "No, I think we covered it.",
+    "bearings": []
+  },
+  {
+    "id": "8488be05-1335-4b29-b28e-adffa231db9e",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      1
+    ],
+    "claim": "I am at home today, it's a remote day.",
+    "provenance": "evidence",
+    "quoted_text": "I'm at home today, it's a remote day.",
+    "bearings": []
+  },
+  {
+    "id": "004b5fdb-85ca-46b8-8de4-0eae99b7aac9",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      3
+    ],
+    "claim": "I didn't prepare anything for this interview.",
+    "provenance": "inference",
+    "quoted_text": "I didn't.",
+    "bearings": []
+  },
+  {
+    "id": "bd1ccd19-fe4b-4343-bb3a-e79ec3b79118",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      5
+    ],
+    "claim": "It's just me in my household.",
+    "provenance": "evidence",
+    "quoted_text": "It's just me.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "11c64a66-2655-463c-801d-63c39a9eb9be",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      5
+    ],
+    "claim": "My fridge is mostly sparkling water and condiments.",
+    "provenance": "evidence",
+    "quoted_text": "my fridge is mostly sparkling water and condiments.",
+    "bearings": []
+  },
+  {
+    "id": "cb848eae-faf3-4d4d-8bcd-6bb20674a175",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      5
+    ],
+    "claim": "I shop when I'm in town, usually at the small shop under my office.",
+    "provenance": "evidence",
+    "quoted_text": "I shop when I'm in town, usually the small shop under my office.",
+    "bearings": []
+  },
+  {
+    "id": "3c256dba-3f15-4881-938f-ed833bc2a5d8",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      7
+    ],
+    "claim": "A colleague mentioned Shmuber Eats in a meeting, he was ordering lunch stuff with it.",
+    "provenance": "evidence",
+    "quoted_text": "A colleague mentioned it in a meeting, he was ordering lunch stuff with it.",
+    "bearings": []
+  },
+  {
+    "id": "a90c76c8-b3f6-4a24-9996-2b3a5469d62c",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      9
+    ],
+    "claim": "I downloaded the app, made an account, and filled a basket really fast with fruit, yogurt, frozen dumplings, and coffee.",
+    "provenance": "evidence",
+    "quoted_text": "I downloaded it, made an account, filled a basket really fast. Fruit, yogurt, frozen dumplings, coffee, the essentials.",
+    "bearings": []
+  },
+  {
+    "id": "e6061824-cb2c-4b33-a978-05014e4f8626",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      11
+    ],
+    "claim": "At checkout, the app logged me out right when I pressed pay, and I had to log in again.",
+    "provenance": "evidence",
+    "quoted_text": "at checkout it logged me out, right when I pressed pay, and I had to log in again",
+    "bearings": []
+  },
+  {
+    "id": "5167f4aa-3bc2-470c-970e-4ffcce08204b",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      11
+    ],
+    "claim": "After logging in again, the basket was half empty.",
+    "provenance": "evidence",
+    "quoted_text": "and the basket was half empty.",
+    "bearings": []
+  },
+  {
+    "id": "71c693c1-6f34-4354-a9a3-04a840dc83e9",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      11
+    ],
+    "claim": "I had to do the ordering process again, which took roughly twenty minutes.",
+    "provenance": "evidence",
+    "quoted_text": "So I did it again. Twenty minutes, roughly.",
+    "bearings": []
+  },
+  {
+    "id": "3447f913-f232-4c5d-8d2b-da8459178485",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      13
+    ],
+    "claim": "I have only ordered groceries online once.",
+    "provenance": "evidence",
+    "quoted_text": "Only that once, really.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "cab936be-c6ee-4a12-b8ff-369968fcf4d3",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      13
+    ],
+    "claim": "The online order was placed the week before a big client deadline.",
+    "provenance": "evidence",
+    "quoted_text": "It was the week before a big client deadline, I was at my desk from seven till midnight, I genuinely could not leave the flat.",
+    "bearings": []
+  },
+  {
+    "id": "bf64b269-0cca-4a86-a613-ad805720e5a0",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      13
+    ],
+    "claim": "I could not leave the flat during the week before a big client deadline.",
+    "provenance": "evidence",
+    "quoted_text": "I genuinely could not leave the flat.",
+    "bearings": []
+  },
+  {
+    "id": "3be7f55b-2ce7-4a52-a3fb-dddb916388f2",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      13
+    ],
+    "claim": "After the project shipped, I went back to buying groceries from the shop under the office during lunch.",
+    "provenance": "evidence",
+    "quoted_text": "When the project shipped I went straight back to grabbing things at lunch from the little shop under the office.",
+    "bearings": []
+  },
+  {
+    "id": "af9c8378-587a-4155-983a-2ef1652ba1ac",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      15
+    ],
+    "claim": "My coffee order was substituted from beans to ground coffee.",
+    "provenance": "evidence",
+    "quoted_text": "The coffee. I wanted beans and I got ground.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "4a1c55f8-d6dd-48d9-92d6-e78fb3e2c7d9",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      15
+    ],
+    "claim": "I minded the coffee substitution because I have a grinder.",
+    "provenance": "evidence",
+    "quoted_text": "That one I minded a bit, I have a grinder for a reason.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "71d9058a-5a23-4551-ae93-47aa55b415ac",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      17
+    ],
+    "claim": "I found out about the coffee substitution when I opened the bag.",
+    "provenance": "evidence",
+    "quoted_text": "When I opened the bag.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "4ac0f963-2abd-4f0c-863d-0d33255e298e",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      17
+    ],
+    "claim": "There was a notification about the substitution, but I was on a call and didn't read it.",
+    "provenance": "evidence",
+    "quoted_text": "There was a notification, I think, but I was on a call. I don't read anything during calls.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ad325eae-7e84-438f-a893-1c9eeb6fb6bc",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      19
+    ],
+    "claim": "I don't keep track of what I need between orders; I just check the fridge.",
+    "provenance": "evidence",
+    "quoted_text": "I don't, really. I look in the fridge and I see what's missing.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "501d9a36-9dfd-4368-8da0-d158e97bf0e2",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      19
+    ],
+    "claim": "Usually everything is missing from my fridge.",
+    "provenance": "evidence",
+    "quoted_text": "Usually everything.",
+    "bearings": []
+  },
+  {
+    "id": "0d5f6278-95d1-42b3-9969-3d5cd6f6179b",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      21
+    ],
+    "claim": "I picked the earliest delivery window the next morning, eight to ten, before my first call.",
+    "provenance": "evidence",
+    "quoted_text": "I picked the earliest one the next morning, eight to ten, before my first call.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "335de4d9-0c7b-4ffc-a595-363c8f8b196f",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      23
+    ],
+    "claim": "The delivery came at eight thirty, which was perfect.",
+    "provenance": "evidence",
+    "quoted_text": "Yes, it came at eight thirty. Perfect, actually. I was in my pyjamas.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "1c3b8444-c8b2-4354-b696-0df0afa1d670",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      25
+    ],
+    "claim": "In theory, I would pay for a monthly delivery pass because money isn't the issue.",
+    "provenance": "inference",
+    "quoted_text": "In theory I'd pay, money isn't really the issue.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "fc407791-df5d-403e-9131-d4003c8e71b9",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      25
+    ],
+    "claim": "I am away half the month.",
+    "provenance": "evidence",
+    "quoted_text": "But I'm away half the month.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "64691c53-0fba-4377-9ee7-73209d7b15a4",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      25
+    ],
+    "claim": "I would forget to cancel a monthly delivery pass and resent it because I am away half the month.",
+    "provenance": "inference",
+    "quoted_text": "I'd forget to cancel it and resent it.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8258ad50-41ec-4003-a145-d059d897138d",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      27
+    ],
+    "claim": "For me, the price of a monthly delivery pass is not the issue, it's that I'm never home.",
+    "provenance": "evidence",
+    "quoted_text": "For me it's not the price, it's that I'm never home.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "db33044b-9c48-418f-b405-8a6c05e4088e",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      27
+    ],
+    "claim": "If I were home every week, ten a month for a delivery pass would be fine.",
+    "provenance": "inference",
+    "quoted_text": "If I were here every week, sure, ten is fine.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "456cc216-e004-4ea7-a18b-0aeacbe08382",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      29
+    ],
+    "claim": "I would recommend Shmuber Eats to people who work from home because it's handy.",
+    "provenance": "evidence",
+    "quoted_text": "Yes, why not. To people who work from home. It's handy.",
+    "bearings": []
+  },
+  {
+    "id": "9d924dac-5f03-4e2f-a09c-bcb21109e459",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      31
+    ],
+    "claim": "The best thing about Shmuber Eats was that it was fast.",
+    "provenance": "evidence",
+    "quoted_text": "That it was fast.",
+    "bearings": []
+  },
+  {
+    "id": "850ea615-8034-4745-9fb2-adbc8fcf76c4",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      31
+    ],
+    "claim": "I ordered at eleven at night and had food at eight thirty in the morning.",
+    "provenance": "evidence",
+    "quoted_text": "I ordered at eleven at night and had food at eight thirty.",
+    "bearings": []
+  },
+  {
+    "id": "c764ba4c-a14c-4d30-8702-c68bf927ec31",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      33
+    ],
+    "claim": "The app itself feels a bit clunky, with too many screens before you can pay.",
+    "provenance": "evidence",
+    "quoted_text": "The app itself feels a bit clunky. Too many screens before you can pay.",
+    "bearings": []
+  },
+  {
+    "id": "9dac3097-0c27-46f2-a2c9-4fe151a9673d",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      35
+    ],
+    "claim": "I did not see a recipes section in the app.",
+    "provenance": "evidence",
+    "quoted_text": "There's a recipes section? No, I didn't see that.",
+    "bearings": []
+  },
+  {
+    "id": "8bcb0d00-a206-40ca-b743-2ac3fe5e084a",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      37
+    ],
+    "claim": "I used my laptop for the order because I was at my desk anyway.",
+    "provenance": "evidence",
+    "quoted_text": "The laptop, because I was at my desk anyway.",
+    "bearings": []
+  },
+  {
+    "id": "b341c2dc-fc47-4396-9cdf-ad58f52b2665",
+    "session_id": "20261102T000000-4",
+    "seqs": [
+      39
+    ],
+    "claim": "I think that's all, and the order was fine.",
+    "provenance": "inference",
+    "quoted_text": "No, I think that's all. It was fine.",
+    "bearings": []
+  },
+  {
+    "id": "cffea633-9ea2-43ab-9efd-ee90e247a8fa",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      1
+    ],
+    "claim": "The interviewee's children are at nursery, allowing for a quiet hour.",
+    "provenance": "evidence",
+    "quoted_text": "They're at nursery, so we have a quiet hour, which is a miracle.",
+    "bearings": []
+  },
+  {
+    "id": "c6d0c2fa-eaf1-4276-9727-ac5afe487733",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee lives with his wife Lena and their four-year-old twins.",
+    "provenance": "evidence",
+    "quoted_text": "Me, my wife Lena and our twins, they're four.",
+    "bearings": []
+  },
+  {
+    "id": "780fa62d-4eea-4a6a-914c-6880d2b48b8d",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      5
+    ],
+    "claim": "Both the interviewee and his wife work full-time; he is an architect, and she is in insurance.",
+    "provenance": "evidence",
+    "quoted_text": "We both work full time, I'm an architect, she's in insurance.",
+    "bearings": []
+  },
+  {
+    "id": "3fca33e2-3555-4bde-8fc7-7cbe5468c5d5",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee and his wife split the shopping, with the least tired person ordering on the app on Sunday night.",
+    "provenance": "evidence",
+    "quoted_text": "We split the shopping, which in practice means whoever is least tired orders on the app on Sunday night.",
+    "bearings": []
+  },
+  {
+    "id": "7fd15117-8c7c-40cb-841a-c61f993ed878",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      7
+    ],
+    "claim": "For their last order, Lena started the basket and the interviewee added the rest, including milk, fruit, yogurts, pasta, chicken, and bread the kids like.",
+    "provenance": "evidence",
+    "quoted_text": "Sunday night, Lena started the basket, I added the rest. Milk, a lot of milk, fruit, yogurts, pasta, chicken, the bread the kids like.",
+    "bearings": []
+  },
+  {
+    "id": "28fdf97e-7b6d-4b05-8e0f-642b6c32e4fb",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      7
+    ],
+    "claim": "The last order came Monday evening.",
+    "provenance": "evidence",
+    "quoted_text": "We hit order, it came Monday evening.",
+    "bearings": []
+  },
+  {
+    "id": "7d63ae5d-fdcd-4c15-a574-2d3650facf3d",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee put away the groceries while his wife did bath time.",
+    "provenance": "evidence",
+    "quoted_text": "I put it away while she did bath time.",
+    "bearings": []
+  },
+  {
+    "id": "eafd8d2c-abb6-4398-bdc0-4013db869c83",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      9
+    ],
+    "claim": "They order groceries online every week since the summer.",
+    "provenance": "evidence",
+    "quoted_text": "Every week now, since the summer.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "772533f7-71b3-4978-a3c7-7db46de352d2",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      9
+    ],
+    "claim": "Before starting weekly online orders, they used to go grocery shopping together on Saturday with the twins.",
+    "provenance": "evidence",
+    "quoted_text": "Before that we'd go together on Saturday, with the twins in the trolley, which was like a sport.",
+    "bearings": []
+  },
+  {
+    "id": "3a68b649-0d30-4972-b669-062556d98b7e",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      11
+    ],
+    "claim": "They started ordering online every week to get their Saturdays back.",
+    "provenance": "evidence",
+    "quoted_text": "Honestly, Saturdays. We wanted them back. A whole morning in the supermarket with four-year-olds, you lose the day.",
+    "bearings": []
+  },
+  {
+    "id": "4fa886fd-3c46-4703-bba1-995204b4fdf6",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      13
+    ],
+    "claim": "They use the list in the app to keep track of what they need, and both the interviewee and Lena add to it.",
+    "provenance": "evidence",
+    "quoted_text": "There's the list in your app, we both add to it. Lena adds during the week, I add on Sunday.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8990b143-5522-424b-b80b-72f8aabc3000",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      13
+    ],
+    "claim": "Sometimes both the interviewee and Lena add milk to the list, resulting in eight litres.",
+    "provenance": "evidence",
+    "quoted_text": "Sometimes we both add milk and get eight litres.",
+    "bearings": []
+  },
+  {
+    "id": "d5f065b2-d85f-4bb8-9b19-e7687933d918",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee's mother indirectly adds to the list by telling Lena what is needed when she babysits.",
+    "provenance": "evidence",
+    "quoted_text": "My mother, when she babysits, she tells Lena and Lena adds it. So indirectly.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "4cdb7b79-5247-4c61-805a-ce0e117edc4b",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      17
+    ],
+    "claim": "Substitutions happen most weeks, usually something small like a different yogurt or pasta brand.",
+    "provenance": "evidence",
+    "quoted_text": "It happens most weeks, something small. A different yogurt, a different brand of pasta. Usually fine.",
+    "bearings": []
+  },
+  {
+    "id": "5ad2c0ea-e403-4540-8790-f44e5f129894",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      17
+    ],
+    "claim": "The twins notice yogurt substitutions and are very strict about them.",
+    "provenance": "evidence",
+    "quoted_text": "The twins notice the yogurt, they're very strict.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "a5b7b335-cfad-44ea-a77d-64eae20e52de",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      19
+    ],
+    "claim": "The interviewee might answer a text about a substitution if he is at the office, but not during bath time.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, I mean, maybe. If I'm at the office, sure, I'd answer. If it's bath time, nobody is looking at a phone.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "6155c1b6-e82e-4fc1-b972-6ffc74da2604",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      21
+    ],
+    "claim": "They always pick the 6 to 8 PM Monday delivery window because one of them is home by six.",
+    "provenance": "evidence",
+    "quoted_text": "Six to eight on Monday, always the same. One of us is home by six.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "c354d325-9b11-4ffc-ab5a-cbf7b529191d",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      23
+    ],
+    "claim": "They missed a delivery once when Lena was stuck on a train, but the driver left it with a neighbor.",
+    "provenance": "evidence",
+    "quoted_text": "Once. Lena was stuck on a train. The driver left it with the neighbour, which was lucky.",
+    "bearings": []
+  },
+  {
+    "id": "ccbc9d88-a183-42f9-902a-f0d8e984ad28",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee would probably buy a monthly delivery pass because they order every week and delivery fees add up.",
+    "provenance": "evidence",
+    "quoted_text": "We'd probably do it. We order every week, so the delivery fees add up.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "25b3a495-457c-43e8-8029-6dfa35ca95e4",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee would consider paying seven or eight a month for a delivery pass.",
+    "provenance": "evidence",
+    "quoted_text": "Maybe seven or eight a month.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "5f030356-9078-40d7-9b6f-ce662d81f371",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      27
+    ],
+    "claim": "The interviewee would probably still pay 9.99 a month for a delivery pass, as it's less than four delivery fees.",
+    "provenance": "evidence",
+    "quoted_text": "Probably still, yeah. It's less than four delivery fees, right? I'd have to check.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "0c59c1b7-0451-4056-84a5-856e42592073",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee has already recommended Shmuber Eats to two families from nursery.",
+    "provenance": "evidence",
+    "quoted_text": "Already did. Two families from nursery use it now.",
+    "bearings": []
+  },
+  {
+    "id": "c19f1d9b-677d-4c18-bdad-178649a6210b",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee likes getting Saturdays back the most about the service.",
+    "provenance": "evidence",
+    "quoted_text": "Getting Saturday back. That's it, that's the whole review.",
+    "bearings": []
+  },
+  {
+    "id": "f10e87a0-92a1-4805-b5a6-64d7940b2250",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee likes least that the app forgets the regular order.",
+    "provenance": "evidence",
+    "quoted_text": "The app forgets the regular order. I wish I could just say same as last week and change two things.",
+    "bearings": []
+  },
+  {
+    "id": "0649c36c-a71d-403a-89aa-374415a14313",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee has never contacted support.",
+    "provenance": "inference",
+    "quoted_text": "No, never.",
+    "bearings": []
+  },
+  {
+    "id": "155ecc08-2004-4a88-9198-5b15bd2b9b9a",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee almost contacted support once when plain flour tortillas were swapped for chili-lime ones for taco night with their four-year-olds.",
+    "provenance": "evidence",
+    "quoted_text": "I nearly did once, for taco night. I'd asked for plain flour tortillas, and the picker swapped them for chili-lime ones, the spicy red kind, for taco night with two four-year-olds.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "4e66d41c-4bbb-47e9-b953-b8c88d0a0af8",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      37
+    ],
+    "claim": "The chili-lime tortillas caused the twins to cry, and the interviewee had to make them toast while he and Lena ate the spicy tacos.",
+    "provenance": "evidence",
+    "quoted_text": "Tears. Both of them. I had to make them toast while Lena and I ate the spicy tacos.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "2f30bcd3-cc8c-4944-a771-b982149dd375",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee would have preferred the picker to leave out the tortillas or pick plain ones from another brand.",
+    "provenance": "evidence",
+    "quoted_text": "Just leave it out, honestly. Or pick plain ones from another brand. The point was plain, not tortilla.",
+    "bearings": []
+  },
+  {
+    "id": "a72de65e-41a4-4239-88b0-7ba8c388ee2c",
+    "session_id": "20261102T000000-5",
+    "seqs": [
+      41
+    ],
+    "claim": "They have so many paper bags from deliveries that they built a castle out of them.",
+    "provenance": "evidence",
+    "quoted_text": "We have so many paper bags we built a castle out of them.",
+    "bearings": []
+  },
+  {
+    "id": "493e928a-0ced-42c9-8f8c-6bffbb5d68b7",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      5
+    ],
+    "claim": "Rosa lives with her husband, Bernard, who is also retired.",
+    "provenance": "evidence",
+    "quoted_text": "I live with my husband, Bernard, he's retired too.",
+    "bearings": []
+  },
+  {
+    "id": "060e3fb5-de8e-4cb5-a142-09b78d7811ab",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      5
+    ],
+    "claim": "Rosa cares for her two grandchildren after school until their mother picks them up.",
+    "provenance": "evidence",
+    "quoted_text": "And after school I have my two grandchildren until their mother picks them up.",
+    "bearings": []
+  },
+  {
+    "id": "578e7c42-ec5a-4f05-b64e-ce71d7b572cc",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      5
+    ],
+    "claim": "Rosa does the shopping for her household.",
+    "provenance": "evidence",
+    "quoted_text": "I do the shopping, I always have.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "63938f4f-b274-42c9-8aa4-ae2ad73a8604",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      5
+    ],
+    "claim": "Rosa likes to shop at the market on Tuesdays and the supermarket for other groceries.",
+    "provenance": "evidence",
+    "quoted_text": "I like the market on Tuesdays and the supermarket for the rest.",
+    "bearings": []
+  },
+  {
+    "id": "84c84516-1cd6-4d1b-9e39-06f46c8a145f",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      7
+    ],
+    "claim": "Rosa's granddaughter installed the Shmuber Eats app on her phone.",
+    "provenance": "evidence",
+    "quoted_text": "My granddaughter put it on my phone.",
+    "bearings": []
+  },
+  {
+    "id": "73f47743-59e1-49ca-8b66-435b75590779",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      7
+    ],
+    "claim": "Rosa used Shmuber Eats when she had a turned ankle and was on crutches for nearly three weeks, preventing her from carrying groceries.",
+    "provenance": "evidence",
+    "quoted_text": "I'd turned my ankle stepping off the bus and I was on crutches for nearly three weeks, I couldn't carry a thing.",
+    "bearings": []
+  },
+  {
+    "id": "50e23ffc-09e5-43fb-82ee-1255bcbb3963",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      7
+    ],
+    "claim": "Rosa is now walking properly again and shops at the market on Tuesdays.",
+    "provenance": "evidence",
+    "quoted_text": "Now I'm walking properly again I'm at the market on Tuesdays like always.",
+    "bearings": []
+  },
+  {
+    "id": "9b59fbfe-f980-4251-aae5-4ff10234ae27",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      9
+    ],
+    "claim": "Rosa placed an order for potatoes, carrots, chicken, milk, biscuits, and soap by pressing pictures in the app.",
+    "provenance": "evidence",
+    "quoted_text": "I pressed the pictures. I put in potatoes, carrots, the chicken, milk, the biscuits the children like, and soap.",
+    "bearings": []
+  },
+  {
+    "id": "95e3ccfc-91a3-4899-acea-8daec7697861",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      9
+    ],
+    "claim": "Rosa's granddaughter checked the order before she submitted it.",
+    "provenance": "evidence",
+    "quoted_text": "My granddaughter checked it before I pressed the button.",
+    "bearings": []
+  },
+  {
+    "id": "80a68dcf-d336-4d39-b8af-3916af76596b",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      9
+    ],
+    "claim": "The delivery person brought the order to the door and put it on the table for Rosa.",
+    "provenance": "evidence",
+    "quoted_text": "Then a young man brought it to the door and put it on the table for me, which was kind.",
+    "bearings": []
+  },
+  {
+    "id": "c3111915-defc-4ea1-81e3-49569a0eae38",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      11
+    ],
+    "claim": "The writing in the app is very small, requiring Rosa to use her glasses and a magnifying glass.",
+    "provenance": "evidence",
+    "quoted_text": "The writing is very small. I had to use my glasses and then the magnifying glass.",
+    "bearings": []
+  },
+  {
+    "id": "724198e0-9315-4970-accf-0560fcce8fd0",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      13
+    ],
+    "claim": "Rosa's granddaughter paid for the order using her card, and Rosa repaid her with cash.",
+    "provenance": "evidence",
+    "quoted_text": "My granddaughter put her card in, and I gave her the money in an envelope. That's how we do it.",
+    "bearings": []
+  },
+  {
+    "id": "032c9d1a-7237-48f6-aaf5-a0553823e09f",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      15
+    ],
+    "claim": "Rosa has ordered groceries online two or three times.",
+    "provenance": "evidence",
+    "quoted_text": "Two or three times, I think.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "501c05ee-9fde-4a64-a6a7-f7e7df6f1f38",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      17
+    ],
+    "claim": "A different kind of biscuit, with chocolate, was substituted in her last order, and the children liked them.",
+    "provenance": "evidence",
+    "quoted_text": "The biscuits. They brought a different kind, with chocolate, and the children were delighted, so I didn't complain.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "78a753ac-b627-46a7-bf97-7fac219c0f22",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      19
+    ],
+    "claim": "Rosa did not know about the biscuit substitution before the delivery arrived.",
+    "provenance": "evidence",
+    "quoted_text": "No, I don't think so.",
+    "bearings": []
+  },
+  {
+    "id": "523a68c0-03af-4d7e-aaeb-2c76f119c71b",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      19
+    ],
+    "claim": "Rosa's phone makes noises, but she doesn't always know what they mean.",
+    "provenance": "evidence",
+    "quoted_text": "My phone makes a noise sometimes, but I don't always know what it wants.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "b3457955-fc79-4baf-a253-642ad4269fcf",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      21
+    ],
+    "claim": "Rosa's granddaughter picked the delivery window for her last order, which was 10 am to 12 pm.",
+    "provenance": "evidence",
+    "quoted_text": "My granddaughter picked it. Ten to twelve in the morning, I think, because I'm always home in the morning.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ddfdd11b-edbd-4498-83ec-16a0f4735765",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      21
+    ],
+    "claim": "Rosa is always home in the morning.",
+    "provenance": "evidence",
+    "quoted_text": "I'm always home in the morning.",
+    "bearings": []
+  },
+  {
+    "id": "ec835e16-374c-470f-b602-580532e09dc9",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      23
+    ],
+    "claim": "Rosa would not consider a monthly delivery pass because she and her husband are pensioners and Bernard would object.",
+    "provenance": "evidence",
+    "quoted_text": "Every month? No, dear. Bernard would have a fit. We're pensioners.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "fde13cba-2423-4e0e-b814-82b49a0c88c7",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      25
+    ],
+    "claim": "Rosa and her husband do not order groceries online often enough for a delivery pass to be worthwhile.",
+    "provenance": "evidence",
+    "quoted_text": "We don't order enough for that. Maybe two or three a month, if it was nothing.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "08d7ad45-7d83-459a-bc0f-4ffad5a6f0ee",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      27
+    ],
+    "claim": "Rosa liked most that the delivery person carried the groceries in for her.",
+    "provenance": "evidence",
+    "quoted_text": "The young man carrying it in. Truly, he was very kind.",
+    "bearings": []
+  },
+  {
+    "id": "518f5038-9e3a-48a6-91b9-26db4bbc9bdf",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      29
+    ],
+    "claim": "Rosa liked least the small writing in the app.",
+    "provenance": "evidence",
+    "quoted_text": "The small writing.",
+    "bearings": []
+  },
+  {
+    "id": "94d5e2eb-0d0c-4f3e-9015-39c79eb25e6e",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      29
+    ],
+    "claim": "The potatoes in her last order were very small.",
+    "provenance": "evidence",
+    "quoted_text": "And the potatoes were very small too, but that's not your fault.",
+    "bearings": []
+  },
+  {
+    "id": "54a46185-8b09-4aad-9fba-ac006c66a645",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      31
+    ],
+    "claim": "The grandchildren ate half the biscuits before Rosa could put them away.",
+    "provenance": "evidence",
+    "quoted_text": "They ate half the biscuits before I'd closed the cupboard.",
+    "bearings": []
+  },
+  {
+    "id": "b0c3f93d-1db5-415f-a857-559693141a5f",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      33
+    ],
+    "claim": "Rosa rated her overall experience an eight out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "Eight. It was a help.",
+    "bearings": []
+  },
+  {
+    "id": "bded8c33-55c6-4f58-b5ea-5b9b6f3518eb",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      35
+    ],
+    "claim": "Rosa's husband, Bernard, does not use his phone for anything except the weather and would not use the app.",
+    "provenance": "evidence",
+    "quoted_text": "Bernard? No. Bernard doesn't use his phone for anything except the weather.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "dd946eb3-cf26-4210-ba51-a89acd5b9326",
+    "session_id": "20261102T000000-6",
+    "seqs": [
+      37
+    ],
+    "claim": "Rosa might use the app again but would need her granddaughter to help her, as she doesn't remember all the buttons.",
+    "provenance": "evidence",
+    "quoted_text": "Perhaps. I'd have to ask my granddaughter to sit with me again, I don't remember all the buttons.",
+    "bearings": []
+  },
+  {
+    "id": "bd382f17-f135-4505-8b28-506bdf8cb15b",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      5
+    ],
+    "claim": "Before Leo, the interviewee and Mira would do one big shop together on a Sunday.",
+    "provenance": "evidence",
+    "quoted_text": "Before, we'd do one big shop together on a Sunday.",
+    "bearings": []
+  },
+  {
+    "id": "a9f092e7-bb61-41ed-93a5-ddb1e6887a74",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee started using the app when Leo came home from the hospital, as neither parent was leaving the flat and they were 'basically zombies' for a couple of weeks.",
+    "provenance": "evidence",
+    "quoted_text": "When we brought him home from the hospital neither of us was leaving the flat, we were basically zombies for a couple of weeks, so that's when the app came out.",
+    "bearings": []
+  },
+  {
+    "id": "750bb7ce-d243-4643-8c9a-6270c29982da",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      5
+    ],
+    "claim": "These days Mira takes Leo out in the pram to the shops in the afternoon.",
+    "provenance": "evidence",
+    "quoted_text": "These days Mira takes him out in the pram to the shops in the afternoon, it gets her out of the house, so we just do that.",
+    "bearings": []
+  },
+  {
+    "id": "bfdb2e7a-dc88-4640-8e11-bb49012b8564",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee's last Shmuber Eats order was placed at around three in the morning, during a feed.",
+    "provenance": "evidence",
+    "quoted_text": "It was at like three in the morning, during a feed.",
+    "bearings": []
+  },
+  {
+    "id": "8dfc0e55-f859-4529-aa46-e43b0612f7f6",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      7
+    ],
+    "claim": "The last order included nappies, wipes, oat milk, bread, frozen meals, and a lot of chocolate.",
+    "provenance": "evidence",
+    "quoted_text": "I just put in everything we could think of. Nappies, wipes, oat milk, bread, those frozen meals, a lot of chocolate.",
+    "bearings": []
+  },
+  {
+    "id": "6cf7d17f-d772-49e6-9a29-b1c3ba4c31d7",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      9
+    ],
+    "claim": "The interviewee put the delivery away with one hand while holding a bottle with the other.",
+    "provenance": "evidence",
+    "quoted_text": "I put it away with one hand. The other one was holding a bottle.",
+    "bearings": []
+  },
+  {
+    "id": "c07b3297-0781-4468-ad33-609d120cb10b",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee has placed maybe four online grocery orders in total.",
+    "provenance": "evidence",
+    "quoted_text": "Maybe four orders in total.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "0ceb78e2-4374-408a-924b-3b4360f71abf",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      11
+    ],
+    "claim": "The interviewee hasn't ordered groceries online lately.",
+    "provenance": "evidence",
+    "quoted_text": "Not lately.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "cca027c4-b3b3-4f83-9ac0-2f499ad3416d",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      13
+    ],
+    "claim": "Once, the nappies in an order were substituted for a different size (one size up), which was a problem because they leaked.",
+    "provenance": "evidence",
+    "quoted_text": "They swapped the nappies for a different size once. One size up. That was actually a problem, they leaked.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "819ac1ce-3579-4559-93fc-2e8e0eefc41b",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      15
+    ],
+    "claim": "There was a notification about the substitution, but the interviewee was asleep or feeding and saw it the next day.",
+    "provenance": "evidence",
+    "quoted_text": "There was a notification, but come on, I was asleep or feeding. I saw it the next day.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "660c4631-1c89-42a7-867a-4a770846748f",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      17
+    ],
+    "claim": "The household keeps track of what they need between orders using a note on Mira's phone.",
+    "provenance": "evidence",
+    "quoted_text": "A note on Mira's phone.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "9bbc42bf-7d18-46ea-bea1-5f8f5836f5df",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee adds things to Mira's shopping list, and Mira says they add the wrong things.",
+    "provenance": "evidence",
+    "quoted_text": "I add things to it, and she says I add the wrong things.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "d69b77a8-14b0-4ecb-9f27-359ec6581bd4",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      19
+    ],
+    "claim": "Both the interviewee and Mira add to the shopping list.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, both of us.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "eb9a83a3-47bb-467c-a60b-5d6f05b0f7de",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      19
+    ],
+    "claim": "Mira mostly adds to the shopping list.",
+    "provenance": "evidence",
+    "quoted_text": "Mostly her.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "98a1c713-6383-4c84-8ff0-65e1cef52f0a",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      19
+    ],
+    "claim": "The interviewee adds snacks to the shopping list.",
+    "provenance": "evidence",
+    "quoted_text": "I add snacks.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "d0785245-35f9-411f-b184-4a1d893e7610",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      21
+    ],
+    "claim": "Last time, the interviewee picked the earliest delivery window because they were home all the time, so the window didn't matter.",
+    "provenance": "evidence",
+    "quoted_text": "Whatever was earliest. We were home all the time, so the window didn't matter at all.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "8a3fa055-fcd9-477a-893b-d70a6c92e26a",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      23
+    ],
+    "claim": "A two-hour delivery window might be harder now that Mira is out more, because it's a long time to stay in with a baby who wants to go out.",
+    "provenance": "inference",
+    "quoted_text": "Two hours is a long time to stay in with a baby who wants to go out.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8cce661d-ea10-46da-9b5a-c8d96e691115",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee would not use a monthly delivery pass enough.",
+    "provenance": "inference",
+    "quoted_text": "Honestly, no, I wouldn't use it enough.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "fca33cdf-438e-4199-95cf-05f0b4afbe80",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee might pay five dollars a month for a delivery pass if it covered everything.",
+    "provenance": "inference",
+    "quoted_text": "Maybe five, if it covered everything.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "6a7a2f4e-8db4-437d-9ac2-30f8b42efe4c",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      27
+    ],
+    "claim": "The interviewee would not pay 9.99 a month for a delivery pass because of how often they order.",
+    "provenance": "inference",
+    "quoted_text": "No, not for how often we order. That's a lot of nappies.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "0dc09517-3997-4cbe-9401-2e8d7b4be82e",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      29
+    ],
+    "claim": "The interviewee first heard about Shmuber Eats from a friend who had a code.",
+    "provenance": "evidence",
+    "quoted_text": "A friend had a code.",
+    "bearings": []
+  },
+  {
+    "id": "452bb025-fa06-4cca-b2bf-8a568ca92c8e",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      29
+    ],
+    "claim": "Everyone on the parents' group chat has a code for something.",
+    "provenance": "evidence",
+    "quoted_text": "Everyone on the parents' group chat has a code for something.",
+    "bearings": []
+  },
+  {
+    "id": "1de3904e-60e5-473c-9965-0ce3f1c41903",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee would recommend Shmuber Eats to other parents.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, I'd tell other parents about it, sure.",
+    "bearings": []
+  },
+  {
+    "id": "e503a49d-cb42-490f-9bc3-73fcfafdc7d6",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee liked the 3 a.m. ordering feature most because nothing else is open at that time.",
+    "provenance": "evidence",
+    "quoted_text": "Three a.m. ordering. Nothing else is open at three a.m.",
+    "bearings": []
+  },
+  {
+    "id": "671c4eb4-a5a9-40a8-a760-dba1a9b9c8b2",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee liked the nappy substitution incident least.",
+    "provenance": "evidence",
+    "quoted_text": "The nappies thing.",
+    "bearings": []
+  },
+  {
+    "id": "d7875dbf-25cf-4b91-902b-c87dab82412e",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      35
+    ],
+    "claim": "The app sometimes forgot what the interviewee had put in the basket if they closed it.",
+    "provenance": "evidence",
+    "quoted_text": "And the app sometimes forgot what I'd put in the basket if I closed it.",
+    "bearings": []
+  },
+  {
+    "id": "5828e18b-c363-4263-a6ac-6621f68d3181",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      37
+    ],
+    "claim": "The interviewee thinks they gave five stars once but doesn't remember for sure.",
+    "provenance": "inference",
+    "quoted_text": "I think I gave five stars once. I don't remember.",
+    "bearings": []
+  },
+  {
+    "id": "86816139-084a-4717-84d1-38d4e5f55e6e",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee has not tried the recipes section of the app.",
+    "provenance": "evidence",
+    "quoted_text": "No. I don't think we've cooked a recipe since he was born.",
+    "bearings": []
+  },
+  {
+    "id": "abc714e1-b969-452f-9687-6e07060a89ed",
+    "session_id": "20261102T000000-7",
+    "seqs": [
+      39
+    ],
+    "claim": "The interviewee doesn't think they've cooked a recipe since Leo was born.",
+    "provenance": "inference",
+    "quoted_text": "I don't think we've cooked a recipe since he was born.",
+    "bearings": []
+  },
+  {
+    "id": "b56e60f8-a10b-4170-8222-a2cc9b1b17e9",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      1
+    ],
+    "claim": "The interviewee has forty minutes for the interview because her younger children are napping and older children are at school.",
+    "provenance": "evidence",
+    "quoted_text": "Yes, the little ones are napping and the big ones are at school, so I have maybe forty minutes.",
+    "bearings": []
+  },
+  {
+    "id": "c00d3d26-fd71-4fda-ab7e-5cbd40f5edd5",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee's household consists of six people: herself, her husband Youssef, and four children aged three to twelve.",
+    "provenance": "evidence",
+    "quoted_text": "We are six. Me, my husband Youssef, and four children, from three to twelve.",
+    "bearings": []
+  },
+  {
+    "id": "a810eab2-0f08-4ab6-b054-152afdac15aa",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee does the food shopping and cooking, while her husband handles the car and bins.",
+    "provenance": "evidence",
+    "quoted_text": "I do the shopping and the cooking, he does the car and the bins.",
+    "bearings": []
+  },
+  {
+    "id": "127e0d51-495c-43a1-9af6-37f5eb8456a3",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      5
+    ],
+    "claim": "The interviewee goes to a wholesale place once a month for large items and the supermarket every week for fresh items.",
+    "provenance": "evidence",
+    "quoted_text": "I go to the wholesale place once a month for the big things, and the supermarket every week for fresh.",
+    "bearings": []
+  },
+  {
+    "id": "a48b5f43-d98d-4e40-8f51-1a0f770079cc",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee heard about Shmuber Eats from a neighbour.",
+    "provenance": "evidence",
+    "quoted_text": "A neighbour.",
+    "bearings": []
+  },
+  {
+    "id": "0c4a2f3f-37a9-480e-8d36-426055b122bb",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      7
+    ],
+    "claim": "The neighbour said Shmuber Eats prices are the same as in the store.",
+    "provenance": "evidence",
+    "quoted_text": "She said the prices are the same as in the store",
+    "bearings": []
+  },
+  {
+    "id": "57b61fb3-6aad-49f0-a88a-602bef72efe1",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      7
+    ],
+    "claim": "The interviewee wanted to check if the prices were true because with six people, every bit matters.",
+    "provenance": "evidence",
+    "quoted_text": "so I wanted to check if that's true, because with six people, every bit matters.",
+    "bearings": []
+  },
+  {
+    "id": "57bd9839-f654-4b17-a8d7-c1432361f376",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      9
+    ],
+    "claim": "The interviewee made a shopping list on paper first before typing it into the app for her last Shmuber Eats order.",
+    "provenance": "evidence",
+    "quoted_text": "I made the list on paper first, like always, then I typed it in.",
+    "bearings": []
+  },
+  {
+    "id": "2d3c62ff-1c15-4ff8-9b52-562b5f662906",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      9
+    ],
+    "claim": "The last Shmuber Eats order included rice, chicken, lentils, vegetables, milk, eggs, bread, and butter.",
+    "provenance": "evidence",
+    "quoted_text": "Rice, a lot of rice, chicken, lentils, vegetables, milk, eggs, bread, butter.",
+    "bearings": []
+  },
+  {
+    "id": "45f0720a-f97a-41a0-aa89-494d5c94c2c3",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      9
+    ],
+    "claim": "The interviewee compared Shmuber Eats prices with her paper list from the store.",
+    "provenance": "evidence",
+    "quoted_text": "I compared the prices with my paper from the store.",
+    "bearings": []
+  },
+  {
+    "id": "21dad3f5-b361-4be7-a2ab-31c59c31f310",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      9
+    ],
+    "claim": "Shmuber Eats prices were mostly the same as the store, but some items were higher.",
+    "provenance": "evidence",
+    "quoted_text": "Mostly the same, some higher.",
+    "bearings": []
+  },
+  {
+    "id": "7c90f40a-1766-4ad7-8af2-85dbf576ef79",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      11
+    ],
+    "claim": "The last Shmuber Eats order involved a lot of bags.",
+    "provenance": "evidence",
+    "quoted_text": "It was a lot of bags.",
+    "bearings": []
+  },
+  {
+    "id": "584b338c-858b-4ec5-a743-d4a7a9ef8972",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      11
+    ],
+    "claim": "The Shmuber Eats driver was nice and helped carry bags to the door.",
+    "provenance": "evidence",
+    "quoted_text": "The driver was nice, he helped me carry them to the door.",
+    "bearings": []
+  },
+  {
+    "id": "10d1f62e-1304-425b-9547-34eb619000d6",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      13
+    ],
+    "claim": "The interviewee orders groceries online maybe once a month for heavy items like rice, oil, and water.",
+    "provenance": "evidence",
+    "quoted_text": "Maybe once a month now. For the heavy things. Rice, oil, water.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "4ad6a362-1b3c-4463-94b6-e729f2aa419a",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      15
+    ],
+    "claim": "The interviewee plans by recipe for the week to keep track of what she needs.",
+    "provenance": "evidence",
+    "quoted_text": "I plan by recipe, for the week. I write the dish and what it needs.",
+    "bearings": []
+  },
+  {
+    "id": "48f9cf23-bcbc-4a4a-b1cd-0193f2fcd0cb",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      15
+    ],
+    "claim": "For her daughter's birthday cake, the picker sent margarine instead of unsalted butter, causing the icing to slide off the cake.",
+    "provenance": "evidence",
+    "quoted_text": "Last time it was my daughter's birthday cake, and I'd written unsalted butter for the buttercream, and the picker sent a tub of margarine instead, the soft one for toast, and the icing just slid off the cake.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "7b76f110-39ed-4c77-a161-4e13c89cd9e7",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      17
+    ],
+    "claim": "The interviewee sent her husband to the corner shop at 8 PM for real butter to fix the cake.",
+    "provenance": "evidence",
+    "quoted_text": "I sent Youssef to the corner shop at eight in the evening for real butter. He was not happy.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "951146ea-dc95-4ed7-9664-7b623de75878",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      17
+    ],
+    "claim": "The cake was okay in the end.",
+    "provenance": "evidence",
+    "quoted_text": "The cake was okay in the end.",
+    "bearings": []
+  },
+  {
+    "id": "377f7678-6725-42ff-be0f-b31fb45d9aeb",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      19
+    ],
+    "claim": "The margarine substitution just arrived without a choice.",
+    "provenance": "evidence",
+    "quoted_text": "It just arrived.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "dd039095-a5e3-44d4-9630-eb04d56350f8",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      19
+    ],
+    "claim": "On the screen, the substituted item was labeled as \"spread,\" implying that butter and spread might be considered the same by Shmuber Eats.",
+    "provenance": "evidence",
+    "quoted_text": "On the screen it said spread, so maybe for them butter and spread are the same thing.",
+    "bearings": []
+  },
+  {
+    "id": "3e700ab4-e381-49e6-8a57-8bffcc943b2d",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      19
+    ],
+    "claim": "For baking, butter and spread are not the same thing.",
+    "provenance": "evidence",
+    "quoted_text": "For baking, no.",
+    "bearings": []
+  },
+  {
+    "id": "b6a4db71-ac27-4a84-85fe-b415cc9d2514",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      21
+    ],
+    "claim": "Another substitution involved chicken being a bigger pack, which cost more.",
+    "provenance": "evidence",
+    "quoted_text": "The chicken was a bigger pack, so it cost more.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "01e78361-ba15-4c09-b079-86f18884c850",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      21
+    ],
+    "claim": "The interviewee would prefer to be asked before substitutions are made, because of budget concerns.",
+    "provenance": "evidence",
+    "quoted_text": "I would prefer they ask first, because of the budget.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "5315ed30-173e-474c-b916-22f78df578b3",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee would answer a substitution request if she was at home.",
+    "provenance": "evidence",
+    "quoted_text": "At home, yes.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "d6691730-a93a-4375-b952-019cf0dcd764",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      23
+    ],
+    "claim": "The interviewee would not answer a substitution request if she was doing the school run because she would be driving.",
+    "provenance": "evidence",
+    "quoted_text": "If I'm doing the school run, no, I'm driving.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "d9a39176-9f71-40ca-a9c5-e9da5a3e46e4",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      25
+    ],
+    "claim": "The interviewee chose the 10 AM to 12 PM delivery window because her small children nap then.",
+    "provenance": "evidence",
+    "quoted_text": "I chose ten to twelve, when the small ones nap.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "04019944-131a-46ae-b85a-e3ee017af4b5",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      25
+    ],
+    "claim": "If a delivery comes at the wrong time, her children wake up with the doorbell, and her whole day is ruined.",
+    "provenance": "evidence",
+    "quoted_text": "If it comes at the wrong time, they wake up with the doorbell and then my whole day is finished.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "45b73d5e-d5e6-422b-a861-1b7ed0d1d831",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      27
+    ],
+    "claim": "A monthly delivery pass would be worth it if the interviewee ordered every week.",
+    "provenance": "inference",
+    "quoted_text": "If I ordered every week, yes.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "unclear"
+      }
+    ]
+  },
+  {
+    "id": "a470ed83-c20c-4f74-b6f0-7d6b124d70f4",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      27
+    ],
+    "claim": "A monthly delivery pass is not worth it for once a month orders.",
+    "provenance": "evidence",
+    "quoted_text": "But once a month, no, it's not worth it.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "7bdfcf08-e09a-45d7-85ca-088cd51530f9",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      27
+    ],
+    "claim": "The interviewee might pay three or four for a monthly delivery pass.",
+    "provenance": "inference",
+    "quoted_text": "Maybe three, four.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "8345f592-3b35-4427-bca5-6de432cfce87",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      29
+    ],
+    "claim": "9.99 for one delivery a month is too much and more than the delivery fee.",
+    "provenance": "evidence",
+    "quoted_text": "9.99 for one delivery a month? No. That is more than the delivery fee.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "2cd34c0f-49ff-4afb-be06-32ee6dcaaa52",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee would recommend Shmuber Eats for heavy things.",
+    "provenance": "evidence",
+    "quoted_text": "For the heavy things, yes.",
+    "bearings": []
+  },
+  {
+    "id": "ee617bfe-18e5-44c9-b99d-d229e91d4e7f",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      31
+    ],
+    "claim": "The interviewee still prefers to choose fresh items herself.",
+    "provenance": "evidence",
+    "quoted_text": "For fresh, I still like to choose myself.",
+    "bearings": []
+  },
+  {
+    "id": "0e8da27b-0346-4461-9622-a7e546cc97fd",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      33
+    ],
+    "claim": "The interviewee liked not having to carry the 20 kilos of rice, especially with four children.",
+    "provenance": "evidence",
+    "quoted_text": "Not carrying the rice. Twenty kilos, with four children, that is a job.",
+    "bearings": []
+  },
+  {
+    "id": "44f0b38b-2c10-4dca-91b9-b444c7175a5d",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      35
+    ],
+    "claim": "The interviewee liked least that the prices are not always the same as the store, contrary to what the neighbour said, with some items being a bit more expensive.",
+    "provenance": "evidence",
+    "quoted_text": "That the prices are not always the same as the store, like the neighbour said. Some things are a bit more.",
+    "bearings": []
+  },
+  {
+    "id": "15acaa74-8477-4134-82b8-ecc9400a8d68",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      37
+    ],
+    "claim": "The overall experience with Shmuber Eats was a seven out of ten.",
+    "provenance": "evidence",
+    "quoted_text": "Seven.",
+    "bearings": []
+  },
+  {
+    "id": "5f37f32a-8667-47cd-9b0b-ee189b40002a",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      39
+    ],
+    "claim": "Twice the driver came at the very end of the two-hour delivery window, and the baby was awake by then.",
+    "provenance": "evidence",
+    "quoted_text": "Twice the driver came at the very end of the two hours, and the baby was awake by then.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "a94c379d-7780-46ea-b533-5d7e84d452b3",
+    "session_id": "20261102T000000-8",
+    "seqs": [
+      39
+    ],
+    "claim": "A smaller delivery time window, even with an additional cost, would be helpful.",
+    "provenance": "inference",
+    "quoted_text": "If I could pick a smaller time, even a cost, that would help me.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "c2535ca1-534b-4202-9ea7-899007a5431c",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      1
+    ],
+    "claim": "Liam just got back from a run.",
+    "provenance": "evidence",
+    "quoted_text": "Just got back from a run, so if I'm out of breath, that's why.",
+    "bearings": []
+  },
+  {
+    "id": "17333145-5446-4b53-9662-ab0bdd434ed0",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      5
+    ],
+    "claim": "Liam lives with his girlfriend Noor in a flat near the park.",
+    "provenance": "evidence",
+    "quoted_text": "It's me and my girlfriend Noor, in a flat near the park.",
+    "bearings": []
+  },
+  {
+    "id": "319979df-fea7-47cf-90d7-39c8166f45e0",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      5
+    ],
+    "claim": "Liam is a PE teacher and Noor is a nurse, so their hours are opposite.",
+    "provenance": "evidence",
+    "quoted_text": "I'm a PE teacher, she's a nurse, so our hours are kind of opposite.",
+    "bearings": []
+  },
+  {
+    "id": "ac4a374c-98be-4fce-81db-387e2c925615",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      5
+    ],
+    "claim": "Whoever is free does the grocery shopping, but it's usually Liam.",
+    "provenance": "evidence",
+    "quoted_text": "Whoever's free does the shop. Usually it's me, on the bike, to the supermarket on the high street.",
+    "bearings": []
+  },
+  {
+    "id": "5e99c8d9-d27c-48d8-b049-435ef86ea1e8",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      7
+    ],
+    "claim": "Liam heard about Shmuber Eats from Noor's sister.",
+    "provenance": "inference",
+    "quoted_text": "Noor's sister uses it, I think. Or she'd heard of it. Something like that.",
+    "bearings": []
+  },
+  {
+    "id": "fed7396b-e47e-4058-9b68-290d8f0c27a4",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      9
+    ],
+    "claim": "Liam opened the app, typed in items like pasta, oats, bananas, eggs, a big bag of rice, tins, and hot chocolate, paid, and waited for the delivery.",
+    "provenance": "evidence",
+    "quoted_text": "Opened it, typed stuff in. Pasta, oats, bananas, eggs, a big bag of rice, tins, hot chocolate. Paid. Then just waited around, watched the little car on the map.",
+    "bearings": []
+  },
+  {
+    "id": "9d12df63-3b0e-4cba-a78c-a52606304234",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      11
+    ],
+    "claim": "It took Liam a minute to find the eggs in the app because they were under dairy.",
+    "provenance": "evidence",
+    "quoted_text": "Took me a minute to find the eggs, they were under dairy, which, okay.",
+    "bearings": []
+  },
+  {
+    "id": "fccd5588-2684-4593-8da4-13281c002f7f",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      13
+    ],
+    "claim": "Liam orders groceries online once or twice, not a lot.",
+    "provenance": "evidence",
+    "quoted_text": "Once? Twice maybe. Not a lot.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "aa6d5968-9f2b-4345-ae72-3e73a0378073",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      15
+    ],
+    "claim": "The oats in Liam's last order were substituted with a different brand, but it didn't matter to him.",
+    "provenance": "evidence",
+    "quoted_text": "The oats, I think. I got a different brand, like the jumbo ones. Didn't matter, oats are oats.",
+    "bearings": [
+      {
+        "hypothesis_id": "h1",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "6ccb1cf7-f986-4d7c-a352-6f9374bb8a6e",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      17
+    ],
+    "claim": "Liam received a message about the substitution before the order arrived, but he didn't care.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, there was a message saying they'd replaced something. I saw it, I just didn't care.",
+    "bearings": [
+      {
+        "hypothesis_id": "h2",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "1e348cd7-a6c3-40f8-9e3a-9ca105772c05",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      19
+    ],
+    "claim": "Liam took whatever delivery slot was available, and he thinks there was only one evening slot that day.",
+    "provenance": "inference",
+    "quoted_text": "I took whatever was there. I think they only had one slot that day, the evening one.",
+    "bearings": []
+  },
+  {
+    "id": "bcf1985c-3e75-4752-bfca-739af9b8e307",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      21
+    ],
+    "claim": "On a school day, Liam would not be home for a two-hour delivery slot because he works until five and has an after-school club.",
+    "provenance": "evidence",
+    "quoted_text": "On a school day, no way. I'm at work till five and then I've got the after-school club.",
+    "bearings": [
+      {
+        "hypothesis_id": "h3",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "8def4a55-e286-4f61-9d65-b909b9567a1e",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      23
+    ],
+    "claim": "Liam would not want a monthly delivery pass because he doesn't use the service enough.",
+    "provenance": "evidence",
+    "quoted_text": "Nah. I don't use it enough.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "supports"
+      }
+    ]
+  },
+  {
+    "id": "5b92b6bb-4281-4506-bdbc-3372a16727c1",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      23
+    ],
+    "claim": "Liam might keep a monthly delivery pass if it was around two dollars a month, because he might forget about it.",
+    "provenance": "inference",
+    "quoted_text": "If it was like two a month, I might forget about it and keep it.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "ecf1ba36-5de6-4d19-82e5-0178105cd082",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      25
+    ],
+    "claim": "Liam would cancel a 9.99 a month delivery pass immediately.",
+    "provenance": "evidence",
+    "quoted_text": "Ten a month? No, I'd cancel it straight away.",
+    "bearings": [
+      {
+        "hypothesis_id": "h5",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "83ee7611-67c0-47a2-a63e-e8e1b76fe72f",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      27
+    ],
+    "claim": "Liam liked that his order turned up at all, as the street was snowed in, buses had stopped, and he couldn't use his bike.",
+    "provenance": "evidence",
+    "quoted_text": "Honestly, that it turned up at all. That was the two days the whole street was snowed in, the buses stopped, I wasn't getting the bike out in that, so it was the app or eating tins.",
+    "bearings": []
+  },
+  {
+    "id": "2c97f9f1-6ba7-4f64-aaa5-eb0d2dbf412d",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      27
+    ],
+    "claim": "Liam went back to shopping at the high street on his bike once the roads were clear.",
+    "provenance": "evidence",
+    "quoted_text": "Once the roads were clear I was back on the bike to the high street.",
+    "bearings": []
+  },
+  {
+    "id": "2090b905-bcf7-4f1e-be53-abd73ad6edf7",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      29
+    ],
+    "claim": "Liam would recommend Shmuber Eats to a friend because it worked fine.",
+    "provenance": "evidence",
+    "quoted_text": "Yeah, I guess. It worked fine.",
+    "bearings": []
+  },
+  {
+    "id": "316f6ed3-a351-4e0e-a131-eddf054cee68",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      31
+    ],
+    "claim": "Liam disliked that the app asks for many permissions, including location, notifications, and contacts.",
+    "provenance": "evidence",
+    "quoted_text": "The app asks for a lot of permissions. Location, notifications, contacts. Why contacts?",
+    "bearings": []
+  },
+  {
+    "id": "4d91084d-c576-42e4-880c-1b80a4089179",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      33
+    ],
+    "claim": "Liam rated his overall experience with Shmuber Eats a seven or eight, solid.",
+    "provenance": "evidence",
+    "quoted_text": "Seven, eight. Solid.",
+    "bearings": []
+  },
+  {
+    "id": "3273f76c-feef-464f-8d4d-c219e2cbd11d",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      35
+    ],
+    "claim": "Noor did not use the app, she just ate the hot chocolate.",
+    "provenance": "evidence",
+    "quoted_text": "No, she just ate the hot chocolate.",
+    "bearings": [
+      {
+        "hypothesis_id": "h4",
+        "stance": "undermines"
+      }
+    ]
+  },
+  {
+    "id": "aab77e5d-4dfb-4e0b-a3ac-bbbb7e1b9c78",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      37
+    ],
+    "claim": "Liam has not seen the recipes section of the app.",
+    "provenance": "evidence",
+    "quoted_text": "No. I just make pasta.",
+    "bearings": []
+  },
+  {
+    "id": "e161a13a-659f-4227-ab54-7e09b3850cb0",
+    "session_id": "20261102T000000-9",
+    "seqs": [
+      37
+    ],
+    "claim": "Liam only makes pasta.",
+    "provenance": "evidence",
+    "quoted_text": "I just make pasta.",
+    "bearings": []
+  }
+]

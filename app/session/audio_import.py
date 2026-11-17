@@ -1,12 +1,11 @@
 """A past interview's RECORDING, written as a session that awaits the file pass.
 
-A recording is one stream with both voices on it -- the same thing an
-in-person meeting leaves behind -- so it takes the same road instead of a
-second one: the session is written holding a copy of the audio under the room
-audio's name, with `evidence: pending`, and the existing after-meeting steps
-(`diarize-after`, then `confirm-speakers`) do the rest. Nothing here
-transcribes, and nothing here decides who spoke: the file pass proposes roles
-and the operator confirms them, exactly as for a meeting.
+A recording is one stream with both voices on it, so the session is written
+holding a copy of the audio under the room audio's name, with
+`evidence: pending`, and the after-meeting steps (`diarize-after`, then
+`confirm-speakers`) do the rest. Nothing here transcribes, and nothing here
+decides who spoke: the file pass proposes roles and the operator confirms
+them.
 
 Rules, each a decision:
 
@@ -132,8 +131,8 @@ def session_metadata(
         "started_at_source": started_at_source,
         "closed_at": ti.iso(started + timedelta(seconds=plan.duration_s)),
         # The key the after-meeting steps read: one stream, both voices, roles
-        # unconfirmed. A recorded call is that just as a meeting is.
-        "capture": "in-person",
+        # unconfirmed.
+        "capture": ev.CAPTURE_ONE_RECORDING,
         "speaker_source": "diarization-file",
         ev.EVIDENCE_KEY: ev.EVIDENCE_PENDING,
         "audio_retained": True,

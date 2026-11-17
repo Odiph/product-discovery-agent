@@ -1,0 +1,37 @@
+[
+  {
+    "id": "b1",
+    "text": "Shmuber Eats is a grocery delivery app: a household orders from a local supermarket, a picker shops the order, and it arrives in a two-hour window the same day or the next.",
+    "source": "Shmuber Eats product one-pager (synthetic demo)",
+    "citation": null,
+    "provenance": "evidence"
+  },
+  {
+    "id": "b2",
+    "text": "The beta runs in one metro area. Many households place a first order, but fewer than one in three place a second order within 30 days.",
+    "source": "beta orders dashboard (synthetic demo)",
+    "citation": null,
+    "provenance": "evidence"
+  },
+  {
+    "id": "b3",
+    "text": "The team's bet: surprise substitutions at the door are the main reason first-time customers do not come back.",
+    "source": "team planning notes (synthetic demo)",
+    "citation": null,
+    "provenance": "inference"
+  },
+  {
+    "id": "b4",
+    "text": "Pickers replace an out-of-stock item with the closest match they can find; the customer is notified in the app, and most see the swap only when the bags arrive.",
+    "source": "picker operations guide (synthetic demo)",
+    "citation": null,
+    "provenance": "evidence"
+  },
+  {
+    "id": "b5",
+    "text": "Twelve beta households agreed to a 15-25 minute interview about their last grocery orders.",
+    "source": "interview scheduling sheet (synthetic demo)",
+    "citation": null,
+    "provenance": "evidence"
+  }
+]

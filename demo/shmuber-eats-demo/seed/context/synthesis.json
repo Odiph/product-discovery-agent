@@ -1,0 +1,1528 @@
+{
+  "version": 2,
+  "model": "anthropic/claude-sonnet-5.5",
+  "key": "5e0c8838a80b8e8a57a905cbf64e615f23ac8034fff9ce0592dc6c418dae2011",
+  "sessions": [
+    "20261102T000000",
+    "20261102T000000-1",
+    "20261102T000000-10",
+    "20261102T000000-11",
+    "20261102T000000-2",
+    "20261102T000000-3",
+    "20261102T000000-4",
+    "20261102T000000-5",
+    "20261102T000000-6",
+    "20261102T000000-7",
+    "20261102T000000-8",
+    "20261102T000000-9"
+  ],
+  "outcome": {
+    "text": "More households place a second order within 30 days",
+    "proposed": false
+  },
+  "opportunities": [
+    {
+      "id": "o1",
+      "statement": "When something I ordered is swapped, I get an item that is wrong for what I planned to cook or use it for.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "13e7a828-3692-4049-b8e5-3f4379cf31ad",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "7b643b35-fdf8-4ace-aa3b-f8c4f92cfe6f",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "38f24a52-9e7f-483f-94cf-d64172e4d553",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "02dda868-0e6f-49da-b9a8-2f8656e68ee8",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "d5c62978-d12f-453c-b034-a104b584cc39",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "2fa07d0c-6b45-4958-b23d-2947d193839d",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "75539a08-5e32-41dd-8671-1405e2b692a8",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "cca027c4-b3b3-4f83-9ac0-2f499ad3416d",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "48f9cf23-bcbc-4a4a-b1cd-0193f2fcd0cb",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "7b76f110-39ed-4c77-a161-4e13c89cd9e7",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "b6a4db71-ac27-4a84-85fe-b415cc9d2514",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "155ecc08-2004-4a88-9198-5b15bd2b9b9a",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "4e66d41c-4bbb-47e9-b953-b8c88d0a0af8",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "5ad2c0ea-e403-4540-8790-f44e5f129894",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "b6b8b7f3-f564-41bb-b5a1-7be9e39c9be0",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "6dbbd4b7-cba6-49a8-abd2-acd9dea11ee8",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "a98f6f8b-9980-4579-929e-7e692e237c9d",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "4a1c55f8-d6dd-48d9-92d6-e78fb3e2c7d9",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "11dc434f-fc59-4807-af44-5aa5e45c3090",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "0d0c9378-f8f8-4645-a5b5-e070adf68c8d",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "eb6a01fb-5eb0-492b-80e8-580f9b1ff99e",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "1b82058d-f845-4e1f-b565-ff4b6880e6cd",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "176d9aed-7b2a-4077-abd2-4d620b8e1832",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "09753066-785a-4f9c-804d-27a360902bd7",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "713de2c3-0bbd-45d2-81a4-91cfe6c0e58a",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "501c05ee-9fde-4a64-a6a7-f7e7df6f1f38",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "aa6d5968-9f2b-4345-ae72-3e73a0378073",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "2f2835d5-c355-4e71-b756-91c301ee8917",
+          "bearing": "already_met"
+        }
+      ],
+      "hypothesis_id": "h1",
+      "reframed_from": "First-time customers do not place a second order because substitutions surprise them at the door.",
+      "next_story": "Tell me about the last time something in your grocery order was swapped for something else. What were you going to do with it, and what happened next?"
+    },
+    {
+      "id": "o2",
+      "statement": "I only find out an item was swapped when the bags are already at my door.",
+      "parent_id": "o1",
+      "evidence": [
+        {
+          "fact_id": "2145bcfd-8466-4cb7-8047-2454f118f556",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "4612a137-15d4-4dc4-9eb1-365501475fda",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "71d9058a-5a23-4551-ae93-47aa55b415ac",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "8a64e7d3-051a-479b-9ecc-bf5cdeef199c",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "377f7678-6725-42ff-be0f-b31fb45d9aeb",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "78a753ac-b627-46a7-bf97-7fac219c0f22",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "b7e7dfc0-cce5-4f16-9dd8-55b048cae371",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "8f22f192-9d0e-471d-a3d9-b5e844e5292a",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "4b770ca1-fbf3-4cd0-ad8e-0253fb1a660f",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "113eb742-edee-4f82-bbb0-dbb899e44059",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "cb322eab-8598-4622-8d66-d1d53ce259cf",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "f64fe4cf-2901-41a3-a87b-637ba805fb66",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "4ac0f963-2abd-4f0c-863d-0d33255e298e",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "819ac1ce-3579-4559-93fc-2e8e0eefc41b",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "523a68c0-03af-4d7e-aaeb-2c76f119c71b",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "6ccb1cf7-f986-4d7c-a352-6f9374bb8a6e",
+          "bearing": "not_experienced"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Walk me through a time you learned about a substitution. Where were you, what were you doing, and how did you find out?"
+    },
+    {
+      "id": "o3",
+      "statement": "When a swap is wrong for my recipe, I have no way to tell Shmuber Eats.",
+      "parent_id": "o1",
+      "evidence": [
+        {
+          "fact_id": "3084f134-84d8-4910-b444-b7beab86be5b",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "ff009185-5ee6-40f9-9b65-7b2a0688deb5",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "155ecc08-2004-4a88-9198-5b15bd2b9b9a",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Tell me about the last time you were unhappy with something in a delivery. What did you do about it afterwards?"
+    },
+    {
+      "id": "o4",
+      "statement": "I can't always be home for a two-hour delivery window.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "6c56fcd9-acaf-43ba-94b7-09e98c8b50b3",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "5f37f32a-8667-47cd-9b0b-ee189b40002a",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "bcf1985c-3e75-4752-bfca-739af9b8e307",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "55e3e214-91c8-4506-a193-fa9f77e00e3e",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "04019944-131a-46ae-b85a-e3ee017af4b5",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "a9f63b8c-ce2c-4cd4-a808-83e9426c48f0",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "1fb631eb-7aba-453a-9b95-8954d5c3cc0a",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "d7ba51e1-f31f-4935-b2d1-01e8ce348830",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "c7841cae-fd6c-430f-9dba-9698bf864653",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "ddfdd11b-edbd-4498-83ec-16a0f4735765",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "d0785245-35f9-411f-b184-4a1d893e7610",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "4fb45a82-09c7-4a69-b89e-3973f4f45ea7",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "daea6370-3ab2-45fc-91f0-49f27527f5ea",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "0d5f6278-95d1-42b3-9969-3d5cd6f6179b",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "335de4d9-0c7b-4ffc-a595-363c8f8b196f",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "6155c1b6-e82e-4fc1-b972-6ffc74da2604",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "d9a39176-9f71-40ca-a9c5-e9da5a3e46e4",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "b3457955-fc79-4baf-a253-642ad4269fcf",
+          "bearing": "already_met"
+        }
+      ],
+      "hypothesis_id": "h3",
+      "reframed_from": "Two-hour delivery windows do not fit working households' days.",
+      "next_story": "Walk me through the last time you chose a delivery slot. What was your day like around that window, and how did the delivery go?"
+    },
+    {
+      "id": "o5",
+      "statement": "I'm out until late on workdays and need an evening slot I can actually be home for.",
+      "parent_id": "o4",
+      "evidence": [
+        {
+          "fact_id": "55e3e214-91c8-4506-a193-fa9f77e00e3e",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "6c56fcd9-acaf-43ba-94b7-09e98c8b50b3",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "bcf1985c-3e75-4752-bfca-739af9b8e307",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "75a1786d-99fc-4c81-a604-34df7bc88b3a",
+          "bearing": "already_met"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Tell me about the last weekday you wanted groceries delivered. What time were you back home, and what did you do about it?"
+    },
+    {
+      "id": "o6",
+      "statement": "When the driver arrives at the wrong moment in the window, it disrupts my household.",
+      "parent_id": "o4",
+      "evidence": [
+        {
+          "fact_id": "5f37f32a-8667-47cd-9b0b-ee189b40002a",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "04019944-131a-46ae-b85a-e3ee017af4b5",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "718b6273-bbed-49ce-8b45-15a0c5d7f4cd",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Tell me about the last time a delivery arrived at a bad moment. What was going on, and what happened?"
+    },
+    {
+      "id": "o7",
+      "statement": "When illness, a newborn, an injury or bad weather keeps me from getting out, I need food brought to me.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "884daba0-d50a-4015-8617-3a60accc1b8c",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "5c174c69-6991-4c5c-b62e-b8a4659ca0f8",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "2e06368f-6718-4663-99d1-5d5f18dbcc53",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "cab936be-c6ee-4a12-b8ff-369968fcf4d3",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "bf64b269-0cca-4a86-a613-ad805720e5a0",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "73f47743-59e1-49ca-8b66-435b75590779",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "a9f092e7-bb61-41ed-93a5-ddb1e6887a74",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "83ee7611-67c0-47a2-a63e-e8e1b76fe72f",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "d3c9a33a-e9d7-4a2f-a652-3b347ce3de69",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "51a21bc0-20fe-4b7b-b270-f3a720d09ca7",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "230d65e9-3c01-43bb-b833-5007c72390cb",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "3be7f55b-2ce7-4a52-a3fb-dddb916388f2",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "50e23ffc-09e5-43fb-82ee-1255bcbb3963",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "2c97f9f1-6ba7-4f64-aaa5-eb0d2dbf412d",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Tell me about the last time you couldn't get to the shop. What did you do for food, and what did you do once things were back to normal?"
+    },
+    {
+      "id": "o8",
+      "statement": "I want to pick my own fresh items and see them before I buy.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "36faa92a-73e8-424f-8bb7-ad9a87b6e420",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "1372e755-7e5b-4667-a991-041ae17b5185",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "ee617bfe-18e5-44c9-b99d-d229e91d4e7f",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "48e9b8d8-3c89-466c-828c-878bdddf4346",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "63938f4f-b274-42c9-8aa4-ae2ad73a8604",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Walk me through the last time you bought fruit, vegetables or meat. Where did you go and how did you choose?"
+    },
+    {
+      "id": "o9",
+      "statement": "I'm tired of carrying heavy things like water and rice home.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "9620d8fb-4bed-4b85-b61d-13d9695b1b9e",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "923e68eb-1bf0-4bbd-bf7e-ccddfa4d44ae",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "0e8da27b-0346-4461-9622-a7e546cc97fd",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "10d1f62e-1304-425b-9547-34eb619000d6",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "5c174c69-6991-4c5c-b62e-b8a4659ca0f8",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Tell me about the last time you had to get something heavy home. How did you do it, and how did it go?"
+    },
+    {
+      "id": "o10",
+      "statement": "I want my weekends back from the weekly shop with small children.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "772533f7-71b3-4978-a3c7-7db46de352d2",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "3a68b649-0d30-4972-b669-062556d98b7e",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "3fca33e2-3555-4bde-8fc7-7cbe5468c5d5",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "127e0d51-495c-43a1-9af6-37f5eb8456a3",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Walk me through your last regular weekly shop. Who came, how long did it take, and what else did it crowd out?"
+    },
+    {
+      "id": "o11",
+      "statement": "I have to redo my order when the app forgets my basket or my usual items.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "f10e87a0-92a1-4805-b5a6-64d7940b2250",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "d7875dbf-25cf-4b91-902b-c87dab82412e",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "e6061824-cb2c-4b33-a978-05014e4f8626",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "5167f4aa-3bc2-470c-970e-4ffcce08204b",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "71c693c1-6f34-4354-a9a3-04a840dc83e9",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "7223d4e4-304c-411c-8324-0dbe75dec4a1",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "cf8b0022-16e2-456f-aa3f-d4d1ad7e71df",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "57bd9839-f654-4b17-a8d7-c1432361f376",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Walk me through the last time you built an order in the app from start to payment. What did you type or tap, and where did you get stuck?"
+    },
+    {
+      "id": "o12",
+      "statement": "I can't quickly find what I'm looking for in the app.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "146fd07a-523e-4b4b-ae7e-ff80316df1fb",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "9ee5bca1-e91a-4ae1-be9e-e0e82fb4650b",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "41dc9e29-63ca-4816-b89f-838b1d87d2d3",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "9d12df63-3b0e-4cba-a78c-a52606304234",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "b3cf332e-e277-4608-bcc0-bdd4b40f992c",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "4f66d653-9259-4780-b94b-61e66296bc1c",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "c764ba4c-a14c-4d30-8702-c68bf927ec31",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "72983197-f308-4b97-9350-3a5dd6c17c46",
+          "bearing": "already_met"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Tell me about the last time you searched for a specific item in the app. What did you type and what did you see?"
+    },
+    {
+      "id": "o13",
+      "statement": "I can't comfortably read the small writing in the app.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "9daacf1f-6103-4f7b-ab69-6c70f3bcccb7",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "c3111915-defc-4ea1-81e3-49569a0eae38",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "518f5038-9e3a-48a6-91b9-26db4bbc9bdf",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Walk me through the last time you used the app on your phone. What was hard to read or tap, and what did you do?"
+    },
+    {
+      "id": "o14",
+      "statement": "I need to gather what everyone in my household wants without chasing them.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "9270a87b-294e-45f0-8d87-b4a8147b650c",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "500edadf-42a9-4521-b286-6f8a4d07271c",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "6fc35ae3-ac39-4a62-b633-0e88a0afae99",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "875948c3-8be3-4f14-9fba-b642311a1726",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "52325379-ea61-451f-8e0e-adfebb6402f2",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "8990b143-5522-424b-b80b-72f8aabc3000",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "d5f065b2-d85f-4bb8-9b19-e7687933d918",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "9bbc42bf-7d18-46ea-bea1-5f8f5836f5df",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "a48fc433-4543-47f7-a074-c2b4106efcff",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "4fa886fd-3c46-4703-bba1-995204b4fdf6",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "7b8c11f0-dd0f-4cfc-b4d6-a748b7e071ba",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "660c4631-1c89-42a7-867a-4a770846748f",
+          "bearing": "already_met"
+        },
+        {
+          "fact_id": "f35254f0-70e9-438f-a5fd-25979cca96b6",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "8fabbd99-270f-484f-9d9d-a610b89d6f8b",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "298618ab-32ae-4f61-a48b-b759a2842f5f",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "dcfacc19-8f0e-4519-ba5a-d1952d89704f",
+          "bearing": "not_experienced"
+        },
+        {
+          "fact_id": "905be88c-c959-4bd8-aba8-48643984bdf0",
+          "bearing": "not_experienced"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Tell me about the last time someone else in your home wanted something from the shop. How did you find out and how did it get on your list?"
+    },
+    {
+      "id": "o15",
+      "statement": "I want to be sure what I pay, including delivery, isn't more than at the store.",
+      "parent_id": null,
+      "evidence": [
+        {
+          "fact_id": "57b61fb3-6aad-49f0-a88a-602bef72efe1",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "21dad3f5-b361-4be7-a2ab-31c59c31f310",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "44f0b38b-2c10-4dca-91b9-b444c7175a5d",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "b6a4db71-ac27-4a84-85fe-b415cc9d2514",
+          "bearing": "experiences"
+        },
+        {
+          "fact_id": "8910b055-f6ba-4791-a1d3-4f6043efbff5",
+          "bearing": "experiences"
+        }
+      ],
+      "hypothesis_id": "",
+      "reframed_from": "",
+      "next_story": "Walk me through the last time you compared a delivered order's price with what you'd pay in the shop. What did you find?"
+    }
+  ],
+  "solutions": [
+    {
+      "id": "s1",
+      "opportunity_id": "o2",
+      "statement": "Ask the customer by push notification to approve or reject each substitution before the driver leaves.",
+      "origin": "operator",
+      "evidence": [
+        {
+          "fact_id": "8a64e7d3-051a-479b-9ecc-bf5cdeef199c",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "3084f134-84d8-4910-b444-b7beab86be5b",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "b7e7dfc0-cce5-4f16-9dd8-55b048cae371",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "8f22f192-9d0e-471d-a3d9-b5e844e5292a",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "4b770ca1-fbf3-4cd0-ad8e-0253fb1a660f",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "113eb742-edee-4f82-bbb0-dbb899e44059",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "cb322eab-8598-4622-8d66-d1d53ce259cf",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "f64fe4cf-2901-41a3-a87b-637ba805fb66",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "4ac0f963-2abd-4f0c-863d-0d33255e298e",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "819ac1ce-3579-4559-93fc-2e8e0eefc41b",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "523a68c0-03af-4d7e-aaeb-2c76f119c71b",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "6ccb1cf7-f986-4d7c-a352-6f9374bb8a6e",
+          "bearing": "contradicts"
+        }
+      ],
+      "hypothesis_id": "h2",
+      "next_story": "Tell me about the last time you got a message from the app while you were in the middle of something else. What did you do with it?",
+      "assumptions": [
+        {
+          "text": "Customers are looking at their phone and can reply in time while the picker is still in the store.",
+          "type": "usability",
+          "importance": "high",
+          "fact_ids": [
+            "b7e7dfc0-cce5-4f16-9dd8-55b048cae371",
+            "8f22f192-9d0e-471d-a3d9-b5e844e5292a",
+            "4b770ca1-fbf3-4cd0-ad8e-0253fb1a660f",
+            "113eb742-edee-4f82-bbb0-dbb899e44059",
+            "4ac0f963-2abd-4f0c-863d-0d33255e298e",
+            "819ac1ce-3579-4559-93fc-2e8e0eefc41b"
+          ]
+        },
+        {
+          "text": "Customers care enough about most swaps to want to be interrupted.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "eb6a01fb-5eb0-492b-80e8-580f9b1ff99e",
+            "aa6d5968-9f2b-4345-ae72-3e73a0378073",
+            "6ccb1cf7-f986-4d7c-a352-6f9374bb8a6e",
+            "176d9aed-7b2a-4077-abd2-4d620b8e1832"
+          ]
+        },
+        {
+          "text": "Pickers can wait for a reply without slowing the order or missing the delivery window.",
+          "type": "feasibility",
+          "importance": "low",
+          "fact_ids": []
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "opportunity_id": "o1",
+      "statement": "Let the customer set a rule per item: swap with the same type, swap with anything, or leave it out.",
+      "origin": "customer",
+      "evidence": [
+        {
+          "fact_id": "2f30bcd3-cc8c-4944-a771-b982149dd375",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "176d9aed-7b2a-4077-abd2-4d620b8e1832",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "1b82058d-f845-4e1f-b565-ff4b6880e6cd",
+          "bearing": "contradicts"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Walk me through the last time you typed an order into the app. Which items did you care about getting exactly right, and how did you say so?",
+      "assumptions": [
+        {
+          "text": "Customers will set a rule for items they care about instead of skipping it.",
+          "type": "usability",
+          "importance": "high",
+          "fact_ids": []
+        },
+        {
+          "text": "Pickers follow the rules reliably.",
+          "type": "feasibility",
+          "importance": "high",
+          "fact_ids": [
+            "41342082-14c8-4acf-b784-b5517b83e66c",
+            "7fba6c0e-a2eb-414c-a441-6b24bc4e6d4a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "opportunity_id": "o3",
+      "statement": "Add a 'wrong for my recipe' option next to 'missing' and 'damaged' when reporting an item.",
+      "origin": "model",
+      "evidence": [
+        {
+          "fact_id": "ff009185-5ee6-40f9-9b65-7b2a0688deb5",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "3084f134-84d8-4910-b444-b7beab86be5b",
+          "bearing": "supports"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Tell me about the last time something in an order wasn't right. Did you tell anyone, and what happened?",
+      "assumptions": [
+        {
+          "text": "Customers who are unhappy with a swap will report it in the app rather than just move on.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "3084f134-84d8-4910-b444-b7beab86be5b",
+            "0649c36c-a71d-403a-89aa-374415a14313"
+          ]
+        },
+        {
+          "text": "A report leads to a fix, such as a refund or credit, that makes customers order again.",
+          "type": "viability",
+          "importance": "high",
+          "fact_ids": []
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "opportunity_id": "o6",
+      "statement": "Offer a narrower one-hour delivery window, perhaps for a small fee.",
+      "origin": "customer",
+      "evidence": [
+        {
+          "fact_id": "5f37f32a-8667-47cd-9b0b-ee189b40002a",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "04019944-131a-46ae-b85a-e3ee017af4b5",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "a9f63b8c-ce2c-4cd4-a808-83e9426c48f0",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "1fb631eb-7aba-453a-9b95-8954d5c3cc0a",
+          "bearing": "contradicts"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Tell me about the last time you waited in for a delivery of any kind. How long did you wait, and what did you give up?",
+      "assumptions": [
+        {
+          "text": "Customers will pay extra for a narrower window.",
+          "type": "viability",
+          "importance": "high",
+          "fact_ids": []
+        },
+        {
+          "text": "Drivers can keep to one-hour windows.",
+          "type": "feasibility",
+          "importance": "high",
+          "fact_ids": [
+            "5f37f32a-8667-47cd-9b0b-ee189b40002a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "opportunity_id": "o5",
+      "statement": "Offer evening delivery slots that run later than 8 to 10 PM.",
+      "origin": "customer",
+      "evidence": [
+        {
+          "fact_id": "55e3e214-91c8-4506-a193-fa9f77e00e3e",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "6c56fcd9-acaf-43ba-94b7-09e98c8b50b3",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "75a1786d-99fc-4c81-a604-34df7bc88b3a",
+          "bearing": "contradicts"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Walk me through the last weekday evening you got something delivered. When did you get home and when did it arrive?",
+      "assumptions": [
+        {
+          "text": "Households want food delivered late at night and will order again to get it.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "75a1786d-99fc-4c81-a604-34df7bc88b3a",
+            "850ea615-8034-4745-9fb2-adbc8fcf76c4"
+          ]
+        },
+        {
+          "text": "Drivers and pickers are available late in the evening.",
+          "type": "feasibility",
+          "importance": "low",
+          "fact_ids": []
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "opportunity_id": "o7",
+      "statement": "After a first order, offer to save it as a ready-to-go essentials basket for the next time you can't get out.",
+      "origin": "model",
+      "evidence": [
+        {
+          "fact_id": "884daba0-d50a-4015-8617-3a60accc1b8c",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "17343524-6dcb-4372-a20b-d1ab17c086aa",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "51a21bc0-20fe-4b7b-b270-f3a720d09ca7",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "230d65e9-3c01-43bb-b833-5007c72390cb",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "3be7f55b-2ce7-4a52-a3fb-dddb916388f2",
+          "bearing": "contradicts"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Tell me about the last time something unexpected kept you at home. How did you decide what to get and how?",
+      "assumptions": [
+        {
+          "text": "The same kind of disruption will come again soon enough to bring the customer back within 30 days.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "51a21bc0-20fe-4b7b-b270-f3a720d09ca7",
+            "230d65e9-3c01-43bb-b833-5007c72390cb",
+            "3be7f55b-2ce7-4a52-a3fb-dddb916388f2",
+            "2c97f9f1-6ba7-4f64-aaa5-eb0d2dbf412d"
+          ]
+        },
+        {
+          "text": "Customers will remember the app and basket when disruption hits.",
+          "type": "usability",
+          "importance": "high",
+          "fact_ids": [
+            "a32278a3-f6ea-4fd7-9f47-ce0d70474e28"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "opportunity_id": "o10",
+      "statement": "Draft a weekly basket from last week's order and remind the household at a set time to confirm it.",
+      "origin": "model",
+      "evidence": [
+        {
+          "fact_id": "eafd8d2c-abb6-4398-bdc0-4013db869c83",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "f10e87a0-92a1-4805-b5a6-64d7940b2250",
+          "bearing": "supports"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Walk me through how you decided what to buy in your last two weekly shops. How alike were they?",
+      "assumptions": [
+        {
+          "text": "Households shop in similar ways week to week, so a draft basket needs few edits.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "4cdb7b79-5247-4c61-805a-ce0e117edc4b"
+          ]
+        },
+        {
+          "text": "A reminder at the right time prompts the order instead of annoying people.",
+          "type": "usability",
+          "importance": "low",
+          "fact_ids": [
+            "cc1d28e0-8900-48a9-91ee-5b86c1ae7f1e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "opportunity_id": "o11",
+      "statement": "Keep the basket saved when the app logs the customer out or is closed, and offer 'reorder my last order'.",
+      "origin": "model",
+      "evidence": [
+        {
+          "fact_id": "e6061824-cb2c-4b33-a978-05014e4f8626",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "5167f4aa-3bc2-470c-970e-4ffcce08204b",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "d7875dbf-25cf-4b91-902b-c87dab82412e",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "f10e87a0-92a1-4805-b5a6-64d7940b2250",
+          "bearing": "supports"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Tell me about the last time the app lost something you had entered. What did you do next?",
+      "assumptions": [
+        {
+          "text": "Losing the basket or the usual order is a reason people don't reorder.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "3447f913-f232-4c5d-8d2b-da8459178485",
+            "71c693c1-6f34-4354-a9a3-04a840dc83e9"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "opportunity_id": "o12",
+      "statement": "Improve search so that typing a product shows the matching product first, and let customers browse without picking a store first.",
+      "origin": "model",
+      "evidence": [
+        {
+          "fact_id": "146fd07a-523e-4b4b-ae7e-ff80316df1fb",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "41dc9e29-63ca-4816-b89f-838b1d87d2d3",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "b3cf332e-e277-4608-bcc0-bdd4b40f992c",
+          "bearing": "supports"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Walk me through the last time you looked for an item and couldn't find it. How did you get there in the end?",
+      "assumptions": [
+        {
+          "text": "Search quality is a reason first-time customers don't come back.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "d583fcbd-87d0-43b1-9d53-192a21da81fe",
+            "b341c2dc-fc47-4396-9cdf-ad58f52b2665"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "opportunity_id": "o13",
+      "statement": "Add a larger text size setting.",
+      "origin": "model",
+      "evidence": [
+        {
+          "fact_id": "c3111915-defc-4ea1-81e3-49569a0eae38",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "9daacf1f-6103-4f7b-ab69-6c70f3bcccb7",
+          "bearing": "supports"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Tell me about the last time someone helped you with the app. What did they do for you?",
+      "assumptions": [
+        {
+          "text": "Customers who find the text small will find and use a setting for it, or have someone who can.",
+          "type": "usability",
+          "importance": "low",
+          "fact_ids": [
+            "dd946eb3-cf26-4210-ba51-a89acd5b9326"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "opportunity_id": "o14",
+      "statement": "A shared household list that anyone at home can add to.",
+      "origin": "operator",
+      "evidence": [
+        {
+          "fact_id": "4fa886fd-3c46-4703-bba1-995204b4fdf6",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "d5f065b2-d85f-4bb8-9b19-e7687933d918",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "d69b77a8-14b0-4ecb-9f27-359ec6581bd4",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "eb9a83a3-47bb-467c-a60b-5d6f05b0f7de",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "98a1c713-6383-4c84-8ff0-65e1cef52f0a",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "8990b143-5522-424b-b80b-72f8aabc3000",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "9bbc42bf-7d18-46ea-bea1-5f8f5836f5df",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "9270a87b-294e-45f0-8d87-b4a8147b650c",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "500edadf-42a9-4521-b286-6f8a4d07271c",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "f35254f0-70e9-438f-a5fd-25979cca96b6",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "875948c3-8be3-4f14-9fba-b642311a1726",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "8fabbd99-270f-484f-9d9d-a610b89d6f8b",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "52325379-ea61-451f-8e0e-adfebb6402f2",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "6f7333d7-8fbc-453b-b55d-5d0761fea6f3",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "6ba3c067-5153-4bc4-a98b-df2c54473149",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "dcfacc19-8f0e-4519-ba5a-d1952d89704f",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "30f52140-ca3c-4b81-90f7-cc468eaa5b5b",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "298618ab-32ae-4f61-a48b-b759a2842f5f",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "801183e3-f8b2-476f-b479-92cb1eb696f7",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "bded8c33-55c6-4f58-b5ea-5b9b6f3518eb",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "3273f76c-feef-464f-8d4d-c219e2cbd11d",
+          "bearing": "contradicts"
+        }
+      ],
+      "hypothesis_id": "h4",
+      "next_story": "Tell me about the last time you and someone you live with decided what to buy. Where did it get written down and who added to it?",
+      "assumptions": [
+        {
+          "text": "Other household members will open the app and add to the list, rather than text or use their own notes.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "9270a87b-294e-45f0-8d87-b4a8147b650c",
+            "500edadf-42a9-4521-b286-6f8a4d07271c",
+            "875948c3-8be3-4f14-9fba-b642311a1726",
+            "30f52140-ca3c-4b81-90f7-cc468eaa5b5b",
+            "bded8c33-55c6-4f58-b5ea-5b9b6f3518eb"
+          ]
+        },
+        {
+          "text": "More items on the list means more repeat orders, not just a bigger first basket.",
+          "type": "viability",
+          "importance": "high",
+          "fact_ids": [
+            "8990b143-5522-424b-b80b-72f8aabc3000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "opportunity_id": "o15",
+      "statement": "A 9.99 a month delivery pass with free delivery on every order.",
+      "origin": "operator",
+      "evidence": [
+        {
+          "fact_id": "eafd8d2c-abb6-4398-bdc0-4013db869c83",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "dfff664a-8f63-4a21-b024-35561170d2cb",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "94d7bc57-b1c9-477e-a00a-168af7a67c2e",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "835ff80f-d1f0-401d-8a6c-3b9e8ffd8019",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "fde13cba-2423-4e0e-b814-82b49a0c88c7",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "a470ed83-c20c-4f74-b6f0-7d6b124d70f4",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "72746d43-84ce-4d38-aa5f-18c96ae20d60",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "3447f913-f232-4c5d-8d2b-da8459178485",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "032c9d1a-7237-48f6-aaf5-a0553823e09f",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "c07b3297-0781-4468-ad33-609d120cb10b",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "0ceb78e2-4374-408a-924b-3b4360f71abf",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "10d1f62e-1304-425b-9547-34eb619000d6",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "fccd5588-2684-4593-8da4-13281c002f7f",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "f1c853ac-bf9e-4bc1-9493-381b2c98cece",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "fc407791-df5d-403e-9131-d4003c8e71b9",
+          "bearing": "contradicts"
+        },
+        {
+          "fact_id": "8258ad50-41ec-4003-a145-d059d897138d",
+          "bearing": "contradicts"
+        }
+      ],
+      "hypothesis_id": "h5",
+      "next_story": "Walk me through the last time you paid a delivery fee or a subscription for a service like this. What did you weigh up, and did you keep it?",
+      "assumptions": [
+        {
+          "text": "Households order often enough, around weekly, for a pass to be worth it.",
+          "type": "viability",
+          "importance": "high",
+          "fact_ids": [
+            "94d7bc57-b1c9-477e-a00a-168af7a67c2e",
+            "835ff80f-d1f0-401d-8a6c-3b9e8ffd8019",
+            "fde13cba-2423-4e0e-b814-82b49a0c88c7",
+            "10d1f62e-1304-425b-9547-34eb619000d6",
+            "eafd8d2c-abb6-4398-bdc0-4013db869c83"
+          ]
+        },
+        {
+          "text": "Households will pay 9.99 a month for it.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "8f3e5253-865d-4a90-892d-0ea89c586e66",
+            "8345f592-3b35-4427-bca5-6de432cfce87"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "opportunity_id": "o9",
+      "statement": "A repeat order for heavy staples such as water, rice and oil, set to arrive on a regular schedule.",
+      "origin": "model",
+      "evidence": [
+        {
+          "fact_id": "10d1f62e-1304-425b-9547-34eb619000d6",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "9620d8fb-4bed-4b85-b61d-13d9695b1b9e",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "0e8da27b-0346-4461-9622-a7e546cc97fd",
+          "bearing": "supports"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Tell me about the last time you ran out of water, rice or oil. How did you restock?",
+      "assumptions": [
+        {
+          "text": "Households buy the same heavy staples regularly enough to want them on a schedule.",
+          "type": "desirability",
+          "importance": "high",
+          "fact_ids": [
+            "127e0d51-495c-43a1-9af6-37f5eb8456a3",
+            "10d1f62e-1304-425b-9547-34eb619000d6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "opportunity_id": "o1",
+      "statement": "Give each item a short note field, such as 'for baking', that the picker sees.",
+      "origin": "model",
+      "evidence": [
+        {
+          "fact_id": "41342082-14c8-4acf-b784-b5517b83e66c",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "7fba6c0e-a2eb-414c-a441-6b24bc4e6d4a",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "803d649d-c039-4cb3-9d01-ceaa1dc97254",
+          "bearing": "supports"
+        },
+        {
+          "fact_id": "dd039095-a5e3-44d4-9630-eb04d56350f8",
+          "bearing": "supports"
+        }
+      ],
+      "hypothesis_id": "",
+      "next_story": "Walk me through a time you told a shop assistant or picker what you needed something for. What did you say and what did you get?",
+      "assumptions": [
+        {
+          "text": "Customers will take the time to add notes while ordering.",
+          "type": "usability",
+          "importance": "high",
+          "fact_ids": [
+            "71c693c1-6f34-4354-a9a3-04a840dc83e9"
+          ]
+        },
+        {
+          "text": "Pickers read the notes and choose better swaps.",
+          "type": "feasibility",
+          "importance": "high",
+          "fact_ids": [
+            "41342082-14c8-4acf-b784-b5517b83e66c",
+            "7fba6c0e-a2eb-414c-a441-6b24bc4e6d4a"
+          ]
+        }
+      ]
+    }
+  ],
+  "opinion_fact_ids": [
+    "de84bd2e-4041-43d5-b860-9c205a7594cf",
+    "6d57570b-0630-4d42-961b-91ca62b6f327",
+    "baa7a29d-009a-476f-85d8-e212c29d6b26",
+    "4bda6dc2-ad89-42b7-83d7-81365c418d11",
+    "6f6db03f-69db-43c8-b443-9cd1519eaf36",
+    "5e151e60-7b8d-451c-926e-27fc36730477",
+    "cfc29077-39b3-4107-b3bf-0ba80fcd3650",
+    "953193ef-0ccc-4e7a-861a-1f4b74a9d262",
+    "e08df258-ef01-44a3-9cca-6ef3fca7d3f0",
+    "3e1a0396-1e1f-4e93-9eee-5788506783c0",
+    "2365fbca-7d62-460a-81f1-a8792a44bf2e",
+    "dc027200-41bb-4710-be5a-1371c1b15d24",
+    "d5416bb0-22c1-4c74-9ff5-cbf4706c5657",
+    "d0fa3a95-b508-4f12-ba20-4694253b5de1",
+    "cd3f60d5-0dc4-4e80-885d-9d75b5d558c8",
+    "5057577d-b492-4acd-883c-956d9b8d9ee8",
+    "87dfc08b-a23f-4c0c-a340-45fbe6847738",
+    "9d9277ea-ff5f-44b3-8fff-5c5bb232131e",
+    "dedd0743-4940-434a-aa8c-1e6c919fe0b0",
+    "c3948eb2-91ca-4f3f-92f8-94af6b4fd165",
+    "8f613b80-3874-4ecd-b825-5af4ccde418c",
+    "6019b99d-085a-47c1-ab8c-ca617256721a",
+    "caaec075-52e9-4a6d-979d-700db93799b0",
+    "aaddd9c6-5138-4fe6-8c97-1f61ed567bf3",
+    "a6b7b887-2a81-4908-9230-d27e2e553943",
+    "f70c3a03-866f-4466-ae8e-43b00d3e4c90",
+    "eef3330e-d612-435a-9738-326c84e4f787",
+    "1f685ac1-ee9d-4c51-b766-93ca1a498922",
+    "22851f72-004f-4e19-a71e-d5e16a9781d3",
+    "3f43774f-b42c-4254-89d4-949ea02917f4",
+    "8782c611-1647-4590-8d52-07e84878f162",
+    "1c3b8444-c8b2-4354-b696-0df0afa1d670",
+    "64691c53-0fba-4377-9ee7-73209d7b15a4",
+    "db33044b-9c48-418f-b405-8a6c05e4088e",
+    "456cc216-e004-4ea7-a18b-0aeacbe08382",
+    "9d924dac-5f03-4e2f-a09c-bcb21109e459",
+    "a5b7b335-cfad-44ea-a77d-64eae20e52de",
+    "ccbc9d88-a183-42f9-902a-f0d8e984ad28",
+    "25b3a495-457c-43e8-8029-6dfa35ca95e4",
+    "5f030356-9078-40d7-9b6f-ce662d81f371",
+    "ec835e16-374c-470f-b602-580532e09dc9",
+    "b0c3f93d-1db5-415f-a857-559693141a5f",
+    "dd946eb3-cf26-4210-ba51-a89acd5b9326",
+    "8a3fa055-fcd9-477a-893b-d70a6c92e26a",
+    "8cce661d-ea10-46da-9b5a-c8d96e691115",
+    "fca33cdf-438e-4199-95cf-05f0b4afbe80",
+    "6a7a2f4e-8db4-437d-9ac2-30f8b42efe4c",
+    "1de3904e-60e5-473c-9965-0ce3f1c41903",
+    "01e78361-ba15-4c09-b079-86f18884c850",
+    "5315ed30-173e-474c-b916-22f78df578b3",
+    "d6691730-a93a-4375-b952-019cf0dcd764",
+    "45b73d5e-d5e6-422b-a861-1b7ed0d1d831",
+    "7bdfcf08-e09a-45d7-85ca-088cd51530f9",
+    "8345f592-3b35-4427-bca5-6de432cfce87",
+    "2cd34c0f-49ff-4afb-be06-32ee6dcaaa52",
+    "15acaa74-8477-4134-82b8-ecc9400a8d68",
+    "a94c379d-7780-46ea-b533-5d7e84d452b3",
+    "8def4a55-e286-4f61-9d65-b909b9567a1e",
+    "5b92b6bb-4281-4506-bdbc-3372a16727c1",
+    "ecf1ba36-5de6-4d19-82e5-0178105cd082",
+    "2090b905-bcf7-4f1e-be53-abd73ad6edf7",
+    "4d91084d-c576-42e4-880c-1b80a4089179"
+  ],
+  "drops": [],
+  "diff": null
+}

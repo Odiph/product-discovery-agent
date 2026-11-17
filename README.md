@@ -46,6 +46,12 @@ py -3 -m venv .venv
 
 Run each command as `.venv\Scripts\python.exe -m app <command>`.
 
+Try it first on mock data: `demo --yes` loads 12 invented interviews for
+Shmuber Eats, a fictional grocery delivery app, already processed. It needs no
+key and makes no API call. Then `missed --project shmuber-eats-demo --group model`
+shows what the interviewer kept walking past, and `prep --project shmuber-eats-demo`
+what to ask next time.
+
 1. Copy `.env.example` to `.env` and add `SONIOX_API_KEY` (speech to text)
    and `ANTHROPIC_API_KEY` (the coach).
 2. `author`: write the interview's brief, your question guide,
@@ -91,7 +97,7 @@ checklist.
 
 ## More
 
-- [The full guide](docs/GUIDE.md): every command, setup, in-person meetings,
+- [The full guide](docs/GUIDE.md): every command, setup, importing recordings,
   troubleshooting.
 - Every command has `--help`.
 - [Security](SECURITY.md) · [License: MIT](LICENSE)

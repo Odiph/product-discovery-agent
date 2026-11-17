@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "08-dev.txt",
+  "import_sha256": "3016360a901a666e5c2f80e55752adba1e2ab18797ee99bebfb150ed8894cf6a",
+  "imported_at": "2026-11-02T00:20:05.000+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:20:05.000+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Dev": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Dev"
+}

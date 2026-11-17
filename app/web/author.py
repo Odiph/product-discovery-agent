@@ -5,8 +5,8 @@ A genuinely SEPARATE FastAPI app instance from `app/web/server.py`'s phone
 surface -- reusing the PATTERN (FastAPI, static assets read once from disk
 at factory time, documentation endpoints disabled), never the INSTANCE.
 `04-RESEARCH.md`'s Pitfall 3 names the failure this avoids: adding authoring
-routes to `create_app()` would inherit that app's `0.0.0.0` binding and put a
-named customer's brief on the LAN behind nothing.
+routes to `create_app()` would tie a named customer's brief to the live view's
+join token and lifetime, which it must not share.
 
 Deliberate divergences from the phone surface, stated here because §E4 calls
 them out as the parts that must not be re-derived:

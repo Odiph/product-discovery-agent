@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "05-aisha.txt",
+  "import_sha256": "429b173bd76980592d33eca0ae0cd1f288819a5364a8820de3be91ca5730f724",
+  "imported_at": "2026-11-02T00:17:52.600+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:17:52.600+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Aisha": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Aisha"
+}

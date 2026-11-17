@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "11-grace.txt",
+  "import_sha256": "99e26a211c1c9353aaa5bd8db89aef12c528e199d142d603fdc9e0f45f50e582",
+  "imported_at": "2026-11-02T00:22:47.200+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:22:47.200+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Grace": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Grace"
+}

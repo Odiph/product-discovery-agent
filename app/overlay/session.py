@@ -48,10 +48,8 @@ from app.control import COMMAND_MIC_OFF, COMMAND_MIC_ON, parse_microphone_state
 
 logger = logging.getLogger(__name__)
 
-# The child prints `Join URL: http://<lan-ip>:<port>/s/<token>`. Only the
-# token is taken from it: the overlay connects over LOOPBACK regardless of
-# what the LAN IP resolved to, because it is on the same machine and has no
-# reason to leave it.
+# The child prints `Join URL: http://127.0.0.1:<port>/s/<token>`. Only the
+# token is taken from it: the overlay builds its own loopback URL.
 _JOIN_URL_PATTERN = re.compile(r"/s/([A-Za-z0-9_\-]+)")
 
 # How long a Ctrl+C is given to close the session before the process is killed

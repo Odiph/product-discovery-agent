@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "06-kenji.txt",
+  "import_sha256": "7665dbc97bb1672219fa20326495ee74880f66005174f2fb955d341c15a439d2",
+  "imported_at": "2026-11-02T00:22:18.200+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:22:18.200+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Kenji": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Kenji"
+}

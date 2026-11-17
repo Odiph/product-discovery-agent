@@ -3,8 +3,8 @@
 
 `start` resolves both devices (loopback + microphone, unless `--only`
 restricts to one), opens the store, launches one capture and one STT worker
-PER SIDE, supervises both for the duration of the run, serves the live phone
-surface (Phase 3, D-05), shuts down cleanly, and prints where the transcript
+PER SIDE, supervises both for the duration of the run, serves the live view
+on this laptop (Phase 3, D-05), shuts down cleanly, and prints where the transcript
 was written. A keyboard interrupt closes the session cleanly, not abandons it
 (SESS-01). `--retain-audio` (default OFF -- phase_specification U3) writes one
 WAV per speaker alongside the transcript, for a REHEARSAL session only.
@@ -61,14 +61,12 @@ from app.capture.devices import (
     resolve_default_render_device,
 )
 from app.capture.keepalive import KeepAliveStream
-from app.capture import precheck_in_person
 from app.capture.precheck import (
     build_precheck_report,
     print_precheck_report,
     print_self_test_report,
     run_self_test,
 )
-from app.capture.remote import RemoteAudioSource
 from app.capture.stream import CaptureStream
 from app.capture.supervisor import StreamSupervisor
 from app.coach import context as coach_context
@@ -101,10 +99,7 @@ from app.session.reader import MalformedRecordError, list_session_ids, read_sess
 from app.session.render import write_rendered_transcript
 from app.session.feed_watch import FeedWatch, FeedWatchConfig
 from app.session.store import SegmentRecord, SessionStore, create_session_dir
-from app.stt import voiceprint as voiceprint_mod
-from app.stt.roles import RoleResolver
 from app.stt.live import (
-    IN_PERSON_SUFFIX,
     EngineNotReadyError,
     StreamWorker,
     UnknownEngineError,
@@ -115,7 +110,6 @@ from app.web import author as web_author
 from app.web import console as web_console
 from app.web import review as web_review
 from app.web import server as web_server
-from app.web import tailnet
 from app.web.hub import ConnectionHub, survey_payload
 from app.web.survey_hold import SurveyDisplayHold
 from app.web.join import create_join
@@ -125,8 +119,8 @@ logger = logging.getLogger(__name__)
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 # 04-03-PLAN.md §E4: the authoring page's OWN static subdirectory, beside the
-# phone surface's four named assets -- adding it changes nothing about what
-# the phone app's asset loader reads (it names its four files explicitly).
+# live view's four named assets -- adding it changes nothing about what the
+# live view's asset loader reads (it names its four files explicitly).
 STATIC_AUTHOR_DIR = STATIC_DIR / "author"
 # Phase B: the console's own static subdirectory, a sibling of the
 # authoring page's -- same reasoning, and it changes nothing about what
@@ -318,7 +312,7 @@ def _suggestion_broadcast_callback(
     done-callback that records a failure -- the SAME thread->asyncio bridge
     shape `StreamWorker._persist` already uses for the segment broadcast
     (app/stt/live.py), never `.result()`, which would couple the coach's own
-    worker thread to a possibly-dead phone's `send()` completing.
+    worker thread to a possibly-dead browser's `send()` completing.
 
     `max_shown` (independent review finding E) is the SAME `cfg.coach_max_shown`
     value already passed to `critic.rank_candidates()` -- threaded through to
@@ -363,7 +357,7 @@ def _schedule_survey_broadcast(
 ) -> None:
     """The schedule-and-forget thread->asyncio bridge both survey callbacks
     below share -- never `.result()`, which would couple a worker thread to a
-    sleeping phone's `send()` completing."""
+    sleeping browser's `send()` completing."""
     future = asyncio.run_coroutine_threadsafe(
         hub.broadcast_survey(survey, asked=asked), loop
     )
@@ -688,25 +682,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
         ),
     )
     start.add_argument(
-        "--in-person",
-        action="store_true",
-        default=False,
-        help=(
-            "An in-person meeting: ONE microphone -- the phone's, streamed from the "
-            "phone page -- carries both people, and each turn is assigned to "
-            "interviewer or interviewee by speaker diarization plus a voiceprint "
-            "check. No local audio device is opened. The phone page is served on "
-            "127.0.0.1 only; reach it from the phone through `tailscale serve`, "
-            "which gives it the HTTPS a phone browser requires for the microphone."
-        ),
-    )
-    start.add_argument(
         "--no-serve",
         action="store_true",
         default=False,
         help=(
-            "Skip the web layer entirely -- no port bound, no browser opened, no QR "
-            "produced. For the single-side trap tests, which need neither."
+            "Skip the web layer entirely -- no port bound, no browser opened. For "
+            "the single-side trap tests, which need neither."
         ),
     )
 
@@ -747,26 +728,6 @@ def build_arg_parser() -> argparse.ArgumentParser:
     precheck.add_argument(
         "--interviewer-device", default=None, metavar="NAME",
         help="Check the same pinned input device `start --interviewer-device` would open.",
-    )
-    precheck.add_argument(
-        "--phone",
-        action="store_true",
-        default=False,
-        help=(
-            "Add a bounded real-phone reachability row: starts the server, shows the "
-            "QR, and waits for a real connection before reporting go/no-go. Off by "
-            "default so the everyday precheck stays fast -- run it before a real call."
-        ),
-    )
-    precheck.add_argument(
-        "--in-person",
-        action="store_true",
-        default=False,
-        help=(
-            "Check the in-person rig instead: no laptop audio device; Tailscale is up, "
-            "`tailscale serve` forwards this laptop's HTTPS name to the app's port, that "
-            "name has a valid certificate, and the diarizing engine answers."
-        ),
     )
 
     author = subparsers.add_parser(
@@ -940,8 +901,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     subparsers.add_parser(
         "fetch-voiceprint-model",
         help=(
-            "Download the speaker-embedding model the in-person mode uses to tell "
-            "the two people in the room apart (about 25 MB, verified by SHA-256, "
+            "Download the speaker-embedding model `diarize-after` uses to tell the "
+            "two voices on an imported recording apart (about 25 MB, verified by SHA-256, "
             "stored in the git-ignored models/ folder)"
         ),
     )
@@ -1147,104 +1108,27 @@ def _warn_if_context_stale(context_dir: Path, previous_started_at: Optional[date
             )
 
 
-# In-person role check: enrol both voices from the opening two minutes, then a
-# voiceprint decides each turn of at least a second (measured: 96% of words).
-IN_PERSON_ENROL_S = 120.0
-IN_PERSON_MIN_TURN_S = 1.0
-
-
-def _in_person_conflict(args: argparse.Namespace) -> Optional[str]:
-    """The flags that assume local audio devices or no server."""
-    if getattr(args, "no_serve", False):
-        return "--no-serve (the phone streams audio through the server)"
-    if getattr(args, "only", None):
-        return "--only (one microphone carries both people)"
-    for flag in ("interviewee_device", "interviewer_device"):
-        if getattr(args, flag, None):
-            return f"--{flag.replace('_', '-')} (no local device is opened)"
-    return None
-
-
-def _serve_host(in_person: bool) -> str:
-    # In person, loopback ONLY: `tailscale serve` is the front door, so the
-    # phone surface is never reachable from whatever Wi-Fi the laptop is on.
-    return "127.0.0.1" if in_person else "0.0.0.0"
-
-
-def _print_in_person_urls(port: int, token: str) -> None:
-    print(f"In-person: test on this laptop at http://127.0.0.1:{port}/s/{token}?mic")
-    name = tailnet.detect_dns_name()
-    if name:
-        print(f"On the phone, open: {tailnet.phone_url(name, token)}")
-        print(f"(needs `tailscale serve --bg {port}` running on this laptop)")
-        # Funnel would put this page on the public internet behind only the
-        # token; precheck refuses it, and a run started without one still says so.
-        warning = tailnet.public_funnel_warning(name, port)
-        if warning:
-            print(warning)
-    else:
-        print(
-            "Tailscale not detected. On this laptop run `tailscale serve --bg "
-            f"{port}`, then on the phone open https://<this-laptop>.<your-tailnet>.ts.net/s/{token}?mic"
-        )
-
-
-def _room_audio_reminder(session_dir: Path, *, project: "Optional[str]") -> "Optional[str]":
-    """What an in-person run prints as it ends while `room.wav` is on disk.
-
-    The file is both people's voices, kept WITHOUT `--retain-audio` and with
-    no flag on it, until `confirm-speakers --confirm` deletes it. The start
-    banner says so, but it has scrolled away by the time the meeting ends,
-    and a reminder nobody sees is how a customer's voice stays on a laptop
-    for months. `None` when nothing was kept (the audio writer failed)."""
-    room = Path(session_dir) / evidence_mod.ROOM_AUDIO_FILENAME
-    if not room.is_file():
-        return None
-    session_id = Path(session_dir).name
-    suffix = f" --project {project}" if project else ""
-    return "\n".join([
-        f"NOTE: {evidence_mod.ROOM_AUDIO_FILENAME} is still on this laptop: {room}",
-        "  It holds both voices from the room and is kept until you confirm the speakers:",
-        f"    python -m app diarize-after {session_id}{suffix}",
-        f"    python -m app confirm-speakers {session_id} --confirm{suffix}   (deletes it)",
-        f"  No after-meeting pass? `confirm-speakers {session_id} --confirm --accept-live-roles{suffix}` "
-        "also deletes it.",
-        f"  To erase the whole interview instead: python -m app forget {session_id}{suffix}",
-    ])
-
-
 async def _async_main(args: argparse.Namespace) -> int:
     cfg = _apply_project(config_mod.load_config(engine_override=args.engine), args)
     extra_fact_dirs = _resolve_extra_fact_dirs(args)
     speakers: tuple[str, ...] = (args.only,) if getattr(args, "only", None) else ALL_SPEAKERS
     # OPS-01's one escape hatch: serving is not a mode, it is what `start` does
     # -- `--no-serve` is the one flag that skips it entirely, for the
-    # single-side trap tests, which need no browser, no QR and no socket.
+    # single-side trap tests, which need no browser and no socket.
     no_serve: bool = getattr(args, "no_serve", False)
-    in_person: bool = getattr(args, "in_person", False)
-    if in_person:
-        conflict = _in_person_conflict(args)
-        if conflict:
-            print(f"ERROR: --in-person cannot be combined with {conflict}.", file=sys.stderr)
-            return 1
-        # ONE stream, the phone's, registered as the interviewer's: the phone IS
-        # the operator's microphone, so "interviewer side not sending audio" is
-        # the true status when it disconnects. Each TURN still gets its own
-        # role from the resolver.
-        speakers = (SPEAKER_INTERVIEWER,)
 
     if not no_serve:
         # Fail loudly, before any device/session setup, if the pinned port is
         # already taken -- never silently bind elsewhere, which would
-        # desynchronize the printed/QR'd join URL from what is actually
+        # desynchronize the printed live-view URL from what is actually
         # listening (03-RESEARCH.md §4, OPS-05).
         try:
-            web_server.check_port_available(cfg.app_port, host=_serve_host(in_person))
+            web_server.check_port_available(cfg.app_port, host=web_server.LOOPBACK_HOST)
         except web_server.PortInUseError as exc:
             print(f"ERROR: {exc}", file=sys.stderr)
             return 1
     else:
-        print("Serving disabled (--no-serve): no port bound, no browser opened, no QR produced.")
+        print("Serving disabled (--no-serve): no port bound, no browser opened.")
 
     # Phase 3 (03-01-PLAN.md §P2/§P3): moved up from where these three were
     # originally constructed (right before the join surface, below) so that
@@ -1323,8 +1207,7 @@ async def _async_main(args: argparse.Namespace) -> int:
             )
 
     try:
-        engine_name = cfg.engine_name + IN_PERSON_SUFFIX if in_person else cfg.engine_name
-        engines = {speaker: get_engine(engine_name) for speaker in speakers}
+        engines = {speaker: get_engine(cfg.engine_name) for speaker in speakers}
     except UnknownEngineError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
@@ -1355,23 +1238,13 @@ async def _async_main(args: argparse.Namespace) -> int:
         for speaker in ALL_SPEAKERS
     }
 
-    remote_source: Optional[RemoteAudioSource] = None
-    if in_person:
-        # No PyAudio at all: nothing on this laptop is recorded.
-        pa = None
-        remote_source = RemoteAudioSource(
-            sample_rate=cfg.sample_rate, frame_ms=cfg.frame_ms,
-            queue_max_seconds=cfg.queue_max_seconds,
-        )
-        devices = {SPEAKER_INTERVIEWER: remote_source.device}
-    else:
-        pa = construct_pyaudio()
-        try:
-            devices = _resolve_devices(pa, speakers, resolvers=device_resolvers)
-        except DeviceOpenError as exc:
-            pa.terminate()
-            print(f"ERROR: {exc}", file=sys.stderr)
-            return 1
+    pa = construct_pyaudio()
+    try:
+        devices = _resolve_devices(pa, speakers, resolvers=device_resolvers)
+    except DeviceOpenError as exc:
+        pa.terminate()
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
     for speaker, device in devices.items():
         print(f"Resolved {speaker} device: {device.name} ({device.native_sample_rate} Hz, {device.channels} ch)")
 
@@ -1384,7 +1257,7 @@ async def _async_main(args: argparse.Namespace) -> int:
     # channel captured two minutes of digital silence. The MEASUREMENT already
     # existed -- `precheck` had reported `-69.5 dBFS (silence)` on that very
     # device -- but nothing stood between it and the recording.
-    if not in_person and not getattr(args, "skip_self_test", False):
+    if not getattr(args, "skip_self_test", False):
         try:
             self_test = run_self_test(
                 pyaudio_module=pyaudio, pa=pa, devices=devices, cfg=cfg
@@ -1419,11 +1292,7 @@ async def _async_main(args: argparse.Namespace) -> int:
                 return 1
             print(f"WARNING: {message}", file=sys.stderr)
 
-    # In-person keeps the room audio WITHOUT --retain-audio: the evidence pass
-    # needs it, and it is deleted once the operator confirms the speakers
-    # (app/session/evidence.py). It never leaves this laptop except to the
-    # transcription vendor the live stream already uses.
-    retain_audio: bool = in_person or getattr(args, "retain_audio", config_mod.DEFAULT_RETAIN_AUDIO)
+    retain_audio: bool = getattr(args, "retain_audio", config_mod.DEFAULT_RETAIN_AUDIO)
 
     session_dir = create_session_dir(cfg.sessions_root)
     store = SessionStore(session_dir)
@@ -1437,29 +1306,6 @@ async def _async_main(args: argparse.Namespace) -> int:
         participant=getattr(args, "participant", None),
     )
     metadata["audio_retained"] = retain_audio
-    role_resolver: Optional[RoleResolver] = None
-    if in_person:
-        embedder, voiceprint_reason = voiceprint_mod.load_embedder()
-        role_resolver = RoleResolver(
-            embedder=embedder, enrol_s=IN_PERSON_ENROL_S, min_turn_s=IN_PERSON_MIN_TURN_S
-        )
-        # How this session's speaker labels were obtained. The evidence side
-        # must read this before it trusts a live role: measured, live labels
-        # were right for ~96% of words WITH the voiceprint, ~86% without.
-        metadata["capture"] = "in-person"
-        metadata["speaker_source"] = "diarization-live"
-        metadata["voiceprint"] = (
-            voiceprint_mod.MODEL_FILENAME if embedder else f"unavailable: {voiceprint_reason}"
-        )
-        metadata[evidence_mod.EVIDENCE_KEY] = evidence_mod.EVIDENCE_PENDING
-        print(
-            f"Room audio: kept on this laptop as {evidence_mod.ROOM_AUDIO_FILENAME} for the after-meeting "
-            "pass (`diarize-after`, then `confirm-speakers`, which deletes it)."
-        )
-        print(
-            "Voiceprint check: on." if embedder
-            else f"WARNING: voiceprint check off ({voiceprint_reason}); roles come from the engine's labels alone."
-        )
     store.write_metadata(metadata)
     # Printed at START, not only at close -- a user who cannot see what the
     # system is doing cannot tell a working system from a dead one
@@ -1670,7 +1516,7 @@ async def _async_main(args: argparse.Namespace) -> int:
         records what to open; `start()` is what touches the microphone, and
         `worker.start()` is what opens the STT session. That separation is what
         makes building a pair on demand safe."""
-        capture = remote_source if remote_source is not None else CaptureStream(
+        capture = CaptureStream(
             pyaudio, pa, device,
             target_sample_rate=cfg.sample_rate, frame_ms=cfg.frame_ms,
             queue_max_seconds=cfg.queue_max_seconds, label=speaker,
@@ -1679,13 +1525,11 @@ async def _async_main(args: argparse.Namespace) -> int:
         if retain_audio:
             audio_writer = AudioWriter(
                 session_dir, speaker=speaker, sample_rate=cfg.sample_rate, store=store,
-                stem=evidence_mod.ROOM_AUDIO_STEM if in_person else None,
             )
         worker = StreamWorker(
             engine=engines[speaker], frame_queue=capture.queue, store=store,
             speaker=speaker, sample_rate=cfg.sample_rate, audio_writer=audio_writer,
             loop=loop, broadcast=(hub.broadcast if hub is not None else None),
-            role_resolver=role_resolver,
             # Phase 4 (04-01-PLAN.md §C2/D-03, 04-02-PLAN.md §D9): the two
             # triggers stay structurally separate -- ONLY the interviewer's
             # stream gets the coverage hook (coverage is written from what
@@ -1730,9 +1574,7 @@ async def _async_main(args: argparse.Namespace) -> int:
             store=store,
             # The SAME resolver session start used, so a pin survives a device
             # change instead of reverting to the default endpoint here.
-            device_resolver=(
-                None if in_person else (lambda pa=pa, fn=device_resolvers[speaker]: fn(pa))
-            ),
+            device_resolver=(lambda pa=pa, fn=device_resolvers[speaker]: fn(pa)),
             config=config_mod.supervisor_config(cfg),
         )
         return StreamPair(
@@ -1840,8 +1682,7 @@ async def _async_main(args: argparse.Namespace) -> int:
         print(microphone_state_line(microphone.is_on), flush=True)
 
     control = ControlChannel(sys.stdin, on_microphone=_set_microphone)
-    if not in_person:  # in person, the phone IS the microphone; nothing to toggle here
-        control.start()
+    control.start()
 
     # 03-02-PLAN.md Task 2 §Q6/§Q7: a laptop-side failure must survive a
     # reconnect, so it is server-authoritative state polled from what each
@@ -1862,17 +1703,15 @@ async def _async_main(args: argparse.Namespace) -> int:
             )
         )
 
-    # The join surface (D-05) and the embedded server. Constructed only now
-    # -- after every capture/STT thread is already running -- so a QR/LAN-IP
-    # degradation (join.py never raises) can never prevent capture from
-    # starting. Entirely skipped under `--no-serve`: no port bound, no
-    # browser opened, no QR produced (OPS-01's one escape hatch).
+    # The live view (D-05) and the embedded server, on this laptop only.
+    # Constructed only now -- after every capture/STT thread is already
+    # running -- so nothing here can prevent capture from starting. Entirely
+    # skipped under `--no-serve`: no port bound, no browser opened (OPS-01's
+    # one escape hatch).
     server: Optional[object] = None
     serve_task: Optional[asyncio.Task] = None
     if not no_serve:
-        join_info = create_join(
-            port=cfg.app_port, session_dir=session_dir, store=store, emit_qr=cfg.emit_qr
-        )
+        join_info = create_join(port=cfg.app_port)
         server_started_at = datetime.now(timezone.utc).astimezone().isoformat(timespec="milliseconds")
         app = web_server.create_app(
             token=join_info.token,
@@ -1888,7 +1727,7 @@ async def _async_main(args: argparse.Namespace) -> int:
             # Reads `coverage_detector.state` live -- never a value captured
             # at construction time, which would freeze the panel at "nothing
             # asked yet" for any client that connected after the first match.
-            # Reads the HOLD, never live coverage state. A phone waking up
+            # Reads the HOLD, never live coverage state. A browser waking up
             # mid-interview would otherwise be handed the newest state and skip
             # the question still being answered -- the same defect the hold
             # exists to fix, arriving through the reconnect door instead.
@@ -1914,15 +1753,10 @@ async def _async_main(args: argparse.Namespace) -> int:
             heartbeat_timeout_ms=cfg.heartbeat_timeout_ms,
             reconnect_backoff_base_ms=cfg.reconnect_backoff_base_ms,
             reconnect_backoff_cap_ms=cfg.reconnect_backoff_cap_ms,
-            # In-person only: the phone's microphone channel. None otherwise,
-            # which keeps a two-stream run's page receive-only (gate 2).
-            audio_sink=remote_source.push if remote_source is not None else None,
         )
-        if in_person:
-            _print_in_person_urls(cfg.app_port, join_info.token)
         server = web_server.build_uvicorn_server(
             app,
-            host=_serve_host(in_person),
+            host=web_server.LOOPBACK_HOST,
             port=cfg.app_port,
             ws_ping_interval_s=cfg.ws_ping_interval_s,
             ws_ping_timeout_s=cfg.ws_ping_timeout_s,
@@ -2046,17 +1880,9 @@ async def _async_main(args: argparse.Namespace) -> int:
                 store.append_event(event="server-status", detail={"stopped_by": "signal"})
         for pair in pairs:
             print(f"{pair.speaker} segment count: {store.segment_count(pair.speaker)}")
-        if in_person:
-            for pair in pairs:
-                store.update_metadata({"speaker_roles": dict(pair.worker.role_counts)})
-                print(f"Speaker roles: {pair.worker.role_counts}")
         summary = store.close()
         print(f"Transcript written to: {store.transcript_path}")
         print(f"Latency summary: {summary}")
-        if in_person:
-            reminder = _room_audio_reminder(store.session_dir, project=getattr(args, "project", None))
-            if reminder:
-                print(reminder)
         # Phase 4 (04-02-PLAN.md §D1/COACH-05): printed beside the transcript
         # latency figures above AND persisted into session metadata -- the
         # same gap STATE.md already records for STT latency (a number only
@@ -2105,20 +1931,8 @@ def run_render(args: argparse.Namespace) -> int:
     return 0
 
 
-def _run_in_person_precheck(args: argparse.Namespace, cfg: "config_mod.AppConfig") -> int:
-    conflict = precheck_in_person.in_person_conflict(args)
-    if conflict:
-        print(f"ERROR: --in-person cannot be combined with {conflict}.", file=sys.stderr)
-        return 2
-    report = precheck_in_person.build_in_person_report(cfg=cfg, port=cfg.app_port, skip_stt=args.skip_stt)
-    print_precheck_report(report, rules=precheck_in_person.IN_PERSON_PREFLIGHT_RULES)
-    return report.exit_code
-
-
 def run_precheck(args: argparse.Namespace) -> int:
     cfg = config_mod.load_config(engine_override=args.engine)
-    if getattr(args, "in_person", False):
-        return _run_in_person_precheck(args, cfg)
     pa = construct_pyaudio()
     # The same pins `start` accepts, resolved the same way. A pre-call check
     # that measured the DEFAULT endpoints while the interview was pinned
@@ -2140,7 +1954,6 @@ def run_precheck(args: argparse.Namespace) -> int:
             cfg=cfg,
             seconds=args.seconds if args.seconds is not None else cfg.precheck_seconds,
             skip_stt=args.skip_stt,
-            phone=args.phone,
             side_defs=side_defs,
         )
     finally:
@@ -2410,9 +2223,9 @@ _EXTRACT_FAILED = extract_all_mod.FAILED
 def _extract_session(cfg, session_dir: Path, *, client=None) -> str:
     """One session through `extract`'s whole path (see `run_extract`). `client`
     is passed by `--all`, which builds it once rather than once per session."""
-    # Before the key check and any vendor call: an unconfirmed one-microphone
-    # session is refused, not warned about -- its live roles are ~96% right,
-    # and a misattributed interviewer line would become customer evidence.
+    # Before the key check and any vendor call: an imported recording whose
+    # speakers are unconfirmed is refused, not warned about -- a misattributed
+    # interviewer line would become customer evidence.
     session_meta = read_session(session_dir).metadata
     refusal = evidence_mod.extract_refusal(session_meta)
     if refusal is not None:
@@ -2676,8 +2489,8 @@ class _CritiqueSkip(Exception):
 
 
 def _critique_records(session_dir: Path):
-    """The transcript a critique judges: the confirmed one for an in-person
-    session. Refused while its speakers are unconfirmed -- a paid call on
+    """The transcript a critique judges: the confirmed one for an imported
+    recording. Refused while its speakers are unconfirmed -- a paid call on
     guessed roles would band the interviewee's words as the interviewer's."""
     try:
         meta = evidence_mod.read_meta(session_dir)

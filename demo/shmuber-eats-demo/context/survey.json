@@ -1,0 +1,12 @@
+[
+  {"id": "s1", "order": 0, "text": "Tell me a bit about your household and who does the food shopping."},
+  {"id": "s2", "order": 1, "text": "How did you hear about Shmuber Eats?"},
+  {"id": "s3", "order": 2, "text": "Walk me through your last Shmuber Eats order, from opening the app to putting things away."},
+  {"id": "s4", "order": 3, "text": "How often do you order groceries online?"},
+  {"id": "s5", "order": 4, "text": "Tell me about the last time an item in your order was substituted."},
+  {"id": "s6", "order": 5, "text": "How do you keep track of what you need between orders?"},
+  {"id": "s7", "order": 6, "text": "How did you pick the delivery window last time?"},
+  {"id": "s8", "order": 7, "text": "What would you think of a monthly delivery pass, and what would you pay for it?"},
+  {"id": "s9", "order": 8, "text": "Would you recommend Shmuber Eats to a friend?"},
+  {"id": "s10", "order": 9, "text": "Is there anything about your orders I didn't ask about?"}
+]

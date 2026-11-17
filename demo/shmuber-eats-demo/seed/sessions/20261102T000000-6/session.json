@@ -1,0 +1,18 @@
+{
+  "engine": "import",
+  "source": "file-import (transcript: text)",
+  "imported_from": "07-rosa.txt",
+  "import_sha256": "c1bd60aac52cfb80fb71eee56fc3ed52304ed6f0c2128438ae98d9170957ab49",
+  "imported_at": "2026-11-02T00:15:32.600+00:00",
+  "started_at": "2026-11-02T00:00:00.000+00:00",
+  "started_at_source": "operator --date",
+  "closed_at": "2026-11-02T00:15:32.600+00:00",
+  "times_synthetic": false,
+  "speaker_roles": {
+    "Interviewer": "interviewer",
+    "Rosa": "interviewee"
+  },
+  "audio_retained": false,
+  "coach_enabled": false,
+  "participant": "Rosa"
+}

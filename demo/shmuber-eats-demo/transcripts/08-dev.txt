@@ -1,0 +1,44 @@
+Interviewer 00:00:03: Hi Dev, thanks for joining. I hear a little one in the background?
+Dev 00:00:29: Yeah, sorry, that's Leo. He's ten weeks. Mira's got him but he might join us.
+Interviewer 00:00:59: Haha, no problem at all. Congratulations! So this is just about your grocery orders.
+Dev 00:01:26: Thanks. Sure, go for it.
+Interviewer 00:01:42: Great. Tell me a bit about your household and who does the food shopping.
+Dev 00:02:10: So it's me, Mira, and now Leo. Before, we'd do one big shop together on a Sunday. When we brought him home from the hospital neither of us was leaving the flat, we were basically zombies for a couple of weeks, so that's when the app came out. These days Mira takes him out in the pram to the shops in the afternoon, it gets her out of the house, so we just do that.
+Interviewer 00:04:00: Great, great. Walk me through your last Shmuber Eats order, from opening the app to putting things away.
+Dev 00:04:33: It was at like three in the morning, during a feed. I just put in everything we could think of. Nappies, wipes, oat milk, bread, those frozen meals, a lot of chocolate. I hit order and went to sleep, or tried to.
+Interviewer 00:05:39: Haha. And when it came?
+Dev 00:05:55: I put it away with one hand. The other one was holding a bottle.
+Interviewer 00:06:22: Great. Let's move on. How often do you order groceries online?
+Dev 00:06:46: Maybe four orders in total. Not lately.
+Interviewer 00:07:05: Great. Tell me about the last time an item in your order was substituted.
+Dev 00:07:32: They swapped the nappies for a different size once. One size up. That was actually a problem, they leaked.
+Interviewer 00:08:07: Did you get a heads-up before the bags came?
+Dev 00:08:28: There was a notification, but come on, I was asleep or feeding. I saw it the next day.
+Interviewer 00:09:01: Got it. How do you keep track of what you need between orders?
+Dev 00:09:27: A note on Mira's phone. I add things to it, and she says I add the wrong things.
+Interviewer 00:10:01: Haha. Do you both add to it?
+Dev 00:10:19: Yeah, both of us. Mostly her. I add snacks.
+Interviewer 00:10:40: Great. How did you pick the delivery window last time?
+Dev 00:11:02: Whatever was earliest. We were home all the time, so the window didn't matter at all.
+Interviewer 00:11:33: And now that Mira's out more, would the window be harder?
+Dev 00:11:57: Maybe. Two hours is a long time to stay in with a baby who wants to go out. But we don't order now, so.
+Interviewer 00:12:38: Great, great. What would you think of a monthly delivery pass, and what would you pay for it?
+Dev 00:13:11: Honestly, no, I wouldn't use it enough. Maybe five, if it covered everything.
+Interviewer 00:13:38: What if it was 9.99?
+Dev 00:13:53: No, not for how often we order. That's a lot of nappies.
+Interviewer 00:14:18: Haha. And how did you first hear about Shmuber Eats?
+Dev 00:14:41: A friend had a code. Everyone on the parents' group chat has a code for something.
+Interviewer 00:15:11: Great. Would you recommend it to a friend?
+Dev 00:15:31: Yeah, I'd tell other parents about it, sure.
+Interviewer 00:15:50: Great. What did you like most?
+Dev 00:16:07: Three a.m. ordering. Nothing else is open at three a.m.
+Interviewer 00:16:30: And what did you like least?
+Dev 00:16:47: The nappies thing. And the app sometimes forgot what I'd put in the basket if I closed it.
+Interviewer 00:17:20: Noted. Great. Did you leave a rating after any of the orders?
+Dev 00:17:45: I think I gave five stars once. I don't remember.
+Interviewer 00:18:07: Great. Have you tried the recipes section?
+Dev 00:18:26: No. I don't think we've cooked a recipe since he was born.
+Interviewer 00:18:51: Haha. Last question, is there anything about your orders I didn't ask about?
+Dev 00:19:17: No, I don't think so. Sorry, he's starting.
+Interviewer 00:19:37: No problem at all. Thank you so much Dev, and good luck with Leo.
+Dev 00:20:04: Thanks, bye.
